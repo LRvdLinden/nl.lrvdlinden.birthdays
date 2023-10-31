@@ -1,0 +1,17 @@
+{
+  "settings": {
+      "title": "Födelsedagsinställningar",
+      "description": "Ställ in de födelsedagsaviseringar du vill ta emot här.",
+      "name": "Namn:",
+      "mobile": "Mobilnummer:",
+      "message": "Födelsedagsmeddelande:",
+      "year": "Födelseår:",
+      "birthdate": "Födelsedatum:",
+      "addBtn": "Lägg till",
+      "listTitle": "Lista över födelsedagar",
+      "deleteBtn": "Radera",
+      "saveBtn": "Spara",
+      "languageToggle": "Meddelande: Svenska"
+  },
+  "birthday_notification": "Idag är det **{{name}}**s födelsedag 🎉. De är **{{age}}** år gammal."
+}

@@ -1,0 +1,18 @@
+{
+    "settings": {
+      "title": "Birthday Settings",
+      "description": "Set up the birthday notifications you want to receive here.",
+      "name": "Name:",
+      "mobile": "Mobile number:",
+      "message": "Birthday message:",
+      "year": "Birth Year:",
+      "birthdate": "Birthday:",
+      "addBtn": "Add",
+      "listTitle": "List of Birthdays",
+      "deleteBtn": "Delete",
+      "saveBtn": "Save",
+      "languageToggle": "Notification: English"
+    },
+    "birthday_notification": "Today is the birthday of **{{name}}** 🎉. They are **{{age}}** years old."
+  }
+  

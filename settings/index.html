@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    <style>
+        .field {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:100%; text-align:center;">
+        <img src="https://raw.githubusercontent.com/LRvdLinden/P2000-brand/main/banners/settings_banner_birthdays.jpg" alt="Banner" style="max-width:100%;">
+    </div>
+
+    <div id="verjaardagen">
+        <h1 data-i18n="settings.title"></h1>
+        <p data-i18n="settings.description"></p>
+
+        <div class="field">
+            <label for="name" data-i18n="settings.name"></label>
+            <input id="name" type="text" />
+        </div>
+
+        <div class="field">
+            <label for="mobile" data-i18n="settings.mobile"></label>
+            <input id="mobile" type="text" />
+        </div>
+
+        <div class="field">
+            <label for="message" data-i18n="settings.message"></label>
+            <input id="message" type="text" />
+        </div>
+
+        <div class="field">
+            <label for="year" data-i18n="settings.year"></label>
+            <input id="year" type="number" />
+        </div>
+
+        <div class="field">
+            <label for="birthdate" data-i18n="settings.birthdate"></label>
+            <input id="birthdate" type="date" />
+        </div>
+
+        <button onclick="addBirthday()" data-i18n="settings.addBtn"></button>
+
+        <h2 data-i18n="settings.listTitle"></h2>
+        <ul id="birthdayList"></ul>
+
+        <button class="homey-button-primary-full" onclick="save()" data-i18n="settings.saveBtn"></button>
+    </div>
+
+    <script type="text/javascript">
+        // Zorg ervoor dat je een manier hebt om de vertalingen vanuit de externe nl.json (en andere taalbestanden) te laden en toe te passen.
+        
+        function initializeTranslations() {
+            // Deze functie moet de vertalingen uit je externe bestanden laden en toepassen 
+            // afhankelijk van de taalinstellingen van de gebruiker.
+        }
+
+        let birthdays = [];
+        let myHomey;
+
+        function onHomeyReady(Homey) {
+            myHomey = Homey;
+            myHomey.ready();
+            loadBirthdays();
+        }
+
+        function loadBirthdays() {
+            myHomey.get('birthdays', function (err, data) {
+                if (!err && data) {
+                    birthdays = data;
+                    displayBirthdays();
+                }
+            });
+        }
+
+        function sortBirthdays() {
+    birthdays.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateA - dateB;
+    });
+}
+
+function displayBirthdays() {
+    sortBirthdays();  // Sorteer eerst de verjaardagen
+
+    const list = document.getElementById("birthdayList");
+    list.innerHTML = '';
+
+    birthdays.forEach((birthday, index) => {
+        const listItem = document.createElement("li");
+        const text = document.createTextNode(`${birthday.name} - ${birthday.date} - ${birthday.year} - ${birthday.mobile} - ${birthday.message}`);
+        listItem.appendChild(text);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete"; // Tijdelijke placeholder
+        deleteButton.onclick = function () {
+            removeBirthday(index);
+        };
+
+        listItem.appendChild(deleteButton);
+        list.appendChild(listItem);
+    });
+}
+
+
+function addBirthday() {
+    console.log("addBirthday function called");
+
+    const name = document.getElementById("name").value;
+    console.log("Name:", name);
+
+    const date = document.getElementById("birthdate").value;
+    console.log("Date:", date);
+
+    const mobile = document.getElementById("mobile").value;
+    console.log("Mobile:", mobile);
+
+    const message = document.getElementById("message").value;
+    console.log("Message:", message);
+
+    const year = document.getElementById("year").value;
+    console.log("Year:", year);
+
+    const currentYear = new Date().getFullYear();
+
+    // Validatie voor het jaar
+    if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
+        console.log("Year validation failed");
+        alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
+        return;
+    }
+
+    // Verplichte veldvalidatie
+    if (name && date && mobile && message) {
+        // Object voor de verjaardag
+        const birthdayObject = {
+            name: name,
+            date: date,
+            mobile: mobile,
+            message: message,
+            year: year || null  // Gebruik 'null' als 'year' leeg is
+        };
+        
+        birthdays.push(birthdayObject);  // Voeg het object toe aan de lijst
+
+        console.log("Birthday added:", birthdayObject);
+        displayBirthdays();  // Toon de gesorteerde verjaardagen na het toevoegen
+    } else {
+        console.log("Failed to add birthday due to missing or invalid field values");
+    }
+}
+
+
+
+function removeBirthday(index) {
+    // Log de details van de verjaardag die verwijderd wordt
+    console.log(`Verwijderen van verjaardag: Naam: ${birthdays[index].name}, Datum: ${birthdays[index].date}, Mobiel: ${birthdays[index].mobile}, Bericht: ${birthdays[index].message}, Jaar: ${birthdays[index].year}`);
+    
+    // Verwijder de verjaardag uit de lijst
+    birthdays.splice(index, 1);
+
+    // Ververs de verjaardagenlijst weergave
+    displayBirthdays();
+}
+
+
+        function save() {
+            myHomey.set('birthdays', birthdays);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            initializeTranslations();
+        });
+
+    </script>
+
+</body>
+
+</html>

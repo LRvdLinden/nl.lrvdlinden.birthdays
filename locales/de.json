@@ -1,0 +1,17 @@
+{
+  "settings": {
+      "title": "Geburtstagseinstellungen",
+      "description": "Richten Sie hier die Geburtstagsbenachrichtigungen ein, die Sie erhalten möchten.",
+      "name": "Name:",
+      "mobile": "Handynummer:",
+      "message": "Geburtstagsnachricht:",
+      "year": "Geburtsjahr:",
+      "birthdate": "Geburtstag:",
+      "addBtn": "Hinzufügen",
+      "listTitle": "Liste der Geburtstage",
+      "deleteBtn": "Löschen",
+      "saveBtn": "Speichern",
+      "languageToggle": "Benachrichtigung: Deutsch"
+  },
+  "birthday_notification": "Heute ist der Geburtstag von **{{name}}** 🎉. Sie sind **{{age}}** Jahre alt."
+}

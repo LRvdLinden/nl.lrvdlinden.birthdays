@@ -1,0 +1,635 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "nl.lrvdlinden.birthdays",
+  "version": "0.1.3",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#ef35aa",
+  "name": {
+    "en": "Birthdays",
+    "nl": "Verjaardagen"
+  },
+  "images": {
+    "xlarge": "/assets/images/xlarge.jpg",
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "description": {
+    "en": "Set birthday reminders or send birthday wishes",
+    "nl": "Stel verjaardagsherinneringen in of stuur verjaardagswensen",
+    "de": "Geburtstagserinnerungen einstellen oder Geburtstagswünsche senden",
+    "fr": "Définir des rappels d'anniversaire ou envoyer des vœux d'anniversaire",
+    "it": "Imposta promemoria di compleanno o invia auguri di compleanno",
+    "es": "Configura recordatorios de cumpleaños o envía felicitaciones de cumpleaños",
+    "sv": "Ställ in födelsedagspåminnelser eller skicka födelsedagshälsningar",
+    "no": "Sett bursdagspåminnelser eller send bursdagshilsener",
+    "da": "Indstil fødselsdagspåmindelser eller send fødselsdagshilsener",
+    "ru": "Настройте напоминания о днях рождения или отправьте поздравления с днем рождения",
+    "pl": "Ustaw przypomnienia urodzinowe lub wysyłaj życzenia urodzinowe"
+  },
+  "category": "tools",
+  "class": "cloud",
+  "tags": {
+    "en": [
+      "birthday",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "messages",
+      "message",
+      "calendar",
+      "party",
+      "birthdays",
+      "callmebot"
+    ],
+    "nl": [
+      "verjaardag",
+      "whatsapp",
+      "telegram",
+      "callmebot",
+      "facebook",
+      "signal",
+      "berichten",
+      "bericht",
+      "agenda",
+      "feest",
+      "verjaardagen",
+      "callmebot"
+    ],
+    "de": [
+      "Geburtstag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "Nachrichten",
+      "Nachricht",
+      "Kalender",
+      "Party",
+      "Geburtstage",
+      "callmebot"
+    ],
+    "fr": [
+      "anniversaire",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "messages",
+      "message",
+      "calendrier",
+      "fête",
+      "anniversaires",
+      "callmebot"
+    ],
+    "it": [
+      "compleanno",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "messaggi",
+      "messaggio",
+      "calendario",
+      "festa",
+      "compleanni",
+      "callmebot"
+    ],
+    "es": [
+      "cumpleaños",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "mensajes",
+      "mensaje",
+      "calendario",
+      "fiesta",
+      "cumpleaños",
+      "callmebot"
+    ],
+    "sv": [
+      "födelsedag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "meddelanden",
+      "meddelande",
+      "kalender",
+      "fest",
+      "födelsedagar",
+      "callmebot"
+    ],
+    "no": [
+      "bursdag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "meldinger",
+      "melding",
+      "kalender",
+      "fest",
+      "bursdager",
+      "callmebot"
+    ],
+    "da": [
+      "fødselsdag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "beskeder",
+      "besked",
+      "kalender",
+      "fest",
+      "fødselsdage",
+      "callmebot"
+    ],
+    "ru": [
+      "день рождения",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "сообщения",
+      "сообщение",
+      "календарь",
+      "вечеринка",
+      "дни рождения",
+      "callmebot"
+    ],
+    "pl": [
+      "urodziny",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "wiadomości",
+      "wiadomość",
+      "kalendarz",
+      "impreza",
+      "urodziny",
+      "callmebot"
+    ]
+  },
+  "language": {
+    "en": "en",
+    "nl": "nl",
+    "de": "de",
+    "fr": "fr",
+    "it": "it",
+    "es": "es",
+    "sv": "sv",
+    "no": "no",
+    "da": "da",
+    "ru": "ru",
+    "pl": "pl"
+  },
+  "permissions": [],
+  "author": {
+    "name": "Léon van der Linden",
+    "email": "homey@vdlinden.xyz"
+  },
+  "contributors": {
+    "translators": [
+      {
+        "name": "🇬🇧 Léon"
+      },
+      {
+        "name": "🇳🇱 Léon"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "lrvdlinden"
+      },
+      "bunq": {
+        "username": "lrvdlinden"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://community.homey.app/t/app-pro-birthdays-for-homey/93178"
+  },
+  "homepage": "https://homey.app/nl-nl/apps/author/5d4da77a2c836a50f6936070/page/0/",
+  "support": "https://community.homey.app/t/app-pro-birthdays-for-homey/93178",
+  "homeyCommunityTopicId": 93178,
+  "flow": {
+    "triggers": [
+      {
+        "id": "birthday-today",
+        "title": {
+          "en": "Someone's birthday",
+          "nl": "Iemand is jarig",
+          "de": "Jemand hat Geburtstag",
+          "fr": "C'est l'anniversaire de quelqu'un",
+          "it": "Il compleanno di qualcuno",
+          "es": "El cumpleaños de alguien",
+          "sv": "Någon har födelsedag",
+          "no": "Noen har bursdag",
+          "da": "Nogen har fødselsdag",
+          "ru": "День рождения у кого-то",
+          "pl": "Urodziny kogoś"
+        },
+        "tokens": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": {
+              "en": "Birthday person",
+              "nl": "Naam jarige",
+              "de": "Geburtstagskind",
+              "fr": "Personne qui fête son anniversaire",
+              "it": "Persona festeggiata",
+              "es": "Persona de cumpleaños",
+              "sv": "Födelsedagsbarn",
+              "no": "Bursdagsbarn",
+              "da": "Fødselar",
+              "ru": "Имя именинника",
+              "pl": "Osoba obchodząca urodziny"
+            },
+            "example": {
+              "en": "Jon Doe",
+              "nl": "Jon Doe",
+              "de": "Max Mustermann",
+              "fr": "Jean Dupont",
+              "it": "Mario Rossi",
+              "es": "María Pérez",
+              "sv": "Anna Andersson",
+              "no": "Per Olsen",
+              "da": "Lise Nielsen",
+              "ru": "Иван Иванов",
+              "pl": "Jan Kowalski"
+            }
+          },
+          {
+            "name": "mobile",
+            "type": "string",
+            "title": {
+              "en": "Mobile number",
+              "nl": "Telefoonnummer",
+              "de": "Handynummer",
+              "fr": "Numéro de téléphone mobile",
+              "it": "Numero di telefono cellulare",
+              "es": "Número de teléfono móvil",
+              "sv": "Mobilnummer",
+              "no": "Mobilnummer",
+              "da": "Mobilnummer",
+              "ru": "Мобильный номер",
+              "pl": "Numer telefonu komórkowego"
+            },
+            "example": {
+              "en": "+31612345678",
+              "nl": "+31612345678",
+              "de": "+4916012345678",
+              "fr": "+33123456789",
+              "it": "+391234567890",
+              "es": "+34123456789",
+              "sv": "+46123456789",
+              "no": "+47123456789",
+              "da": "+45123456789",
+              "ru": "+79123456789",
+              "pl": "+48123456789"
+            }
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "title": {
+              "en": "Birthday message",
+              "nl": "Verjaardagsbericht",
+              "de": "Geburtstagsnachricht",
+              "fr": "Message d'anniversaire",
+              "it": "Messaggio di compleanno",
+              "es": "Mensaje de cumpleaños",
+              "sv": "Födelsedagshälsning",
+              "no": "Bursdagsmelding",
+              "da": "Fødselsdagshilsen",
+              "ru": "Поздравление с днем рождения",
+              "pl": "Wiadomość urodzinowa"
+            },
+            "example": {
+              "en": "Happy B-day!",
+              "nl": "Gefeliciteerd!",
+              "de": "Herzlichen Glückwunsch zum Geburtstag!",
+              "fr": "Joyeux anniversaire!",
+              "it": "Buon compleanno!",
+              "es": "¡Feliz cumpleaños!",
+              "sv": "Grattis på födelsedagen!",
+              "no": "Gratulerer med dagen!",
+              "da": "Tillykke med fødselsdagen!",
+              "ru": "С днем рождения!",
+              "pl": "Wszystkiego najlepszego!"
+            }
+          },
+          {
+            "name": "age",
+            "type": "number",
+            "title": {
+              "en": "Age",
+              "nl": "Leeftijd",
+              "de": "Alter",
+              "fr": "Âge",
+              "it": "Età",
+              "es": "Edad",
+              "sv": "Ålder",
+              "no": "Alder",
+              "da": "Alder",
+              "ru": "Возраст",
+              "pl": "Wiek"
+            },
+            "example": {
+              "en": "38",
+              "nl": "38",
+              "de": "38",
+              "fr": "38",
+              "it": "38",
+              "es": "38",
+              "sv": "38",
+              "no": "38",
+              "da": "38",
+              "ru": "38",
+              "pl": "38"
+            }
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "is-birthday-today",
+        "title": {
+          "en": "It's someone's birthday today",
+          "nl": "Iemand is jarig vandaag",
+          "de": "Jemand hat heute Geburtstag",
+          "fr": "C'est l'anniversaire de quelqu'un aujourd'hui",
+          "it": "Oggi è il compleanno di qualcuno",
+          "es": "Hoy es el cumpleaños de alguien",
+          "sv": "Det är någons födelsedag idag",
+          "no": "Det er noen sin bursdag i dag",
+          "da": "Det er nogens fødselsdag i dag",
+          "ru": "Сегодня у кого-то день рождения",
+          "pl": "Dziś ktoś ma urodziny"
+        },
+        "titleFormatted": {
+          "en": "Today !{{is|isn't}} someone's birthday",
+          "nl": "Vandaag !{{is iemand|is niemand}} jarig",
+          "de": "Heute !{{hat|hat nicht}} jemand Geburtstag",
+          "fr": "Aujourd'hui !{{c'est|ce n'est pas}} l'anniversaire de quelqu'un",
+          "it": "Oggi !{{è|non è}} il compleanno di qualcuno",
+          "es": "Hoy !{{es|no es}} el cumpleaños de alguien",
+          "sv": "Idag !{{är|är inte}} någons födelsedag",
+          "no": "I dag !{{er|er ikke}} noen sin bursdag",
+          "da": "I dag !{{er|er ikke}} nogens fødselsdag",
+          "ru": "Сегодня !{{есть|нет}} у кого-то день рождения",
+          "pl": "Dziś !{{jest|nie ma}} urodzin kogoś"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "get-next-birthday",
+        "title": {
+          "en": "Get who's next up for a birthday",
+          "nl": "Verkrijg wie er als volgende jarig is",
+          "de": "Holen Sie sich, wer als nächstes Geburtstag hat",
+          "fr": "Obtenez qui est le prochain à avoir un anniversaire",
+          "it": "Scopri chi è il prossimo a compiere gli anni",
+          "es": "Obtén quién es el próximo en cumplir años",
+          "sv": "Få reda på vem som är nästa att fylla år",
+          "no": "Få vite hvem som er neste som har bursdag",
+          "da": "Få at vide, hvem der har fødselsdag næste gang",
+          "ru": "Узнайте, кто следующий отмечает день рождения",
+          "pl": "Dowiedz się, kto jest następny w kolejce do urodzin"
+        },
+        "tokens": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": {
+              "en": "Birthday person",
+              "nl": "Naam jarige",
+              "de": "Geburtstagskind",
+              "fr": "Personne qui fête son anniversaire",
+              "it": "Persona festeggiata",
+              "es": "Persona de cumpleaños",
+              "sv": "Födelsedagsbarn",
+              "no": "Bursdagsbarn",
+              "da": "Fødselar",
+              "ru": "Имя именинника",
+              "pl": "Osoba obchodząca urodziny"
+            },
+            "example": {
+              "en": "Jon Doe",
+              "nl": "Jon Doe",
+              "de": "Max Mustermann",
+              "fr": "Jean Dupont",
+              "it": "Mario Rossi",
+              "es": "María Pérez",
+              "sv": "Anna Andersson",
+              "no": "Per Olsen",
+              "da": "Lise Nielsen",
+              "ru": "Иван Иванов",
+              "pl": "Jan Kowalski"
+            }
+          },
+          {
+            "name": "mobile",
+            "type": "string",
+            "title": {
+              "en": "Mobile number",
+              "nl": "Telefoonnummer",
+              "de": "Handynummer",
+              "fr": "Numéro de téléphone mobile",
+              "it": "Numero di telefono cellulare",
+              "es": "Número de teléfono móvil",
+              "sv": "Mobilnummer",
+              "no": "Mobilnummer",
+              "da": "Mobilnummer",
+              "ru": "Мобильный номер",
+              "pl": "Numer telefonu komórkowego"
+            },
+            "example": {
+              "en": "+31612345678",
+              "nl": "+31612345678",
+              "de": "+4916012345678",
+              "fr": "+33123456789",
+              "it": "+391234567890",
+              "es": "+34123456789",
+              "sv": "+46123456789",
+              "no": "+47123456789",
+              "da": "+45123456789",
+              "ru": "+79123456789",
+              "pl": "+48123456789"
+            }
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "title": {
+              "en": "Birthday message",
+              "nl": "Verjaardagsbericht",
+              "de": "Geburtstagsnachricht",
+              "fr": "Message d'anniversaire",
+              "it": "Messaggio di compleanno",
+              "es": "Mensaje de cumpleaños",
+              "sv": "Födelsedagshälsning",
+              "no": "Bursdagsmelding",
+              "da": "Fødselsdagshilsen",
+              "ru": "Поздравление с днем рождения",
+              "pl": "Wiadomość urodzinowa"
+            },
+            "example": {
+              "en": "Happy B-day!",
+              "nl": "Gefeliciteerd!",
+              "de": "Herzlichen Glückwunsch zum Geburtstag!",
+              "fr": "Joyeux anniversaire!",
+              "it": "Buon compleanno!",
+              "es": "¡Feliz cumpleaños!",
+              "sv": "Grattis på födelsedagen!",
+              "no": "Gratulerer med dagen!",
+              "da": "Tillykke med fødselsdagen!",
+              "ru": "С днем рождения!",
+              "pl": "Wszystkiego najlepszego!"
+            }
+          },
+          {
+            "name": "date",
+            "type": "string",
+            "title": {
+              "en": "Birthday",
+              "nl": "Verjaardag",
+              "de": "Geburtstag",
+              "fr": "Anniversaire",
+              "it": "Compleanno",
+              "es": "Cumpleaños",
+              "sv": "Födelsedag",
+              "no": "Bursdag",
+              "da": "Fødselsdag",
+              "ru": "День рождения",
+              "pl": "Urodziny"
+            },
+            "example": {
+              "en": "01-01-2023",
+              "nl": "01-01-2023",
+              "de": "01-01-2023",
+              "fr": "01-01-2023",
+              "it": "01-01-2023",
+              "es": "01-01-2023",
+              "sv": "01-01-2023",
+              "no": "01-01-2023",
+              "da": "01-01-2023",
+              "ru": "01-01-2023",
+              "pl": "01-01-2023"
+            }
+          },
+          {
+            "name": "age",
+            "type": "number",
+            "title": {
+              "en": "Age",
+              "nl": "Leeftijd",
+              "de": "Alter",
+              "fr": "Âge",
+              "it": "Età",
+              "es": "Edad",
+              "sv": "Ålder",
+              "no": "Alder",
+              "da": "Alder",
+              "ru": "Возраст",
+              "pl": "Wiek"
+            },
+            "example": {
+              "en": "38",
+              "nl": "38",
+              "de": "38",
+              "fr": "38",
+              "it": "38",
+              "es": "38",
+              "sv": "38",
+              "no": "38",
+              "da": "38",
+              "ru": "38",
+              "pl": "38"
+            }
+          }
+        ]
+      },
+      {
+        "id": "temporary-image",
+        "title": {
+          "en": "Create image token",
+          "nl": "Maak afbeeldingstoken",
+          "de": "Erstelle Bildtoken",
+          "fr": "Créer un jeton d'image",
+          "it": "Crea un token immagine",
+          "es": "Crear un token de imagen",
+          "sv": "Skapa bildtoken",
+          "no": "Opprett bilde-token",
+          "da": "Opret billede token",
+          "ru": "Создать токен изображения",
+          "pl": "Utwórz token obrazu"
+        },
+        "titleFormatted": {
+          "en": "Create image token [[imageUrl]]",
+          "nl": "Maak afbeeldingstoken [[imageUrl]]",
+          "de": "Erstelle Bildtoken [[imageUrl]]",
+          "fr": "Créer un jeton d'image [[imageUrl]]",
+          "it": "Crea un token immagine [[imageUrl]]",
+          "es": "Crear un token de imagen [[imageUrl]]",
+          "sv": "Skapa bildtoken [[imageUrl]]",
+          "no": "Opprett bilde-token [[imageUrl]]",
+          "da": "Opret billede token [[imageUrl]]",
+          "ru": "Создать токен изображения [[imageUrl]]",
+          "pl": "Utwórz token obrazu [[imageUrl]]"
+        },
+        "args": [
+          {
+            "type": "text",
+            "name": "imageUrl",
+            "placeholder": {
+              "en": "https:// (Only support .png, .jpg or .jpeg)",
+              "nl": "https:// (Ondersteunt alleen .png, .jpg of .jpeg)",
+              "de": "https:// (Unterstützt nur .png, .jpg oder .jpeg)",
+              "fr": "https:// (Prise en charge uniquement de .png, .jpg ou .jpeg)",
+              "it": "https:// (Supporta solo .png, .jpg o .jpeg)",
+              "es": "https:// (Soporte solo .png, .jpg o .jpeg)",
+              "sv": "https:// (Endast stöd för .png, .jpg eller .jpeg)",
+              "no": "https:// (Støtter bare .png, .jpg eller .jpeg)",
+              "da": "https:// (Understøtter kun .png, .jpg eller .jpeg)",
+              "ru": "https:// (Поддерживаются только .png, .jpg или .jpeg)",
+              "pl": "https:// (Obsługuje tylko .png, .jpg lub .jpeg)"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "image",
+            "type": "image",
+            "title": {
+              "en": "Image",
+              "nl": "Afbeelding",
+              "de": "Bild",
+              "fr": "Image",
+              "it": "Immagine",
+              "es": "Imagen",
+              "sv": "Bild",
+              "no": "Bilde",
+              "da": "Billede",
+              "ru": "Изображение",
+              "pl": "Obraz"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

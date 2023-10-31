@@ -1,0 +1,17 @@
+{
+  "settings": {
+      "title": "Instellingen voor Verjaardagen",
+      "description": "Stel hier de verjaardagsmeldingen in die je wilt ontvangen.",
+      "name": "Naam:",
+      "mobile": "Mobiel nummer:",
+      "message": "Verjaardagsboodschap:",
+      "year": "Geboortejaar:",
+      "birthdate": "Verjaardag:",
+      "addBtn": "Toevoegen",
+      "listTitle": "Lijst van Verjaardagen",
+      "deleteBtn": "Verwijderen",
+      "saveBtn": "Opslaan",
+      "languageToggle": "Notificatie: Nederlands"
+  },
+  "birthday_notification": "Vandaag is de verjaardag van **${birthdayPerson.name}** 🎉. Hij/Zij is **${age}** jaar oud."
+}

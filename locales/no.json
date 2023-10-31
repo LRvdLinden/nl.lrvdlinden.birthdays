@@ -1,0 +1,17 @@
+{
+  "settings": {
+      "title": "Bursdagsinnstillinger",
+      "description": "Sett opp bursdagsvarslene du ønsker å motta her.",
+      "name": "Navn:",
+      "mobile": "Mobilnummer:",
+      "message": "Bursdagsmelding:",
+      "year": "Fødselsår:",
+      "birthdate": "Bursdag:",
+      "addBtn": "Legg til",
+      "listTitle": "Liste over bursdager",
+      "deleteBtn": "Slett",
+      "saveBtn": "Lagre",
+      "languageToggle": "Varsling: Norsk"
+  },
+  "birthday_notification": "I dag er det **{{name}}**s bursdag 🎉. De er **{{age}}** år gammel."
+}
