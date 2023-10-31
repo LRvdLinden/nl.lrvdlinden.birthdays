@@ -222,13 +222,14 @@ function removeBirthday(index) {
 
 
 function save() {
-    if (editingIndex !== -1) {
-        const name = document.getElementById("name").value;
-        const date = document.getElementById("birthdate").value;
-        const mobile = document.getElementById("mobile").value;
-        const message = document.getElementById("message").value;
-        const year = document.getElementById("year").value;
+    const name = document.getElementById("name").value;
+    const date = document.getElementById("birthdate").value;
+    const mobile = document.getElementById("mobile").value;
+    const message = document.getElementById("message").value;
+    const year = document.getElementById("year").value;
 
+    // Als we een bestaande verjaardag bewerken
+    if (editingIndex !== -1) {
         birthdays[editingIndex] = {
             name: name,
             date: date,
@@ -237,11 +238,20 @@ function save() {
             year: year || null
         };
         editingIndex = -1; // Reset de index na het opslaan
-        displayBirthdays(); // Update de lijst met de bijgewerkte gegevens
-    } else {
-        addBirthday(); // Toevoegen van een nieuwe verjaardag als er geen verjaardag wordt bewerkt
+    } 
+    // Anders voegen we een nieuwe verjaardag toe
+    else {
+        birthdays.push({
+            name: name,
+            date: date,
+            mobile: mobile,
+            message: message,
+            year: year || null
+        });
     }
-    
+
+    displayBirthdays(); // Update de lijst met de nieuwe of bijgewerkte gegevens
+
     // Velden leegmaken na het opslaan/bewerken van een verjaardag
     document.getElementById("name").value = "";
     document.getElementById("birthdate").value = "";
@@ -251,6 +261,7 @@ function save() {
 
     myHomey.set('birthdays', birthdays);
 }
+
 
         document.addEventListener("DOMContentLoaded", function () {
             initializeTranslations();
