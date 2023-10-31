@@ -1,0 +1,225 @@
+{
+  "id": "nl.lrvdlinden.birthdays",
+  "version": "0.1.3",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#ef35aa",
+  "name": {
+    "en": "Birthdays",
+    "nl": "Verjaardagen"
+  },
+  "images": {
+    "xlarge": "/assets/images/xlarge.jpg",
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "description": {
+    "en": "Set birthday reminders or send birthday wishes",
+    "nl": "Stel verjaardagsherinneringen in of stuur verjaardagswensen",
+    "de": "Geburtstagserinnerungen einstellen oder Geburtstagswünsche senden",
+    "fr": "Définir des rappels d'anniversaire ou envoyer des vœux d'anniversaire",
+    "it": "Imposta promemoria di compleanno o invia auguri di compleanno",
+    "es": "Configura recordatorios de cumpleaños o envía felicitaciones de cumpleaños",
+    "sv": "Ställ in födelsedagspåminnelser eller skicka födelsedagshälsningar",
+    "no": "Sett bursdagspåminnelser eller send bursdagshilsener",
+    "da": "Indstil fødselsdagspåmindelser eller send fødselsdagshilsener",
+    "ru": "Настройте напоминания о днях рождения или отправьте поздравления с днем рождения",
+    "pl": "Ustaw przypomnienia urodzinowe lub wysyłaj życzenia urodzinowe"
+  },
+  "category": "tools",
+  "class": "cloud",
+  "capabilities": [],
+  "tags": {
+    "en": [
+      "birthday",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "messages",
+      "message",
+      "calendar",
+      "party",
+      "birthdays",
+      "callmebot"
+    ],
+    "nl": [
+      "verjaardag",
+      "whatsapp",
+      "telegram",
+      "callmebot",
+      "facebook",
+      "signal",
+      "berichten",
+      "bericht",
+      "agenda",
+      "feest",
+      "verjaardagen",
+      "callmebot"
+    ],
+    "de": [
+      "Geburtstag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "Nachrichten",
+      "Nachricht",
+      "Kalender",
+      "Party",
+      "Geburtstage",
+      "callmebot"
+    ],
+    "fr": [
+      "anniversaire",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "messages",
+      "message",
+      "calendrier",
+      "fête",
+      "anniversaires",
+      "callmebot"
+    ],
+    "it": [
+      "compleanno",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "messaggi",
+      "messaggio",
+      "calendario",
+      "festa",
+      "compleanni",
+      "callmebot"
+    ],
+    "es": [
+      "cumpleaños",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "mensajes",
+      "mensaje",
+      "calendario",
+      "fiesta",
+      "cumpleaños",
+      "callmebot"
+    ],
+    "sv": [
+      "födelsedag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "meddelanden",
+      "meddelande",
+      "kalender",
+      "fest",
+      "födelsedagar",
+      "callmebot"
+    ],
+    "no": [
+      "bursdag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "meldinger",
+      "melding",
+      "kalender",
+      "fest",
+      "bursdager",
+      "callmebot"
+    ],
+    "da": [
+      "fødselsdag",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "beskeder",
+      "besked",
+      "kalender",
+      "fest",
+      "fødselsdage",
+      "callmebot"
+    ],
+    "ru": [
+      "день рождения",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "сообщения",
+      "сообщение",
+      "календарь",
+      "вечеринка",
+      "дни рождения",
+      "callmebot"
+    ],
+    "pl": [
+      "urodziny",
+      "whatsapp",
+      "telegram",
+      "facebook",
+      "signal",
+      "wiadomości",
+      "wiadomość",
+      "kalendarz",
+      "impreza",
+      "urodziny",
+      "callmebot"
+    ]
+  },
+  "language": {
+    "en": "en",
+    "nl": "nl",
+    "de": "de",
+    "fr": "fr",
+    "it": "it",
+    "es": "es",
+    "sv": "sv",
+    "no": "no",
+    "da": "da",
+    "ru": "ru",
+    "pl": "pl"
+  },
+  "permissions": [],
+  "author": {
+    "name": "Léon van der Linden",
+    "email": "homey@vdlinden.xyz"
+  },
+  "contributors": {
+    "translators": [
+      {
+        "name": "🇬🇧 Léon"
+      },
+      {
+        "name": "🇳🇱 Léon"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "lrvdlinden"
+      },
+      "bunq": {
+        "username": "lrvdlinden"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://community.homey.app/t/app-pro-birthdays-for-homey/93178"
+  },
+  "homepage": "https://homey.app/nl-nl/apps/author/5d4da77a2c836a50f6936070/page/0/",
+  "support": "https://community.homey.app/t/app-pro-birthdays-for-homey/93178",
+  "homeyCommunityTopicId": 93178
+}
