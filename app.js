@@ -64,15 +64,13 @@ class Birthdays extends App {
 
     async checkForTodaysBirthdays() {
         const today = new Date();
-        this.log(`Checking for birthdays at ${today.toISOString()}`); 
         const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
         
         const lastTriggeredDate = await this.homey.settings.get('lastTriggeredDate');
     
         // Als we al hebben getriggerd voor vandaag, controleer dan niet opnieuw
         if (lastTriggeredDate === formattedToday) {
-            const triggeredBirthday = this.birthdays.find(p => p.date.substring(5) === formattedToday.substring(5));
-            this.log(`Already triggered the birthday card for ${triggeredBirthday.name} today at ${today.toISOString()}.`);
+            this.log('Already triggered the birthday card for today.');
             return;
         }
         
@@ -168,31 +166,6 @@ class Birthdays extends App {
             }
         }
     
-// async notifyBirthdayDeleted(birthdayPerson) {
-//     const translations = {
-//         "en": `Birthday of **${birthdayPerson.name}** deleted from the list.`,
-//         "nl": `Verjaardag van **${birthdayPerson.name}** verwijderd uit de lijst.`,
-//         "de": `Geburtstag von **${birthdayPerson.name}** aus der Liste gelöscht.`,
-//         "fr": `Anniversaire de **${birthdayPerson.name}** supprimé de la liste.`,
-//         "it": `Compleanno di **${birthdayPerson.name}** eliminato dalla lista.`,
-//         "es": `Cumpleaños de **${birthdayPerson.name}** eliminado de la lista.`,
-//         "sv": `Födelsedagen för **${birthdayPerson.name}** har tagits bort från listan.`,
-//         "no": `Bursdagen til **${birthdayPerson.name}** er slettet fra listen.`,
-//         "da": `Fødselsdagen for **${birthdayPerson.name}** er slettet fra listen.`,
-//         "ru": `День рождения **${birthdayPerson.name}** удален из списка.`,
-//         "pl": `Urodziny **${birthdayPerson.name}** zostały usunięte z listy.`               
-//     };
-//
-//     const language = this.homey.i18n.getLanguage();
-//     const notificationMessage = translations[language] || translations['en'];
-// 
-//     try {
-//         await this.homey.notifications.createNotification({ excerpt: notificationMessage });
-//     } catch (error) {
-//         this.log('notifyBirthdayDeleted - error', error);
-//     }
-// }
-
         registerTriggerCard() {
             const birthdayTriggerCard = this.homey.flow.getTriggerCard('birthday-today');
         
