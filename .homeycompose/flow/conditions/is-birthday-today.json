@@ -1,0 +1,29 @@
+{
+  "id": "is-birthday-today",
+  "title": {
+    "en": "It's someone's birthday today",
+    "nl": "Iemand is jarig vandaag",
+    "de": "Jemand hat heute Geburtstag",
+    "fr": "C'est l'anniversaire de quelqu'un aujourd'hui",
+    "it": "Oggi è il compleanno di qualcuno",
+    "es": "Hoy es el cumpleaños de alguien",
+    "sv": "Det är någons födelsedag idag",
+    "no": "Det er noen sin bursdag i dag",
+    "da": "Det er nogens fødselsdag i dag",
+    "ru": "Сегодня у кого-то день рождения",
+    "pl": "Dziś ktoś ma urodziny"
+  },
+  "titleFormatted": {
+    "en": "Today !{{is|isn't}} someone's birthday",
+    "nl": "Vandaag !{{is iemand|is niemand}} jarig",
+    "de": "Heute !{{hat|hat nicht}} jemand Geburtstag",
+    "fr": "Aujourd'hui !{{c'est|ce n'est pas}} l'anniversaire de quelqu'un",
+    "it": "Oggi !{{è|non è}} il compleanno di qualcuno",
+    "es": "Hoy !{{es|no es}} el cumpleaños de alguien",
+    "sv": "Idag !{{är|är inte}} någons födelsedag",
+    "no": "I dag !{{er|er ikke}} noen sin bursdag",
+    "da": "I dag !{{er|er ikke}} nogens fødselsdag",
+    "ru": "Сегодня !{{есть|нет}} у кого-то день рождения",
+    "pl": "Dziś !{{jest|nie ma}} urodzin kogoś"
+    }
+}
