@@ -1,5 +1,6 @@
 const { App } = require('homey');
 const axios = require('axios'); // Required for fetching images
+const { Homey } = require('homey');
 
 class Birthdays extends App {
     async onInit() {
@@ -14,7 +15,16 @@ class Birthdays extends App {
 
         // Set up a daily interval to check for birthdays
         setInterval(this.checkForTodaysBirthdays.bind(this), 1 * 60 * 60 * 1000);
+
+
+//    const myToken = await this.homey.flow.createToken("my_token", {
+//        type: "number",
+//        title: "My Token",
+//      });
+//  ​
+//      await myToken.setValue(23.5);
     }
+    
 
     async fetchBirthdays() {
         try {
@@ -166,6 +176,7 @@ class Birthdays extends App {
             }
         }
     
+
         registerTriggerCard() {
             const birthdayTriggerCard = this.homey.flow.getTriggerCard('birthday-today');
         
