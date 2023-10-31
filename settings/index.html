@@ -44,12 +44,11 @@
             <input id="birthdate" type="date" />
         </div>
 
-        <button onclick="addBirthday()" data-i18n="settings.addBtn"></button>
-
         <h2 data-i18n="settings.listTitle"></h2>
         <ul id="birthdayList"></ul>
 
         <button class="homey-button-primary-full" onclick="save()" data-i18n="settings.saveBtn"></button>
+
     </div>
 
     <script type="text/javascript">
@@ -222,26 +221,46 @@ function removeBirthday(index) {
 
 
 function save() {
-    if (editingIndex !== -1) {
-        const name = document.getElementById("name").value;
-        const date = document.getElementById("birthdate").value;
-        const mobile = document.getElementById("mobile").value;
-        const message = document.getElementById("message").value;
-        const year = document.getElementById("year").value;
+    const name = document.getElementById("name").value;
+    const date = document.getElementById("birthdate").value;
+    const mobile = document.getElementById("mobile").value;
+    const message = document.getElementById("message").value;
+    const year = document.getElementById("year").value;
+    const currentYear = new Date().getFullYear();
 
-        birthdays[editingIndex] = {
+    // Validatie voor het jaar
+    if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
+        console.log("Year validation failed");
+        alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
+        return;
+    }
+
+    // Verplichte veldvalidatie
+    if (name && date && mobile && message) {
+        // Object voor de verjaardag
+        const birthdayObject = {
             name: name,
             date: date,
             mobile: mobile,
             message: message,
-            year: year || null
+            year: year || null  // Gebruik 'null' als 'year' leeg is
         };
-        editingIndex = -1; // Reset de index na het opslaan
-        displayBirthdays(); // Update de lijst met de bijgewerkte gegevens
+
+        if (editingIndex !== -1) {
+            birthdays[editingIndex] = birthdayObject;
+            editingIndex = -1; // Reset de index na het opslaan
+        } else {
+            birthdays.push(birthdayObject);  // Voeg het object toe aan de lijst
+            console.log("Birthday added:", birthdayObject);
+        }
+        displayBirthdays();  // Toon de gesorteerde verjaardagen na het toevoegen/bewerken
+    } else {
+        console.log("Failed to add/update birthday due to missing or invalid field values");
     }
-    
+
     myHomey.set('birthdays', birthdays);
 }
+
 
         document.addEventListener("DOMContentLoaded", function () {
             initializeTranslations();
