@@ -16,25 +16,26 @@ class Birthdays extends App {
         // Set up a daily interval to check for birthdays
         setInterval(this.checkForTodaysBirthdays.bind(this), 1 * 60 * 60 * 1000);
 
-    this.tokens = {
-        name: await this.homey.flow.createToken('name', {
-            type: 'string',
-            title: 'Name'
-        }),
-        
-        mobile: await this.homey.flow.createToken('mobile', {
-            type: 'string',
-            title: 'Mobile'
-        }),
-        message: await this.homey.flow.createToken('message', {
-            type: 'string',
-            title: 'Message'
-        }),
-        age: await this.homey.flow.createToken('age', {
-            type: 'number',
-            title: 'Age'
-        })
-    };
+//    this.tokens = {
+//        name: await this.homey.flow.createToken('name', {
+//            type: 'string',
+//            title: 'Name'
+//        }),
+//
+//        mobile: await this.homey.flow.createToken('mobile', {
+//            type: 'string',
+//            title: 'Mobile'
+//        }),
+//        message: await this.homey.flow.createToken('message', {
+//            type: 'string',
+//            title: 'Message'
+//        }),
+//        age: await this.homey.flow.createToken('age', {
+//            type: 'number',
+//            title: 'Age'
+//        })
+//   };
+//   await this.tokens.age.setValue(35);
 }
     async fetchBirthdays() {
         try {
@@ -112,10 +113,10 @@ class Birthdays extends App {
                 message: birthdayPerson.message 
             };
 
-            await this.tokens.name.setValue(triggerData.name);
             await this.tokens.mobile.setValue(triggerData.mobile);
             await this.tokens.message.setValue(triggerData.message);
-            await this.tokens.age.setValue(triggerData.age);            
+            await this.tokens.age.setValue(triggerData.age);  
+        
     
             // Controleer op ongedefinieerde waarden in triggerData
             Object.entries(triggerData).forEach(([key, value]) => {
