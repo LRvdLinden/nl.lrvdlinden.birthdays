@@ -62,6 +62,8 @@
 
         let birthdays = [];
         let myHomey;
+        let editedBirthday = null;
+        let editedIndex = -1;
 
         function onHomeyReady(Homey) {
             myHomey = Homey;
@@ -102,8 +104,16 @@ function displayBirthdays() {
         deleteButton.onclick = function () {
             removeBirthday(index);
         };
-
         listItem.appendChild(deleteButton);
+
+        // Hier creëren we de "Wijzigen" knop
+        const editButton = document.createElement("button");
+        editButton.innerText = "Wijzigen";
+        editButton.onclick = function () {
+            editBirthday(index);
+        };
+        listItem.appendChild(editButton);
+
         list.appendChild(listItem);
     });
 }
@@ -156,6 +166,47 @@ function addBirthday() {
     }
 }
 
+function editBirthday(index) {
+    const selectedBirthday = birthdays[index];
+    
+    document.getElementById("name").value = selectedBirthday.name;
+    document.getElementById("birthdate").value = selectedBirthday.date;
+    document.getElementById("mobile").value = selectedBirthday.mobile;
+    document.getElementById("message").value = selectedBirthday.message;
+    document.getElementById("year").value = selectedBirthday.year || '';
+    
+    editingIndex = index;
+}
+
+
+
+function saveEditedBirthday(index) {
+    const name = document.getElementById("name").value;
+    const date = document.getElementById("birthdate").value;
+    const mobile = document.getElementById("mobile").value;
+    const message = document.getElementById("message").value;
+    const year = document.getElementById("year").value;
+
+    editedBirthday = {
+        name: name,
+        date: date,
+        mobile: mobile,
+        message: message,
+        year: year || null
+    };
+
+    editedIndex = index;
+
+    displayBirthdays();
+
+    // Herstel de originele onclick functie en tekst van de "Toevoegen" knop
+    const addBtn = document.querySelector("[onclick^='saveEditedBirthday']");
+    addBtn.setAttribute('onclick', addBtn.getAttribute('data-original-onclick'));
+    addBtn.textContent = "Toevoegen";
+    addBtn.removeAttribute('data-original-onclick');
+}
+
+
 
 
 function removeBirthday(index) {
@@ -170,9 +221,27 @@ function removeBirthday(index) {
 }
 
 
-        function save() {
-            myHomey.set('birthdays', birthdays);
-        }
+function save() {
+    if (editingIndex !== -1) {
+        const name = document.getElementById("name").value;
+        const date = document.getElementById("birthdate").value;
+        const mobile = document.getElementById("mobile").value;
+        const message = document.getElementById("message").value;
+        const year = document.getElementById("year").value;
+
+        birthdays[editingIndex] = {
+            name: name,
+            date: date,
+            mobile: mobile,
+            message: message,
+            year: year || null
+        };
+        editingIndex = -1; // Reset de index na het opslaan
+        displayBirthdays(); // Update de lijst met de bijgewerkte gegevens
+    }
+    
+    myHomey.set('birthdays', birthdays);
+}
 
         document.addEventListener("DOMContentLoaded", function () {
             initializeTranslations();
