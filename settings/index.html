@@ -49,6 +49,7 @@
 
         <button class="homey-button-primary-full" onclick="save()" data-i18n="settings.saveBtn"></button>
 
+
     </div>
 
     <script type="text/javascript">
@@ -221,46 +222,35 @@ function removeBirthday(index) {
 
 
 function save() {
-    const name = document.getElementById("name").value;
-    const date = document.getElementById("birthdate").value;
-    const mobile = document.getElementById("mobile").value;
-    const message = document.getElementById("message").value;
-    const year = document.getElementById("year").value;
-    const currentYear = new Date().getFullYear();
+    if (editingIndex !== -1) {
+        const name = document.getElementById("name").value;
+        const date = document.getElementById("birthdate").value;
+        const mobile = document.getElementById("mobile").value;
+        const message = document.getElementById("message").value;
+        const year = document.getElementById("year").value;
 
-    // Validatie voor het jaar
-    if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
-        console.log("Year validation failed");
-        alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
-        return;
-    }
-
-    // Verplichte veldvalidatie
-    if (name && date && mobile && message) {
-        // Object voor de verjaardag
-        const birthdayObject = {
+        birthdays[editingIndex] = {
             name: name,
             date: date,
             mobile: mobile,
             message: message,
-            year: year || null  // Gebruik 'null' als 'year' leeg is
+            year: year || null
         };
-
-        if (editingIndex !== -1) {
-            birthdays[editingIndex] = birthdayObject;
-            editingIndex = -1; // Reset de index na het opslaan
-        } else {
-            birthdays.push(birthdayObject);  // Voeg het object toe aan de lijst
-            console.log("Birthday added:", birthdayObject);
-        }
-        displayBirthdays();  // Toon de gesorteerde verjaardagen na het toevoegen/bewerken
+        editingIndex = -1; // Reset de index na het opslaan
+        displayBirthdays(); // Update de lijst met de bijgewerkte gegevens
     } else {
-        console.log("Failed to add/update birthday due to missing or invalid field values");
+        addBirthday(); // Toevoegen van een nieuwe verjaardag als er geen verjaardag wordt bewerkt
     }
+    
+    // Velden leegmaken na het opslaan/bewerken van een verjaardag
+    document.getElementById("name").value = "";
+    document.getElementById("birthdate").value = "";
+    document.getElementById("mobile").value = "";
+    document.getElementById("message").value = "";
+    document.getElementById("year").value = "";
 
     myHomey.set('birthdays', birthdays);
 }
-
 
         document.addEventListener("DOMContentLoaded", function () {
             initializeTranslations();
@@ -271,3 +261,4 @@ function save() {
 </body>
 
 </html>
+
