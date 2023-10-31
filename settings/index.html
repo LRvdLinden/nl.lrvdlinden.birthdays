@@ -108,7 +108,7 @@ function displayBirthdays() {
 
         // Hier creëren we de "Wijzigen" knop
         const editButton = document.createElement("button");
-        editButton.innerText = "Wijzigen";
+        editButton.innerText = "Edit";
         editButton.onclick = function () {
             editBirthday(index);
         };
@@ -228,8 +228,13 @@ function save() {
     const message = document.getElementById("message").value;
     const year = document.getElementById("year").value;
 
-    // Als we een bestaande verjaardag bewerken
+    if (!name || !date || !mobile || !message) {
+        alert("Vul alle verplichte velden in!");
+        return;
+    }
+
     if (editingIndex !== -1) {
+        // Bestaande verjaardag bijwerken
         birthdays[editingIndex] = {
             name: name,
             date: date,
@@ -238,9 +243,8 @@ function save() {
             year: year || null
         };
         editingIndex = -1; // Reset de index na het opslaan
-    } 
-    // Anders voegen we een nieuwe verjaardag toe
-    else {
+    } else {
+        // Nieuwe verjaardag toevoegen
         birthdays.push({
             name: name,
             date: date,
@@ -250,9 +254,10 @@ function save() {
         });
     }
 
-    displayBirthdays(); // Update de lijst met de nieuwe of bijgewerkte gegevens
+    // Ververs de verjaardagenlijst weergave
+    displayBirthdays();
 
-    // Velden leegmaken na het opslaan/bewerken van een verjaardag
+    // Maak de invoervelden leeg
     document.getElementById("name").value = "";
     document.getElementById("birthdate").value = "";
     document.getElementById("mobile").value = "";
@@ -261,6 +266,7 @@ function save() {
 
     myHomey.set('birthdays', birthdays);
 }
+
 
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -272,4 +278,5 @@ function save() {
 </body>
 
 </html>
+
 
