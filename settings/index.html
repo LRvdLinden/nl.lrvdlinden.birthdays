@@ -72,13 +72,13 @@
         }
 
         function loadBirthdays() {
-            myHomey.get('birthdays', function (err, data) {
-                if (!err && data) {
-                    birthdays = data;
-                    displayBirthdays();
-                }
-            });
-        }
+    let data = localStorage.getItem('birthdays');
+    if (data) {
+        birthdays = JSON.parse(data);
+        displayBirthdays();
+    }
+}
+
 
         function sortBirthdays() {
     birthdays.sort((a, b) => {
@@ -265,6 +265,7 @@ function save() {
     document.getElementById("year").value = "";
 
     myHomey.set('birthdays', birthdays);
+    localStorage.setItem('birthdays', JSON.stringify(birthdays));
 }
 
 
@@ -278,5 +279,4 @@ function save() {
 </body>
 
 </html>
-
 
