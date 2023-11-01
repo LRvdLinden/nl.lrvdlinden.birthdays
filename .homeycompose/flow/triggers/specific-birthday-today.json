@@ -1,32 +1,52 @@
 {
-  "id": "birthday-today",
+  "id": "specific-birthday-today",
   "title": {
-    "en": "It's someone's birthday",
-    "nl": "Het is iemands verjaardag",
-    "de": "Es ist jemandes Geburtstag",
-    "fr": "C'est l'anniversaire de quelqu'un",
-    "it": "È il compleanno di qualcuno",
-    "es": "Es el cumpleaños de alguien",
-    "sv": "Det är någons födelsedag",
-    "no": "Det er noen sin bursdag",
-    "da": "Det er en persons fødselsdag",
-    "ru": "У кого-то день рождения",
-    "pl": "Ktoś ma urodziny"
+    "en": "It's a specific person's birthday",
+    "nl": "Het is een specifiek iemand zijn verjaardag",
+    "de": "Es ist der Geburtstag einer bestimmten Person",
+    "fr": "C'est l'anniversaire d'une personne spécifique",
+    "it": "È il compleanno di una persona specifica",
+    "es": "Es el cumpleaños de una persona específica",
+    "sv": "Det är en specifik persons födelsedag",
+    "no": "Det er en spesifikk persons bursdag",
+    "da": "Det er en bestemt persons fødselsdag",
+    "ru": "Сегодня день рождения конкретного человека",
+    "pl": "To są urodziny konkretnej osoby"
   },
   "titleFormatted": {
-    "en": "Celebrate someone's birthday at [[run_at]] o'clock",
-    "nl": "Vier iemands verjaardag om [[run_at]] uur",
-    "de": "Feiere jemandes Geburtstag um [[run_at]] Uhr",
-    "fr": "Célébrez l'anniversaire de quelqu'un à [[run_at]] heures",
-    "it": "Festeggia il compleanno di qualcuno alle ore [[run_at]]",
-    "es": "Celebra el cumpleaños de alguien a las [[run_at]] horas",
-    "sv": "Fira någons födelsedag klockan [[run_at]]",
-    "no": "Feire noens bursdag klokken [[run_at]]",
-    "da": "Fejr en persons fødselsdag kl. [[run_at]]",
-    "ru": "Празднуйте день рождения кого-то в [[run_at]] часов",
-    "pl": "Świętuj urodziny kogoś o [[run_at]]"
+    "en": "Celebrate [[person]]'s birthday at [[run_at]] o'clock",
+    "nl": "Vier de verjaardag van [[person]] om [[run_at]] uur",
+    "de": "Feiere den Geburtstag von [[person]] um [[run_at]] Uhr",
+    "fr": "Célébrez l'anniversaire de [[person]] à [[run_at]] heures",
+    "it": "Festeggia il compleanno di [[person]] alle ore [[run_at]]",
+    "es": "Celebra el cumpleaños de [[person]] a las [[run_at]] horas",
+    "sv": "Fira [[person]]'s födelsedag klockan [[run_at]]",
+    "no": "Feir [[person]]'s bursdag klokken [[run_at]]",
+    "da": "Fejr [[person]]'s fødselsdag kl. [[run_at]]",
+    "ru": "Празднуйте день рождения [[person]] в [[run_at]] часов",
+    "pl": "Świętuj urodziny [[person]] o [[run_at]]"
   },
   "args": [
+    {
+      "type": "autocomplete",
+      "name": "person",
+      "title": {
+        "en": "Person",
+        "nl": "Persoon",
+        "de": "Person",
+        "fr": "Personne",
+        "it": "Persona",
+        "es": "Persona",
+        "sv": "Person",
+        "no": "Person",
+        "da": "Person",
+        "ru": "Человек",
+        "pl": "Osoba"
+      },
+      "placeholder": {
+        "en": "John Doe"
+      }
+    },
     {
       "type": "time",
       "name": "run_at",
@@ -94,7 +114,7 @@
         "pl": "Numer telefonu komórkowego"
       },
       "example": {
-        "en": "+31612345678",
+        "en": "+441234567890",
         "nl": "+31612345678",
         "de": "+4916012345678",
         "fr": "+33123456789",
