@@ -80,7 +80,7 @@
         return;
       }
 
-      console.log("Homey.get(\"birthdays\")", data);
+      console.log("Homey.get(\"persons\")", data);
 
       if (data) {
         birthdays = data;
@@ -267,6 +267,7 @@
     document.getElementById("year").value = "";
 
     myHomey.set("persons", birthdays);
+    // dit mag niet in de web app
     // localStorage.setItem("birthdays", JSON.stringify(birthdays));
   }
 

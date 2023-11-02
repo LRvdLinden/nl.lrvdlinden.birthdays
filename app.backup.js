@@ -7,6 +7,7 @@ class Birthdays extends App {
         this.log('Birthdays has been initialized');
         this.birthdays = [];
         await this.initializeBirthdays();
+
         this.registerTriggerCard();
         this.registerActionCard();
 
