@@ -98,7 +98,7 @@ class Birthdays extends Homey.App {
     try {
       let birthdays = await this.homey.settings.get("birthdays") as Array<{
         name: string,
-        dateOfBirth: string,
+        date: string,
         year?: string,
         mobile: string,
         message: string,
@@ -108,7 +108,7 @@ class Birthdays extends Homey.App {
         return {
           id: this.getUniqueId(birthday),
           name: birthday.name,
-          dateOfBirth: birthday.dateOfBirth,
+          dateOfBirth: birthday.date,
           year: birthday.year,
           mobile: birthday.mobile,
           message: birthday.message
