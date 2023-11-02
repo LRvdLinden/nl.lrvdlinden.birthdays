@@ -167,7 +167,7 @@ class Birthdays extends Homey.App {
       const today = new Date();
       const formattedToday = `${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-      return person.dateOfBirth.substring(5) === formattedToday;
+      return person.dateOfBirth && person.dateOfBirth.substring(5) === formattedToday;
     }) ?? [];
   };
 
