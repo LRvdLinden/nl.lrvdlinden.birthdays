@@ -1,5 +1,6 @@
 import Homey, { FlowCard, FlowCardTrigger, FlowToken } from "homey";
 import * as crypto from "crypto";
+const axios = require('axios'); 
 
 interface Person {
   id: string;
@@ -8,6 +9,7 @@ interface Person {
   year?: string;
   mobile: string;
   message: string;
+  category: string;
 }
 
 interface BirthdayTodayTriggerArgs {
@@ -19,6 +21,15 @@ interface SpecificBirthdayTodayTriggerArgs extends BirthdayTodayTriggerArgs {
 }
 
 interface SpecificBirthdayTodayTriggerState {
+  person: Person;
+}
+
+interface CategoryBirthdayTriggerArgs {
+  run_at: string;
+  person: Person;
+}
+
+interface CategoryBirthdayTriggerState {
   person: Person;
 }
 
@@ -47,6 +58,7 @@ class Birthdays extends Homey.App {
   private tokens?: Tokens;
   private birthdayTriggerCard?: FlowCardTrigger;
   private specificBirthdayTriggerCard?: FlowCardTrigger;
+  private categoryBirthdayTriggerCard?: FlowCardTrigger;
   private _image: any;
   private _imageSet?: boolean;
   private debug: boolean = false;
@@ -102,6 +114,7 @@ class Birthdays extends Homey.App {
         year?: string,
         mobile: string,
         message: string,
+        category: string,
       }>;
 
       this.homey.settings.set("persons", birthdays.map((birthday) => {
@@ -111,7 +124,8 @@ class Birthdays extends Homey.App {
           dateOfBirth: birthday.dateOfBirth,
           year: birthday.year,
           mobile: birthday.mobile,
-          message: birthday.message
+          message: birthday.message,
+          category: birthday.category
         } as Person;
       }));
 
@@ -158,7 +172,8 @@ class Birthdays extends Homey.App {
       typeof data.name === "string" &&
       typeof data.mobile === "string" &&
       typeof data.message === "string" &&
-      typeof data.age === "number"
+      typeof data.age === "number" &&
+      typeof data.category === "string"
     );
   }
 
@@ -253,6 +268,17 @@ class Birthdays extends Homey.App {
         });
       }
     );
+    
+    this.categoryBirthdayTriggerCard = this.homey.flow.getTriggerCard("category-birthday-today");
+    this.categoryBirthdayTriggerCard.registerRunListener(async (args: CategoryBirthdayTriggerArgs, state: CategoryBirthdayTriggerState) => {
+        // Hier controleren we eerst of args en state daadwerkelijk de verwachte waarden bevatten
+        if(!args.person || !state.person) {
+            throw new Error("Expected person details in args and state.");
+        }
+    
+        // Valideer dat de huidige tijd overeenkomt met de args.run_at tijd die het formaat "HH:mm" heeft en verifieer dat de persoon dezelfde is
+        return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
+    });  
 
     this.homey.flow.getConditionCard("is-birthday-today").registerRunListener(async (args, state) => {
       const today = new Date();
@@ -265,11 +291,12 @@ class Birthdays extends Homey.App {
       this._image = args.image;
       this._imageSet = true;
       setTimeout(() => {
-        this._imageSet = false;
+          this._imageSet = false;
       }, 120000);
       return true;
-    });
-  }
+  });
+}
+
 
   private verifyRunAtByArgs(args: BirthdayTodayTriggerArgs) {
     const now = new Date();
