@@ -155,7 +155,6 @@
         <tr>
             <th data-i18n="settings.personList.name">Name</th>
             <th data-i18n="settings.personList.dateOfBirth">Date of birth</th>
-            <th data-i18n="settings.personList.category">Category</th>
             <th data-i18n="settings.personList.message">Message</th>
             <th data-i18n="settings.personList.actions" style="width:0;">Actions</th>
         </tr>
@@ -266,9 +265,9 @@ function sortBirthdays() {
     dateOfBirthCell.textContent = formattedDate;
     row.appendChild(dateOfBirthCell);
 
-    const categoryCell = document.createElement("td");
-    categoryCell.textContent = person.category;
-    row.appendChild(categoryCell);
+    //const categoryCell = document.createElement("td");
+    //categoryCell.textContent = person.category;
+    //row.appendChild(categoryCell);
 
     const messageCell = document.createElement("td");
     messageCell.textContent = person.message;
@@ -444,6 +443,7 @@ function sortBirthdays() {
 </body>
 
 </html>
+
 
 </body>
 
