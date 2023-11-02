@@ -192,18 +192,52 @@
     myHomey.get("persons", function(err, data) {
       if (!err && data) {
         persons = data;
+        sortBirthdays();
         renderPersons();
       }
     });
-  }
+}
 
-  function sortBirthdays () {
+
+function sortBirthdays() {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+
     persons.sort((a, b) => {
-      const dateA = new Date(a.dateOfBirth);
-      const dateB = new Date(b.dateOfBirth);
-      return dateA - dateB;
+        const dateA = new Date(a.dateOfBirth);
+        const dateB = new Date(b.dateOfBirth);
+
+        if (dateA.getMonth() === currentMonth && dateA.getDate() === currentDay) {
+            return -1; // Als datum A vandaag is, breng het naar de top
+        }
+
+        if (dateB.getMonth() === currentMonth && dateB.getDate() === currentDay) {
+            return 1; // Als datum B vandaag is, breng het naar de top
+        }
+
+        if (dateA.getMonth() === dateB.getMonth()) {
+            if (dateA.getDate() < currentDay && dateB.getDate() >= currentDay) {
+                return 1;
+            }
+            if (dateB.getDate() < currentDay && dateA.getDate() >= currentDay) {
+                return -1;
+            }
+            return dateA.getDate() - dateB.getDate();
+        }
+
+        if (dateA.getMonth() < currentMonth || (dateA.getMonth() === currentMonth && dateA.getDate() < currentDay)) {
+            return 1;
+        }
+
+        if (dateB.getMonth() < currentMonth || (dateB.getMonth() === currentMonth && dateB.getDate() < currentDay)) {
+            return -1;
+        }
+
+        return dateA.getMonth() - dateB.getMonth();
     });
-  }
+}
+
 
   const tableBodyElement = document.querySelector("#person-table tbody");
   const personsListElement = document.querySelector("div#person-list");
@@ -227,7 +261,9 @@
     row.appendChild(nameCell);
 
     const dateOfBirthCell = document.createElement("td");
-    dateOfBirthCell.textContent = person.dateOfBirth;
+    const dateParts = person.dateOfBirth.split("-");
+    const formattedDate = `${dateParts[2]}-${dateParts[1]}`;
+    dateOfBirthCell.textContent = formattedDate;
     row.appendChild(dateOfBirthCell);
 
     const categoryCell = document.createElement("td");
@@ -388,22 +424,27 @@
   }
 
   function save () {
+    sortBirthdays();
     myHomey.set("persons", persons, function(error) {
       if (error) {
         console.error(error);
-        console.log(error);
         myHomey.alert("Error saving data!");
         return;
       }
       clearFields();
     });
-  }
+}
+
 
   document.addEventListener("DOMContentLoaded", function() {
     // initializeTranslations();
   });
 
 </script>
+</body>
+
+</html>
+
 </body>
 
 </html>
