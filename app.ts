@@ -79,7 +79,7 @@ class Birthdays extends Homey.App {
     await this.initializeBirthdays();
 
     this.registerTriggerCard();
-    this.registerActionCard();
+
 
     // Check birthdays upon initialization
     await this.checkBirthdayTriggers();
@@ -373,30 +373,30 @@ class Birthdays extends Homey.App {
   }
 
 
-  private registerActionCard() {
-    const getNextBirthdayActionCard = this.homey.flow.getActionCard("get-next-birthday");
-
-    getNextBirthdayActionCard.registerRunListener(async (args, state) => {
-      const nextBirthdayPerson = this.getNextBirthdayPerson();
-
-      if (nextBirthdayPerson) {
-        const today = new Date();
-        const age = nextBirthdayPerson.year ? today.getFullYear() - parseInt(nextBirthdayPerson.year) : null;
-
-        const tokens = {
-          name: nextBirthdayPerson.name,
-          mobile: nextBirthdayPerson.mobile,
-          message: nextBirthdayPerson.message,
-          date: nextBirthdayPerson.dateOfBirth,
-          age: age || "0"
-        };
-
-        return tokens;  // returning the tokens will pass them to the card
-      } else {
-        throw new Error("No upcoming birthdays found.");
-      }
-    });
-  }
+//  private registerActionCard() {
+//    const getNextBirthdayActionCard = this.homey.flow.getActionCard("get-next-birthday");
+//
+//    getNextBirthdayActionCard.registerRunListener(async (args, state) => {
+//      const nextBirthdayPerson = this.getNextBirthdayPerson();
+//
+//      if (nextBirthdayPerson) {
+//        const today = new Date();
+//        const age = nextBirthdayPerson.year ? today.getFullYear() - parseInt(nextBirthdayPerson.year) : null;
+//
+//        const tokens = {
+//          name: nextBirthdayPerson.name,
+//          mobile: nextBirthdayPerson.mobile,
+//          message: nextBirthdayPerson.message,
+//          date: nextBirthdayPerson.dateOfBirth,
+//          age: age || "0"
+//        };
+//
+//        return tokens;  // returning the tokens will pass them to the card
+//      } else {
+//        throw new Error("No upcoming birthdays found.");
+//      }
+//    });
+//  }
 
   private getNextBirthdayPerson(): Person | undefined {
     const today = new Date();
