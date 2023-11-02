@@ -1,6 +1,6 @@
 {
   "id": "nl.lrvdlinden.birthdays",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -207,6 +207,11 @@
     ]
   },
   "contributing": {
+    "developers": [
+      {
+        "name": "Lucas van der Have"
+      }
+    ],
     "donate": {
       "paypal": {
         "username": "lrvdlinden"
@@ -217,7 +222,7 @@
     }
   },
   "bugs": {
-    "url": "https://community.homey.app/t/app-pro-birthdays-for-homey/93178"
+    "url": "https://github.com/LRvdLinden/nl.lrvdlinden.birthdays/issues"
   },
   "homepage": "https://homey.app/nl-nl/apps/author/5d4da77a2c836a50f6936070/page/0/",
   "support": "https://community.homey.app/t/app-pro-birthdays-for-homey/93178",

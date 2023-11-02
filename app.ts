@@ -1,13 +1,15 @@
 import Homey, { FlowCard, FlowCardTrigger, FlowToken } from "homey";
 import * as crypto from "crypto";
+const axios = require('axios');
 
 interface Person {
   id: string;
   name: string;
   dateOfBirth: string;
   year?: string;
-  mobile: string;
-  message: string;
+  mobile?: string;
+  message?: string;
+  category?: string;
 }
 
 interface BirthdayTodayTriggerArgs {
@@ -19,6 +21,15 @@ interface SpecificBirthdayTodayTriggerArgs extends BirthdayTodayTriggerArgs {
 }
 
 interface SpecificBirthdayTodayTriggerState {
+  person: Person;
+}
+
+interface CategoryBirthdayTriggerArgs {
+  run_at: string;
+  person: Person;
+}
+
+interface CategoryBirthdayTriggerState {
   person: Person;
 }
 
@@ -47,9 +58,10 @@ class Birthdays extends Homey.App {
   private tokens?: Tokens;
   private birthdayTriggerCard?: FlowCardTrigger;
   private specificBirthdayTriggerCard?: FlowCardTrigger;
+  private categoryBirthdayTriggerCard?: FlowCardTrigger;
   private _image: any;
-  private _imageSet?: boolean;
-  private debug: boolean = true;
+  private _imageSet: boolean = false;
+  private debug: boolean = false;
 
   async onInit() {
     this.log("Birthdays has been initialized");
@@ -165,7 +177,8 @@ class Birthdays extends Homey.App {
       typeof data.name === "string" &&
       typeof data.mobile === "string" &&
       typeof data.message === "string" &&
-      typeof data.age === "number"
+      typeof data.age === "number" &&
+      typeof data.category === "string"
     );
   }
 
@@ -174,7 +187,7 @@ class Birthdays extends Homey.App {
       const today = new Date();
       const formattedToday = `${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-      return person.dateOfBirth.substring(5) === formattedToday;
+      return person.dateOfBirth && person.dateOfBirth.substring(5) === formattedToday;
     }) ?? [];
   };
 
@@ -265,6 +278,17 @@ class Birthdays extends Homey.App {
       }
     );
 
+    this.categoryBirthdayTriggerCard = this.homey.flow.getTriggerCard("category-birthday-today");
+    this.categoryBirthdayTriggerCard.registerRunListener(async (args: CategoryBirthdayTriggerArgs, state: CategoryBirthdayTriggerState) => {
+        // Hier controleren we eerst of args en state daadwerkelijk de verwachte waarden bevatten
+        if(!args.person || !state.person) {
+            throw new Error("Expected person details in args and state.");
+        }
+
+        // Valideer dat de huidige tijd overeenkomt met de args.run_at tijd die het formaat "HH:mm" heeft en verifieer dat de persoon dezelfde is
+        return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
+    });
+
     this.homey.flow.getConditionCard("is-birthday-today").registerRunListener(async (args, state) => {
       const today = new Date();
       const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
@@ -273,13 +297,36 @@ class Birthdays extends Homey.App {
     });
 
     this.homey.flow.getActionCard("temporary-image").registerRunListener(async (args, state) => {
-      this._image = args.image;
-      this._imageSet = true;
-      setTimeout(() => {
-        this._imageSet = false;
-      }, 120000);
-      return true;
-    });
+      const { imageUrl } = args;
+
+      try {
+          if (!this._image) {
+              this._imageSet = false;
+          }
+
+          this._image = await this.homey.images.createImage();
+
+          await this._image.setStream(async (stream: NodeJS.WritableStream) => {
+              const response = await axios.get(imageUrl, { responseType: 'stream' });
+
+              if (response.status !== 200) {
+                  this.error('Error fetching image:', response.statusText);
+                  throw new Error('Error fetching image');
+              }
+
+              response.data.pipe(stream);
+          });
+
+          const tokens = {
+              image: this._image
+          };
+
+          return tokens;
+      } catch (error) {
+          this.error('Error setting image:', error);
+          throw new Error('Error setting image');
+      }
+  });
   }
 
   private verifyRunAtByArgs(args: BirthdayTodayTriggerArgs) {

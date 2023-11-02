@@ -120,6 +120,14 @@
                 <input class="homey-form-input" id="dateOfBirth" type="date" />
             </div>
 
+            <div class="homey-form-group">
+                <label class="homey-form-label" for="category" data-i18n="settings.person.category"></label>
+                <select id="category" class="homey-form-select">
+                    <option value="Work">Work</option>
+                    <option value="Private">Private</option>
+                </select>
+            </div>
+
             <div class="flex">
                 <button id="save-button" class="homey-button-primary-full"
                         data-i18n="settings.person.save"></button>
@@ -147,6 +155,7 @@
         <tr>
             <th data-i18n="settings.personList.name">Name</th>
             <th data-i18n="settings.personList.dateOfBirth">Date of birth</th>
+            <th data-i18n="settings.personList.category">Category</th>
             <th data-i18n="settings.personList.message">Message</th>
             <th data-i18n="settings.personList.actions" style="width:0;">Actions</th>
         </tr>
@@ -221,6 +230,10 @@
     dateOfBirthCell.textContent = person.dateOfBirth;
     row.appendChild(dateOfBirthCell);
 
+    const categoryCell = document.createElement("td");
+    categoryCell.textContent = person.category;
+    row.appendChild(categoryCell);
+
     const messageCell = document.createElement("td");
     messageCell.textContent = person.message;
     row.appendChild(messageCell);
@@ -272,7 +285,7 @@
     document.getElementById("dateOfBirth").value = person.dateOfBirth;
     document.getElementById("mobile").value = person.mobile;
     document.getElementById("message").value = person.message;
-    document.getElementById("year").value = person.year;
+    document.getElementById("category").value = person.category;
 
     editingPerson = person;
   }
@@ -324,7 +337,8 @@
       name: document.getElementById("name").value,
       dateOfBirth: document.getElementById("dateOfBirth").value,
       mobile: document.getElementById("mobile").value ?? null,
-      message: document.getElementById("message").value ?? null
+      message: document.getElementById("message").value ?? null,
+      category: document.getElementById("category").value ?? null
     };
 
     if (!isValid(person)) {
@@ -343,11 +357,12 @@
     }
   }
 
-  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, message }) {
+  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, message, category }) {
     document.getElementById("name").value = name ?? "";
     document.getElementById("dateOfBirth").value = dateOfBirth ?? "";
     document.getElementById("mobile").value = mobile ?? "";
     document.getElementById("message").value = message ?? "";
+    document.getElementById("category").value = category ?? "";
   }
 
   function editBirthday (index) {
