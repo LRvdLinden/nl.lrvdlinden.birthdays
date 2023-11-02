@@ -16,11 +16,12 @@
     "personList": {
       "title": "Personen",
       "name": "Naam",
-      "dateOfBirth": "Geboortedatum",
+      "dateOfBirth": "Verjaardag",
+      "age": "Wordt",
       "category": "Categorie",
       "message": "Bericht",
       "actions": "Acties",
-      "edit": "Bewerken",
+      "edit": "Wijzigen",
       "delete": "Verwijderen"
     }
   },
