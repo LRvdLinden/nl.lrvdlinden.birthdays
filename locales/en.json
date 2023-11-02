@@ -16,7 +16,8 @@
     "personList": {
       "title": "Persons",
       "name": "Name",
-      "dateOfBirth": "Date of Birth",
+      "dateOfBirth": "Birthday",
+      "age": "age",
       "category": "Category",
       "message": "Message",
       "actions": "Actions",
