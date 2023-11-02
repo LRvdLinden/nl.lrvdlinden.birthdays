@@ -3,9 +3,83 @@
 
 <head>
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
-    <style>
+
+    <style type="text/css">
+      .form-wrapper {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+      }
+
+      .hint {
+        color: #004085;
+        background-color: #cce5ff;
+        border-color: #b8daff;
+      }
+
+      .help {
+        color: #383d41;
+        background-color: #f4f5f5;
+        border-color: #e4e5e7;
+      }
+
+      .footer {
+        margin-top: auto;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
       .field {
         margin-bottom: 15px;
+      }
+
+      .homey-form-input[type="date"] {
+        padding: 8px;
+        border-radius: 5px;
+        border: solid 1px #ccc;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 1px;
+        line-height: 24px;
+      }
+
+      .homey-table {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+
+      .homey-table tr th, .homey-table tr td {
+        padding: 5px;
+      }
+
+      .homey-table button {
+        padding: 5px 10px;
+        font-size: 15px;
+        margin: 0 3px 5px 0;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .flex button:not(:first-child) {
+        margin-left: 5px;
       }
     </style>
 </head>
@@ -16,172 +90,294 @@
          alt="Banner" style="max-width:100%;">
 </div>
 
-<div id="verjaardagen">
-    <h1 data-i18n="settings.title"></h1>
-    <p data-i18n="settings.description"></p>
+<header class="homey-header">
+    <h1 class="homey-title" data-i18n="settings.title"></h1>
+    <p class="homey-subtitle" data-i18n="settings.description"></p>
+</header>
 
-    <div class="field">
-        <label for="name" data-i18n="settings.name"></label>
-        <input id="name" type="text" />
-    </div>
+<div id="create-or-edit-form" class="form-wrapper hidden">
+    <form class="homey-form">
+        <fieldset class="homey-form-fieldset">
+            <legend class="homey-form-legend" data-i18n="settings.person.title">Person</legend>
 
-    <div class="field">
-        <label for="mobile" data-i18n="settings.mobile"></label>
-        <input id="mobile" type="text" />
-    </div>
+            <div class="homey-form-group">
+                <label class="homey-form-label" for="name" data-i18n="settings.person.name"></label>
+                <input class="homey-form-input" id="name" type="text" />
+            </div>
 
-    <div class="field">
-        <label for="message" data-i18n="settings.message"></label>
-        <input id="message" type="text" />
-    </div>
+            <div class="homey-form-group">
+                <label class="homey-form-label" for="mobile" data-i18n="settings.person.mobile"></label>
+                <input class="homey-form-input" id="mobile" type="text" />
+            </div>
 
-    <div class="field">
-        <label for="year" data-i18n="settings.year"></label>
-        <input id="year" type="number" />
-    </div>
+            <div class="homey-form-group">
+                <label class="homey-form-label" for="message" data-i18n="settings.person.message"></label>
+                <textarea class="homey-form-textarea" id="message" rows="3"></textarea>
+            </div>
 
-    <div class="field">
-        <label for="dateOfBirth" data-i18n="settings.dateOfBirth"></label>
-        <input id="dateOfBirth" type="date" />
-    </div>
+            <div class="homey-form-group">
+                <label class="homey-form-label" for="dateOfBirth" data-i18n="settings.person.dateOfBirth"></label>
+                <input class="homey-form-input" id="dateOfBirth" type="date" />
+            </div>
 
-    <button onclick="addOrUpdateBirthday()" data-i18n="settings.addBtn"></button>
+            <div class="flex">
+                <button id="save-button" class="homey-button-primary-full"
+                        data-i18n="settings.person.save"></button>
+                <button id="cancel-button" class="homey-button-secondary-full-shadow"
+                        data-i18n="settings.person.cancel"></button>
+            </div>
+        </fieldset>
+    </form>
 
-    <h2 data-i18n="settings.listTitle"></h2>
-    <ul id="birthdayList"></ul>
-
-    <button class="homey-button-primary-full" onclick="save()" data-i18n="settings.saveBtn"></button>
+    <!--    <div class="footer">-->
+    <!--        <p id="hint" class="alert hint hidden"></p>-->
+    <!--        <p class="alert help">-->
+    <!--            <span data-i18n="pair.add_by_ip.need_help_pairing">Need help pairing?</span>-->
+    <!--            <a href="https://homey-philips-tv.gitbook.io/homey-philips-tv/guides/pairing"-->
+    <!--               data-i18n="pair.add_by_ip.click_here_documentation">Click here to view the documentation.</a>-->
+    <!--        </p>-->
+    <!--    </div>-->
 </div>
 
-<script type="text/javascript">
-  // Zorg ervoor dat je een manier hebt om de vertalingen vanuit de externe nl.json (en andere taalbestanden) te laden en toe te passen.
-  function initializeTranslations () {
-  }
+<div id="person-list">
+    <h2 class="homey-title" data-i18n="settings.personList.title"></h2>
 
-  let birthdays = [];
+    <table class="homey-table" id="person-table">
+        <thead>
+        <tr>
+            <th data-i18n="settings.personList.name">Name</th>
+            <th data-i18n="settings.personList.dateOfBirth">Date of birth</th>
+            <th data-i18n="settings.personList.message">Message</th>
+            <th data-i18n="settings.personList.actions" style="width:0;">Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<button id="add-person-button" class="homey-button-secondary-shadow-full"
+        data-i18n="settings.person.add"></button>
+
+<!--<div id="verjaardagen">-->
+
+<!--    <h2 data-i18n="settings.personList.title"></h2>-->
+<!--    <ul id="birthdayList"></ul>-->
+
+<!--    <button class="homey-button-primary-shadow-full" onclick="save()" data-i18n="settings.saveBtn"></button>-->
+<!--</div>-->
+
+<script type="text/javascript">
+  let persons = [];
   let myHomey;
   let editingIndex = -1;
+  let editingPerson = null;
 
   function onHomeyReady (Homey) {
     myHomey = Homey;
     myHomey.ready();
-    loadBirthdays();
+
+    loadPersons();
   }
 
-  function loadBirthdays () {
+  function loadPersons () {
     myHomey.get("persons", function(err, data) {
       if (!err && data) {
-        birthdays = data;
-        displayBirthdays();
+        persons = data;
+        renderPersons();
       }
     });
   }
 
   function sortBirthdays () {
-    birthdays.sort((a, b) => {
+    persons.sort((a, b) => {
       const dateA = new Date(a.dateOfBirth);
       const dateB = new Date(b.dateOfBirth);
       return dateA - dateB;
     });
   }
 
-  function displayBirthdays () {
-    sortBirthdays();
+  const tableBodyElement = document.querySelector("#person-table tbody");
+  const personsListElement = document.querySelector("div#person-list");
+  const createOrEditFormElement = document.querySelector("div#create-or-edit-form");
+  const addPersonButtonElement = document.querySelector("#add-person-button");
+  const saveButtonElement = document.querySelector("#save-button");
+  const cancelButtonElement = document.querySelector("#cancel-button");
 
-    const list = document.getElementById("birthdayList");
-    list.innerHTML = "";
+  addPersonButtonElement.addEventListener("click", showCreateOrEdit);
+  saveButtonElement.addEventListener("click", addOrUpdateBirthday);
+  cancelButtonElement.addEventListener("click", cancelCreateOrEdit);
 
-    birthdays.forEach((birthday, index) => {
-      const listItem = document.createElement("li");
-      const text = document.createTextNode(`${birthday.name} - ${birthday.dateOfBirth} - ${birthday.year} - ${birthday.mobile} - ${birthday.message}`);
-      listItem.appendChild(text);
+  // Function to create a row for a person
+  function createPersonRow (person) {
+    console.log("creating row");
+    const row = document.createElement("tr");
+    console.log(row);
 
-      const deleteButton = document.createElement("button");
-      deleteButton.innerText = "Delete";
-      deleteButton.onclick = function() {
-        removeBirthday(index);
-      };
-      listItem.appendChild(deleteButton);
+    const nameCell = document.createElement("td");
+    nameCell.textContent = person.name;
+    row.appendChild(nameCell);
 
-      const editButton = document.createElement("button");
-      editButton.innerText = "Edit";
-      editButton.onclick = function() {
-        editBirthday(index);
-      };
-      listItem.appendChild(editButton);
+    const dateOfBirthCell = document.createElement("td");
+    dateOfBirthCell.textContent = person.dateOfBirth;
+    row.appendChild(dateOfBirthCell);
 
-      list.appendChild(listItem);
+    const messageCell = document.createElement("td");
+    messageCell.textContent = person.message;
+    row.appendChild(messageCell);
+
+    const actionsCell = document.createElement("td");
+
+    const editButton = document.createElement("button");
+    editButton.classList.add("homey-button-secondary-shadow");
+    editButton.textContent = myHomey.__("settings.personList.edit");
+    editButton.addEventListener("click", () => editPerson(person));
+    actionsCell.appendChild(editButton);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("homey-button-danger-shadow");
+    deleteButton.textContent = myHomey.__("settings.personList.delete");
+    deleteButton.addEventListener("click", () => deletePerson(person.id));
+    actionsCell.appendChild(deleteButton);
+
+    row.appendChild(actionsCell);
+
+    return row;
+  }
+
+  // Function to render the list of persons
+  function renderPersons () {
+    console.log("Rendering persons", { persons });
+    console.log(tableBodyElement);
+    tableBodyElement.innerHTML = "";
+    console.log(tableBodyElement);
+    persons.forEach(person => {
+      console.log(person);
+      const row = createPersonRow(person);
+      console.log(row);
+      tableBodyElement.appendChild(row);
     });
   }
 
-  function addOrUpdateBirthday () {
-    const name = document.getElementById("name").value;
-    const dateOfBirth = document.getElementById("dateOfBirth").value;
-    const mobile = document.getElementById("mobile").value;
-    const message = document.getElementById("message").value;
-    const year = document.getElementById("year").value;
-    const currentYear = new Date().getFullYear();
+  // Function to edit a person (placeholder function for now)
+  function editPerson (person) {
+    editingIndex = persons.findIndex(p => p.id === person.id);
 
-    // Year validation
-    if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
-      alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
-      return;
-    }
+    createOrEditFormElement.classList.remove("hidden");
+    personsListElement.classList.add("hidden");
+    addPersonButtonElement.classList.add("hidden");
 
-    // Mandatory field validation
-    if (name && dateOfBirth) {
-      const birthdayObject = {
-        name,
-        dateOfBirth,
-        mobile: mobile || null,
-        message: message || null,
-        year: year || null
-      };
+    console.log(`Edit person with ID ${person.id}`);
 
+    document.getElementById("name").value = person.name;
+    document.getElementById("dateOfBirth").value = person.dateOfBirth;
+    document.getElementById("mobile").value = person.mobile;
+    document.getElementById("message").value = person.message;
+    document.getElementById("year").value = person.year;
+
+    editingPerson = person;
+  }
+
+  // Function to delete a person (placeholder function for now)
+  function deletePerson (personId) {
+    console.log(`Delete person with ID ${personId}`);
+
+    persons = persons.filter(person => person.id !== personId);
+
+    save();
+
+    renderPersons();
+  }
+
+  function showCreateOrEdit (event) {
+    clearFields();
+
+    event?.preventDefault();
+    addPersonButtonElement.classList.add("hidden");
+    personsListElement.classList.add("hidden");
+    createOrEditFormElement.classList.remove("hidden");
+  }
+
+  function cancelCreateOrEdit (event) {
+    event?.preventDefault();
+    personsListElement.classList.remove("hidden");
+    addPersonButtonElement.classList.remove("hidden");
+    createOrEditFormElement.classList.add("hidden");
+  }
+
+  function isValid (person) {
+    const nowDate = new Date();
+    const dateOfBirthDate = new Date(person.dateOfBirth);
+
+    return dateOfBirthDate.getFullYear() >= 1900
+      && dateOfBirthDate.getFullYear() <= nowDate.getFullYear()
+      && person.name !== ""
+      && person.name !== undefined
+      && person.dateOfBirth !== ""
+      && person.dateOfBirth !== undefined;
+  }
+
+  function addOrUpdateBirthday (event) {
+    event?.preventDefault();
+
+    const person = {
+      id: guid(),
+      name: document.getElementById("name").value,
+      dateOfBirth: document.getElementById("dateOfBirth").value,
+      mobile: document.getElementById("mobile").value ?? null,
+      message: document.getElementById("message").value ?? null
+    };
+
+    if (!isValid(person)) {
+      myHomey.alert(myHomey.__("messages.validation_error"));
+    } else {
       if (editingIndex === -1) {
-        birthdays.push(birthdayObject);
+        persons.push(person);
       } else {
-        birthdays[editingIndex] = birthdayObject;
+        persons[editingIndex] = person;
         editingIndex = -1;
       }
 
-      displayBirthdays();
-      clearFields(); // Voeg dit toe aan het einde van de functie
-    } else {
-      alert("Please fill in mandatory fields.");
+      save();
+      renderPersons();
+      cancelCreateOrEdit(event);
     }
   }
 
+  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, message }) {
+    document.getElementById("name").value = name ?? "";
+    document.getElementById("dateOfBirth").value = dateOfBirth ?? "";
+    document.getElementById("mobile").value = mobile ?? "";
+    document.getElementById("message").value = message ?? "";
+  }
+
   function editBirthday (index) {
-    const selectedBirthday = birthdays[index];
-    document.getElementById("name").value = selectedBirthday.name;
-    document.getElementById("dateOfBirth").value = selectedBirthday.dateOfBirth;
-    document.getElementById("mobile").value = selectedBirthday.mobile;
-    document.getElementById("message").value = selectedBirthday.message;
-    document.getElementById("year").value = selectedBirthday.year;
+    const selectedPerson = persons[index];
+
+    fillCreateOrEditForm(selectedPerson);
 
     editingIndex = index;
   }
 
-  function removeBirthday (index) {
-    birthdays.splice(index, 1);
-    displayBirthdays();
-  }
-
   function clearFields () {
-    document.getElementById("name").value = "";
-    document.getElementById("dateOfBirth").value = "";
-    document.getElementById("mobile").value = "";
-    document.getElementById("message").value = "";
-    document.getElementById("year").value = "";
+    fillCreateOrEditForm({});
 
     editingIndex = -1;
   }
 
+  function guid () {
+    function s4 () {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+
+    return s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4();
+  }
+
   function save () {
-    myHomey.set("persons", birthdays, function(error) {
+    myHomey.set("persons", persons, function(error) {
       if (error) {
-        alert("Error saving data!");
+        console.error(error);
+        console.log(error);
+        myHomey.alert("Error saving data!");
         return;
       }
       clearFields();
@@ -189,7 +385,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    initializeTranslations();
+    // initializeTranslations();
   });
 
 </script>

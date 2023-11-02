@@ -49,7 +49,7 @@ class Birthdays extends Homey.App {
   private specificBirthdayTriggerCard?: FlowCardTrigger;
   private _image: any;
   private _imageSet?: boolean;
-  private debug: boolean = false;
+  private debug: boolean = true;
 
   async onInit() {
     this.log("Birthdays has been initialized");
@@ -90,15 +90,16 @@ class Birthdays extends Homey.App {
   }
 
   private async migrateBirthdaysToPersonsSetting(): Promise<void> {
-    // if (this.homey.settings.get("persons") !== null) {
-    //   this.log("Birthdays have been migrated to persons");
-    //   return;
-    // }
+    if (this.homey.settings.get("persons") !== null) {
+      this.log("Birthdays have been migrated to persons");
+      return;
+    }
 
     try {
       let birthdays = await this.homey.settings.get("birthdays") as Array<{
         name: string,
-        date: string,
+        date?: string,
+        dateOfBirth?: string,
         year?: string,
         mobile: string,
         message: string,
@@ -108,7 +109,7 @@ class Birthdays extends Homey.App {
         return {
           id: this.getUniqueId(birthday),
           name: birthday.name,
-          dateOfBirth: birthday.date,
+          dateOfBirth: birthday.date || birthday.dateOfBirth,
           year: birthday.year,
           mobile: birthday.mobile,
           message: birthday.message
@@ -195,6 +196,10 @@ class Birthdays extends Homey.App {
       const state = {
         person: birthdayPerson
       };
+
+      if (this.debug) {
+        this.log("trigger birthday triggers with", { tokens, state });
+      }
 
       this.birthdayTriggerCard?.trigger(tokens, state);
       this.specificBirthdayTriggerCard?.trigger(tokens, state);
