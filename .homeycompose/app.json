@@ -192,6 +192,10 @@
     "pl": "pl"
   },
   "permissions": [],
+    "author": {
+    "name": "Léon van der Linden",
+    "email": "homey@vdlinden.xyz"
+  },
   "contributors": {
     "developers": [
       {
