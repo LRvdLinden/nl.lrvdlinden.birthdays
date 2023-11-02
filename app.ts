@@ -90,10 +90,10 @@ class Birthdays extends Homey.App {
   }
 
   private async migrateBirthdaysToPersonsSetting(): Promise<void> {
-    if (this.homey.settings.get("persons") !== null) {
-      this.log("Birthdays have been migrated to persons");
-      return;
-    }
+    // if (this.homey.settings.get("persons") !== null) {
+    //   this.log("Birthdays have been migrated to persons");
+    //   return;
+    // }
 
     try {
       let birthdays = await this.homey.settings.get("birthdays") as Array<{
@@ -104,7 +104,7 @@ class Birthdays extends Homey.App {
         message: string,
       }>;
 
-      this.homey.settings.set("persons", birthdays.map((birthday) => {
+      const mappedBirthdays = birthdays.map((birthday) => {
         return {
           id: this.getUniqueId(birthday),
           name: birthday.name,
@@ -113,8 +113,14 @@ class Birthdays extends Homey.App {
           mobile: birthday.mobile,
           message: birthday.message
         } as Person;
-      }));
+      });
 
+      if (this.debug) {
+        this.log("birthdays to migrate:", birthdays);
+        this.log("mapped birthdays:", mappedBirthdays);
+      }
+
+      this.homey.settings.set("persons", mappedBirthdays);
     } catch (error) {
       this.log("Error fetching birthdays:", error);
     }
