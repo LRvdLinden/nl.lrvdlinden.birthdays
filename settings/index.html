@@ -4,194 +4,195 @@
 <head>
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
     <style>
-        .field {
-            margin-bottom: 15px;
-        }
+      .field {
+        margin-bottom: 15px;
+      }
     </style>
 </head>
 
 <body>
-    <div style="width:100%; text-align:center;">
-        <img src="https://raw.githubusercontent.com/LRvdLinden/P2000-brand/main/banners/settings_banner_birthdays.jpg" alt="Banner" style="max-width:100%;">
+<div style="width:100%; text-align:center;">
+    <img src="https://raw.githubusercontent.com/LRvdLinden/P2000-brand/main/banners/settings_banner_birthdays.jpg"
+         alt="Banner" style="max-width:100%;">
+</div>
+
+<div id="verjaardagen">
+    <h1 data-i18n="settings.title"></h1>
+    <p data-i18n="settings.description"></p>
+
+    <div class="field">
+        <label for="name" data-i18n="settings.name"></label>
+        <input id="name" type="text" />
     </div>
 
-    <div id="verjaardagen">
-        <h1 data-i18n="settings.title"></h1>
-        <p data-i18n="settings.description"></p>
-
-        <div class="field">
-            <label for="name" data-i18n="settings.name"></label>
-            <input id="name" type="text" />
-        </div>
-
-        <div class="field">
-            <label for="mobile" data-i18n="settings.mobile"></label>
-            <input id="mobile" type="text" />
-        </div>
-
-        <div class="field">
-            <label for="message" data-i18n="settings.message"></label>
-            <input id="message" type="text" />
-        </div>
-
-        <div class="field">
-            <label for="year" data-i18n="settings.year"></label>
-            <input id="year" type="number" />
-        </div>
-
-        <div class="field">
-            <label for="birthdate" data-i18n="settings.birthdate"></label>
-            <input id="birthdate" type="date" />
-        </div>
-
-        <button onclick="addOrUpdateBirthday()" data-i18n="settings.addBtn"></button>
-
-        <h2 data-i18n="settings.listTitle"></h2>
-        <ul id="birthdayList"></ul>
-
-        <button class="homey-button-primary-full" onclick="save()" data-i18n="settings.saveBtn"></button>
+    <div class="field">
+        <label for="mobile" data-i18n="settings.mobile"></label>
+        <input id="mobile" type="text" />
     </div>
 
-    <script type="text/javascript">
-        // Zorg ervoor dat je een manier hebt om de vertalingen vanuit de externe nl.json (en andere taalbestanden) te laden en toe te passen.
-        function initializeTranslations() {
-        }
+    <div class="field">
+        <label for="message" data-i18n="settings.message"></label>
+        <input id="message" type="text" />
+    </div>
 
-        let birthdays = [];
-        let myHomey;
-        let editingIndex = -1;
+    <div class="field">
+        <label for="year" data-i18n="settings.year"></label>
+        <input id="year" type="number" />
+    </div>
 
-        function onHomeyReady(Homey) {
-            myHomey = Homey;
-            myHomey.ready();
-            loadBirthdays();
-        }
+    <div class="field">
+        <label for="dateOfBirth" data-i18n="settings.dateOfBirth"></label>
+        <input id="dateOfBirth" type="date" />
+    </div>
 
-        function loadBirthdays() {
-            myHomey.get('birthdays', function (err, data) {
-                if (!err && data) {
-                    birthdays = data;
-                    displayBirthdays();
-                }
-            });
-        }
+    <button onclick="addOrUpdateBirthday()" data-i18n="settings.addBtn"></button>
 
-        function sortBirthdays() {
-            birthdays.sort((a, b) => {
-                const dateA = new Date(a.date);
-                const dateB = new Date(b.date);
-                return dateA - dateB;
-            });
-        }
+    <h2 data-i18n="settings.listTitle"></h2>
+    <ul id="birthdayList"></ul>
 
-        function displayBirthdays() {
-            sortBirthdays();
+    <button class="homey-button-primary-full" onclick="save()" data-i18n="settings.saveBtn"></button>
+</div>
 
-            const list = document.getElementById("birthdayList");
-            list.innerHTML = '';
+<script type="text/javascript">
+  // Zorg ervoor dat je een manier hebt om de vertalingen vanuit de externe nl.json (en andere taalbestanden) te laden en toe te passen.
+  function initializeTranslations () {
+  }
 
-            birthdays.forEach((birthday, index) => {
-                const listItem = document.createElement("li");
-                const text = document.createTextNode(`${birthday.name} - ${birthday.date} - ${birthday.year} - ${birthday.mobile} - ${birthday.message}`);
-                listItem.appendChild(text);
+  let birthdays = [];
+  let myHomey;
+  let editingIndex = -1;
 
-                const deleteButton = document.createElement("button");
-                deleteButton.innerText = "Delete"; 
-                deleteButton.onclick = function () {
-                    removeBirthday(index);
-                };
-                listItem.appendChild(deleteButton);
+  function onHomeyReady (Homey) {
+    myHomey = Homey;
+    myHomey.ready();
+    loadBirthdays();
+  }
 
-                const editButton = document.createElement("button");
-                editButton.innerText = "Edit";
-                editButton.onclick = function () {
-                    editBirthday(index);
-                };
-                listItem.appendChild(editButton);
+  function loadBirthdays () {
+    myHomey.get("persons", function(err, data) {
+      if (!err && data) {
+        birthdays = data;
+        displayBirthdays();
+      }
+    });
+  }
 
-                list.appendChild(listItem);
-            });
-        }
+  function sortBirthdays () {
+    birthdays.sort((a, b) => {
+      const dateA = new Date(a.dateOfBirth);
+      const dateB = new Date(b.dateOfBirth);
+      return dateA - dateB;
+    });
+  }
 
-        function addOrUpdateBirthday() {
-            const name = document.getElementById("name").value;
-            const date = document.getElementById("birthdate").value;
-            const mobile = document.getElementById("mobile").value;
-            const message = document.getElementById("message").value;
-            const year = document.getElementById("year").value;
-            const currentYear = new Date().getFullYear();
+  function displayBirthdays () {
+    sortBirthdays();
 
-            // Year validation
-            if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
-                alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
-                return;
-            }
+    const list = document.getElementById("birthdayList");
+    list.innerHTML = "";
 
-            // Mandatory field validation
-            if (name && date) {
-                const birthdayObject = {
-                    name: name,
-                    date: date,
-                    mobile: mobile || null,
-                    message: message || null,
-                    year: year || null
-                };
+    birthdays.forEach((birthday, index) => {
+      const listItem = document.createElement("li");
+      const text = document.createTextNode(`${birthday.name} - ${birthday.dateOfBirth} - ${birthday.year} - ${birthday.mobile} - ${birthday.message}`);
+      listItem.appendChild(text);
 
-                if (editingIndex === -1) {
-                    birthdays.push(birthdayObject);
-                } else {
-                    birthdays[editingIndex] = birthdayObject;
-                    editingIndex = -1;
-                }
+      const deleteButton = document.createElement("button");
+      deleteButton.innerText = "Delete";
+      deleteButton.onclick = function() {
+        removeBirthday(index);
+      };
+      listItem.appendChild(deleteButton);
 
+      const editButton = document.createElement("button");
+      editButton.innerText = "Edit";
+      editButton.onclick = function() {
+        editBirthday(index);
+      };
+      listItem.appendChild(editButton);
 
-                displayBirthdays();
-                clearFields(); // Voeg dit toe aan het einde van de functie
-            } else {
-                alert("Please fill in mandatory fields.");
-            }
-        }
+      list.appendChild(listItem);
+    });
+  }
 
-        function editBirthday(index) {
-            const selectedBirthday = birthdays[index];
-            document.getElementById("name").value = selectedBirthday.name;
-            document.getElementById("birthdate").value = selectedBirthday.date;
-            document.getElementById("mobile").value = selectedBirthday.mobile;
-            document.getElementById("message").value = selectedBirthday.message;
-            document.getElementById("year").value = selectedBirthday.year;
+  function addOrUpdateBirthday () {
+    const name = document.getElementById("name").value;
+    const dateOfBirth = document.getElementById("dateOfBirth").value;
+    const mobile = document.getElementById("mobile").value;
+    const message = document.getElementById("message").value;
+    const year = document.getElementById("year").value;
+    const currentYear = new Date().getFullYear();
 
-            editingIndex = index;
-        }
+    // Year validation
+    if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
+      alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
+      return;
+    }
 
-        function removeBirthday(index) {
-            birthdays.splice(index, 1);
-            displayBirthdays();
-        }
+    // Mandatory field validation
+    if (name && dateOfBirth) {
+      const birthdayObject = {
+        name,
+        dateOfBirth,
+        mobile: mobile || null,
+        message: message || null,
+        year: year || null
+      };
 
-        function clearFields() {
-            document.getElementById("name").value = '';
-            document.getElementById("birthdate").value = '';
-            document.getElementById("mobile").value = '';
-            document.getElementById("message").value = '';
-            document.getElementById("year").value = '';
+      if (editingIndex === -1) {
+        birthdays.push(birthdayObject);
+      } else {
+        birthdays[editingIndex] = birthdayObject;
+        editingIndex = -1;
+      }
 
-            editingIndex = -1;
-        }
+      displayBirthdays();
+      clearFields(); // Voeg dit toe aan het einde van de functie
+    } else {
+      alert("Please fill in mandatory fields.");
+    }
+  }
 
-        function save() {
-            myHomey.set('birthdays', birthdays, function(error) {
-                if (error) {
-                    alert("Error saving data!");
-                    return;
-                }
-                clearFields();
-            });
-        }
+  function editBirthday (index) {
+    const selectedBirthday = birthdays[index];
+    document.getElementById("name").value = selectedBirthday.name;
+    document.getElementById("dateOfBirth").value = selectedBirthday.dateOfBirth;
+    document.getElementById("mobile").value = selectedBirthday.mobile;
+    document.getElementById("message").value = selectedBirthday.message;
+    document.getElementById("year").value = selectedBirthday.year;
 
-        document.addEventListener("DOMContentLoaded", function () {
-            initializeTranslations();
-        });
-    </script>
+    editingIndex = index;
+  }
+
+  function removeBirthday (index) {
+    birthdays.splice(index, 1);
+    displayBirthdays();
+  }
+
+  function clearFields () {
+    document.getElementById("name").value = "";
+    document.getElementById("dateOfBirth").value = "";
+    document.getElementById("mobile").value = "";
+    document.getElementById("message").value = "";
+    document.getElementById("year").value = "";
+
+    editingIndex = -1;
+  }
+
+  function save () {
+    myHomey.set("persons", birthdays, function(error) {
+      if (error) {
+        alert("Error saving data!");
+        return;
+      }
+      clearFields();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initializeTranslations();
+  });
+
+</script>
 </body>
 
 </html>

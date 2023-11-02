@@ -13,5 +13,8 @@
       "saveBtn": "Opslaan",
       "languageToggle": "Notificatie: Nederlands"
   },
-  "birthday_notification": "Vandaag is de verjaardag van **${birthdayPerson.name}** 🎉. Hij/Zij is **${age}** jaar oud."
+  "messages": {
+    "person_added": "Verjaardag van __name__ is toegevoegd",
+    "birthday_notification": "Vandaag is de verjaardag van __name__ 🎉. Hij/Zij is __age__ jaar oud."
+  }
 }
