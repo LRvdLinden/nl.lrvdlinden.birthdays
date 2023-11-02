@@ -192,25 +192,25 @@
     "pl": "pl"
   },
   "permissions": [],
-  "author": {
-    "name": "Léon van der Linden",
-    "email": "homey@vdlinden.xyz"
-  },
   "contributors": {
+    "developers": [
+      {
+        "name": "Lucas van der Have"
+      }
+    ],
     "translators": [
       {
         "name": "🇬🇧 Léon"
       },
       {
         "name": "🇳🇱 Léon"
+      },
+      {
+        "name": "ChatGPT"
       }
     ]
   },
-    "developers": [
-      {
-        "name": "Lucas van der Have"
-      }
-    ],
+  "contributing": {
     "donate": {
       "paypal": {
         "username": "lrvdlinden"
