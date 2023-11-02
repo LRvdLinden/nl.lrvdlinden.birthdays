@@ -155,8 +155,8 @@
         <tr>
             <th data-i18n="settings.personList.name">Name</th>
             <th data-i18n="settings.personList.dateOfBirth">Date of birth</th>
+            <th data-i18n="settings.personList.age">Age</th>
             <th data-i18n="settings.personList.message">Message</th>
-            <th data-i18n="settings.personList.actions" style="width:0;">Actions</th>
         </tr>
         </thead>
         <tbody></tbody>
@@ -195,48 +195,46 @@
         renderPersons();
       }
     });
-}
+  }
 
-
-function sortBirthdays() {
+  function sortBirthdays () {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
     const currentDay = currentDate.getDate();
 
     persons.sort((a, b) => {
-        const dateA = new Date(a.dateOfBirth);
-        const dateB = new Date(b.dateOfBirth);
+      const dateA = new Date(a.dateOfBirth);
+      const dateB = new Date(b.dateOfBirth);
 
-        if (dateA.getMonth() === currentMonth && dateA.getDate() === currentDay) {
-            return -1; // Als datum A vandaag is, breng het naar de top
+      if (dateA.getMonth() === currentMonth && dateA.getDate() === currentDay) {
+        return -1; // Als datum A vandaag is, breng het naar de top
+      }
+
+      if (dateB.getMonth() === currentMonth && dateB.getDate() === currentDay) {
+        return 1; // Als datum B vandaag is, breng het naar de top
+      }
+
+      if (dateA.getMonth() === dateB.getMonth()) {
+        if (dateA.getDate() < currentDay && dateB.getDate() >= currentDay) {
+          return 1;
         }
-
-        if (dateB.getMonth() === currentMonth && dateB.getDate() === currentDay) {
-            return 1; // Als datum B vandaag is, breng het naar de top
+        if (dateB.getDate() < currentDay && dateA.getDate() >= currentDay) {
+          return -1;
         }
+        return dateA.getDate() - dateB.getDate();
+      }
 
-        if (dateA.getMonth() === dateB.getMonth()) {
-            if (dateA.getDate() < currentDay && dateB.getDate() >= currentDay) {
-                return 1;
-            }
-            if (dateB.getDate() < currentDay && dateA.getDate() >= currentDay) {
-                return -1;
-            }
-            return dateA.getDate() - dateB.getDate();
-        }
+      if (dateA.getMonth() < currentMonth || (dateA.getMonth() === currentMonth && dateA.getDate() < currentDay)) {
+        return 1;
+      }
 
-        if (dateA.getMonth() < currentMonth || (dateA.getMonth() === currentMonth && dateA.getDate() < currentDay)) {
-            return 1;
-        }
+      if (dateB.getMonth() < currentMonth || (dateB.getMonth() === currentMonth && dateB.getDate() < currentDay)) {
+        return -1;
+      }
 
-        if (dateB.getMonth() < currentMonth || (dateB.getMonth() === currentMonth && dateB.getDate() < currentDay)) {
-            return -1;
-        }
-
-        return dateA.getMonth() - dateB.getMonth();
+      return dateA.getMonth() - dateB.getMonth();
     });
-}
-
+  }
 
   const tableBodyElement = document.querySelector("#person-table tbody");
   const personsListElement = document.querySelector("div#person-list");
@@ -249,11 +247,9 @@ function sortBirthdays() {
   saveButtonElement.addEventListener("click", addOrUpdateBirthday);
   cancelButtonElement.addEventListener("click", cancelCreateOrEdit);
 
-  // Function to create a row for a person
-  function createPersonRow (person) {
+  function renderPersonRow (person, tableBody) {
     console.log("creating row");
     const row = document.createElement("tr");
-    console.log(row);
 
     const nameCell = document.createElement("td");
     nameCell.textContent = person.name;
@@ -265,15 +261,23 @@ function sortBirthdays() {
     dateOfBirthCell.textContent = formattedDate;
     row.appendChild(dateOfBirthCell);
 
-    //const categoryCell = document.createElement("td");
-    //categoryCell.textContent = person.category;
-    //row.appendChild(categoryCell);
+    const ageCell = document.createElement("td");
+    ageCell.textContent = getPersonAge(person) + 1;
+    row.appendChild(ageCell);
 
     const messageCell = document.createElement("td");
     messageCell.textContent = person.message;
     row.appendChild(messageCell);
 
+    tableBody.appendChild(row);
+
+    const actionRow = document.createElement("tr");
+
     const actionsCell = document.createElement("td");
+
+    actionsCell.colSpan = 4;
+    actionsCell.style.textAlign = "center";
+    actionsCell.style.borderBottom = "solid 1px #eee";
 
     const editButton = document.createElement("button");
     editButton.classList.add("homey-button-secondary-shadow");
@@ -287,9 +291,22 @@ function sortBirthdays() {
     deleteButton.addEventListener("click", () => deletePerson(person.id));
     actionsCell.appendChild(deleteButton);
 
-    row.appendChild(actionsCell);
+    actionRow.appendChild(actionsCell);
 
-    return row;
+    tableBody.appendChild(actionRow);
+  }
+
+  function getPersonAge (person) {
+    const today = new Date();
+    const birthDate = new Date(person.dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    return age;
   }
 
   // Function to render the list of persons
@@ -300,9 +317,7 @@ function sortBirthdays() {
     console.log(tableBodyElement);
     persons.forEach(person => {
       console.log(person);
-      const row = createPersonRow(person);
-      console.log(row);
-      tableBodyElement.appendChild(row);
+      renderPersonRow(person, tableBodyElement);
     });
   }
 
@@ -432,8 +447,7 @@ function sortBirthdays() {
       }
       clearFields();
     });
-}
-
+  }
 
   document.addEventListener("DOMContentLoaded", function() {
     // initializeTranslations();

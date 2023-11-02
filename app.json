@@ -197,21 +197,24 @@
     "email": "homey@vdlinden.xyz"
   },
   "contributors": {
+    "developers": [
+      {
+        "name": "Lucas van der Have"
+      }
+    ],
     "translators": [
       {
         "name": "🇬🇧 Léon"
       },
       {
         "name": "🇳🇱 Léon"
+      },
+      {
+        "name": "ChatGPT"
       }
     ]
   },
   "contributing": {
-    "developers": [
-      {
-        "name": "Lucas van der Have"
-      }
-    ],
     "donate": {
       "paypal": {
         "username": "lrvdlinden"
@@ -916,174 +919,6 @@
       }
     ],
     "actions": [
-      {
-        "id": "get-next-birthday",
-        "title": {
-          "en": "Get who's next up for a birthday",
-          "nl": "Verkrijg wie er als volgende jarig is",
-          "de": "Holen Sie sich, wer als nächstes Geburtstag hat",
-          "fr": "Obtenez qui est le prochain à avoir un anniversaire",
-          "it": "Scopri chi è il prossimo a compiere gli anni",
-          "es": "Obtén quién es el próximo en cumplir años",
-          "sv": "Få reda på vem som är nästa att fylla år",
-          "no": "Få vite hvem som er neste som har bursdag",
-          "da": "Få at vide, hvem der har fødselsdag næste gang",
-          "ru": "Узнайте, кто следующий отмечает день рождения",
-          "pl": "Dowiedz się, kto jest następny w kolejce do urodzin"
-        },
-        "tokens": [
-          {
-            "name": "name",
-            "type": "string",
-            "title": {
-              "en": "Birthday person",
-              "nl": "Naam jarige",
-              "de": "Geburtstagskind",
-              "fr": "Personne qui fête son anniversaire",
-              "it": "Persona festeggiata",
-              "es": "Persona de cumpleaños",
-              "sv": "Födelsedagsbarn",
-              "no": "Bursdagsbarn",
-              "da": "Fødselar",
-              "ru": "Имя именинника",
-              "pl": "Osoba obchodząca urodziny"
-            },
-            "example": {
-              "en": "Jon Doe",
-              "nl": "Jon Doe",
-              "de": "Max Mustermann",
-              "fr": "Jean Dupont",
-              "it": "Mario Rossi",
-              "es": "María Pérez",
-              "sv": "Anna Andersson",
-              "no": "Per Olsen",
-              "da": "Lise Nielsen",
-              "ru": "Иван Иванов",
-              "pl": "Jan Kowalski"
-            }
-          },
-          {
-            "name": "mobile",
-            "type": "string",
-            "title": {
-              "en": "Mobile number",
-              "nl": "Telefoonnummer",
-              "de": "Handynummer",
-              "fr": "Numéro de téléphone mobile",
-              "it": "Numero di telefono cellulare",
-              "es": "Número de teléfono móvil",
-              "sv": "Mobilnummer",
-              "no": "Mobilnummer",
-              "da": "Mobilnummer",
-              "ru": "Мобильный номер",
-              "pl": "Numer telefonu komórkowego"
-            },
-            "example": {
-              "en": "+31612345678",
-              "nl": "+31612345678",
-              "de": "+4916012345678",
-              "fr": "+33123456789",
-              "it": "+391234567890",
-              "es": "+34123456789",
-              "sv": "+46123456789",
-              "no": "+47123456789",
-              "da": "+45123456789",
-              "ru": "+79123456789",
-              "pl": "+48123456789"
-            }
-          },
-          {
-            "name": "message",
-            "type": "string",
-            "title": {
-              "en": "Birthday message",
-              "nl": "Verjaardagsbericht",
-              "de": "Geburtstagsnachricht",
-              "fr": "Message d'anniversaire",
-              "it": "Messaggio di compleanno",
-              "es": "Mensaje de cumpleaños",
-              "sv": "Födelsedagshälsning",
-              "no": "Bursdagsmelding",
-              "da": "Fødselsdagshilsen",
-              "ru": "Поздравление с днем рождения",
-              "pl": "Wiadomość urodzinowa"
-            },
-            "example": {
-              "en": "Happy B-day!",
-              "nl": "Gefeliciteerd!",
-              "de": "Herzlichen Glückwunsch zum Geburtstag!",
-              "fr": "Joyeux anniversaire!",
-              "it": "Buon compleanno!",
-              "es": "¡Feliz cumpleaños!",
-              "sv": "Grattis på födelsedagen!",
-              "no": "Gratulerer med dagen!",
-              "da": "Tillykke med fødselsdagen!",
-              "ru": "С днем рождения!",
-              "pl": "Wszystkiego najlepszego!"
-            }
-          },
-          {
-            "name": "date",
-            "type": "string",
-            "title": {
-              "en": "Birthday",
-              "nl": "Verjaardag",
-              "de": "Geburtstag",
-              "fr": "Anniversaire",
-              "it": "Compleanno",
-              "es": "Cumpleaños",
-              "sv": "Födelsedag",
-              "no": "Bursdag",
-              "da": "Fødselsdag",
-              "ru": "День рождения",
-              "pl": "Urodziny"
-            },
-            "example": {
-              "en": "01-01-2023",
-              "nl": "01-01-2023",
-              "de": "01-01-2023",
-              "fr": "01-01-2023",
-              "it": "01-01-2023",
-              "es": "01-01-2023",
-              "sv": "01-01-2023",
-              "no": "01-01-2023",
-              "da": "01-01-2023",
-              "ru": "01-01-2023",
-              "pl": "01-01-2023"
-            }
-          },
-          {
-            "name": "age",
-            "type": "number",
-            "title": {
-              "en": "Age",
-              "nl": "Leeftijd",
-              "de": "Alter",
-              "fr": "Âge",
-              "it": "Età",
-              "es": "Edad",
-              "sv": "Ålder",
-              "no": "Alder",
-              "da": "Alder",
-              "ru": "Возраст",
-              "pl": "Wiek"
-            },
-            "example": {
-              "en": "38",
-              "nl": "38",
-              "de": "38",
-              "fr": "38",
-              "it": "38",
-              "es": "38",
-              "sv": "38",
-              "no": "38",
-              "da": "38",
-              "ru": "38",
-              "pl": "38"
-            }
-          }
-        ]
-      },
       {
         "id": "temporary-image",
         "title": {
