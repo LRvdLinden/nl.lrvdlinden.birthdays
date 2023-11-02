@@ -60,7 +60,7 @@ class Birthdays extends Homey.App {
   private specificBirthdayTriggerCard?: FlowCardTrigger;
   private categoryBirthdayTriggerCard?: FlowCardTrigger;
   private _image: any;
-  private _imageSet?: boolean;
+  private _imageSet: boolean = false; 
   private debug: boolean = false;
 
   async onInit() {
@@ -288,15 +288,37 @@ class Birthdays extends Homey.App {
     });
 
     this.homey.flow.getActionCard("temporary-image").registerRunListener(async (args, state) => {
-      this._image = args.image;
-      this._imageSet = true;
-      setTimeout(() => {
-          this._imageSet = false;
-      }, 120000);
-      return true;
-  });
-}
+      const { imageUrl } = args;
+        
+      try {
+          if (!this._image) {
+              this._imageSet = false;
+          }
+  
+          this._image = await this.homey.images.createImage();
+  
+          await this._image.setStream(async (stream: NodeJS.WritableStream) => {
+              const response = await axios.get(imageUrl, { responseType: 'stream' });
+  
+              if (response.status !== 200) {
+                  this.error('Error fetching image:', response.statusText);
+                  throw new Error('Error fetching image');
+              }
+  
+              response.data.pipe(stream);
+          });
+  
+          const tokens = {
+              image: this._image  
+          };
 
+          return tokens;
+      } catch (error) {
+          this.error('Error setting image:', error);
+          throw new Error('Error setting image');
+      }
+  });
+  }
 
   private verifyRunAtByArgs(args: BirthdayTodayTriggerArgs) {
     const now = new Date();
