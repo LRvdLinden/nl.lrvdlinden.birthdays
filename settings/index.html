@@ -45,6 +45,14 @@
         <input id="dateOfBirth" type="date" />
     </div>
 
+    <div class="field">
+      <label for="category" data-i18n="settings.category">Category</label>
+      <select id="category">
+          <option value="Work">Work</option>
+          <option value="Private">Private</option>
+      </select>
+  </div>
+  
     <button onclick="addOrUpdateBirthday()" data-i18n="settings.addBtn"></button>
 
     <h2 data-i18n="settings.listTitle"></h2>
@@ -93,7 +101,7 @@
 
     birthdays.forEach((birthday, index) => {
       const listItem = document.createElement("li");
-      const text = document.createTextNode(`${birthday.name} - ${birthday.dateOfBirth} - ${birthday.year} - ${birthday.mobile} - ${birthday.message}`);
+      const text = document.createTextNode(`${birthday.name} - ${birthday.dateOfBirth} - ${birthday.year} - ${birthday.mobile} - ${birthday.message} - ${birthday.category}`);
       listItem.appendChild(text);
 
       const deleteButton = document.createElement("button");
@@ -121,6 +129,7 @@
     const message = document.getElementById("message").value;
     const year = document.getElementById("year").value;
     const currentYear = new Date().getFullYear();
+    const category = document.getElementById("category").value;
 
     // Year validation
     if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
@@ -135,7 +144,8 @@
         dateOfBirth,
         mobile: mobile || null,
         message: message || null,
-        year: year || null
+        year: year || null,
+        category
       };
 
       if (editingIndex === -1) {
@@ -159,6 +169,7 @@
     document.getElementById("mobile").value = selectedBirthday.mobile;
     document.getElementById("message").value = selectedBirthday.message;
     document.getElementById("year").value = selectedBirthday.year;
+    document.getElementById("category").value = selectedBirthday.category;
 
     editingIndex = index;
   }
@@ -174,6 +185,7 @@
     document.getElementById("mobile").value = "";
     document.getElementById("message").value = "";
     document.getElementById("year").value = "";
+    document.getElementById("category").value = "";
 
     editingIndex = -1;
   }
