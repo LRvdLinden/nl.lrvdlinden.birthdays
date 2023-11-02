@@ -44,26 +44,22 @@
             <input id="birthdate" type="date" />
         </div>
 
+        <button onclick="addOrUpdateBirthday()" data-i18n="settings.addBtn"></button>
+
         <h2 data-i18n="settings.listTitle"></h2>
         <ul id="birthdayList"></ul>
 
         <button class="homey-button-primary-full" onclick="save()" data-i18n="settings.saveBtn"></button>
-
-
     </div>
 
     <script type="text/javascript">
         // Zorg ervoor dat je een manier hebt om de vertalingen vanuit de externe nl.json (en andere taalbestanden) te laden en toe te passen.
-        
         function initializeTranslations() {
-            // Deze functie moet de vertalingen uit je externe bestanden laden en toepassen 
-            // afhankelijk van de taalinstellingen van de gebruiker.
         }
 
         let birthdays = [];
         let myHomey;
-        let editedBirthday = null;
-        let editedIndex = -1;
+        let editingIndex = -1;
 
         function onHomeyReady(Homey) {
             myHomey = Homey;
@@ -72,211 +68,130 @@
         }
 
         function loadBirthdays() {
-    let data = localStorage.getItem('birthdays');
-    if (data) {
-        birthdays = JSON.parse(data);
-        displayBirthdays();
-    }
-}
-
+            myHomey.get('birthdays', function (err, data) {
+                if (!err && data) {
+                    birthdays = data;
+                    displayBirthdays();
+                }
+            });
+        }
 
         function sortBirthdays() {
-    birthdays.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        return dateA - dateB;
-    });
-}
+            birthdays.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateA - dateB;
+            });
+        }
 
-function displayBirthdays() {
-    sortBirthdays();  // Sorteer eerst de verjaardagen
+        function displayBirthdays() {
+            sortBirthdays();
 
-    const list = document.getElementById("birthdayList");
-    list.innerHTML = '';
+            const list = document.getElementById("birthdayList");
+            list.innerHTML = '';
 
-    birthdays.forEach((birthday, index) => {
-        const listItem = document.createElement("li");
-        const text = document.createTextNode(`${birthday.name} - ${birthday.date} - ${birthday.year} - ${birthday.mobile} - ${birthday.message}`);
-        listItem.appendChild(text);
+            birthdays.forEach((birthday, index) => {
+                const listItem = document.createElement("li");
+                const text = document.createTextNode(`${birthday.name} - ${birthday.date} - ${birthday.year} - ${birthday.mobile} - ${birthday.message}`);
+                listItem.appendChild(text);
 
-        const deleteButton = document.createElement("button");
-        deleteButton.innerText = "Delete"; // Tijdelijke placeholder
-        deleteButton.onclick = function () {
-            removeBirthday(index);
-        };
-        listItem.appendChild(deleteButton);
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "Delete"; 
+                deleteButton.onclick = function () {
+                    removeBirthday(index);
+                };
+                listItem.appendChild(deleteButton);
 
-        // Hier creëren we de "Wijzigen" knop
-        const editButton = document.createElement("button");
-        editButton.innerText = "Edit";
-        editButton.onclick = function () {
-            editBirthday(index);
-        };
-        listItem.appendChild(editButton);
+                const editButton = document.createElement("button");
+                editButton.innerText = "Edit";
+                editButton.onclick = function () {
+                    editBirthday(index);
+                };
+                listItem.appendChild(editButton);
 
-        list.appendChild(listItem);
-    });
-}
+                list.appendChild(listItem);
+            });
+        }
 
+        function addOrUpdateBirthday() {
+            const name = document.getElementById("name").value;
+            const date = document.getElementById("birthdate").value;
+            const mobile = document.getElementById("mobile").value;
+            const message = document.getElementById("message").value;
+            const year = document.getElementById("year").value;
+            const currentYear = new Date().getFullYear();
 
-function addBirthday() {
-    console.log("addBirthday function called");
+            // Year validation
+            if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
+                alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
+                return;
+            }
 
-    const name = document.getElementById("name").value;
-    console.log("Name:", name);
+            // Mandatory field validation
+            if (name && date) {
+                const birthdayObject = {
+                    name: name,
+                    date: date,
+                    mobile: mobile || null,
+                    message: message || null,
+                    year: year || null
+                };
 
-    const date = document.getElementById("birthdate").value;
-    console.log("Date:", date);
-
-    const mobile = document.getElementById("mobile").value;
-    console.log("Mobile:", mobile);
-
-    const message = document.getElementById("message").value;
-    console.log("Message:", message);
-
-    const year = document.getElementById("year").value;
-    console.log("Year:", year);
-
-    const currentYear = new Date().getFullYear();
-
-    // Validatie voor het jaar
-    if (year && year !== "" && (isNaN(year) || year < 1900 || year > currentYear)) {
-        console.log("Year validation failed");
-        alert("Voer een geldig geboortejaar in tussen 1900 en " + currentYear);
-        return;
-    }
-
-    // Verplichte veldvalidatie
-    if (name && date && mobile && message) {
-        // Object voor de verjaardag
-        const birthdayObject = {
-            name: name,
-            date: date,
-            mobile: mobile,
-            message: message,
-            year: year || null  // Gebruik 'null' als 'year' leeg is
-        };
-        
-        birthdays.push(birthdayObject);  // Voeg het object toe aan de lijst
-
-        console.log("Birthday added:", birthdayObject);
-        displayBirthdays();  // Toon de gesorteerde verjaardagen na het toevoegen
-    } else {
-        console.log("Failed to add birthday due to missing or invalid field values");
-    }
-}
-
-function editBirthday(index) {
-    const selectedBirthday = birthdays[index];
-    
-    document.getElementById("name").value = selectedBirthday.name;
-    document.getElementById("birthdate").value = selectedBirthday.date;
-    document.getElementById("mobile").value = selectedBirthday.mobile;
-    document.getElementById("message").value = selectedBirthday.message;
-    document.getElementById("year").value = selectedBirthday.year || '';
-    
-    editingIndex = index;
-}
+                if (editingIndex === -1) {
+                    birthdays.push(birthdayObject);
+                } else {
+                    birthdays[editingIndex] = birthdayObject;
+                    editingIndex = -1;
+                }
 
 
+                displayBirthdays();
+                clearFields(); // Voeg dit toe aan het einde van de functie
+            } else {
+                alert("Please fill in mandatory fields.");
+            }
+        }
 
-function saveEditedBirthday(index) {
-    const name = document.getElementById("name").value;
-    const date = document.getElementById("birthdate").value;
-    const mobile = document.getElementById("mobile").value;
-    const message = document.getElementById("message").value;
-    const year = document.getElementById("year").value;
+        function editBirthday(index) {
+            const selectedBirthday = birthdays[index];
+            document.getElementById("name").value = selectedBirthday.name;
+            document.getElementById("birthdate").value = selectedBirthday.date;
+            document.getElementById("mobile").value = selectedBirthday.mobile;
+            document.getElementById("message").value = selectedBirthday.message;
+            document.getElementById("year").value = selectedBirthday.year;
 
-    editedBirthday = {
-        name: name,
-        date: date,
-        mobile: mobile,
-        message: message,
-        year: year || null
-    };
+            editingIndex = index;
+        }
 
-    editedIndex = index;
+        function removeBirthday(index) {
+            birthdays.splice(index, 1);
+            displayBirthdays();
+        }
 
-    displayBirthdays();
+        function clearFields() {
+            document.getElementById("name").value = '';
+            document.getElementById("birthdate").value = '';
+            document.getElementById("mobile").value = '';
+            document.getElementById("message").value = '';
+            document.getElementById("year").value = '';
 
-    // Herstel de originele onclick functie en tekst van de "Toevoegen" knop
-    const addBtn = document.querySelector("[onclick^='saveEditedBirthday']");
-    addBtn.setAttribute('onclick', addBtn.getAttribute('data-original-onclick'));
-    addBtn.textContent = "Toevoegen";
-    addBtn.removeAttribute('data-original-onclick');
-}
+            editingIndex = -1;
+        }
 
-
-
-
-function removeBirthday(index) {
-    // Log de details van de verjaardag die verwijderd wordt
-    console.log(`Verwijderen van verjaardag: Naam: ${birthdays[index].name}, Datum: ${birthdays[index].date}, Mobiel: ${birthdays[index].mobile}, Bericht: ${birthdays[index].message}, Jaar: ${birthdays[index].year}`);
-    
-    // Verwijder de verjaardag uit de lijst
-    birthdays.splice(index, 1);
-
-    // Ververs de verjaardagenlijst weergave
-    displayBirthdays();
-}
-
-
-function save() {
-    const name = document.getElementById("name").value;
-    const date = document.getElementById("birthdate").value;
-    const mobile = document.getElementById("mobile").value;
-    const message = document.getElementById("message").value;
-    const year = document.getElementById("year").value;
-
-    if (!name || !date || !mobile || !message) {
-        alert("Vul alle verplichte velden in!");
-        return;
-    }
-
-    if (editingIndex !== -1) {
-        // Bestaande verjaardag bijwerken
-        birthdays[editingIndex] = {
-            name: name,
-            date: date,
-            mobile: mobile,
-            message: message,
-            year: year || null
-        };
-        editingIndex = -1; // Reset de index na het opslaan
-    } else {
-        // Nieuwe verjaardag toevoegen
-        birthdays.push({
-            name: name,
-            date: date,
-            mobile: mobile,
-            message: message,
-            year: year || null
-        });
-    }
-
-    // Ververs de verjaardagenlijst weergave
-    displayBirthdays();
-
-    // Maak de invoervelden leeg
-    document.getElementById("name").value = "";
-    document.getElementById("birthdate").value = "";
-    document.getElementById("mobile").value = "";
-    document.getElementById("message").value = "";
-    document.getElementById("year").value = "";
-
-    myHomey.set('birthdays', birthdays);
-    localStorage.setItem('birthdays', JSON.stringify(birthdays));
-}
-
-
+        function save() {
+            myHomey.set('birthdays', birthdays, function(error) {
+                if (error) {
+                    alert("Error saving data!");
+                    return;
+                }
+                clearFields();
+            });
+        }
 
         document.addEventListener("DOMContentLoaded", function () {
             initializeTranslations();
         });
-
     </script>
-
 </body>
 
 </html>
-
