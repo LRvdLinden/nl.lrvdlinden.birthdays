@@ -1,6 +1,7 @@
-import Homey, { FlowCard, FlowCardTrigger, FlowToken } from "homey";
+import Homey, { FlowCard, FlowCardCondition, FlowCardTrigger, FlowToken } from "homey";
 import * as crypto from "crypto";
-const axios = require('axios');
+
+const axios = require("axios");
 
 interface Person {
   id: string;
@@ -24,9 +25,17 @@ interface SpecificBirthdayTodayTriggerState {
   person: Person;
 }
 
+interface IsSpecificBirthdayTodayConditionArgs {
+  person: Person;
+}
+
+interface IsSpecificBirthdayTodayConditionState {
+  person: Person;
+}
+
 interface CategoryBirthdayTriggerArgs {
   run_at: string;
-  person: Person;
+  category: string;
 }
 
 interface CategoryBirthdayTriggerState {
@@ -59,6 +68,8 @@ class Birthdays extends Homey.App {
   private birthdayTriggerCard?: FlowCardTrigger;
   private specificBirthdayTriggerCard?: FlowCardTrigger;
   private categoryBirthdayTriggerCard?: FlowCardTrigger;
+  private isBirthdayTodayConditionCard?: FlowCardCondition;
+  private isSpecificBirthdayTodayConditionCard?: FlowCardCondition;
   private _image: any;
   private _imageSet: boolean = false;
   private debug: boolean = false;
@@ -260,73 +271,73 @@ class Birthdays extends Homey.App {
       // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person is the same
       return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
     });
-    this.specificBirthdayTriggerCard.registerArgumentAutocompleteListener(
-      "person",
-      async (query: string, args) => {
-        // map persons to homey flow card autocomplete items
-        const results = this.persons?.map((person: Person) => {
-          return {
-            id: person.id,
-            name: person.name
-          };
-        }) as FlowCard.ArgumentAutocompleteResults ?? [];
-
-        // filter based on the query
-        return results.filter((result) => {
-          return result.name.toLowerCase().includes(query.toLowerCase());
-        });
-      }
-    );
+    this.specificBirthdayTriggerCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
 
     this.categoryBirthdayTriggerCard = this.homey.flow.getTriggerCard("category-birthday-today");
     this.categoryBirthdayTriggerCard.registerRunListener(async (args: CategoryBirthdayTriggerArgs, state: CategoryBirthdayTriggerState) => {
-        // Hier controleren we eerst of args en state daadwerkelijk de verwachte waarden bevatten
-        if(!args.person || !state.person) {
-            throw new Error("Expected person details in args and state.");
-        }
-
-        // Valideer dat de huidige tijd overeenkomt met de args.run_at tijd die het formaat "HH:mm" heeft en verifieer dat de persoon dezelfde is
-        return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
+      // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person belongs to the provided category
+      return String(args.category).toLowerCase() === String(state.person.category).toLowerCase()
+        && this.verifyRunAtByArgs(args);
     });
 
-    this.homey.flow.getConditionCard("is-birthday-today").registerRunListener(async (args, state) => {
-      const today = new Date();
-      const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-      const birthdayPerson = this.persons?.find(p => p.dateOfBirth.substring(5) === formattedToday.substring(5));
-      return !!birthdayPerson;
+    this.isBirthdayTodayConditionCard = this.homey.flow.getConditionCard("is-birthday-today");
+    this.isBirthdayTodayConditionCard.registerRunListener(async (args, state) => {
+      return this.getPersonsWithBirthdaysToday().length > 0;
     });
+
+    this.isSpecificBirthdayTodayConditionCard = this.homey.flow.getConditionCard("is-specific-birthday-today");
+    this.isSpecificBirthdayTodayConditionCard.registerRunListener(async (args: IsSpecificBirthdayTodayConditionArgs, state: IsSpecificBirthdayTodayConditionState) => {
+      return this.getPersonsWithBirthdaysToday().length > 0
+        && this.isSamePerson(args.person, state.person);
+    });
+    this.isSpecificBirthdayTodayConditionCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
 
     this.homey.flow.getActionCard("temporary-image").registerRunListener(async (args, state) => {
       const { imageUrl } = args;
 
       try {
-          if (!this._image) {
-              this._imageSet = false;
+        if (!this._image) {
+          this._imageSet = false;
+        }
+
+        this._image = await this.homey.images.createImage();
+
+        await this._image.setStream(async (stream: NodeJS.WritableStream) => {
+          const response = await axios.get(imageUrl, { responseType: "stream" });
+
+          if (response.status !== 200) {
+            this.error("Error fetching image:", response.statusText);
+            throw new Error("Error fetching image");
           }
 
-          this._image = await this.homey.images.createImage();
+          response.data.pipe(stream);
+        });
 
-          await this._image.setStream(async (stream: NodeJS.WritableStream) => {
-              const response = await axios.get(imageUrl, { responseType: 'stream' });
+        const tokens = {
+          image: this._image
+        };
 
-              if (response.status !== 200) {
-                  this.error('Error fetching image:', response.statusText);
-                  throw new Error('Error fetching image');
-              }
-
-              response.data.pipe(stream);
-          });
-
-          const tokens = {
-              image: this._image
-          };
-
-          return tokens;
+        return tokens;
       } catch (error) {
-          this.error('Error setting image:', error);
-          throw new Error('Error setting image');
+        this.error("Error setting image:", error);
+        throw new Error("Error setting image");
       }
-  });
+    });
+  }
+
+  private async autocompletePersons(query: string, args: any) {
+    // map persons to homey flow card autocomplete items
+    const results = this.persons?.map((person: Person) => {
+      return {
+        id: person.id,
+        name: person.name
+      };
+    }) as FlowCard.ArgumentAutocompleteResults ?? [];
+
+    // filter based on the query
+    return results.filter((result) => {
+      return result.name.toLowerCase().includes(query.toLowerCase());
+    });
   }
 
   private verifyRunAtByArgs(args: BirthdayTodayTriggerArgs) {

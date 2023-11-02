@@ -1,30 +1,30 @@
 {
   "id": "category-birthday-today",
   "title": {
-      "en": "It's a specific person in a category birthday",
-      "nl": "Het is de verjaardag van een specifiek persoon in een categorie",
-      "de": "Es ist der Geburtstag einer bestimmten Person in einer Kategorie",
-      "fr": "C'est l'anniversaire d'une personne spécifique dans une catégorie",
-      "it": "È il compleanno di una persona specifica in una categoria",
-      "es": "Es el cumpleaños de una persona específica en una categoría",
-      "sv": "Det är en specifik persons födelsedag i en kategori",
-      "no": "Det er en bestemt persons bursdag i en kategori",
-      "da": "Det er en specifik persons fødselsdag i en kategori",
-      "ru": "Это день рождения конкретного человека в категории",
-      "pl": "To jest urodziny konkretnej osoby w kategorii"
+    "en": "It is the birthday of a person in a category",
+    "nl": "Het is de verjaardag van een persoon in een categorie",
+    "de": "Es ist der Geburtstag einer Person in einer Kategorie",
+    "fr": "C'est l'anniversaire d'une personne dans une catégorie",
+    "it": "È il compleanno di una persona in una categoria",
+    "es": "Es el cumpleaños de una persona en una categoría",
+    "sv": "Det är en persons födelsedag i en kategori",
+    "no": "Det er en persons bursdag i en kategori",
+    "da": "Det er en persons fødselsdag i en kategori",
+    "ru": "Это день рождения человека в категории",
+    "pl": "To są urodziny osoby w kategorii"
   },
   "titleFormatted": {
-    "en": "Celebrate the birthday in category [[category]] at [[run_at]] o'clock",
-    "nl": "Vier de verjaardag in de categorie [[category]] om [[run_at]] uur",
-    "de": "Feiere den Geburtstag in der Kategorie [[category]] um [[run_at]] Uhr",
-    "fr": "Célébrez l'anniversaire dans la catégorie [[category]] à [[run_at]] heures",
-    "it": "Celebra il compleanno nella categoria [[category]] alle [[run_at]] in punto",
-    "es": "Celebra el cumpleaños en la categoría [[category]] a las [[run_at]] en punto",
-    "sv": "Fira födelsedagen i kategorin [[category]] kl [[run_at]]",
-    "no": "Feire bursdagen i kategorien [[category]] kl [[run_at]]",
-    "da": "Fejr fødselsdagen i kategorien [[category]] kl [[run_at]]",
-    "ru": "Празднуйте день рождения в категории [[category]] в [[run_at]] часов",
-    "pl": "Świętuj urodziny w kategorii [[category]] o [[run_at]]"
+    "en": "Celebrate the birthday of a person in category [[category]] at [[run_at]] o'clock",
+    "nl": "Vier de verjaardag van iemand in de categorie [[category]] om [[run_at]] uur",
+    "de": "Feiern Sie den Geburtstag einer Person in der Kategorie [[category]] um [[run_at]] Uhr",
+    "fr": "Célébrez l'anniversaire d'une personne dans la catégorie [[category]] à [[run_at]] heures",
+    "it": "Festeggia il compleanno di una persona nella categoria [[category]] alle [[run_at]]",
+    "es": "Celebra el cumpleaños de una persona en la categoría [[category]] a las [[run_at]] horas",
+    "sv": "Fira födelsedagen för en person i kategorin [[category]] klockan [[run_at]]",
+    "no": "Feir bursdagen til en person i kategorien [[category]] klokken [[run_at]]",
+    "da": "Fejr fødselsdagen for en person i kategorien [[category]] kl. [[run_at]]",
+    "ru": "Празднуйте день рождения человека в категории [[category]] в [[run_at]] часов",
+    "pl": "Świętuj urodziny osoby w kategorii [[category]] o [[run_at]]"
   },
   "args": [
     {
@@ -55,42 +55,42 @@
         "da": "Arbejde",
         "ru": "Работа",
         "pl": "Praca"
-    },
-    "values": [
-      {
+      },
+      "values": [
+        {
           "id": "work",
           "label": {
-              "en": "Work",
-              "nl": "Werk",
-              "de": "Arbeit",
-              "fr": "Travail",
-              "it": "Lavoro",
-              "es": "Trabajo",
-              "sv": "Arbete",
-              "no": "Arbeid",
-              "da": "Arbejde",
-              "ru": "Работа",
-              "pl": "Praca"
+            "en": "Work",
+            "nl": "Werk",
+            "de": "Arbeit",
+            "fr": "Travail",
+            "it": "Lavoro",
+            "es": "Trabajo",
+            "sv": "Arbete",
+            "no": "Arbeid",
+            "da": "Arbejde",
+            "ru": "Работа",
+            "pl": "Praca"
           }
-      },
-      {
+        },
+        {
           "id": "private",
           "label": {
-              "en": "Private",
-              "nl": "Prive",
-              "de": "Privat",
-              "fr": "Privé",
-              "it": "Privato",
-              "es": "Privado",
-              "sv": "Privat",
-              "no": "Privat",
-              "da": "Privat",
-              "ru": "Частное",
-              "pl": "Prywatny"
-            }
+            "en": "Private",
+            "nl": "Prive",
+            "de": "Privat",
+            "fr": "Privé",
+            "it": "Privato",
+            "es": "Privado",
+            "sv": "Privat",
+            "no": "Privat",
+            "da": "Privat",
+            "ru": "Частное",
+            "pl": "Prywatny"
           }
+        }
       ]
-  },
+    },
     {
       "type": "time",
       "name": "run_at",
@@ -107,7 +107,9 @@
         "ru": "Время",
         "pl": "Czas"
       },
-      "placeholder": { "en": "13:37" }
+      "placeholder": {
+        "en": "13:37"
+      }
     }
   ],
   "tokens": [

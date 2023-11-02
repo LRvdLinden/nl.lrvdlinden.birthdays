@@ -8,6 +8,7 @@
       "mobile": "Mobiel nummer",
       "message": "Verjaardagsboodschap",
       "dateOfBirth": "Geboortedatum",
+      "category": "Categorie",
       "add": "Persoon toevoegen",
       "save": "Opslaan",
       "cancel": "Annuleren"
@@ -16,6 +17,7 @@
       "title": "Personen",
       "name": "Naam",
       "dateOfBirth": "Geboortedatum",
+      "category": "Categorie",
       "message": "Bericht",
       "actions": "Acties",
       "edit": "Bewerken",
