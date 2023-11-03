@@ -262,8 +262,14 @@
     row.appendChild(dateOfBirthCell);
 
     const ageCell = document.createElement("td");
-    ageCell.textContent = getPersonAge(person) + 1;
+    const ageValue = getPersonAge(person);
+    if (ageValue === 'N/A') {
+    ageCell.textContent = 'N/A';
+    } else {
+    ageCell.textContent = ageValue + 1;
+    }
     row.appendChild(ageCell);
+
 
     const messageCell = document.createElement("td");
     messageCell.textContent = person.message;
@@ -296,18 +302,37 @@
     tableBody.appendChild(actionRow);
   }
 
-  function getPersonAge (person) {
+  function getPersonAge(person) {
     const today = new Date();
     const birthDate = new Date(person.dateOfBirth);
+
+    // Controleer eerst of de geboortedatum in de toekomst ligt of het huidige jaar is
+    if (birthDate > today || birthDate.getFullYear() === today.getFullYear()) {
+        return 'N/A';
+    }
+
     let age = today.getFullYear() - birthDate.getFullYear();
     const month = today.getMonth() - birthDate.getMonth();
 
-    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+    // Als we nog voor de verjaardag van dit jaar zitten, trekken we 1 jaar af
+    if (month < 0 || (month === 0 && today.getDate() <= birthDate.getDate())) {
+        age--;
+    }
+
+    // Als het de dag na de verjaardag is, voegen we 1 jaar toe
+    if (month === 0 && today.getDate() === birthDate.getDate() + 1) {
+        age++;
     }
 
     return age;
-  }
+}
+
+
+const ageCell = document.createElement("td");
+const age = getPersonAge(person);
+ageCell.textContent = (age === 'N/A') ? age : age + 1; // Behoud je originele logica om 1 toe te voegen, indien nodig
+row.appendChild(ageCell);
+
 
   // Function to render the list of persons
   function renderPersons () {
