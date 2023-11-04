@@ -263,12 +263,9 @@
 
     const ageCell = document.createElement("td");
     const ageValue = getPersonAge(person);
-    if (ageValue === 'N/A') {
-    ageCell.textContent = 'N/A';
-    } else {
-    ageCell.textContent = ageValue + 1;
-    }
+    ageCell.textContent = (ageValue === 'N/A') ? ageValue : ageValue + 1;
     row.appendChild(ageCell);
+
 
 
     const messageCell = document.createElement("td");
