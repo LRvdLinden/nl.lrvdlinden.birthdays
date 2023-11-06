@@ -46,7 +46,10 @@
       .field {
         margin-bottom: 15px;
       }
-
+      .flex {
+        display: flex;
+        gap: 10px; 
+      }
       .homey-form-input[type="date"] {
         padding: 8px;
         border-radius: 5px;
@@ -81,6 +84,34 @@
       .flex button:not(:first-child) {
         margin-left: 5px;
       }
+      /* Verdeling met 2 velden op een rij */
+.flex-2 {
+  display: flex;
+  gap: 10px; /* Voeg hier de gewenste tussenruimte in pixels toe */
+}
+
+/* Beide velden in de rij nemen de helft van de beschikbare ruimte in */
+.field-2:nth-child(1),
+.field-2:nth-child(2) {
+  flex: 1;
+}
+
+/* Verdeling met 3 velden op een rij */
+.flex-3 {
+  display: flex;
+  gap: 10px; /* Voeg hier de gewenste tussenruimte in pixels toe */
+}
+
+/* Het eerste veld in de rij neemt 1/2 van de beschikbare ruimte in, de andere twee elk 1/4 */
+.field-3:nth-child(1) {
+  flex: 2;
+}
+
+.field-3:nth-child(2),
+.field-3:nth-child(3) {
+  flex: 1;
+}
+
     </style>
 </head>
 
@@ -100,32 +131,36 @@
         <fieldset class="homey-form-fieldset">
             <legend class="homey-form-legend" data-i18n="settings.person.title">Person</legend>
 
-            <div class="homey-form-group">
+            <div class="flex-2">
+              <div class="field-2 homey-form-group">
                 <label class="homey-form-label" for="name" data-i18n="settings.person.name"></label>
                 <input class="homey-form-input" id="name" type="text" />
             </div>
 
-            <div class="homey-form-group">
+            <div class="field-2 homey-form-group">
+              <label class="homey-form-label" for="dateOfBirth" data-i18n="settings.person.dateOfBirth"></label>
+              <input class="homey-form-input" id="dateOfBirth" type="date" />
+          </div>
+        </div>
+
+            <div class="flex-2">
+              <div class="field-2 homey-form-group">
                 <label class="homey-form-label" for="mobile" data-i18n="settings.person.mobile"></label>
                 <input class="homey-form-input" id="mobile" type="text" />
             </div>
 
-            <div class="homey-form-group">
+            <div class="field-2 homey-form-group">
+              <label class="homey-form-label" for="category" data-i18n="settings.person.category"></label>
+              <select id="category" class="homey-form-select">
+                  <option value="Work">Work</option>
+                  <option value="Private">Private</option>
+              </select>
+          </div>
+        </div>
+
+          <div class="homey-form-group">
                 <label class="homey-form-label" for="message" data-i18n="settings.person.message"></label>
                 <textarea class="homey-form-textarea" id="message" rows="3"></textarea>
-            </div>
-
-            <div class="homey-form-group">
-                <label class="homey-form-label" for="dateOfBirth" data-i18n="settings.person.dateOfBirth"></label>
-                <input class="homey-form-input" id="dateOfBirth" type="date" />
-            </div>
-
-            <div class="homey-form-group">
-                <label class="homey-form-label" for="category" data-i18n="settings.person.category"></label>
-                <select id="category" class="homey-form-select">
-                    <option value="Work">Work</option>
-                    <option value="Private">Private</option>
-                </select>
             </div>
 
             <div class="flex">
@@ -481,6 +516,3 @@ row.appendChild(ageCell);
 </html>
 
 
-</body>
-
-</html>
