@@ -9,6 +9,7 @@ interface Person {
   dateOfBirth: string;
   year?: string;
   mobile?: string;
+  mobile2?: string;
   message?: string;
   category?: string;
 }
@@ -49,6 +50,7 @@ interface Birthday extends Person {
 interface Tokens {
   name: FlowToken;
   mobile: FlowToken;
+  mobile2: FlowToken;
   message: FlowToken;
   age: FlowToken;
 }
@@ -125,6 +127,7 @@ class Birthdays extends Homey.App {
         dateOfBirth?: string,
         year?: string,
         mobile: string,
+        mobile2: string,
         message: string,
       }>;
 
@@ -135,6 +138,7 @@ class Birthdays extends Homey.App {
           dateOfBirth: birthday.date || birthday.dateOfBirth,
           year: birthday.year,
           mobile: birthday.mobile,
+          mobile2: birthday.mobile2,
           message: birthday.message
         } as Person;
       });
@@ -187,6 +191,7 @@ class Birthdays extends Homey.App {
     return (
       typeof data.name === "string" &&
       typeof data.mobile === "string" &&
+      typeof data.mobile2 === "string" &&
       typeof data.message === "string" &&
       typeof data.age === "number" &&
       typeof data.category === "string"
@@ -215,6 +220,7 @@ class Birthdays extends Homey.App {
         name: birthdayPerson.name,
         age: this.getPersonAge(birthdayPerson),
         mobile: birthdayPerson.mobile,
+        mobile2: birthdayPerson.mobile2,
         message: birthdayPerson.message
       };
       const state = {
