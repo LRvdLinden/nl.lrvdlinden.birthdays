@@ -153,14 +153,18 @@
             </div>
 
             <div class="field-2 homey-form-group">
-              <label class="homey-form-label" for="category" data-i18n="settings.person.category"></label>
-              <select id="category" class="homey-form-select">
-                  <option value="Work">Work</option>
-                  <option value="Private">Private</option>
-              </select>
+              <label class="homey-form-label" for="mobile2" data-i18n="settings.person.mobile2"></label>
+              <input class="homey-form-input" id="mobile2" type="text" />
           </div>
         </div>
 
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="category" data-i18n="settings.person.category"></label>
+          <select id="category" class="homey-form-select">
+              <option value="Work">Work</option>
+              <option value="Private">Private</option>
+          </select>
+      </div>
           <div class="homey-form-group">
                 <label class="homey-form-label" for="message" data-i18n="settings.person.message"></label>
                 <textarea class="homey-form-textarea" id="message" rows="3"></textarea>
@@ -234,44 +238,43 @@
     });
   }
 
-  function sortBirthdays () {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const currentDay = currentDate.getDate();
+  function sortBirthdays() {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentDayOfYear = getDayOfYear(today);
 
-    persons.sort((a, b) => {
-      const dateA = new Date(a.dateOfBirth);
-      const dateB = new Date(b.dateOfBirth);
+  persons.sort((a, b) => {
+    // Creëer een datum voor dit jaar voor beide verjaardagen
+    const dateA = new Date(a.dateOfBirth);
+    dateA.setFullYear(currentYear);
+    const dayOfYearA = getDayOfYear(dateA);
 
-      if (dateA.getMonth() === currentMonth && dateA.getDate() === currentDay) {
-        return -1; // Als datum A vandaag is, breng het naar de top
-      }
+    const dateB = new Date(b.dateOfBirth);
+    dateB.setFullYear(currentYear);
+    const dayOfYearB = getDayOfYear(dateB);
 
-      if (dateB.getMonth() === currentMonth && dateB.getDate() === currentDay) {
-        return 1; // Als datum B vandaag is, breng het naar de top
-      }
+    // Bepaal of de verjaardag al geweest is door te kijken of de dag van het jaar groter is dan vandaag
+    const isPastA = dayOfYearA < currentDayOfYear;
+    const isPastB = dayOfYearB < currentDayOfYear;
 
-      if (dateA.getMonth() === dateB.getMonth()) {
-        if (dateA.getDate() < currentDay && dateB.getDate() >= currentDay) {
-          return 1;
-        }
-        if (dateB.getDate() < currentDay && dateA.getDate() >= currentDay) {
-          return -1;
-        }
-        return dateA.getDate() - dateB.getDate();
-      }
+    if (isPastA !== isPastB) {
+      // Als een van de twee verjaardagen al geweest is, dan sorteren we die naar beneden
+      return isPastA ? 1 : -1;
+    }
 
-      if (dateA.getMonth() < currentMonth || (dateA.getMonth() === currentMonth && dateA.getDate() < currentDay)) {
-        return 1;
-      }
+    // Als beide verjaardagen in het verleden of de toekomst zijn, sorteer dan op dag van het jaar
+    return dayOfYearA - dayOfYearB;
+  });
+}
 
-      if (dateB.getMonth() < currentMonth || (dateB.getMonth() === currentMonth && dateB.getDate() < currentDay)) {
-        return -1;
-      }
+// Helper functie om de dag van het jaar te krijgen
+function getDayOfYear(date) {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+}
 
-      return dateA.getMonth() - dateB.getMonth();
-    });
-  }
 
   const tableBodyElement = document.querySelector("#person-table tbody");
   const personsListElement = document.querySelector("div#person-list");
@@ -393,6 +396,7 @@ row.appendChild(ageCell);
     document.getElementById("name").value = person.name;
     document.getElementById("dateOfBirth").value = person.dateOfBirth;
     document.getElementById("mobile").value = person.mobile;
+    document.getElementById("mobile2").value = person.mobile2;
     document.getElementById("message").value = person.message;
     document.getElementById("category").value = person.category;
 
@@ -446,6 +450,7 @@ row.appendChild(ageCell);
       name: document.getElementById("name").value,
       dateOfBirth: document.getElementById("dateOfBirth").value,
       mobile: document.getElementById("mobile").value ?? null,
+      mobile2: document.getElementById("mobile2").value ?? null,
       message: document.getElementById("message").value ?? null,
       category: document.getElementById("category").value ?? null
     };
@@ -466,10 +471,11 @@ row.appendChild(ageCell);
     }
   }
 
-  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, message, category }) {
+  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, mobile2, message, category }) {
     document.getElementById("name").value = name ?? "";
     document.getElementById("dateOfBirth").value = dateOfBirth ?? "";
     document.getElementById("mobile").value = mobile ?? "";
+    document.getElementById("mobile2").value = mobile2 ?? "";
     document.getElementById("message").value = message ?? "";
     document.getElementById("category").value = category ?? "";
   }
@@ -516,5 +522,3 @@ row.appendChild(ageCell);
 </body>
 
 </html>
-
-
