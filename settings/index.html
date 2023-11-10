@@ -76,7 +76,9 @@
         font-size: 15px;
         margin: 0 3px 5px 0;
       }
-
+      .homey-form-checkbox-text {
+      color: inherit; 
+      }
       .flex {
         display: flex;
       }
@@ -145,6 +147,12 @@
               <input class="homey-form-input" id="dateOfBirth" type="date" />
           </div>
         </div>
+
+        <label class="homey-form-checkbox">
+          <input class="homey-form-checkbox-input" type="checkbox" id="baby" name="checkbox-example"/>
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text" data-i18n="settings.person.babyCheckbox"></span>
+        </label>        
 
             <div class="flex-2">
               <div class="field-2 homey-form-group">
@@ -283,6 +291,7 @@ function getDayOfYear(date) {
   const saveButtonElement = document.querySelector("#save-button");
   const cancelButtonElement = document.querySelector("#cancel-button");
 
+
   addPersonButtonElement.addEventListener("click", showCreateOrEdit);
   saveButtonElement.addEventListener("click", addOrUpdateBirthday);
   cancelButtonElement.addEventListener("click", cancelCreateOrEdit);
@@ -302,11 +311,9 @@ function getDayOfYear(date) {
     row.appendChild(dateOfBirthCell);
 
     const ageCell = document.createElement("td");
-    const ageValue = getPersonAge(person);
-    ageCell.textContent = (ageValue === 'N/A') ? ageValue : ageValue + 1;
+    const age = getPersonAge(person);
+    ageCell.textContent = (age === 'N/A') ? age : age + 1; 
     row.appendChild(ageCell);
-
-
 
     const messageCell = document.createElement("td");
     messageCell.textContent = person.message;
@@ -339,36 +346,45 @@ function getDayOfYear(date) {
     tableBody.appendChild(actionRow);
   }
 
+
   function getPersonAge(person) {
     const today = new Date();
     const birthDate = new Date(person.dateOfBirth);
 
-    // Controleer eerst of de geboortedatum in de toekomst ligt of het huidige jaar is
+    // Als de persoon als baby is gemarkeerd, bereken dan de leeftijd ongeacht of de geboortedatum dit jaar is
+    if (person.isBaby) {
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const month = today.getMonth() - birthDate.getMonth();
+        const day = today.getDate() - birthDate.getDate();
+        // Verhoog leeftijd met 1 de dag na de verjaardag
+        if (month > 0 || (month === 0 && day > 0)) {
+            age++;
+        }
+
+        return age;
+    }
+
+    // Voor niet-baby's, controleer of de geboortedatum in de toekomst ligt of het huidige jaar is
     if (birthDate > today || birthDate.getFullYear() === today.getFullYear()) {
         return 'N/A';
     }
 
     let age = today.getFullYear() - birthDate.getFullYear();
     const month = today.getMonth() - birthDate.getMonth();
+    const day = today.getDate() - birthDate.getDate();
 
-    // Als we nog voor de verjaardag van dit jaar zitten, trekken we 1 jaar af
-    if (month < 0 || (month === 0 && today.getDate() <= birthDate.getDate())) {
+        // Als we nog voor de verjaardag van dit jaar zitten, trekken we 1 jaar af
+        if (month < 0 || (month === 0 && today.getDate() <= birthDate.getDate())) {
         age--;
     }
 
-    // Als het de dag na de verjaardag is, voegen we 1 jaar toe
-    if (month === 0 && today.getDate() === birthDate.getDate() + 1) {
+    // Verhoog leeftijd met 1 de dag na de verjaardag
+    if (month > 0 || (month === 0 && day > 0)) {
         age++;
     }
 
     return age;
 }
-
-
-const ageCell = document.createElement("td");
-const age = getPersonAge(person);
-ageCell.textContent = (age === 'N/A') ? age : age + 1; // Behoud je originele logica om 1 toe te voegen, indien nodig
-row.appendChild(ageCell);
 
 
   // Function to render the list of persons
@@ -399,6 +415,7 @@ row.appendChild(ageCell);
     document.getElementById("mobile2").value = person.mobile2;
     document.getElementById("message").value = person.message;
     document.getElementById("category").value = person.category;
+    document.getElementById("baby").value = person.baby;
 
     editingPerson = person;
   }
@@ -446,14 +463,17 @@ row.appendChild(ageCell);
     event?.preventDefault();
 
     const person = {
-      id: guid(),
+  id: guid(),
       name: document.getElementById("name").value,
       dateOfBirth: document.getElementById("dateOfBirth").value,
       mobile: document.getElementById("mobile").value ?? null,
-      mobile2: document.getElementById("mobile2").value ?? null,
+      mobile2: document.getElementById("mobile2").value || "No Mobile",
       message: document.getElementById("message").value ?? null,
-      category: document.getElementById("category").value ?? null
-    };
+      category: document.getElementById("category").value ?? null,
+      isBaby: document.getElementById("baby").checked
+};
+
+
 
     if (!isValid(person)) {
       myHomey.alert(myHomey.__("messages.validation_error"));
@@ -471,14 +491,15 @@ row.appendChild(ageCell);
     }
   }
 
-  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, mobile2, message, category }) {
-    document.getElementById("name").value = name ?? "";
-    document.getElementById("dateOfBirth").value = dateOfBirth ?? "";
-    document.getElementById("mobile").value = mobile ?? "";
-    document.getElementById("mobile2").value = mobile2 ?? "";
-    document.getElementById("message").value = message ?? "";
-    document.getElementById("category").value = category ?? "";
-  }
+  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, mobile2, message, category, isBaby }) {
+  document.getElementById("name").value = name ?? "";
+  document.getElementById("dateOfBirth").value = dateOfBirth ?? "";
+  document.getElementById("mobile").value = mobile ?? "";
+  document.getElementById("mobile2").value = mobile2 ?? "";
+  document.getElementById("message").value = message ?? "";
+  document.getElementById("category").value = category ?? "";
+  document.getElementById("baby").checked = isBaby ?? false;
+}
 
   function editBirthday (index) {
     const selectedPerson = persons[index];
