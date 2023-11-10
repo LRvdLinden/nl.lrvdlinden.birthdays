@@ -76,6 +76,7 @@ class Birthdays extends Homey.App {
   private _imageSet: boolean = false;
   private debug: boolean = false;
 
+
   async onInit() {
     this.log("Birthdays has been initialized");
     await this.initializeBirthdays();
@@ -87,31 +88,37 @@ class Birthdays extends Homey.App {
     await this.checkBirthdayTriggers();
 
     // Checks triggers every minute
-    this.homey.setInterval(this.checkBirthdayTriggers.bind(this), 60 * 1000);
+    this.homey.setInterval(this.checkBirthdayTriggers.bind(this), 120 * 1000);
 
-    // this.tokens = {
-    //   name: await this.homey.flow.createToken("name", {
-    //     type: "string",
-    //     title: "Name",
-    //     value: "John Doe"
-    //   }),
-    //
-    //   mobile: await this.homey.flow.createToken("mobile", {
-    //     type: "string",
-    //     title: "Mobile",
-    //     value: "0612345678"
-    //   }),
-    //   message: await this.homey.flow.createToken("message", {
-    //     type: "string",
-    //     title: "Message",
-    //     value: "Happy Birthday!"
-    //   }),
-    //   age: await this.homey.flow.createToken("age", {
-    //     type: "number",
-    //     title: "Age",
-    //     value: 0
-    //   })
-    // };
+
+// Maak globale tokens aan
+this.tokens = {
+  name: await this.homey.flow.createToken("name", {
+    type: "string",
+    title: "Name",
+    value: "Default Name"
+  }),
+  mobile: await this.homey.flow.createToken("mobile", {
+    type: "string",
+    title: "Mobile",
+    value: "Default Mobile"
+  }),
+  mobile2: await this.homey.flow.createToken("mobile2", {
+    type: "string",
+    title: "Mobile2",
+    value: "Empty field"
+  }),
+  message: await this.homey.flow.createToken("message", {
+    type: "string",
+    title: "Message",
+    value: "Happy Birthday!"
+  }),
+  age: await this.homey.flow.createToken("age", {
+    type: "number",
+    title: "Age",
+    value: 0
+  })
+};
   }
 
   private async migrateBirthdaysToPersonsSetting(): Promise<void> {
@@ -170,11 +177,6 @@ class Birthdays extends Homey.App {
     this.homey.settings.on("set", async (...args): Promise<void> => {
       if (args[0] === "persons") {
         await this.fetchBirthdays();
-
-        // TODO: refactor
-        // if (this.birthdays) {
-        //   await this.notifyBirthdayAdded(this.birthdays[this.birthdays.length - 1]);
-        // }
       }
     });
   }
@@ -183,7 +185,7 @@ class Birthdays extends Homey.App {
     this.persons?.forEach((person) => {
       const age = person.year ? new Date().getFullYear() - parseInt(person.year) : 0;
 
-      this.log(`Person in list = Name: ${person.name} - Date of birth: ${person.dateOfBirth} - BirthYear: ${person.year} - Age: ${age} - Message: ${person.message}`);
+      this.log(`Person in list = Name: ${person.name} - Date of birth: ${person.dateOfBirth} - Mobile ${person.mobile} - Mobile 2 ${person.mobile} - Age: ${age} - Message: ${person.message}`);
     });
   }
 
@@ -197,25 +199,25 @@ class Birthdays extends Homey.App {
       typeof data.category === "string"
     );
   }
-
+  
   private getPersonsWithBirthdaysToday(): Array<Person> {
     return this.persons?.filter((person: Person) => {
       const today = new Date();
       const formattedToday = `${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-
       return person.dateOfBirth && person.dateOfBirth.substring(5) === formattedToday;
     }) ?? [];
   };
 
   private async checkBirthdayTriggers() {
     this.log("Checking birthdays");
-
+  
     if (this.debug) {
       this.log("Persons with birthdays today", this.getPersonsWithBirthdaysToday());
     }
-    // Trigger the birthday card every time for each person who has a birthday today
-    // the run listener will deal with the run_at time
-    this.getPersonsWithBirthdaysToday().forEach((birthdayPerson: Person): void => {
+  
+    const birthdaysToday = this.getPersonsWithBirthdaysToday();
+    for (let i = 0; i < birthdaysToday.length; i++) {
+      const birthdayPerson = birthdaysToday[i];
       const tokens = {
         name: birthdayPerson.name,
         age: this.getPersonAge(birthdayPerson),
@@ -226,44 +228,47 @@ class Birthdays extends Homey.App {
       const state = {
         person: birthdayPerson
       };
-
+  
       if (this.debug) {
         this.log("trigger birthday triggers with", { tokens, state });
       }
-
+  
       this.birthdayTriggerCard?.trigger(tokens, state);
       this.specificBirthdayTriggerCard?.trigger(tokens, state);
-    });
+      this.categoryBirthdayTriggerCard?.trigger(tokens, state);
+  
+      // Update globale tokens
+      this.updateGlobalTokens(birthdayPerson);
+  
+      // Wacht voor een specifieke tijd voordat je doorgaat naar de volgende jarige persoon
+      await new Promise(resolve => setTimeout(resolve, 5000)); // 5 seconden wachten
+    }
   }
+  
 
-  /**
-   * Er moet denk ik met node-cron nog een aparte timer ingesteld worden zodat de app 1 keer per dag per persoon een
-   * notificatie op de tijdlijn aan kan maken
-   */
-  private sendNotifications(birthdayPerson: Birthday): Promise<void> {
-    const notificationMessage = this.homey.__("birthday_notification", {
-      name: birthdayPerson.name,
-      age: birthdayPerson.age
-    });
-
-    return this.homey.notifications
-      .createNotification({ excerpt: notificationMessage })
-      .catch(error => this.log("notifyBirthdayAdded - error", error));
-  }
-
-  /**
-   * Dit moeten we denk ik a.d.h.v. een event die je vanuit de settings pagina emit gaan doen
-   */
-  private notifyBirthdayAdded(birthdayPerson: Birthday): Promise<void> {
-    const notificationMessage = this.homey.__("messages.person_added", {
-      name: birthdayPerson.name,
-      age: birthdayPerson.age
-    });
-
-    return this.homey.notifications
-      .createNotification({ excerpt: notificationMessage })
-      .catch(error => this.log("notifyBirthdayAdded - error", error));
-  }
+      // Methode om globale tokens bij te werken
+      private async updateGlobalTokens(birthdayPerson: Person): Promise<void> {
+        try {
+            if (this.tokens && this.tokens.name) {
+                await this.tokens.name.setValue(birthdayPerson.name);
+            }
+            if (this.tokens && this.tokens.mobile) {
+                await this.tokens.mobile.setValue(birthdayPerson.mobile || "No mobile");
+            }
+            if (this.tokens && this.tokens.mobile2) {
+              await this.tokens.mobile2.setValue(birthdayPerson.mobile2 || "No mobile");
+          }
+            if (this.tokens && this.tokens.message) {
+                await this.tokens.message.setValue(birthdayPerson.message || "Happy Birthday!");
+            }
+            if (this.tokens && this.tokens.age) {
+                const age = this.getPersonAge(birthdayPerson);
+                await this.tokens.age.setValue(Number(age)); 
+            }
+        } catch (error) {
+            this.log('Error updating global tokens', error);
+        }
+    }
 
   private registerTriggerCard() {
     this.birthdayTriggerCard = this.homey.flow.getTriggerCard("birthday-today");
@@ -271,7 +276,7 @@ class Birthdays extends Homey.App {
       // Validate that the current time matches the args.run_at time which has the format "HH:mm"
       return this.verifyRunAtByArgs(args);
     });
-
+    
     this.specificBirthdayTriggerCard = this.homey.flow.getTriggerCard("specific-birthday-today");
     this.specificBirthdayTriggerCard.registerRunListener(async (args: SpecificBirthdayTodayTriggerArgs, state: SpecificBirthdayTodayTriggerState) => {
       // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person is the same
@@ -427,7 +432,7 @@ class Birthdays extends Homey.App {
     return hash.digest("hex");
   }
 
-  private getPersonAge(person: Person): Number {
+  private getPersonAge(person: Person): number {
     const today = new Date();
     const birthDate = new Date(person.dateOfBirth);
     let age = today.getFullYear() - birthDate.getFullYear();
