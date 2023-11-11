@@ -472,11 +472,11 @@ function getDayOfYear(date) {
   id: guid(),
       name: document.getElementById("name").value,
       dateOfBirth: document.getElementById("dateOfBirth").value,
-      mobile: document.getElementById("mobile").value ?? null,
+      mobile: document.getElementById("mobile").value ?? "",
       mobile2: document.getElementById("mobile2").value || "",
-      message: document.getElementById("message").value ?? null,
-      category: document.getElementById("category").value ?? null,
-      imageUrl: document.getElementById("imageUrl").value ?? "",
+      message: document.getElementById("message").value ?? "",
+      category: document.getElementById("category").value ?? "",
+      imageUrl: document.getElementById("imageUrl").value ?? "https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/birthday_card.png",
       isBaby: document.getElementById("baby").checked
 
 };
