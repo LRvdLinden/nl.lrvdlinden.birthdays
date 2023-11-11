@@ -1,0 +1,51 @@
+{
+  "id": "is-specific-birthday-today",
+  "title": {
+    "en": "Someone specific is celebrating their birthday today",
+    "nl": "Een specifiek iemand is jarig vandaag",
+    "de": "Jemand Bestimmtes hat heute Geburtstag",
+    "fr": "Quelqu'un de spécifique fête son anniversaire aujourd'hui",
+    "it": "Qualcuno di specifico compie gli anni oggi",
+    "es": "Alguien específico está celebrando su cumpleaños hoy",
+    "sv": "Någon specifik fyller år idag",
+    "no": "Noen spesifikke har bursdag i dag",
+    "da": "Nogen specifik har fødselsdag i dag",
+    "ru": "Кто-то отмечает свой день рождения сегодня",
+    "pl": "Ktoś ma dzisiaj urodziny"
+  },
+  "titleFormatted": {
+    "en": "Today !{{is|is not}} [[person]]'s birthday",
+    "nl": "Vandaag !{{is het|is het niet}} de verjaardag van [[person]]",
+    "de": "Heute !{{ist|ist nicht}} der Geburtstag von [[person]]",
+    "fr": "Aujourd'hui !{{c'est|ce n'est pas}} l'anniversaire de [[person]]",
+    "it": "Oggi !{{è|non è}} il compleanno di [[person]]",
+    "es": "Hoy !{{es|no es}} el cumpleaños de [[person]]",
+    "sv": "Idag !{{är|är inte}} det [[person]]s födelsedag",
+    "no": "I dag !{{er|er ikke}} det [[person]]s bursdag",
+    "da": "I dag !{{er|er ikke}} det fødselsdag for [[person]]",
+    "ru": "Сегодня !{{день рождения|не день рождения}} [[person]]",
+    "pl": "Dziś !{{są|nie są}} urodziny [[person]]"
+  },
+  "args": [
+    {
+      "type": "autocomplete",
+      "name": "person",
+      "title": {
+        "en": "Person",
+        "nl": "Persoon",
+        "de": "Person",
+        "fr": "Personne",
+        "it": "Persona",
+        "es": "Persona",
+        "sv": "Person",
+        "no": "Person",
+        "da": "Person",
+        "ru": "Человек",
+        "pl": "Osoba"
+      },
+      "placeholder": {
+        "en": "John Doe"
+      }
+    }
+  ]
+}
