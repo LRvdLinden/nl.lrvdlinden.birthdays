@@ -178,6 +178,11 @@
                 <textarea class="homey-form-textarea" id="message" rows="3" placeholder="e.g. Happy birthday Jon 🎉🍻"></textarea>
             </div>
 
+            <div class="homey-form-group">
+              <label class="homey-form-label" for="imageUrl" data-i18n="settings.person.imageUrl"></label>
+              <input class="homey-form-input" id="imageUrl" type="text" placeholder="Https://"/>
+          </div>
+
             <div class="flex">
                 <button id="save-button" class="homey-button-primary-full"
                         data-i18n="settings.person.save"></button>
@@ -379,9 +384,9 @@ function getDayOfYear(date) {
     }
 
     // Verhoog leeftijd met 1 de dag na de verjaardag
-    if (month > 0 || (month === 0 && day > 0)) {
-        age++;
-    }
+    //if (month > 0 || (month === 0 && day > 0)) {
+      //  age++;
+   // }
 
     return age;
 }
@@ -415,7 +420,8 @@ function getDayOfYear(date) {
     document.getElementById("mobile2").value = person.mobile2;
     document.getElementById("message").value = person.message;
     document.getElementById("category").value = person.category;
-    document.getElementById("baby").value = person.baby;
+    document.getElementById("imageUrl").value = person.imageUrl;
+    document.getElementById("baby").checked = person.isBaby;
 
     editingPerson = person;
   }
@@ -467,10 +473,12 @@ function getDayOfYear(date) {
       name: document.getElementById("name").value,
       dateOfBirth: document.getElementById("dateOfBirth").value,
       mobile: document.getElementById("mobile").value ?? null,
-      mobile2: document.getElementById("mobile2").value || "No Mobile",
+      mobile2: document.getElementById("mobile2").value || "",
       message: document.getElementById("message").value ?? null,
       category: document.getElementById("category").value ?? null,
+      imageUrl: document.getElementById("imageUrl").value ?? "",
       isBaby: document.getElementById("baby").checked
+
 };
 
 
@@ -491,14 +499,15 @@ function getDayOfYear(date) {
     }
   }
 
-  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, mobile2, message, category, isBaby }) {
+  function fillCreateOrEditForm ({ name, dateOfBirth, mobile, mobile2, message, category, imageUrl, isBaby }) {
   document.getElementById("name").value = name ?? "";
   document.getElementById("dateOfBirth").value = dateOfBirth ?? "";
   document.getElementById("mobile").value = mobile ?? "";
   document.getElementById("mobile2").value = mobile2 ?? "";
   document.getElementById("message").value = message ?? "";
   document.getElementById("category").value = category ?? "";
-  document.getElementById("baby").checked = isBaby ?? false;
+  document.getElementById("imageUrl").value = imageUrl ?? "";
+
 }
 
   function editBirthday (index) {
@@ -543,5 +552,7 @@ function getDayOfYear(date) {
 </body>
 
 </html>
+
+
 
 
