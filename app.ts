@@ -12,6 +12,7 @@ interface Person {
   mobile2?: string;
   message?: string;
   category?: string;
+  imageUrl?: string;
 }
 
 interface BirthdayTodayTriggerArgs {
@@ -53,6 +54,7 @@ interface Tokens {
   mobile2: FlowToken;
   message: FlowToken;
   age: FlowToken;
+  imageUrl: FlowToken;
 }
 
 class Birthdays extends Homey.App {
@@ -117,6 +119,11 @@ this.tokens = {
     type: "number",
     title: "Age",
     value: 0
+  }),
+  imageUrl: await this.homey.flow.createToken("imageUrl", {
+    type: "string",
+    title: "URL Image",
+    value: "Https://"
   })
 };
   }
@@ -136,6 +143,7 @@ this.tokens = {
         mobile: string,
         mobile2: string,
         message: string,
+        imageUrl: string,
       }>;
 
       const mappedBirthdays = birthdays.map((birthday) => {
@@ -146,7 +154,8 @@ this.tokens = {
           year: birthday.year,
           mobile: birthday.mobile,
           mobile2: birthday.mobile2,
-          message: birthday.message
+          message: birthday.message,
+          imageUrl: birthday.imageUrl
         } as Person;
       });
 
@@ -183,11 +192,12 @@ this.tokens = {
 
   private async logCompleteBirthdayList(): Promise<void> {
     this.persons?.forEach((person) => {
-      const age = person.year ? new Date().getFullYear() - parseInt(person.year) : 0;
-
+      const age = this.getPersonAge(person); // Gebruik de bestaande functie om de leeftijd te berekenen
+  
       this.log(`Person in list = Name: ${person.name} - Date of birth: ${person.dateOfBirth} - Mobile ${person.mobile} - Mobile 2 ${person.mobile} - Age: ${age} - Message: ${person.message}`);
     });
   }
+  
 
   private isValidTriggerData(data: any): boolean {
     return (
@@ -196,6 +206,7 @@ this.tokens = {
       typeof data.mobile2 === "string" &&
       typeof data.message === "string" &&
       typeof data.age === "number" &&
+      typeof data.imageUrl === "string" &&
       typeof data.category === "string"
     );
   }
@@ -223,7 +234,8 @@ this.tokens = {
         age: this.getPersonAge(birthdayPerson),
         mobile: birthdayPerson.mobile,
         mobile2: birthdayPerson.mobile2,
-        message: birthdayPerson.message
+        message: birthdayPerson.message,
+        imageUrl: birthdayPerson.imageUrl
       };
       const state = {
         person: birthdayPerson
@@ -261,6 +273,9 @@ this.tokens = {
             if (this.tokens && this.tokens.message) {
                 await this.tokens.message.setValue(birthdayPerson.message || "Happy Birthday!");
             }
+            if (this.tokens && this.tokens.imageUrl) {
+              await this.tokens.imageUrl.setValue(birthdayPerson.imageUrl || "Https://");
+          }
             if (this.tokens && this.tokens.age) {
                 const age = this.getPersonAge(birthdayPerson);
                 await this.tokens.age.setValue(Number(age)); 
@@ -270,26 +285,26 @@ this.tokens = {
         }
     }
 
-  private registerTriggerCard() {
-    this.birthdayTriggerCard = this.homey.flow.getTriggerCard("birthday-today");
-    this.birthdayTriggerCard.registerRunListener(async (args: BirthdayTodayTriggerArgs, state) => {
-      // Validate that the current time matches the args.run_at time which has the format "HH:mm"
-      return this.verifyRunAtByArgs(args);
-    });
-    
-    this.specificBirthdayTriggerCard = this.homey.flow.getTriggerCard("specific-birthday-today");
-    this.specificBirthdayTriggerCard.registerRunListener(async (args: SpecificBirthdayTodayTriggerArgs, state: SpecificBirthdayTodayTriggerState) => {
-      // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person is the same
-      return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
-    });
-    this.specificBirthdayTriggerCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
-
-    this.categoryBirthdayTriggerCard = this.homey.flow.getTriggerCard("category-birthday-today");
-    this.categoryBirthdayTriggerCard.registerRunListener(async (args: CategoryBirthdayTriggerArgs, state: CategoryBirthdayTriggerState) => {
-      // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person belongs to the provided category
-      return String(args.category).toLowerCase() === String(state.person.category).toLowerCase()
-        && this.verifyRunAtByArgs(args);
-    });
+    private registerTriggerCard() {
+      this.birthdayTriggerCard = this.homey.flow.getTriggerCard("birthday-today");
+      this.birthdayTriggerCard.registerRunListener(async (args: BirthdayTodayTriggerArgs, state) => {
+        // Validate that the current time matches the args.run_at time which has the format "HH:mm"
+        return this.verifyRunAtByArgs(args);
+      });
+  
+      this.specificBirthdayTriggerCard = this.homey.flow.getTriggerCard("specific-birthday-today");
+      this.specificBirthdayTriggerCard.registerRunListener(async (args: SpecificBirthdayTodayTriggerArgs, state: SpecificBirthdayTodayTriggerState) => {
+        // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person is the same
+        return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
+      });
+      this.specificBirthdayTriggerCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
+  
+      this.categoryBirthdayTriggerCard = this.homey.flow.getTriggerCard("category-birthday-today");
+      this.categoryBirthdayTriggerCard.registerRunListener(async (args: CategoryBirthdayTriggerArgs, state: CategoryBirthdayTriggerState) => {
+        // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person belongs to the provided category
+        return String(args.category).toLowerCase() === String(state.person.category).toLowerCase()
+          && this.verifyRunAtByArgs(args);
+      });
 
     this.isBirthdayTodayConditionCard = this.homey.flow.getConditionCard("is-birthday-today");
     this.isBirthdayTodayConditionCard.registerRunListener(async (args, state) => {
@@ -469,3 +484,4 @@ this.tokens = {
 }
 
 module.exports = Birthdays;
+
