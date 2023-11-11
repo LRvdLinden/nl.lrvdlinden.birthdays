@@ -114,6 +114,62 @@
   flex: 1;
 }
 
+.homey-form-input {
+  padding: 8px;
+  border-radius: 5px;
+  border: solid 1px #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 24px;
+  position: relative; /* Voor dropdown-pijl */
+}
+
+.homey-form-input[type="text"]::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000; /* Kleur van de pijl */
+}
+
+/* Zorg ervoor dat de category-dropdown binnen de grenzen van het ouder-element valt */
+.homey-form-group {
+  position: relative;
+}
+
+.category-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  z-index: 1000;
+  width: 100%; /* Zet de breedte gelijk aan het container element */
+  max-height: 200px;
+  overflow-y: auto;
+  display: none; /* Verborgen totdat geactiveerd */
+  top: 100%; /* Zet dit op 100% van de hoogte van het inputveld */
+  left: 0; /* Uitlijnen met de linkerzijde van het inputveld */
+}
+
+.category-dropdown div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.category-dropdown div:hover {
+  background-color: #f0f0f0;
+}
+
+.category-dropdown .delete-btn {
+  float: right;
+  color: red;
+  cursor: pointer;
+  font-weight: bold; 
+}
+
     </style>
 </head>
 
@@ -164,15 +220,19 @@
               <label class="homey-form-label" for="mobile2" data-i18n="settings.person.mobile2"></label>
               <input class="homey-form-input" id="mobile2" type="text" placeholder="e.g. +31601020304" />
           </div>
-        </div>
+          </div>
+          
+          <div class="homey-form-group">
+            <label for="category" class="homey-form-label" data-i18n="settings.person.category"></label>
+            <input id="category" name="category" class="homey-form-input" placeholder="Select or enter a category">
+            <div id="categoryDropdown" class="category-dropdown">
+              <!-- Categorie-opties en verwijderknoppen worden hier ingeladen -->
+            </div>
+          </div>
+          
+          
+                        
 
-        <div class="homey-form-group">
-          <label class="homey-form-label" for="category" data-i18n="settings.person.category"></label>
-          <select id="category" class="homey-form-select">
-              <option value="Work">Work</option>
-              <option value="Private">Private</option>
-          </select>
-      </div>
           <div class="homey-form-group">
                 <label class="homey-form-label" for="message" data-i18n="settings.person.message"></label>
                 <textarea class="homey-form-textarea" id="message" rows="3" placeholder="e.g. Happy birthday Jon 🎉🍻"></textarea>
@@ -362,9 +422,9 @@ function getDayOfYear(date) {
         const month = today.getMonth() - birthDate.getMonth();
         const day = today.getDate() - birthDate.getDate();
         // Verhoog leeftijd met 1 de dag na de verjaardag
-        if (month > 0 || (month === 0 && day > 0)) {
-            age++;
-        }
+        //if (month > 0 || (month === 0 && day > 0)) {
+            //age++;
+        //}
 
         return age;
     }
@@ -478,10 +538,7 @@ function getDayOfYear(date) {
       category: document.getElementById("category").value ?? "",
       imageUrl: document.getElementById("imageUrl").value || "https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/birthday_card.png",
       isBaby: document.getElementById("baby").checked
-
 };
-
-
 
     if (!isValid(person)) {
       myHomey.alert(myHomey.__("messages.validation_error"));
@@ -544,19 +601,99 @@ function getDayOfYear(date) {
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
-    // initializeTranslations();
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    loadCategories();
+    //initializeCategoryEvents();
+});
+
+// Functie om categorieën te laden in de dropdown
+function loadCategories() {
+    let categories = JSON.parse(localStorage.getItem('categories')) || [];
+    let dropdown = document.getElementById('categoryDropdown');
+    dropdown.innerHTML = ''; // Verwijder eerdere inhoud
+
+    categories.forEach(function(category) {
+        let div = document.createElement('div');
+        div.textContent = category;
+        let deleteBtn = document.createElement('span');
+        deleteBtn.textContent = ' X';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.onclick = function() {
+            deleteCategory(category);
+        };
+        div.appendChild(deleteBtn);
+        dropdown.appendChild(div);
+    });
+    initializeCategorySelection();
+}
+
+document.getElementById('category').addEventListener('input', function() {
+    let dropdown = document.getElementById('categoryDropdown');
+    let value = this.value;
+
+    // Toon de dropdown en filter de opties
+    dropdown.style.display = 'block';
+    let divs = dropdown.querySelectorAll('div');
+    divs.forEach(div => {
+        if (div.textContent.toLowerCase().includes(value.toLowerCase())) {
+            div.style.display = 'block';
+        } else {
+            div.style.display = 'none';
+        }
+    });
+});
+
+document.getElementById('category').addEventListener('focus', function() {
+    document.getElementById('categoryDropdown').style.display = 'block';
+});
+
+document.getElementById('category').addEventListener('blur', function() {
+    setTimeout(() => { // Vertraging om klik op delete te vangen
+        document.getElementById('categoryDropdown').style.display = 'none';
+    }, 200);
+});
+
+// Voeg nieuwe categorie toe
+document.getElementById('category').addEventListener('change', function() {
+    let value = this.value.trim();
+    if (value && !getCategories().includes(value)) {
+        addCategory(value);
+    }
+});
+
+function getCategories() {
+    return JSON.parse(localStorage.getItem('categories')) || [];
+}
+
+function initializeCategorySelection() {
+    let categoryDivs = document.querySelectorAll('#categoryDropdown div');
+    categoryDivs.forEach(function(div) {
+        div.addEventListener('click', function() {
+            document.getElementById('category').value = this.textContent.replace(' X', ''); // Verwijder ' X' van de tekst
+            document.getElementById('categoryDropdown').style.display = 'none'; // Sluit de dropdown
+        });
+    });
+}
+
+function addCategory(category) {
+    let categories = getCategories();
+    categories.push(category);
+    localStorage.setItem('categories', JSON.stringify(categories));
+    loadCategories();
+}
+
+function deleteCategory(category) {
+    let categories = getCategories();
+    categories = categories.filter(c => c !== category);
+    localStorage.setItem('categories', JSON.stringify(categories));
+    loadCategories();
+}
+
+// Laad categorieën bij het laden van de pagina
+loadCategories();
+
 
 </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
