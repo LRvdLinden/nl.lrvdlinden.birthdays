@@ -55,6 +55,7 @@ interface Tokens {
   message: FlowToken;
   age: FlowToken;
   imageUrl: FlowToken;
+  category: FlowToken;
 }
 
 class Birthdays extends Homey.App {
@@ -90,7 +91,7 @@ class Birthdays extends Homey.App {
     await this.checkBirthdayTriggers();
 
     // Checks triggers every minute
-    this.homey.setInterval(this.checkBirthdayTriggers.bind(this), 120 * 1000);
+    this.homey.setInterval(this.checkBirthdayTriggers.bind(this), 60 * 1000);
 
 
 // Maak globale tokens aan
@@ -124,6 +125,11 @@ this.tokens = {
     type: "string",
     title: "URL Image",
     value: "Https://"
+  }),
+  category: await this.homey.flow.createToken("category", {
+    type: "string",
+    title: "Category",
+    value: "Work"
   })
 };
   }
@@ -144,6 +150,7 @@ this.tokens = {
         mobile2: string,
         message: string,
         imageUrl: string,
+        category: string,
       }>;
 
       const mappedBirthdays = birthdays.map((birthday) => {
@@ -155,7 +162,8 @@ this.tokens = {
           mobile: birthday.mobile,
           mobile2: birthday.mobile2,
           message: birthday.message,
-          imageUrl: birthday.imageUrl
+          imageUrl: birthday.imageUrl,
+          category: birthday.category
         } as Person;
       });
 
@@ -219,6 +227,19 @@ this.tokens = {
     }) ?? [];
   };
 
+    // Deze methode haalt alle unieke categorieën op uit de lijst van personen
+    private getAvailableCategories(): Array<string> {
+      const categories = new Set<string>();
+  
+      this.persons?.forEach((person: Person) => {
+        if (person.category && person.category.trim() !== "") {
+          categories.add(person.category.trim());
+        }
+      });
+  
+      return Array.from(categories);
+    };
+    
   private async checkBirthdayTriggers() {
     this.log("Checking birthdays");
   
@@ -235,7 +256,8 @@ this.tokens = {
         mobile: birthdayPerson.mobile,
         mobile2: birthdayPerson.mobile2,
         message: birthdayPerson.message,
-        imageUrl: birthdayPerson.imageUrl
+        imageUrl: birthdayPerson.imageUrl,
+        category: birthdayPerson.category
       };
       const state = {
         person: birthdayPerson
@@ -276,6 +298,9 @@ this.tokens = {
             if (this.tokens && this.tokens.imageUrl) {
               await this.tokens.imageUrl.setValue(birthdayPerson.imageUrl || "Https://");
           }
+          if (this.tokens && this.tokens.category) {
+            await this.tokens.category.setValue(birthdayPerson.category || "Work");
+        }
             if (this.tokens && this.tokens.age) {
                 const age = this.getPersonAge(birthdayPerson);
                 await this.tokens.age.setValue(Number(age)); 
@@ -304,6 +329,11 @@ this.tokens = {
         // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person belongs to the provided category
         return String(args.category).toLowerCase() === String(state.person.category).toLowerCase()
           && this.verifyRunAtByArgs(args);
+      });
+      this.categoryBirthdayTriggerCard.registerArgumentAutocompleteListener("category", async (query: string) => {
+        const categories = this.getAvailableCategories();
+        return categories.filter(category => category.toLowerCase().includes(query.toLowerCase()))
+                         .map(category => ({ id: category, name: category }));
       });
 
     this.isBirthdayTodayConditionCard = this.homey.flow.getConditionCard("is-birthday-today");
@@ -365,6 +395,26 @@ this.tokens = {
       return result.name.toLowerCase().includes(query.toLowerCase());
     });
   }
+
+  private async autocompleteCategories(query: string) {
+    // Haal de lijst met beschikbare categorieën op
+    const availableCategories = await this.getAvailableCategories();
+  
+    // Map categorieën naar Homey flow card autocomplete items
+    const results = availableCategories.map((category) => {
+      return {
+        id: category, // Of een andere unieke identificatie van de categorie
+        name: category // De naam van de categorie
+      };
+    });
+  
+    // Filter op basis van de query
+    return results.filter((result) => {
+      return result.name.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+  
+  
 
   private verifyRunAtByArgs(args: BirthdayTodayTriggerArgs) {
     const now = new Date();
