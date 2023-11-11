@@ -1,0 +1,252 @@
+{
+  "id": "specific-birthday-today",
+  "title": {
+    "en": "It's a specific person's birthday",
+    "nl": "Het is een specifiek iemand zijn verjaardag",
+    "de": "Es ist der Geburtstag einer bestimmten Person",
+    "fr": "C'est l'anniversaire d'une personne spécifique",
+    "it": "È il compleanno di una persona specifica",
+    "es": "Es el cumpleaños de una persona específica",
+    "sv": "Det är en specifik persons födelsedag",
+    "no": "Det er en spesifikk persons bursdag",
+    "da": "Det er en bestemt persons fødselsdag",
+    "ru": "Сегодня день рождения конкретного человека",
+    "pl": "To są urodziny konkretnej osoby"
+  },
+  "titleFormatted": {
+    "en": "Celebrate [[person]]'s birthday at [[run_at]] o'clock",
+    "nl": "Vier de verjaardag van [[person]] om [[run_at]] uur",
+    "de": "Feiere den Geburtstag von [[person]] um [[run_at]] Uhr",
+    "fr": "Célébrez l'anniversaire de [[person]] à [[run_at]] heures",
+    "it": "Festeggia il compleanno di [[person]] alle ore [[run_at]]",
+    "es": "Celebra el cumpleaños de [[person]] a las [[run_at]] horas",
+    "sv": "Fira [[person]]'s födelsedag klockan [[run_at]]",
+    "no": "Feir [[person]]'s bursdag klokken [[run_at]]",
+    "da": "Fejr [[person]]'s fødselsdag kl. [[run_at]]",
+    "ru": "Празднуйте день рождения [[person]] в [[run_at]] часов",
+    "pl": "Świętuj urodziny [[person]] o [[run_at]]"
+  },
+  "args": [
+    {
+      "type": "autocomplete",
+      "name": "person",
+      "title": {
+        "en": "Person",
+        "nl": "Persoon",
+        "de": "Person",
+        "fr": "Personne",
+        "it": "Persona",
+        "es": "Persona",
+        "sv": "Person",
+        "no": "Person",
+        "da": "Person",
+        "ru": "Человек",
+        "pl": "Osoba"
+      },
+      "placeholder": {
+        "en": "John Doe"
+      }
+    },
+    {
+      "type": "time",
+      "name": "run_at",
+      "title": {
+        "en": "Time",
+        "nl": "Tijd",
+        "de": "Zeit",
+        "fr": "Temps",
+        "it": "Tempo",
+        "es": "Tiempo",
+        "sv": "Tid",
+        "no": "Tid",
+        "da": "Tid",
+        "ru": "Время",
+        "pl": "Czas"
+      },
+      "placeholder": { "en": "13:37" }
+    }
+  ],
+  "tokens": [
+    {
+      "name": "name",
+      "type": "string",
+      "title": {
+        "en": "Birthday person",
+        "nl": "Naam jarige",
+        "de": "Geburtstagskind",
+        "fr": "Personne qui fête son anniversaire",
+        "it": "Persona festeggiata",
+        "es": "Persona de cumpleaños",
+        "sv": "Födelsedagsbarn",
+        "no": "Bursdagsbarn",
+        "da": "Fødselar",
+        "ru": "Имя именинника",
+        "pl": "Osoba obchodząca urodziny"
+      },
+      "example": {
+        "en": "Jon Doe",
+        "nl": "Jon Doe",
+        "de": "Max Mustermann",
+        "fr": "Jean Dupont",
+        "it": "Mario Rossi",
+        "es": "María Pérez",
+        "sv": "Anna Andersson",
+        "no": "Per Olsen",
+        "da": "Lise Nielsen",
+        "ru": "Иван Иванов",
+        "pl": "Jan Kowalski"
+      }
+    },
+    {
+      "name": "mobile",
+      "type": "string",
+      "title": {
+        "en": "Mobile number",
+        "nl": "Telefoonnummer",
+        "de": "Handynummer",
+        "fr": "Numéro de téléphone mobile",
+        "it": "Numero di telefono cellulare",
+        "es": "Número de teléfono móvil",
+        "sv": "Mobilnummer",
+        "no": "Mobilnummer",
+        "da": "Mobilnummer",
+        "ru": "Мобильный номер",
+        "pl": "Numer telefonu komórkowego"
+      },
+      "example": {
+        "en": "+441234567890",
+        "nl": "+31612345678",
+        "de": "+4916012345678",
+        "fr": "+33123456789",
+        "it": "+391234567890",
+        "es": "+34123456789",
+        "sv": "+46123456789",
+        "no": "+47123456789",
+        "da": "+45123456789",
+        "ru": "+79123456789",
+        "pl": "+48123456789"
+      }
+    },
+    {
+      "name": "mobile2",
+      "type": "string",
+      "title": {
+        "en": "Mobile number 2",
+        "nl": "Telefoonnummer 2",
+        "de": "Handynummer 2",
+        "fr": "Numéro de téléphone mobile 2",
+        "it": "Numero di telefono cellulare 2",
+        "es": "Número de teléfono móvil 2",
+        "sv": "Mobilnummer 2",
+        "no": "Mobilnummer 2",
+        "da": "Mobilnummer 2",
+        "ru": "Мобильный номер 2",
+        "pl": "Numer telefonu komórkowego 2"
+      },
+      "example": {
+        "en": "+31612345678",
+        "nl": "+31612345678",
+        "de": "+4916012345678",
+        "fr": "+33123456789",
+        "it": "+391234567890",
+        "es": "+34123456789",
+        "sv": "+46123456789",
+        "no": "+47123456789",
+        "da": "+45123456789",
+        "ru": "+79123456789",
+        "pl": "+48123456789"
+      }
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "title": {
+        "en": "Birthday message",
+        "nl": "Verjaardagsbericht",
+        "de": "Geburtstagsnachricht",
+        "fr": "Message d'anniversaire",
+        "it": "Messaggio di compleanno",
+        "es": "Mensaje de cumpleaños",
+        "sv": "Födelsedagshälsning",
+        "no": "Bursdagsmelding",
+        "da": "Fødselsdagshilsen",
+        "ru": "Поздравление с днем рождения",
+        "pl": "Wiadomość urodzinowa"
+      },
+      "example": {
+        "en": "Happy B-day!",
+        "nl": "Gefeliciteerd!",
+        "de": "Herzlichen Glückwunsch zum Geburtstag!",
+        "fr": "Joyeux anniversaire!",
+        "it": "Buon compleanno!",
+        "es": "¡Feliz cumpleaños!",
+        "sv": "Grattis på födelsedagen!",
+        "no": "Gratulerer med dagen!",
+        "da": "Tillykke med fødselsdagen!",
+        "ru": "С днем рождения!",
+        "pl": "Wszystkiego najlepszego!"
+      }
+    },
+    {
+      "name": "imageUrl",
+      "type": "string",
+      "title": {
+          "en": "URL Image",
+          "nl": "URL Afbeelding",
+          "de": "URL Bild",
+          "fr": "URL de l'image",
+          "it": "URL Immagine",
+          "es": "URL de la imagen",
+          "sv": "URL Bild",
+          "no": "URL Bilde",
+          "da": "URL Billede",
+          "ru": "URL изображения",
+          "pl": "URL Obrazu"
+      },
+      "example": {
+        "en": "Https://",
+        "nl": "Https://",
+        "de": "Https://",
+        "fr": "Https://",
+        "it": "Https://",
+        "es": "Https://",
+        "sv": "Https://",
+        "no": "Https://",
+        "da": "Https://",
+        "ru": "Https://",
+        "pl": "Https://"
+      }
+    },
+    {
+      "name": "age",
+      "type": "number",
+      "title": {
+        "en": "Age",
+        "nl": "Leeftijd",
+        "de": "Alter",
+        "fr": "Âge",
+        "it": "Età",
+        "es": "Edad",
+        "sv": "Ålder",
+        "no": "Alder",
+        "da": "Alder",
+        "ru": "Возраст",
+        "pl": "Wiek"
+      },
+      "example": {
+        "en": "38",
+        "nl": "38",
+        "de": "38",
+        "fr": "38",
+        "it": "38",
+        "es": "38",
+        "sv": "38",
+        "no": "38",
+        "da": "38",
+        "ru": "38",
+        "pl": "38"
+      }
+    }
+  ]
+}
+  
