@@ -135,24 +135,67 @@
   border-top: 5px solid #000; /* Kleur van de pijl */
 }
 
-/* Zorg ervoor dat de category-dropdown binnen de grenzen van het ouder-element valt */
+/* Zorg ervoor dat de category-dropdown dezelfde breedte heeft als het invoerveld */
 .homey-form-group {
-  position: relative;
+    position: relative;
 }
 
 .category-dropdown {
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-top: none;
-  z-index: 1000;
-  width: 100%; /* Zet de breedte gelijk aan het container element */
-  max-height: 200px;
-  overflow-y: auto;
-  display: none; /* Verborgen totdat geactiveerd */
-  top: 100%; /* Zet dit op 100% van de hoogte van het inputveld */
-  left: 0; /* Uitlijnen met de linkerzijde van het inputveld */
+    position: absolute;
+    top: 100%; /* Direct onder het invoerveld */
+    left: 0;
+    width: 100%; /* Dezelfde breedte als het invoerveld */
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 1000;
+    display: none; /* Verborgen totdat geactiveerd */
 }
+
+/* Stijlen voor items binnen de dropdown */
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.category-text {
+    flex-grow: 1;
+    margin-right: 10px; /* Ruimte tussen tekst en knop */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Voegt ellips toe als de tekst te lang is */
+    white-space: nowrap; /* Voorkomt tekstterugloop */
+}
+
+/* Responsive design voor kleinere schermen */
+@media (max-width: 600px) {
+    .category-dropdown {
+        width: calc(100% - 20px); /* 100% van de ouder minus wat marge */
+        margin: 0 10px; /* Voeg marge toe om niet tegen de randen van het scherm te plakken */
+    }
+
+    .category-item {
+        padding: 8px; /* Kleinere padding voor items */
+    }
+
+    .category-text {
+        font-size: 14px; /* Kleinere tekstgrootte */
+    }
+
+    .category-delete-btn {
+        width: 35px; /* Kleinere knop, zorg dat deze niet te klein wordt */
+        height: 35px;
+    }
+
+    .category-delete-btn svg {
+        width: 20px; /* Pas de grootte van SVG aan binnen de knop */
+        height: 20px;
+    }
+}
+
 
 .category-dropdown div {
   padding: 10px;
@@ -163,11 +206,78 @@
   background-color: #f0f0f0;
 }
 
-.category-dropdown .delete-btn {
-  float: right;
-  color: red;
+/* Stijlen specifiek voor de delete knop */
+.category-delete-btn {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 2px solid rgb(231, 50, 50);
+  background-color: #fff;
   cursor: pointer;
-  font-weight: bold; 
+  box-shadow: 0 0 10px #333;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.category-delete-btn:hover {
+  background-color: rgb(245, 207, 207);
+  transform: scale(1.2);
+  box-shadow: 0 0 4px #111;
+  transition: .3s;
+}
+
+.category-delete-btn svg {
+  color: rgb(231, 50, 50);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: .3s;
+}
+
+.category-delete-btn:focus svg {
+  opacity: 0;
+  transition: .3s;
+}
+
+.category-delete-btn span {
+  width: 150px;
+  position: absolute;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  color: rgb(231, 50, 50);
+  font-weight: 600;
+  transition: .3s;
+}
+
+.category-delete-btn:focus {
+  width: 150px;
+  height: 50px;
+  transition: .3s;
+}
+
+.category-delete-btn:focus span {
+  opacity: 1;
+  transition: .3s;
+}
+
+/* Voeg deze stijlen toe om de rest van je elementen correct te stijlen */
+.category-dropdown div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
     </style>
@@ -610,22 +720,50 @@ document.addEventListener("DOMContentLoaded", function() {
 function loadCategories() {
     let categories = JSON.parse(localStorage.getItem('categories')) || [];
     let dropdown = document.getElementById('categoryDropdown');
-    dropdown.innerHTML = ''; // Verwijder eerdere inhoud
+    dropdown.innerHTML = '';
 
     categories.forEach(function(category) {
         let div = document.createElement('div');
-        div.textContent = category;
-        let deleteBtn = document.createElement('span');
-        deleteBtn.textContent = ' X';
+        div.classList.add('category-item');
+
+        let textSpan = document.createElement('span');
+        textSpan.classList.add('category-text');
+        textSpan.textContent = category;
+        div.appendChild(textSpan);
+
+
+        let deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24" stroke="rgb(231, 50, 50)" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    </svg>
+`;
         deleteBtn.classList.add('delete-btn');
-        deleteBtn.onclick = function() {
+        deleteBtn.onclick = function(event) {
+            event.stopPropagation(); // Voorkom dat het klik-event verder gaat naar de div
             deleteCategory(category);
         };
         div.appendChild(deleteBtn);
+
         dropdown.appendChild(div);
     });
     initializeCategorySelection();
 }
+
+
+function initializeCategorySelection() {
+    let categoryDivs = document.querySelectorAll('#categoryDropdown .category-item');
+    categoryDivs.forEach(function(div) {
+        div.addEventListener('click', function(event) {
+            if (!event.target.matches('.delete-btn, .delete-btn *')) {
+                let categoryText = this.querySelector('span').textContent.trim();
+                document.getElementById('category').value = categoryText;
+                document.getElementById('categoryDropdown').style.display = 'none';
+            }
+        });
+    });
+}
+
 
 document.getElementById('category').addEventListener('input', function() {
     let dropdown = document.getElementById('categoryDropdown');
@@ -665,15 +803,7 @@ function getCategories() {
     return JSON.parse(localStorage.getItem('categories')) || [];
 }
 
-function initializeCategorySelection() {
-    let categoryDivs = document.querySelectorAll('#categoryDropdown div');
-    categoryDivs.forEach(function(div) {
-        div.addEventListener('click', function() {
-            document.getElementById('category').value = this.textContent.replace(' X', ''); // Verwijder ' X' van de tekst
-            document.getElementById('categoryDropdown').style.display = 'none'; // Sluit de dropdown
-        });
-    });
-}
+
 
 function addCategory(category) {
     let categories = getCategories();
