@@ -2,6 +2,9 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
 
     <style type="text/css">
@@ -194,9 +197,8 @@
         width: 20px; /* Pas de grootte van SVG aan binnen de knop */
         height: 20px;
     }
-}
-
-
+  }
+ 
 .category-dropdown div {
   padding: 10px;
   cursor: pointer;
@@ -280,6 +282,30 @@
   justify-content: center;
 }
 
+footer {
+  text-align: center;
+  margin-top: 20px;
+}
+.custom-link {
+    color: inherit; /* Erft de kleur van de ouder */
+    text-decoration: none; /* Verwijdert de onderstreping */
+  }
+
+.custom-link:hover {
+  color: #d32f8b; /* Verandert de kleur bij hover */
+  text-decoration: none; /* Verwijdert de onderstreping */
+}
+
+.custom-link-reverse {
+  color: #d32f8b; /* Basiskleur voor de link */
+  text-decoration: none; /* Verwijdert de onderstreping */
+}
+
+.custom-link-reverse:hover {
+  color: inherit; /* Erft de kleur van de ouder */
+  text-decoration: none; /* Verwijdert de onderstreping */
+}
+
     </style>
 </head>
 
@@ -338,10 +364,7 @@
             <div id="categoryDropdown" class="category-dropdown">
               <!-- Categorie-opties en verwijderknoppen worden hier ingeladen -->
             </div>
-          </div>
-          
-          
-                        
+          </div>         
 
           <div class="homey-form-group">
                 <label class="homey-form-label" for="message" data-i18n="settings.person.message"></label>
@@ -353,42 +376,48 @@
               <input class="homey-form-input" id="imageUrl" type="text" placeholder="Https://"/>
           </div>
 
-            <div class="flex">
-                <button id="save-button" class="homey-button-primary-full"
-                        data-i18n="settings.person.save"></button>
-                <button id="cancel-button" class="homey-button-secondary-full-shadow"
-                        data-i18n="settings.person.cancel"></button>
-            </div>
-        </fieldset>
+          <div class="flex" style="margin-bottom: 20px;">
+            <button id="save-button" class="homey-button-primary-full"
+                    data-i18n="settings.person.save"></button>
+            <button id="cancel-button" class="homey-button-secondary-full-shadow"
+                    data-i18n="settings.person.cancel"></button>
+        </div>
+        
+        <footer style="margin-top: 20px;">
+          Made with 
+          <svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="height: 0.8rem;">
+            <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#ef35aa"></path>
+        </svg> 
+        in <a href="https://www.google.com/maps/dir//Apeldoorn" target="_blank" class="custom-link">Apeldoorn</a><br>
+        </footer>
+      </fieldset>
     </form>
-
-    <!--    <div class="footer">-->
-    <!--        <p id="hint" class="alert hint hidden"></p>-->
-    <!--        <p class="alert help">-->
-    <!--            <span data-i18n="pair.add_by_ip.need_help_pairing">Need help pairing?</span>-->
-    <!--            <a href="https://homey-philips-tv.gitbook.io/homey-philips-tv/guides/pairing"-->
-    <!--               data-i18n="pair.add_by_ip.click_here_documentation">Click here to view the documentation.</a>-->
-    <!--        </p>-->
-    <!--    </div>-->
 </div>
 
 <div id="person-list">
-    <h2 class="homey-title" data-i18n="settings.personList.title"></h2>
+  <h2 class="homey-title" data-i18n="settings.personList.title"></h2>
 
-    <table class="homey-table" id="person-table">
-        <thead>
-        <tr>
-            <th data-i18n="settings.personList.name">Name</th>
-            <th data-i18n="settings.personList.dateOfBirth">Date of birth</th>
-            <th data-i18n="settings.personList.age">Age</th>
-            <th data-i18n="settings.personList.message">Message</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+  <table class="homey-table" id="person-table">
+      <thead>
+      <tr>
+          <th data-i18n="settings.personList.name">Name</th>
+          <th data-i18n="settings.personList.dateOfBirth">Date of birth</th>
+          <th data-i18n="settings.personList.age">Age</th>
+          <th data-i18n="settings.personList.message">Message</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+  </table>
+
+  <footer style="margin-top: 20px;">
+    Made with 
+    <svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="height: 0.8rem;">
+      <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#ef35aa"></path>
+  </svg> 
+  in <a href="https://www.google.com/maps/dir//Apeldoorn" target="_blank" class="custom-link">Apeldoorn</a><br>
+  See more <a href="https://community.homey.app/t/apps-made-by-lrvdlinden/85452" target="_blank" class="custom-link">apps</a> by <a href="https://community.homey.app/t/apps-made-by-lrvdlinden/85452" target="_blank" class="custom-link-reverse">@LRvdLinden</a>
+</footer>
 </div>
-
-
 
 <!--<div id="verjaardagen">-->
 
@@ -827,3 +856,4 @@ loadCategories();
 </body>
 
 </html>
+
