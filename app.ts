@@ -31,21 +31,16 @@ interface IsSpecificBirthdayTodayConditionArgs {
   person: Person;
 }
 
-interface IsSpecificBirthdayTodayConditionState {
-  person: Person;
-}
-
 interface CategoryBirthdayTriggerArgs {
   run_at: string;
-  category: string;
+  category: {
+    id: string;
+    name: string;
+  };
 }
 
 interface CategoryBirthdayTriggerState {
   person: Person;
-}
-
-interface Birthday extends Person {
-  age: number;
 }
 
 interface Tokens {
@@ -76,7 +71,6 @@ class Birthdays extends Homey.App {
   private isBirthdayTodayConditionCard?: FlowCardCondition;
   private isSpecificBirthdayTodayConditionCard?: FlowCardCondition;
   private _image: any;
-  private _imageSet: boolean = false;
   private debug: boolean = false;
 
 
@@ -95,43 +89,43 @@ class Birthdays extends Homey.App {
 
 
 // Maak globale tokens aan
-this.tokens = {
-  name: await this.homey.flow.createToken("name", {
-    type: "string",
-    title: "Name",
-    value: "Default Name"
-  }),
-  mobile: await this.homey.flow.createToken("mobile", {
-    type: "string",
-    title: "Mobile",
-    value: "Default Mobile"
-  }),
-  mobile2: await this.homey.flow.createToken("mobile2", {
-    type: "string",
-    title: "Mobile2",
-    value: "Empty field"
-  }),
-  message: await this.homey.flow.createToken("message", {
-    type: "string",
-    title: "Message",
-    value: "Happy Birthday!"
-  }),
-  age: await this.homey.flow.createToken("age", {
-    type: "number",
-    title: "Age",
-    value: 0
-  }),
-  imageUrl: await this.homey.flow.createToken("imageUrl", {
-    type: "string",
-    title: "URL Image",
-    value: "Https://"
-  }),
-  category: await this.homey.flow.createToken("category", {
-    type: "string",
-    title: "Category",
-    value: "Work"
-  })
-};
+    this.tokens = {
+      name: await this.homey.flow.createToken("name", {
+        type: "string",
+        title: "Name",
+        value: "Default Name"
+      }),
+      mobile: await this.homey.flow.createToken("mobile", {
+        type: "string",
+        title: "Mobile",
+        value: "Default Mobile"
+      }),
+      mobile2: await this.homey.flow.createToken("mobile2", {
+        type: "string",
+        title: "Mobile2",
+        value: "Empty field"
+      }),
+      message: await this.homey.flow.createToken("message", {
+        type: "string",
+        title: "Message",
+        value: "Happy Birthday!"
+      }),
+      age: await this.homey.flow.createToken("age", {
+        type: "number",
+        title: "Age",
+        value: 0
+      }),
+      imageUrl: await this.homey.flow.createToken("imageUrl", {
+        type: "string",
+        title: "URL Image",
+        value: "Https://"
+      }),
+      category: await this.homey.flow.createToken("category", {
+        type: "string",
+        title: "Category",
+        value: "Work"
+      })
+    };
   }
 
   private async migrateBirthdaysToPersonsSetting(): Promise<void> {
@@ -201,11 +195,11 @@ this.tokens = {
   private async logCompleteBirthdayList(): Promise<void> {
     this.persons?.forEach((person) => {
       const age = this.getPersonAge(person); // Gebruik de bestaande functie om de leeftijd te berekenen
-  
+
       this.log(`Person in list = Name: ${person.name} - Date of birth: ${person.dateOfBirth} - Mobile ${person.mobile} - Mobile 2 ${person.mobile} - Age: ${age} - Message: ${person.message}`);
     });
   }
-  
+
 
   private isValidTriggerData(data: any): boolean {
     return (
@@ -218,7 +212,7 @@ this.tokens = {
       typeof data.category === "string"
     );
   }
-  
+
   private getPersonsWithBirthdaysToday(): Array<Person> {
     return this.persons?.filter((person: Person) => {
       const today = new Date();
@@ -227,26 +221,25 @@ this.tokens = {
     }) ?? [];
   };
 
-    // Deze methode haalt alle unieke categorieën op uit de lijst van personen
-    private getAvailableCategories(): Array<string> {
-      const categories = new Set<string>();
-  
-      this.persons?.forEach((person: Person) => {
-        if (person.category && person.category.trim() !== "") {
-          categories.add(person.category.trim());
-        }
-      });
-  
-      return Array.from(categories);
-    };
-    
+  private getAvailableCategories(): Array<string> {
+    const categories = new Set<string>();
+
+    this.persons?.forEach((person: Person) => {
+      if (person.category && person.category.trim() !== "") {
+        categories.add(person.category.trim());
+      }
+    });
+
+    return Array.from(categories);
+  };
+
   private async checkBirthdayTriggers() {
     this.log("Checking birthdays");
-  
+
     if (this.debug) {
       this.log("Persons with birthdays today", this.getPersonsWithBirthdaysToday());
     }
-  
+
     const birthdaysToday = this.getPersonsWithBirthdaysToday();
     for (let i = 0; i < birthdaysToday.length; i++) {
       const birthdayPerson = birthdaysToday[i];
@@ -262,159 +255,153 @@ this.tokens = {
       const state = {
         person: birthdayPerson
       };
-  
+
       if (this.debug) {
         this.log("trigger birthday triggers with", { tokens, state });
       }
-  
+
       this.birthdayTriggerCard?.trigger(tokens, state);
       this.specificBirthdayTriggerCard?.trigger(tokens, state);
       this.categoryBirthdayTriggerCard?.trigger(tokens, state);
-  
+
       // Update globale tokens
       this.updateGlobalTokens(birthdayPerson);
-  
+
       // Wacht voor een specifieke tijd voordat je doorgaat naar de volgende jarige persoon
       await new Promise(resolve => setTimeout(resolve, 5000)); // 5 seconden wachten
     }
   }
-  
 
-      // Methode om globale tokens bij te werken
-      private async updateGlobalTokens(birthdayPerson: Person): Promise<void> {
-        try {
-            if (this.tokens && this.tokens.name) {
-                await this.tokens.name.setValue(birthdayPerson.name);
-            }
-            if (this.tokens && this.tokens.mobile) {
-                await this.tokens.mobile.setValue(birthdayPerson.mobile || "No mobile");
-            }
-            if (this.tokens && this.tokens.mobile2) {
-              await this.tokens.mobile2.setValue(birthdayPerson.mobile2 || "No mobile");
-          }
-            if (this.tokens && this.tokens.message) {
-                await this.tokens.message.setValue(birthdayPerson.message || "Happy Birthday!");
-            }
-            if (this.tokens && this.tokens.imageUrl) {
-              await this.tokens.imageUrl.setValue(birthdayPerson.imageUrl || "Https://");
-          }
-          if (this.tokens && this.tokens.category) {
-            await this.tokens.category.setValue(birthdayPerson.category || "Work");
-        }
-            if (this.tokens && this.tokens.age) {
-                const age = this.getPersonAge(birthdayPerson);
-                await this.tokens.age.setValue(Number(age)); 
-            }
-        } catch (error) {
-            this.log('Error updating global tokens', error);
-        }
+
+  // Methode om globale tokens bij te werken
+  private async updateGlobalTokens(birthdayPerson: Person): Promise<void> {
+    try {
+      if (this.tokens && this.tokens.name) {
+        await this.tokens.name.setValue(birthdayPerson.name);
+      }
+      if (this.tokens && this.tokens.mobile) {
+        await this.tokens.mobile.setValue(birthdayPerson.mobile || "No mobile");
+      }
+      if (this.tokens && this.tokens.mobile2) {
+        await this.tokens.mobile2.setValue(birthdayPerson.mobile2 || "No mobile");
+      }
+      if (this.tokens && this.tokens.message) {
+        await this.tokens.message.setValue(birthdayPerson.message || "Happy Birthday!");
+      }
+      if (this.tokens && this.tokens.imageUrl) {
+        await this.tokens.imageUrl.setValue(birthdayPerson.imageUrl || "Https://");
+      }
+      if (this.tokens && this.tokens.category) {
+        await this.tokens.category.setValue(birthdayPerson.category || "Work");
+      }
+      if (this.tokens && this.tokens.age) {
+        const age = this.getPersonAge(birthdayPerson);
+        await this.tokens.age.setValue(Number(age));
+      }
+    } catch (error) {
+      this.log("Error updating global tokens", error);
     }
+  }
 
-    private registerTriggerCard() {
-      this.birthdayTriggerCard = this.homey.flow.getTriggerCard("birthday-today");
-      this.birthdayTriggerCard.registerRunListener(async (args: BirthdayTodayTriggerArgs, state) => {
-        // Validate that the current time matches the args.run_at time which has the format "HH:mm"
-        return this.verifyRunAtByArgs(args);
-      });
-  
-      this.specificBirthdayTriggerCard = this.homey.flow.getTriggerCard("specific-birthday-today");
-      this.specificBirthdayTriggerCard.registerRunListener(async (args: SpecificBirthdayTodayTriggerArgs, state: SpecificBirthdayTodayTriggerState) => {
-        // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person is the same
-        return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
-      });
-      this.specificBirthdayTriggerCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
-  
-      this.categoryBirthdayTriggerCard = this.homey.flow.getTriggerCard("category-birthday-today");
-      this.categoryBirthdayTriggerCard.registerRunListener(async (args: CategoryBirthdayTriggerArgs, state: CategoryBirthdayTriggerState) => {
-        // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person belongs to the provided category
-        return String(args.category).toLowerCase() === String(state.person.category).toLowerCase()
-          && this.verifyRunAtByArgs(args);
-      });
-      this.categoryBirthdayTriggerCard.registerArgumentAutocompleteListener("category", async (query: string) => {
-        const categories = this.getAvailableCategories();
-        return categories.filter(category => category.toLowerCase().includes(query.toLowerCase()))
-                         .map(category => ({ id: category, name: category }));
-      });
+  private registerTriggerCard() {
+    // Birthday trigger card
+    this.birthdayTriggerCard = this.homey.flow.getTriggerCard("birthday-today");
+    this.birthdayTriggerCard.registerRunListener(async (args: BirthdayTodayTriggerArgs, state) => {
+      // Validate that the current time matches the args.run_at time which has the format "HH:mm"
+      return this.verifyRunAtByArgs(args);
+    });
 
+    // Specific person birthday trigger card
+    this.specificBirthdayTriggerCard = this.homey.flow.getTriggerCard("specific-birthday-today");
+    this.specificBirthdayTriggerCard.registerRunListener(async (args: SpecificBirthdayTodayTriggerArgs, state: SpecificBirthdayTodayTriggerState) => {
+      // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person is the same
+      return this.isSamePerson(args.person, state.person) && this.verifyRunAtByArgs(args);
+    });
+    this.specificBirthdayTriggerCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
+
+    // Category birthday trigger card
+    this.categoryBirthdayTriggerCard = this.homey.flow.getTriggerCard("category-birthday-today");
+    this.categoryBirthdayTriggerCard.registerRunListener(async (args: CategoryBirthdayTriggerArgs, state: CategoryBirthdayTriggerState) => {
+      // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person belongs to the provided category
+      return String(args.category.id).toLowerCase() === String(state.person.category).toLowerCase()
+        && this.verifyRunAtByArgs(args);
+    });
+    this.categoryBirthdayTriggerCard.registerArgumentAutocompleteListener("category", this.autocompleteCategories.bind(this));
+
+    // Is birthday condition card
     this.isBirthdayTodayConditionCard = this.homey.flow.getConditionCard("is-birthday-today");
     this.isBirthdayTodayConditionCard.registerRunListener(async (args, state) => {
       return this.getPersonsWithBirthdaysToday().length > 0;
     });
 
+    // Is specific person birthday condition card
     this.isSpecificBirthdayTodayConditionCard = this.homey.flow.getConditionCard("is-specific-birthday-today");
-    this.isSpecificBirthdayTodayConditionCard.registerRunListener(async (args: IsSpecificBirthdayTodayConditionArgs, state: IsSpecificBirthdayTodayConditionState) => {
-      return this.getPersonsWithBirthdaysToday().length > 0
-        && this.isSamePerson(args.person, state.person);
+    this.isSpecificBirthdayTodayConditionCard.registerRunListener(async (args: IsSpecificBirthdayTodayConditionArgs) => {
+      const person = this.findPersonById(args.person.id);
+
+      return this.isPersonsBirthday(person);
     });
     this.isSpecificBirthdayTodayConditionCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
 
-    this.homey.flow.getActionCard("temporary-image").registerRunListener(async (args, state) => {
-      const { imageUrl } = args;
+    this.homey.flow.getActionCard("temporary-image").registerRunListener(this.temporaryImageRunListener.bind(this));
+  }
 
-      try {
-        if (!this._image) {
-          this._imageSet = false;
+  private async temporaryImageRunListener(args: { imageUrl: string }) {
+    const { imageUrl } = args;
+
+    try {
+      this._image = await this.homey.images.createImage();
+
+      await this._image.setStream(async (stream: NodeJS.WritableStream) => {
+        const response = await axios.get(imageUrl, { responseType: "stream" });
+
+        if (response.status !== 200) {
+          this.error("Error fetching image:", response.statusText);
+          throw new Error("Error fetching image");
         }
 
-        this._image = await this.homey.images.createImage();
+        response.data.pipe(stream);
+      });
 
-        await this._image.setStream(async (stream: NodeJS.WritableStream) => {
-          const response = await axios.get(imageUrl, { responseType: "stream" });
+      const tokens = {
+        image: this._image
+      };
 
-          if (response.status !== 200) {
-            this.error("Error fetching image:", response.statusText);
-            throw new Error("Error fetching image");
-          }
+      return tokens;
+    } catch (error) {
+      this.error("Error setting image:", error);
+      throw new Error("Error setting image");
+    }
+  }
 
-          response.data.pipe(stream);
-        });
-
-        const tokens = {
-          image: this._image
+  private async autocompletePersons(query: string, args: any): Promise<FlowCard.ArgumentAutocompleteResults> {
+    // Return all persons mapped to homey flow card autocomplete items and optionally filtered by the query
+    return this.persons
+      ?.map((person: Person) => {
+        return {
+          id: person.id,
+          name: person.name
         };
-
-        return tokens;
-      } catch (error) {
-        this.error("Error setting image:", error);
-        throw new Error("Error setting image");
-      }
-    });
+      })
+      .filter((result) => {
+        return result.name.toLowerCase().includes(query.toLowerCase());
+      }) as FlowCard.ArgumentAutocompleteResults;
   }
 
-  private async autocompletePersons(query: string, args: any) {
-    // map persons to homey flow card autocomplete items
-    const results = this.persons?.map((person: Person) => {
-      return {
-        id: person.id,
-        name: person.name
-      };
-    }) as FlowCard.ArgumentAutocompleteResults ?? [];
-
-    // filter based on the query
-    return results.filter((result) => {
-      return result.name.toLowerCase().includes(query.toLowerCase());
-    });
+  private async autocompleteCategories(query: string): Promise<FlowCard.ArgumentAutocompleteResults> {
+    // Return all categories mapped to homey flow card autocomplete items and optionally filtered by the query
+    return this.getAvailableCategories()
+      .map((category) => {
+        return {
+          id: category, // Of een andere unieke identificatie van de categorie
+          name: category
+        };
+      })
+      .filter((result) => {
+        return result.name.toLowerCase().includes(query.toLowerCase());
+      }) as FlowCard.ArgumentAutocompleteResults;
   }
 
-  private async autocompleteCategories(query: string) {
-    // Haal de lijst met beschikbare categorieën op
-    const availableCategories = await this.getAvailableCategories();
-  
-    // Map categorieën naar Homey flow card autocomplete items
-    const results = availableCategories.map((category) => {
-      return {
-        id: category, // Of een andere unieke identificatie van de categorie
-        name: category // De naam van de categorie
-      };
-    });
-  
-    // Filter op basis van de query
-    return results.filter((result) => {
-      return result.name.toLowerCase().includes(query.toLowerCase());
-    });
-  }
-  
-  
 
   private verifyRunAtByArgs(args: BirthdayTodayTriggerArgs) {
     const now = new Date();
@@ -474,6 +461,14 @@ this.tokens = {
 //    });
 //  }
 
+  private findPersonById(id: string): Person | undefined {
+    return this.persons?.find((person: Person) => person.id === id);
+  }
+
+  private isPersonsBirthday(person: Person | undefined): boolean {
+    return this.getPersonsWithBirthdaysToday().some((birthdayPerson: Person) => this.isSamePerson(birthdayPerson, person));
+  }
+
   private getNextBirthdayPerson(): Person | undefined {
     const today = new Date();
     const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
@@ -528,8 +523,8 @@ this.tokens = {
     return localeMappings[this.homey.i18n.getLanguage()] || "en-GB"; // Default to English (United Kingdom) if no mapping is found
   }
 
-  private isSamePerson(personA: Person, personB: Person) {
-    return personA.id === personB.id;
+  private isSamePerson(personA: Person | undefined, personB: Person | undefined): boolean {
+    return personA !== undefined && personB !== undefined && personA?.id === personB?.id;
   }
 }
 

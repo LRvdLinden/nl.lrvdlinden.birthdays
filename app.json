@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.lrvdlinden.birthdays",
-  "version": "1.0.0",
+  "version": "1.1.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -314,6 +314,36 @@
             }
           },
           {
+            "name": "category",
+            "type": "string",
+            "title": {
+              "en": "Category",
+              "nl": "Categorie",
+              "de": "Kategorie",
+              "fr": "Catégorie",
+              "it": "Categoria",
+              "es": "Categoría",
+              "sv": "Kategori",
+              "no": "Kategori",
+              "da": "Kategori",
+              "ru": "Категория",
+              "pl": "Kategoria"
+            },
+            "example": {
+              "en": "Work",
+              "nl": "Werk",
+              "de": "Arbeit",
+              "fr": "Travail",
+              "it": "Lavoro",
+              "es": "Trabajo",
+              "sv": "Arbete",
+              "no": "Arbeid",
+              "da": "Arbejde",
+              "ru": "Работа",
+              "pl": "Praca"
+            }
+          },
+          {
             "name": "mobile",
             "type": "string",
             "title": {
@@ -328,6 +358,36 @@
               "da": "Mobilnummer",
               "ru": "Мобильный номер",
               "pl": "Numer telefonu komórkowego"
+            },
+            "example": {
+              "en": "+31612345678",
+              "nl": "+31612345678",
+              "de": "+4916012345678",
+              "fr": "+33123456789",
+              "it": "+391234567890",
+              "es": "+34123456789",
+              "sv": "+46123456789",
+              "no": "+47123456789",
+              "da": "+45123456789",
+              "ru": "+79123456789",
+              "pl": "+48123456789"
+            }
+          },
+          {
+            "name": "mobile2",
+            "type": "string",
+            "title": {
+              "en": "Mobile number 2",
+              "nl": "Telefoonnummer 2",
+              "de": "Handynummer 2",
+              "fr": "Numéro de téléphone mobile 2",
+              "it": "Numero di telefono cellulare 2",
+              "es": "Número de teléfono móvil 2",
+              "sv": "Mobilnummer 2",
+              "no": "Mobilnummer 2",
+              "da": "Mobilnummer 2",
+              "ru": "Мобильный номер 2",
+              "pl": "Numer telefonu komórkowego 2"
             },
             "example": {
               "en": "+31612345678",
@@ -371,6 +431,36 @@
               "da": "Tillykke med fødselsdagen!",
               "ru": "С днем рождения!",
               "pl": "Wszystkiego najlepszego!"
+            }
+          },
+          {
+            "name": "imageUrl",
+            "type": "string",
+            "title": {
+              "en": "URL Image",
+              "nl": "URL Afbeelding",
+              "de": "URL Bild",
+              "fr": "URL de l'image",
+              "it": "URL Immagine",
+              "es": "URL de la imagen",
+              "sv": "URL Bild",
+              "no": "URL Bilde",
+              "da": "URL Billede",
+              "ru": "URL изображения",
+              "pl": "URL Obrazu"
+            },
+            "example": {
+              "en": "Https://",
+              "nl": "Https://",
+              "de": "Https://",
+              "fr": "Https://",
+              "it": "Https://",
+              "es": "Https://",
+              "sv": "Https://",
+              "no": "Https://",
+              "da": "Https://",
+              "ru": "Https://",
+              "pl": "Https://"
             }
           },
           {
@@ -435,7 +525,7 @@
         },
         "args": [
           {
-            "type": "dropdown",
+            "type": "autocomplete",
             "name": "category",
             "title": {
               "en": "Choose Category",
@@ -551,6 +641,36 @@
             }
           },
           {
+            "name": "category",
+            "type": "string",
+            "title": {
+              "en": "Category",
+              "nl": "Categorie",
+              "de": "Kategorie",
+              "fr": "Catégorie",
+              "it": "Categoria",
+              "es": "Categoría",
+              "sv": "Kategori",
+              "no": "Kategori",
+              "da": "Kategori",
+              "ru": "Категория",
+              "pl": "Kategoria"
+            },
+            "example": {
+              "en": "Work",
+              "nl": "Werk",
+              "de": "Arbeit",
+              "fr": "Travail",
+              "it": "Lavoro",
+              "es": "Trabajo",
+              "sv": "Arbete",
+              "no": "Arbeid",
+              "da": "Arbejde",
+              "ru": "Работа",
+              "pl": "Praca"
+            }
+          },
+          {
             "name": "mobile",
             "type": "string",
             "title": {
@@ -568,6 +688,36 @@
             },
             "example": {
               "en": "+441234567890",
+              "nl": "+31612345678",
+              "de": "+4916012345678",
+              "fr": "+33123456789",
+              "it": "+391234567890",
+              "es": "+34123456789",
+              "sv": "+46123456789",
+              "no": "+47123456789",
+              "da": "+45123456789",
+              "ru": "+79123456789",
+              "pl": "+48123456789"
+            }
+          },
+          {
+            "name": "mobile2",
+            "type": "string",
+            "title": {
+              "en": "Mobile number 2",
+              "nl": "Telefoonnummer 2",
+              "de": "Handynummer 2",
+              "fr": "Numéro de téléphone mobile 2",
+              "it": "Numero di telefono cellulare 2",
+              "es": "Número de teléfono móvil 2",
+              "sv": "Mobilnummer 2",
+              "no": "Mobilnummer 2",
+              "da": "Mobilnummer 2",
+              "ru": "Мобильный номер 2",
+              "pl": "Numer telefonu komórkowego 2"
+            },
+            "example": {
+              "en": "+31612345678",
               "nl": "+31612345678",
               "de": "+4916012345678",
               "fr": "+33123456789",
@@ -608,6 +758,36 @@
               "da": "Tillykke med fødselsdagen!",
               "ru": "С днем рождения!",
               "pl": "Wszystkiego najlepszego!"
+            }
+          },
+          {
+            "name": "imageUrl",
+            "type": "string",
+            "title": {
+              "en": "URL Image",
+              "nl": "URL Afbeelding",
+              "de": "URL Bild",
+              "fr": "URL de l'image",
+              "it": "URL Immagine",
+              "es": "URL de la imagen",
+              "sv": "URL Bild",
+              "no": "URL Bilde",
+              "da": "URL Billede",
+              "ru": "URL изображения",
+              "pl": "URL Obrazu"
+            },
+            "example": {
+              "en": "Https://",
+              "nl": "Https://",
+              "de": "Https://",
+              "fr": "Https://",
+              "it": "Https://",
+              "es": "Https://",
+              "sv": "Https://",
+              "no": "Https://",
+              "da": "Https://",
+              "ru": "Https://",
+              "pl": "Https://"
             }
           },
           {
@@ -744,6 +924,36 @@
             }
           },
           {
+            "name": "category",
+            "type": "string",
+            "title": {
+              "en": "Category",
+              "nl": "Categorie",
+              "de": "Kategorie",
+              "fr": "Catégorie",
+              "it": "Categoria",
+              "es": "Categoría",
+              "sv": "Kategori",
+              "no": "Kategori",
+              "da": "Kategori",
+              "ru": "Категория",
+              "pl": "Kategoria"
+            },
+            "example": {
+              "en": "Work",
+              "nl": "Werk",
+              "de": "Arbeit",
+              "fr": "Travail",
+              "it": "Lavoro",
+              "es": "Trabajo",
+              "sv": "Arbete",
+              "no": "Arbeid",
+              "da": "Arbejde",
+              "ru": "Работа",
+              "pl": "Praca"
+            }
+          },
+          {
             "name": "mobile",
             "type": "string",
             "title": {
@@ -761,6 +971,36 @@
             },
             "example": {
               "en": "+441234567890",
+              "nl": "+31612345678",
+              "de": "+4916012345678",
+              "fr": "+33123456789",
+              "it": "+391234567890",
+              "es": "+34123456789",
+              "sv": "+46123456789",
+              "no": "+47123456789",
+              "da": "+45123456789",
+              "ru": "+79123456789",
+              "pl": "+48123456789"
+            }
+          },
+          {
+            "name": "mobile2",
+            "type": "string",
+            "title": {
+              "en": "Mobile number 2",
+              "nl": "Telefoonnummer 2",
+              "de": "Handynummer 2",
+              "fr": "Numéro de téléphone mobile 2",
+              "it": "Numero di telefono cellulare 2",
+              "es": "Número de teléfono móvil 2",
+              "sv": "Mobilnummer 2",
+              "no": "Mobilnummer 2",
+              "da": "Mobilnummer 2",
+              "ru": "Мобильный номер 2",
+              "pl": "Numer telefonu komórkowego 2"
+            },
+            "example": {
+              "en": "+31612345678",
               "nl": "+31612345678",
               "de": "+4916012345678",
               "fr": "+33123456789",
@@ -801,6 +1041,36 @@
               "da": "Tillykke med fødselsdagen!",
               "ru": "С днем рождения!",
               "pl": "Wszystkiego najlepszego!"
+            }
+          },
+          {
+            "name": "imageUrl",
+            "type": "string",
+            "title": {
+              "en": "URL Image",
+              "nl": "URL Afbeelding",
+              "de": "URL Bild",
+              "fr": "URL de l'image",
+              "it": "URL Immagine",
+              "es": "URL de la imagen",
+              "sv": "URL Bild",
+              "no": "URL Bilde",
+              "da": "URL Billede",
+              "ru": "URL изображения",
+              "pl": "URL Obrazu"
+            },
+            "example": {
+              "en": "Https://",
+              "nl": "Https://",
+              "de": "Https://",
+              "fr": "Https://",
+              "it": "Https://",
+              "es": "Https://",
+              "sv": "Https://",
+              "no": "Https://",
+              "da": "Https://",
+              "ru": "Https://",
+              "pl": "Https://"
             }
           },
           {
