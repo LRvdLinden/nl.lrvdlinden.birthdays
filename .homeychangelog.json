@@ -14,5 +14,18 @@
   },
   "0.1.3": {
     "en": "Extra logging"
+  },
+  "0.1.4": {
+    "en": "Fix category trigger card, fix person birthday condition card",
+    "nl": "Fix categorie trigger kaart, fix persoon verjaardag conditie kaart",
+    "de": "Kategorie-Triggerkarte reparieren, Geburtstagsbedingungskarte der Person reparieren",
+    "fr": "Réparer la carte déclencheur de catégorie, réparer la carte de condition d'anniversaire de personne",
+    "it": "Riparare la carta di attivazione categoria, riparare la carta di condizione di compleanno della persona",
+    "es": "Reparar tarjeta de activación de categoría, reparar tarjeta de condición de cumpleaños de persona",
+    "sv": "Fixa kategoriutlösarkort, fixa person födelsedag villkorskort",
+    "no": "Reparer kategori utløserkort, reparer person bursdag betingelseskort",
+    "da": "Reparer kategori udløserkort, reparer person fødselsdag betingelseskort",
+    "ru": "Исправить карточку триггера категории, исправить карточку условия дня рождения человека",
+    "pl": "Napraw kartę wyzwalacza kategorii, napraw kartę warunku urodzin osoby"
   }
 }
