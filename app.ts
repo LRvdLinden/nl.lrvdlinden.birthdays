@@ -76,6 +76,26 @@ class Birthdays extends Homey.App {
 
   async onInit() {
     this.log("Birthdays has been initialized");
+
+    this.sendNotifications();
+  }
+
+  async sendNotifications() {
+      try {
+           const ntfy2023111801 = `[Birthdays 🎉] (1/2) - When you have problems sending out birthday reminders etc...`;
+           const ntfy2023111802 = `[Birthdays 🎉] (2/2) - Then make sure no settings field contains the word "Undefined". Delete the word and save again.`;
+
+           await this.homey.notifications.createNotification({
+               excerpt: ntfy2023111802
+           });
+
+           await this.homey.notifications.createNotification({
+               excerpt: ntfy2023111801
+           });
+      } catch (error) {
+          this.log('sendNotifications - error', console.error());
+      }
+  
     await this.initializeBirthdays();
 
     this.registerTriggerCard();
