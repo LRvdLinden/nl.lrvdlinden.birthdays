@@ -347,13 +347,12 @@ function getDayOfYear(date) {
         return 'N/A';
     }
 
-    // Bereken de leeftijd voor niet-baby's
     let age = today.getFullYear() - birthDate.getFullYear();
-    const month = today.getMonth() - birthDate.getMonth();
-    const day = today.getDate() - birthDate.getDate();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    const dayDifference = today.getDate() - birthDate.getDate();
 
-    // Als we nog voor de verjaardag van dit jaar zitten, trekken we 1 jaar af
-    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    // Als de verjaardag dit jaar nog moet komen of vandaag is, trek dan 1 jaar af
+    if (monthDifference < 0 || (monthDifference === 0 && dayDifference <= 0)) {
         age--;
     }
 
