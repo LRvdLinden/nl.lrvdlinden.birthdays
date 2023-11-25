@@ -1,11 +1,9 @@
 {
   "id": "nl.lrvdlinden.birthdays",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "compatibility": ">=5.0.0",
   "sdk": 3,
-  "platforms": [
-    "local"
-  ],
+  "platforms": [ "local", "cloud" ],
   "brandColor": "#ef35aa",
   "name": {
     "en": "Birthdays",
