@@ -1,0 +1,24 @@
+footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.custom-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.custom-link:hover {
+  color: #ef35aa;
+  text-decoration: none;
+}
+
+.custom-link-reverse {
+  color: inherit;
+  text-decoration: none;
+}
+
+.custom-link-reverse:hover {
+  color: #ef35aa;
+  text-decoration: none;
+}

@@ -27,5 +27,11 @@
     "da": "Reparer kategori udløserkort, reparer person fødselsdag betingelseskort",
     "ru": "Исправить карточку триггера категории, исправить карточку условия дня рождения человека",
     "pl": "Napraw kartę wyzwalacza kategorii, napraw kartę warunku urodzin osoby"
+  },
+  "2.0.0": {
+    "en": "New: settings page"
+  },
+  "2.0.1": {
+    "en": "App improvement"
   }
 }
