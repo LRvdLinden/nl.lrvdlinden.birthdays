@@ -1,7 +1,7 @@
 {
   "id": "nl.lrvdlinden.birthdays",
-  "version": "2.0.1",
-    "compatibility": ">=12.1.0",
+  "version": "2.1.0",
+  "compatibility": ">=12.1.0",
   "sdk": 3,
   "platforms": [
     "local"
@@ -200,6 +200,9 @@
     "developers": [
       {
         "name": "Lucas van der Have"
+      },
+            {
+        "name": "Techniman"
       }
     ],
     "translators": [
