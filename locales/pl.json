@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "title": "Ustawienia urodzin",
+    "description": "Ustaw tutaj powiadomienia urodzinowe, które chcesz otrzymać.",
+    "person": {
+      "title": "Osoba",
+      "name": "Imię",
+      "mobile": "Numer komórki",
+      "mobile2": "Numer komórki 2",
+      "message": "Wiadomość urodzinowa",
+      "dateOfBirth": "Data urodzenia",
+      "category": "Kategoria",
+      "babyCheckbox": "Ignorer fødselsåret",
+      "imageUrl": "Birthday card image URL",
+      "add": "Dodaj osobę",
+      "save": "Zapisz",
+      "cancel": "Anuluj"
+    },
+    "personList": {
+      "title": "Osoby",
+      "name": "Imię",
+      "dateOfBirth": "Data urodzenia",
+      "category": "Kategoria",
+      "message": "Wiadomość",
+      "actions": "Akcje",
+      "edit": "Edytuj",
+      "delete": "Usuń"
+    },
+    "import_btn": "Importuj CSV",
+    "export_btn": "Eksportuj CSV",
+    "clear_btn": "Wyczyść listę"
+  },
+  "messages": {
+    "validation_error": "Sprawdź wprowadzone dane",
+    "person_added": "Urodziny __name__ zostały dodane",
+    "birthday_notification": "Dziś są urodziny __name__ 🎉. On/Ona ma __age__ lat.",
+    "export_error": "Błąd eksportu: ",
+    "export_success": "Eksport zakończony sukcesem! Rozpoczęto pobieranie (sprawdź folder pobierania).",
+    "export_fallback": "Eksport zakończony sukcesem! Jeśli pobieranie nie rozpoczęło się, dane zostały skopiowane do schowka. Wklej je do dokumentu i zapisz jako .csv",
+    "import_invalid": "Nieprawidłowy format CSV. Nie można zaimportować.",
+    "import_missing_fields": "CSV nie zawiera wymaganych pól (name, dateOfBirth).",
+    "import_error": "Błąd podczas pobierania/zapisywania urodzin: ",
+    "import_success": "Pomyślnie zaimportowano __count__ urodzin!",
+    "no_export": "Brak urodzin do wyeksportowania.",
+    "clear_confirm": "Czy na pewno chcesz usunąć wszystkie urodziny? Tej operacji nie można cofnąć.",
+    "clear_success": "Wszystkie urodziny zostały usunięte."
+  }
+}

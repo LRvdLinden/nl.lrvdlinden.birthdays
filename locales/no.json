@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "title": "Bursdagsinnstillinger",
+    "description": "Sett opp bursdagsvarslingene du vil motta her.",
+    "person": {
+      "title": "Person",
+      "name": "Navn",
+      "mobile": "Mobilnummer",
+      "mobile2": "Mobilnummer 2",
+      "message": "Bursdagsmelding",
+      "dateOfBirth": "Fødselsdato",
+      "category": "Kategori",
+      "babyCheckbox": "Ignorer fødselsår",
+      "imageUrl": "Birthday card image URL",
+      "add": "Legg til person",
+      "save": "Lagre",
+      "cancel": "Avbryt"
+    },
+    "personList": {
+      "title": "Personer",
+      "name": "Navn",
+      "dateOfBirth": "Fødselsdato",
+      "category": "Kategori",
+      "message": "Melding",
+      "actions": "Handlinger",
+      "edit": "Rediger",
+      "delete": "Slett"
+    },
+    "import_btn": "Importer CSV",
+    "export_btn": "Eksporter CSV",
+    "clear_btn": "Tøm listen"
+  },
+  "messages": {
+    "validation_error": "Vennligst sjekk de innskrevne data",
+    "person_added": "Bursdag for __name__ er lagt til",
+    "birthday_notification": "I dag er __name__'s bursdag 🎉. Han/Hun er __age__ år gammel.",
+    "export_error": "Eksportfeil: ",
+    "export_success": "Eksport vellykket! Nedlasting startet (sjekk nedlastingsmappen din).",
+    "export_fallback": "Eksport vellykket! Hvis nedlastingen ikke startet, er dataene kopiert til utklippstavlen. Lim den inn i et dokument og lagre som .csv",
+    "import_invalid": "Ugyldig CSV-format. Kan ikke importere.",
+    "import_missing_fields": "CSV mangler obligatoriske felt (name, dateOfBirth).",
+    "import_error": "Feil ved henting/lagring av fødselsdager: ",
+    "import_success": "Vellykket importert __count__ fødselsdager!",
+    "no_export": "Ingen fødselsdager å eksportere.",
+    "clear_confirm": "Er du sikker på at du vil slette alle fødselsdager? Dette kan ikke angres.",
+    "clear_success": "Alle fødselsdager er slettet."
+  }
+}

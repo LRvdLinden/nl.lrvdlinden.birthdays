@@ -1,0 +1,51 @@
+{
+  "menu": {
+    "title": "Fødselsdag"
+  },
+  "settings": {
+    "title": "Fødselsdagsindstillinger",
+    "description": "Opsæt de fødselsdagsnotifikationer, du ønsker at modtage her.",
+    "person": {
+      "title": "Person",
+      "name": "Navn",
+      "mobile": "Mobilnummer",
+      "mobile2": "Mobilnummer 2",
+      "message": "Fødselsdagsbesked",
+      "dateOfBirth": "Fødselsdato",
+      "category": "Kategori",
+      "babyCheckbox": "Ignorer fødselsåret",
+      "imageUrl": "Birthday card image URL",
+      "add": "Tilføj person",
+      "save": "Gem",
+      "cancel": "Annuller"
+    },
+    "personList": {
+      "title": "Personer",
+      "name": "Navn",
+      "dateOfBirth": "Fødselsdato",
+      "category": "Kategori",
+      "message": "Besked",
+      "actions": "Handlinger",
+      "edit": "Rediger",
+      "delete": "Slet"
+    },
+    "import_btn": "Importer CSV",
+    "export_btn": "Eksporter CSV",
+    "clear_btn": "Ryd liste"
+  },
+  "messages": {
+    "validation_error": "Tjek venligst de indtastede data",
+    "person_added": "Fødselsdag for __name__ er blevet tilføjet",
+    "birthday_notification": "I dag er det __name__'s fødselsdag 🎉. Han/Hun er __age__ år gammel.",
+    "export_error": "Eksportfejl: ",
+    "export_success": "Eksport vellykket! Download startet (tjek din downloads-mappe).",
+    "export_fallback": "Eksport vellykket! Hvis downloadet ikke startede, er dataene kopieret til din udklipsholder. Sæt det ind i et dokument og gem som .csv",
+    "import_invalid": "Ugyldigt CSV-format. Kan ikke importere.",
+    "import_missing_fields": "CSV mangler obligatoriske felter (name, dateOfBirth).",
+    "import_error": "Fejl ved indlæsning/gemning af fødselsdage: ",
+    "import_success": "Succesfuldt importeret __count__ fødselsdage!",
+    "no_export": "Ingen fødselsdage at eksportere.",
+    "clear_confirm": "Er du sikker på, at du vil slette alle fødselsdage? Dette kan ikke fortrydes.",
+    "clear_success": "Alle fødselsdage er blevet slettet."
+  }
+}

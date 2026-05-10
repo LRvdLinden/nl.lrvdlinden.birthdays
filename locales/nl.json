@@ -1,0 +1,52 @@
+{
+  "menu": {
+    "title": "Verjaardagen"
+    },
+  "settings": {
+    "title": "Instellingen voor Verjaardagen",
+    "description": "Stel hier de verjaardagsmeldingen in die je wilt ontvangen.",
+    "import_btn": "Importeer CSV",
+    "export_btn": "Exporteer CSV",
+    "clear_btn": "Lijst leegmaken",
+    "person": {
+      "title": "Persoon",
+      "name": "Naam",
+      "mobile": "Mobiel nummer",
+      "mobile2": "Mobiel nummer 2",
+      "message": "Verjaardagsboodschap",
+      "dateOfBirth": "Geboortedatum",
+      "category": "Categorie",
+      "babyCheckbox": "Negeer geboortejaar",
+      "imageUrl": "Verjaardagskaart image URL",
+      "add": "Persoon toevoegen",
+      "save": "Opslaan",
+      "cancel": "Annuleren"
+    },
+    "personList": {
+      "title": "Personen",
+      "name": "Naam",
+      "dateOfBirth": "Verjaardag",
+      "age": "Wordt",
+      "category": "Categorie",
+      "message": "Bericht",
+      "actions": "Acties",
+      "edit": "Wijzigen",
+      "delete": "Verwijderen"
+    }
+  },
+  "messages": {
+    "validation_error": "Controleer de ingevoerde gegevens",
+    "person_added": "Verjaardag van __name__ is toegevoegd",
+    "birthday_notification": "Vandaag is de verjaardag van __name__ 🎉. Hij/Zij is __age__ jaar oud.",
+    "export_error": "Export fout: ",
+    "export_success": "Export succesvol! Download gestart (check je downloads map).",
+    "export_fallback": "Export succesvol! Als de download niet is gestart (omdat je browser of app dit blokkeert), is de data zojuist naar je klembord gekopieerd. Plak het in een document en sla op als .csv",
+    "import_invalid": "Ongeldig CSV formaat. Kan niet importeren.",
+    "import_missing_fields": "CSV bevat geen verplichte velden (name, dateOfBirth).",
+    "import_error": "Fout bij ophalen/opslaan verjaardagen: ",
+    "import_success": "Succesvol __count__ verjaardagen geïmporteerd!",
+    "no_export": "Geen verjaardagen om te exporteren.",
+    "clear_confirm": "Weet je zeker dat je alle verjaardagen wilt verwijderen? Dit kan niet ongedaan gemaakt worden.",
+    "clear_success": "Alle verjaardagen zijn verwijderd."
+  }
+}

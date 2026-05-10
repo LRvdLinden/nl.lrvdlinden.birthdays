@@ -1,0 +1,47 @@
+{
+  "settings": {
+    "title": "Geburtstagseinstellungen",
+    "description": "Legen Sie hier die Geburtstagsbenachrichtigungen fest, die Sie erhalten möchten.",
+    "person": {
+      "title": "Person",
+      "name": "Name",
+      "mobile": "Handynummer 2",
+      "message": "Geburtstagsnachricht",
+      "dateOfBirth": "Geburtsdatum",
+      "category": "Kategorie",
+      "babyCheckbox": "Geburtsjahr ignorieren",
+      "imageUrl": "Birthday card image URL",
+      "add": "Person hinzufügen",
+      "save": "Speichern",
+      "cancel": "Abbrechen"
+    },
+    "personList": {
+      "title": "Personen",
+      "name": "Name",
+      "dateOfBirth": "Geburtsdatum",
+      "category": "Kategorie",
+      "message": "Nachricht",
+      "actions": "Aktionen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen"
+    },
+    "import_btn": "CSV importieren",
+    "export_btn": "CSV exportieren",
+    "clear_btn": "Liste leeren"
+  },
+  "messages": {
+    "validation_error": "Bitte überprüfen Sie die eingegebenen Daten",
+    "person_added": "Geburtstag von __name__ wurde hinzugefügt",
+    "birthday_notification": "Heute ist der Geburtstag von __name__ 🎉. Er/Sie ist __age__ Jahre alt.",
+    "export_error": "Exportfehler: ",
+    "export_success": "Export erfolgreich! Download gestartet (überprüfen Sie Ihren Download-Ordner).",
+    "export_fallback": "Export erfolgreich! Wenn der Download nicht gestartet wurde, wurden die Daten in die Zwischenablage kopiert. Fügen Sie sie in ein Dokument ein und speichern Sie sie als .csv",
+    "import_invalid": "Ungültiges CSV-Format. Kann nicht importiert werden.",
+    "import_missing_fields": "CSV enthält keine Pflichtfelder (name, dateOfBirth).",
+    "import_error": "Fehler beim Abrufen/Speichern von Geburtstagen: ",
+    "import_success": "__count__ Geburtstage erfolgreich importiert!",
+    "no_export": "Keine Geburtstage zum Exportieren.",
+    "clear_confirm": "Sind Sie sicher, dass Sie alle Geburtstage löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+    "clear_success": "Alle Geburtstage wurden gelöscht."
+  }
+}

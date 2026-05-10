@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "title": "Paramètres d'anniversaire",
+    "description": "Configurez ici les notifications d'anniversaire que vous souhaitez recevoir.",
+    "person": {
+      "title": "Personne",
+      "name": "Nom",
+      "mobile": "Numéro de portable",
+      "mobile2": "Numéro de portable 2",
+      "message": "Message d'anniversaire",
+      "dateOfBirth": "Date de naissance",
+      "category": "Catégorie",
+      "babyCheckbox": "Ignorer l'année de naissance",
+      "imageUrl": "Birthday card image URL",
+      "add": "Ajouter une personne",
+      "save": "Enregistrer",
+      "cancel": "Annuler"
+    },
+    "personList": {
+      "title": "Personnes",
+      "name": "Nom",
+      "dateOfBirth": "Date de naissance",
+      "category": "Catégorie",
+      "message": "Message",
+      "actions": "Actions",
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    },
+    "import_btn": "Importer CSV",
+    "export_btn": "Exporter CSV",
+    "clear_btn": "Vider la liste"
+  },
+  "messages": {
+    "validation_error": "Veuillez vérifier les données saisies",
+    "person_added": "L'anniversaire de __name__ a été ajouté",
+    "birthday_notification": "Aujourd'hui, c'est l'anniversaire de __name__ 🎉. Il/Elle a __age__ ans.",
+    "export_error": "Erreur d'exportation: ",
+    "export_success": "Exportation réussie! Téléchargement démarré (vérifiez votre dossier de téléchargements).",
+    "export_fallback": "Exportation réussie! Si le téléchargement n'a pas démarré, les données ont été copiées dans votre presse-papiers. Collez-les dans un document et enregistrez sous .csv",
+    "import_invalid": "Format CSV invalide. Impossible d'importer.",
+    "import_missing_fields": "Le CSV ne contient pas les champs obligatoires (name, dateOfBirth).",
+    "import_error": "Erreur lors de l'obtention/sauvegarde des anniversaires: ",
+    "import_success": "__count__ anniversaires importés avec succès!",
+    "no_export": "Aucun anniversaire à exporter.",
+    "clear_confirm": "Êtes-vous sûr de vouloir supprimer tous les anniversaires? Cette action est irréversible.",
+    "clear_success": "Tous les anniversaires ont été supprimés."
+  }
+}

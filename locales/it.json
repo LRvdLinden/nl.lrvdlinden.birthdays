@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "title": "Impostazioni Compleanno",
+    "description": "Configura qui le notifiche di compleanno che desideri ricevere.",
+    "person": {
+      "title": "Persona",
+      "name": "Nome",
+      "mobile": "Numero di cellulare",
+      "mobile2": "Numero di cellulare 2",
+      "message": "Messaggio di compleanno",
+      "dateOfBirth": "Data di nascita",
+      "category": "Categoria",
+      "babyCheckbox": "Ignora l'anno di nascita",
+      "imageUrl": "Birthday card image URL",
+      "add": "Aggiungi persona",
+      "save": "Salva",
+      "cancel": "Annulla"
+    },
+    "personList": {
+      "title": "Persone",
+      "name": "Nome",
+      "dateOfBirth": "Data di nascita",
+      "category": "Categoria",
+      "message": "Messaggio",
+      "actions": "Azioni",
+      "edit": "Modifica",
+      "delete": "Elimina"
+    },
+    "import_btn": "Importa CSV",
+    "export_btn": "Esporta CSV",
+    "clear_btn": "Svuota elenco"
+  },
+  "messages": {
+    "validation_error": "Si prega di controllare i dati inseriti",
+    "person_added": "Il compleanno di __name__ è stato aggiunto",
+    "birthday_notification": "Oggi è il compleanno di __name__ 🎉. Lui/Lei ha __age__ anni.",
+    "export_error": "Errore di esportazione: ",
+    "export_success": "Esportazione riuscita! Download avviato (controlla la cartella dei download).",
+    "export_fallback": "Esportazione riuscita! Se il download non è iniziato, i dati sono stati copiati negli appunti. Incollali in un documento e salvali come .csv",
+    "import_invalid": "Formato CSV non valido. Impossibile importare.",
+    "import_missing_fields": "Il CSV non contiene i campi obbligatori (name, dateOfBirth).",
+    "import_error": "Errore durante il recupero/salvataggio dei compleanni: ",
+    "import_success": "__count__ compleanni importati con successo!",
+    "no_export": "Nessun compleanno da esportare.",
+    "clear_confirm": "Sei sicuro di voler eliminare tutti i compleanni? Questa operazione non può essere annullata.",
+    "clear_success": "Tutti i compleanni sono stati eliminati."
+  }
+}

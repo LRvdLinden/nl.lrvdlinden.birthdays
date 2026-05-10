@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "title": "Födelsedagsinställningar",
+    "description": "Ställ in de födelsedagsaviseringar du vill ta emot här.",
+    "person": {
+      "title": "Person",
+      "name": "Namn",
+      "mobile": "Mobilnummer",
+      "mobile2": "Mobilnummer 2",
+      "message": "Födelsedagsmeddelande",
+      "dateOfBirth": "Födelsedatum",
+      "category": "Kategori",
+      "babyCheckbox": "Ignorera födelseår",
+      "imageUrl": "URL Image",
+      "add": "Lägg till person",
+      "save": "Spara",
+      "cancel": "Avbryt"
+    },
+    "personList": {
+      "title": "Personer",
+      "name": "Namn",
+      "dateOfBirth": "Födelsedatum",
+      "category": "Kategori",
+      "message": "Meddelande",
+      "actions": "Åtgärder",
+      "edit": "Redigera",
+      "delete": "Radera"
+    },
+    "import_btn": "Importera CSV",
+    "export_btn": "Exportera CSV",
+    "clear_btn": "Rensa listan"
+  },
+  "messages": {
+    "validation_error": "Kontrollera de inmatade uppgifterna",
+    "person_added": "Födelsedag för __name__ har lagts till",
+    "birthday_notification": "Idag är det __name__'s födelsedag 🎉. Han/Hon är __age__ år gammal.",
+    "export_error": "Exportfel: ",
+    "export_success": "Exporten lyckades! Nedladdningen startade (kolla din nedladdningsmapp).",
+    "export_fallback": "Exporten lyckades! Om nedladdningen inte startade kopierades data till ditt urklipp. Klistra in det i ett dokument och spara som .csv",
+    "import_invalid": "Ogiltigt CSV-format. Det går inte att importera.",
+    "import_missing_fields": "CSV saknar obligatoriska fält (name, dateOfBirth).",
+    "import_error": "Fel vid hämtning/sparande av födelsedagar: ",
+    "import_success": "Framgångsrikt importerat __count__ födelsedagar!",
+    "no_export": "Inga födelsedagar att exportera.",
+    "clear_confirm": "Är du säker på att du vill ta bort alla födelsedagar? Detta kan inte ångras.",
+    "clear_success": "Alla födelsedagar har tagits bort."
+  }
+}

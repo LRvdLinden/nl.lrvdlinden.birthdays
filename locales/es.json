@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "title": "Configuraciones de cumpleaños",
+    "description": "Configure aquí las notificaciones de cumpleaños que desea recibir.",
+    "person": {
+      "title": "Persona",
+      "name": "Nombre",
+      "mobile": "Número móvil",
+      "mobile2": "Número móvil 2",
+      "message": "Mensaje de cumpleaños",
+      "dateOfBirth": "Fecha de nacimiento",
+      "category": "Categoría",
+      "babyCheckbox": "Ignorar el año de nacimiento",
+      "imageUrl": "Birthday card image URL",
+      "add": "Añadir persona",
+      "save": "Guardar",
+      "cancel": "Cancelar"
+    },
+    "personList": {
+      "title": "Personas",
+      "name": "Nombre",
+      "dateOfBirth": "Fecha de nacimiento",
+      "category": "Categoría",
+      "message": "Mensaje",
+      "actions": "Acciones",
+      "edit": "Editar",
+      "delete": "Eliminar"
+    },
+    "import_btn": "Importar CSV",
+    "export_btn": "Exportar CSV",
+    "clear_btn": "Vaciar lista"
+  },
+  "messages": {
+    "validation_error": "Por favor, verifique los datos ingresados",
+    "person_added": "El cumpleaños de __name__ ha sido añadido",
+    "birthday_notification": "Hoy es el cumpleaños de __name__ 🎉. Él/Ella tiene __age__ años.",
+    "export_error": "Error de exportación: ",
+    "export_success": "¡Exportación exitosa! Descarga iniciada (verifique su carpeta de descargas).",
+    "export_fallback": "¡Exportación exitosa! Si la descarga no se inició, los datos se copiaron en su portapapeles. Péguelos en un documento y guárdelos como .csv",
+    "import_invalid": "Formato CSV no válido. No se puede importar.",
+    "import_missing_fields": "El CSV no contiene los campos obligatorios (name, dateOfBirth).",
+    "import_error": "Error al obtener/guardar cumpleaños: ",
+    "import_success": "¡Se han importado __count__ cumpleaños con éxito!",
+    "no_export": "No hay cumpleaños para exportar.",
+    "clear_confirm": "¿Estás seguro de que quieres eliminar todos los cumpleaños? Esto no se puede deshacer.",
+    "clear_success": "Se han eliminado todos los cumpleaños."
+  }
+}
