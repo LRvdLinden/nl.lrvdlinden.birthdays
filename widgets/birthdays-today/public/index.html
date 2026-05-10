@@ -289,10 +289,7 @@
             ${birthdays.map(function(person) {
               const ageText = getAgeText(person);
 
-              const meta = [
-                person.category,
-                person.message,
-              ].filter(Boolean).join(' · ');
+              const meta = 'Vandaag jarig';
 
               return `
                 <div class="person">
