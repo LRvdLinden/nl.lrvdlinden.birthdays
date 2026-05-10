@@ -287,11 +287,7 @@
             ${birthdays.map(function(person) {
               const ageText = getAgeText(person);
 
-              const meta = [
-                person.category,
-                getStatusText(person),
-                person.message,
-              ].filter(Boolean).join(' · ');
+             const meta = getStatusText(person);
 
               return `
                 <div class="person">
