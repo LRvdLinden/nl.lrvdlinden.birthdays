@@ -1,0 +1,13 @@
+{
+  "name": {
+    "en": "Birthdays Today",
+    "nl": "Jarig Vandaag"
+  },
+  "height": 200,
+  "api": {
+    "getBirthdaysToday": {
+      "method": "GET",
+      "path": "/"
+    }
+  }
+}
