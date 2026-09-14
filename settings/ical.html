@@ -6,15 +6,16 @@
   <meta name="theme-color" content="#ffffff">
   <title>iCal - Birthdays for Homey</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style/styles.css">
   <link rel="stylesheet" href="css/framework7-icons.css">
   <script src="/homey.js" data-origin="settings"></script>
   <style>
     :root { color-scheme: light dark; --bg:#fff; --card:#fff; --text:#17233d; --muted:#8b9098; --line:#e5e7eb; --field:#fff; --shadow:0 5px 18px rgba(17,24,39,.08); --blue:#168cf4; --danger:#e53935; }
     * { box-sizing:border-box; }
-    body { margin:0; padding:0 20px 32px; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    .ical-content { padding:0 20px 32px; }
+    .buttons-container { padding:0 20px; background:var(--bg) !important; }
     .banner { width:100%; max-width:620px; display:block; margin:0 auto 8px; }
-    .back { display:inline-flex; align-items:center; min-height:42px; color:var(--text); text-decoration:none; }
-    html[dir="rtl"] .back i { transform:rotate(180deg); }
     h1 { margin:2px 0 22px; font-size:28px; line-height:1.2; }
     .section-title { margin:28px 2px 10px; color:var(--muted); font-size:13px; font-weight:750; letter-spacing:.03em; text-transform:uppercase; }
     .card { width:100%; margin-bottom:14px; padding:17px; border:1px solid var(--line); border-radius:18px; background:var(--card); box-shadow:var(--shadow); overflow:hidden; }
@@ -23,10 +24,8 @@
     label { display:block; width:100%; margin:0 0 7px; color:var(--muted); font-size:14px; font-weight:600; }
     input { display:block; width:100%; min-width:0; height:48px; padding:0 13px; border:1px solid var(--line); border-radius:12px; background:var(--field); color:var(--text); font:inherit; }
     input[type="file"] { height:auto; min-height:48px; padding:11px; }
-    button { display:block; width:100%; min-height:48px; margin:0; padding:11px 14px; border:0; border-radius:13px; font:inherit; font-weight:700; cursor:pointer; }
+    #ical-add, #ical-import, #ical-sync { width:100%; min-height:48px; }
     button:disabled { opacity:.55; }
-    .primary { color:#fff; background:linear-gradient(135deg,#087ef0,#51adff); }
-    .secondary { color:var(--blue); background:color-mix(in srgb,var(--blue) 12%,var(--card)); }
     .source-card { position:relative; }
     .source-top { display:flex; align-items:flex-start; gap:10px; }
     .source-copy { flex:1; min-width:0; }
@@ -34,7 +33,7 @@
     .source-type,.source-meta { display:block; margin-top:4px; color:var(--muted); font-size:12px; line-height:1.4; }
     .source-url { margin-top:10px; padding:10px; border-radius:10px; background:color-mix(in srgb,var(--muted) 9%,transparent); color:var(--muted); font-size:12px; line-height:1.45; overflow-wrap:anywhere; word-break:break-word; }
     .source-error { margin-top:10px; padding:10px; border-radius:10px; background:color-mix(in srgb,var(--danger) 12%,transparent); color:var(--danger); font-size:12px; line-height:1.45; overflow-wrap:anywhere; }
-    .remove { width:auto; min-height:36px; padding:7px 10px; color:var(--danger); background:transparent; font-size:13px; }
+    .ical-remove-button { flex:0 0 auto; width:auto; min-height:36px; }
     .empty { color:var(--muted); text-align:center; box-shadow:none; }
     #status { min-height:20px; margin:12px 2px; color:var(--muted); font-size:13px; line-height:1.45; overflow-wrap:anywhere; }
     @media (prefers-color-scheme:dark) {
@@ -46,9 +45,23 @@
   </style>
 </head>
 <body>
-  <img class="banner" src="https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/settings_banner.png" alt="">
-  <a href="index.html" class="back" aria-label="Back"><i class="icon f7-icons">chevron_left</i></a>
-  <h1 data-i18n="settings.ical.title">iCal calendars</h1>
+  <div id="content-area">
+    <div class="buttons-container">
+      <button id="back-to-menu" class="back-button" type="button" onclick="window.location.href = 'index.html';">
+        <img src="svg/arrow-prev.svg" alt="Back" class="back-button-icon">
+        <span class="back-button-text" data-i18n="settings.main.back">Back</span>
+      </button>
+    </div>
+
+    <div class="scrollable-content ical-content">
+      <div class="content-header">
+        <header class="homey-header">
+          <div style="width:100%;text-align:center;">
+            <img class="banner" src="https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/settings_banner.png" alt="">
+          </div>
+          <h1 class="homey-title" data-i18n="settings.ical.title">iCal calendars</h1>
+        </header>
+      </div>
 
   <div class="section-title" data-i18n="settings.ical.subscription">Subscription</div>
   <div class="card">
@@ -60,7 +73,7 @@
       <label for="ical-url" data-i18n="settings.ical.url">iCal subscription URL</label>
       <input id="ical-url" type="url" inputmode="url" autocapitalize="none" autocomplete="off" data-i18n-placeholder="settings.ical.urlPlaceholder">
     </div>
-    <button id="ical-add" class="primary" data-i18n="settings.ical.add">Add subscription</button>
+    <button id="ical-add" class="homey-button-primary-full" type="button" data-i18n="settings.ical.add">Add subscription</button>
   </div>
 
   <div class="section-title" data-i18n="settings.ical.uploadedFile">Uploaded file</div>
@@ -69,13 +82,16 @@
       <label for="ical-file" data-i18n="settings.ical.upload">Upload iCal file</label>
       <input id="ical-file" type="file" accept=".ics,text/calendar">
     </div>
-    <button id="ical-import" class="secondary" data-i18n="settings.ical.import">Import file</button>
+    <button id="ical-import" class="homey-button-secondary-full" type="button" data-i18n="settings.ical.import">Import file</button>
   </div>
 
   <div class="section-title" data-i18n="settings.ical.addedCalendars">Added calendars</div>
   <div id="ical-sources"></div>
-  <button id="ical-sync" class="secondary" data-i18n="settings.ical.sync">Synchronize now</button>
+  <button id="ical-sync" class="homey-button-secondary-full" type="button" data-i18n="settings.ical.sync">Synchronize now</button>
   <div id="status" aria-live="polite"></div>
+
+    </div>
+  </div>
 
   <script>
     let myHomey;
@@ -168,7 +184,7 @@
           myHomey.__('settings.ical.birthdayCount') + ': ' + (count !== undefined ? count : '—') +
           ' · ' + myHomey.__('settings.ical.lastUpdated') + ': ' + formatDate(updated)));
         top.appendChild(copy);
-        const remove = element('button', 'remove', myHomey.__('settings.ical.remove'));
+        const remove = element('button', 'homey-button-danger-shadow ical-remove-button', myHomey.__('settings.ical.remove'));
         remove.type = 'button';
         remove.addEventListener('click', () => removeSource(source.id));
         top.appendChild(remove);
