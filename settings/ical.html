@@ -105,7 +105,7 @@
     }
 
     function readableError(error) {
-      const value = error && readableError(error) ? readableError(error) : String(error || '');
+      const value = error && error.message ? error.message : String(error || '');
       if (/<!doctype|<html|cannot\s+(post|get)/i.test(value)) {
         return myHomey.__('settings.ical.apiUnavailable');
       }
