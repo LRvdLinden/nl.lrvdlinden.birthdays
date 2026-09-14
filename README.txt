@@ -1,15 +1,17 @@
-# Birthdays for Homey
+Birthdays for Homey
 
-Manage birthdays, trigger Flows and show upcoming birthdays in widgets.
+Manage birthdays and receive reliable reminders in Homey. You can also use apps such as WhatsApp for Homey to send a personal congratulations directly to the birthday person.
 
-## Features
+Features:
+- Add, edit, search and filter birthdays by category.
+- Use birthday details, age, category and images in Flow tokens.
+- Trigger Flows for today's birthdays and upcoming birthdays.
+- Subscribe to online iCal calendars, including calendars shared by Google Calendar.
+- Import local .ics calendar files.
+- Uses the timezone configured on the user's Homey.
 
-- Birthday reminders for everyone, a specific person or category
-- Widgets for today and this month
-- Search and category filtering
-- iCal subscriptions and .ics file import
-- All dates and times use the Homey timezone
+Usage:
+Install the app, open the app settings and add birthdays manually or import them using CSV, an iCal subscription URL or an .ics file. Existing birthday lists and Flows remain supported.
 
-## iCal
-
-Add a public or private iCal subscription URL in Settings, or upload an .ics file. URL subscriptions synchronize at startup, after changes and every six hours. Imported events are deduplicated by calendar source and event UID.
+Supported languages:
+English, Dutch, German, French, Italian, Swedish, Norwegian, Spanish, Danish, Russian, Polish, Korean and Arabic.

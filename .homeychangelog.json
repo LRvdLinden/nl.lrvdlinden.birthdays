@@ -35,18 +35,18 @@
     "en": "App improvement"
   },
   "2.1.2": {
-    "en": "Added iCal URL subscriptions and .ics imports, category search/filtering, stable person IDs and reliable birthday Flow triggers.",
-    "nl": "iCal-URL-abonnementen en .ics-import toegevoegd, zoeken/filteren op categorie, stabiele persoons-ID’s en betrouwbare verjaardags-Flow-triggers.",
-    "de": "iCal-URL-Abonnements und .ics-Import, Kategoriesuche/-filter, stabile Personen-IDs und zuverlässige Geburtstags-Flow-Trigger hinzugefügt.",
-    "fr": "Ajout des abonnements iCal par URL, de l’import .ics, de la recherche par catégorie, d’identifiants stables et de déclencheurs Flow fiables.",
-    "it": "Aggiunti abbonamenti iCal tramite URL, importazione .ics, ricerca per categoria, ID persona stabili e trigger Flow affidabili.",
-    "sv": "Lade till iCal-prenumerationer, .ics-import, kategorisökning, stabila person-ID:n och tillförlitliga Flow-utlösare.",
-    "no": "La til iCal-abonnementer, .ics-import, kategorisøk, stabile person-ID-er og pålitelige Flow-utløsere.",
-    "es": "Se añadieron suscripciones iCal, importación .ics, búsqueda por categoría, ID estables y activadores Flow fiables.",
-    "da": "Tilføjede iCal-abonnementer, .ics-import, kategorisøgning, stabile person-ID’er og pålidelige Flow-udløsere.",
-    "ru": "Добавлены подписки iCal, импорт .ics, поиск по категориям, стабильные ID и надёжные триггеры Flow.",
-    "pl": "Dodano subskrypcje iCal, import .ics, wyszukiwanie kategorii, stabilne ID osób i niezawodne wyzwalacze Flow.",
-    "ko": "iCal 구독, .ics 가져오기, 카테고리 검색, 안정적인 사람 ID 및 신뢰할 수 있는 Flow 트리거를 추가했습니다.",
-    "ar": "تمت إضافة اشتراكات iCal واستيراد .ics والبحث حسب الفئة ومعرّفات ثابتة ومشغلات Flow موثوقة."
+    "en": "Added iCal URL subscriptions and .ics imports, category search/filtering, stable person IDs and reliable birthday Flow triggers. iCal management is now available from its own settings tab and README files are included in all 13 supported languages.",
+    "nl": "iCal-URL-abonnementen en .ics-import toegevoegd, zoeken/filteren op categorie, stabiele persoons-ID’s en betrouwbare verjaardags-Flow-triggers. iCal-beheer staat nu in een eigen tab in de instellingen en README-bestanden zijn toegevoegd voor alle 13 ondersteunde talen.",
+    "de": "iCal-URL-Abonnements und .ics-Import, Kategoriesuche/-filter, stabile Personen-IDs und zuverlässige Geburtstags-Flow-Trigger hinzugefügt. Die iCal-Verwaltung befindet sich jetzt in einem eigenen Einstellungs-Tab; README-Dateien sind in allen 13 unterstützten Sprachen enthalten.",
+    "fr": "Ajout des abonnements iCal par URL, de l’import .ics, de la recherche par catégorie, d’identifiants stables et de déclencheurs Flow fiables. La gestion iCal dispose maintenant de son propre onglet dans les paramètres et les fichiers README sont disponibles dans les 13 langues prises en charge.",
+    "it": "Aggiunti abbonamenti iCal tramite URL, importazione .ics, ricerca per categoria, ID persona stabili e trigger Flow affidabili. La gestione iCal è ora disponibile in una scheda dedicata delle impostazioni e i file README sono inclusi in tutte le 13 lingue supportate.",
+    "sv": "Lade till iCal-prenumerationer, .ics-import, kategorisökning, stabila person-ID:n och tillförlitliga Flow-utlösare. iCal-hanteringen finns nu på en egen inställningsflik och README-filer ingår på alla 13 språk som stöds.",
+    "no": "La til iCal-abonnementer, .ics-import, kategorisøk, stabile person-ID-er og pålitelige Flow-utløsere. iCal-administrasjon er nå tilgjengelig i en egen innstillingsfane, og README-filer finnes på alle de 13 støttede språkene.",
+    "es": "Se añadieron suscripciones iCal, importación .ics, búsqueda por categoría, ID estables y activadores Flow fiables. La gestión de iCal ahora está disponible en su propia pestaña de ajustes y se incluyen archivos README en los 13 idiomas compatibles.",
+    "da": "Tilføjede iCal-abonnementer, .ics-import, kategorisøgning, stabile person-ID’er og pålidelige Flow-udløsere. iCal-administration findes nu på sin egen indstillingsfane, og README-filer er inkluderet på alle 13 understøttede sprog.",
+    "ru": "Добавлены подписки iCal, импорт .ics, поиск по категориям, стабильные ID и надёжные триггеры Flow. Управление iCal теперь находится на отдельной вкладке настроек; файлы README доступны на всех 13 поддерживаемых языках.",
+    "pl": "Dodano subskrypcje iCal, import .ics, wyszukiwanie kategorii, stabilne ID osób i niezawodne wyzwalacze Flow. Zarządzanie iCal jest teraz dostępne na osobnej karcie ustawień, a pliki README dodano we wszystkich 13 obsługiwanych językach.",
+    "ko": "iCal 구독, .ics 가져오기, 카테고리 검색, 안정적인 사람 ID 및 신뢰할 수 있는 Flow 트리거를 추가했습니다. 이제 iCal 관리는 별도의 설정 탭에서 사용할 수 있으며 README 파일이 지원되는 13개 언어로 제공됩니다.",
+    "ar": "تمت إضافة اشتراكات iCal واستيراد .ics والبحث حسب الفئة ومعرّفات ثابتة ومشغلات Flow موثوقة. أصبحت إدارة iCal متاحة الآن في علامة تبويب مستقلة ضمن الإعدادات، وتمت إضافة ملفات README بجميع اللغات الـ13 المدعومة."
   }
 }
