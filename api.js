@@ -1,16 +1,15 @@
 'use strict';
 
-module.exports = [
-  {
-    method: 'POST', path: '/ical/sync',
-    fn: async ({ homey }) => homey.app.syncIcalSources(true),
+module.exports = {
+  async icalSync({ homey }) {
+    return homey.app.syncIcalSources(true);
   },
-  {
-    method: 'POST', path: '/ical/import',
-    fn: async ({ homey, body }) => homey.app.importIcalUpload(body || {}),
+
+  async icalImport({ homey, body }) {
+    return homey.app.importIcalUpload(body || {});
   },
-  {
-    method: 'GET', path: '/ical/status',
-    fn: async ({ homey }) => homey.settings.get('icalSyncStatus') || {},
+
+  async icalStatus({ homey }) {
+    return homey.settings.get('icalSyncStatus') || {};
   },
-];
+};

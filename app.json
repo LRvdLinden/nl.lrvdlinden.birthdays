@@ -1533,5 +1533,19 @@
       "id": "birthdays-today",
       "settings": []
     }
+  },
+  "api": {
+    "icalSync": {
+      "method": "POST",
+      "path": "/ical/sync"
+    },
+    "icalImport": {
+      "method": "POST",
+      "path": "/ical/import"
+    },
+    "icalStatus": {
+      "method": "GET",
+      "path": "/ical/status"
+    }
   }
 }

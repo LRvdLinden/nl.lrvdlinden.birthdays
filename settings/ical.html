@@ -104,6 +104,14 @@
       });
     }
 
+    function readableError(error) {
+      const value = error && readableError(error) ? readableError(error) : String(error || '');
+      if (/<!doctype|<html|cannot\s+(post|get)/i.test(value)) {
+        return myHomey.__('settings.ical.apiUnavailable');
+      }
+      return value;
+    }
+
     function formatDate(value) {
       if (!value) return myHomey.__('settings.ical.never');
       const date = new Date(value);
@@ -177,7 +185,7 @@
         currentSyncStatus = values[1] && typeof values[1] === 'object' ? values[1] : {};
         renderIcalSources();
       } catch (error) {
-        document.getElementById('ical-status').textContent = myHomey.__('settings.ical.loadError') + ' ' + error.message;
+        document.getElementById('ical-status').textContent = myHomey.__('settings.ical.loadError') + ' ' + readableError(error);
       }
     }
 
@@ -191,7 +199,7 @@
         }
         renderIcalSources();
       } catch (error) {
-        myHomey.alert(myHomey.__('settings.ical.error') + ' ' + error.message);
+        myHomey.alert(myHomey.__('settings.ical.error') + ' ' + readableError(error));
         await refreshSources();
       }
     }
@@ -231,7 +239,7 @@
           document.getElementById('ical-name').value = '';
           document.getElementById('ical-status').textContent = myHomey.__('settings.ical.saved');
         } catch (error) {
-          myHomey.alert(myHomey.__('settings.ical.error') + ' ' + error.message);
+          myHomey.alert(myHomey.__('settings.ical.error') + ' ' + readableError(error));
         } finally {
           button.disabled = false;
         }
@@ -250,7 +258,7 @@
             Object.values(result.sources || {}).reduce(function(total, source) { return total + (source.count || 0); }, 0));
           await refreshSources();
         } catch (error) {
-          status.textContent = myHomey.__('settings.ical.error') + ' ' + error.message;
+          status.textContent = myHomey.__('settings.ical.error') + ' ' + readableError(error);
         } finally {
           button.disabled = false;
         }
@@ -289,7 +297,7 @@
           document.getElementById('ical-status').textContent =
             myHomey.__('settings.ical.imported').replace('__count__', result.count || 0);
         } catch (error) {
-          myHomey.alert(myHomey.__('settings.ical.error') + ' ' + error.message);
+          myHomey.alert(myHomey.__('settings.ical.error') + ' ' + readableError(error));
         } finally {
           button.disabled = false;
         }

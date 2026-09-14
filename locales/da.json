@@ -87,7 +87,8 @@
       "never": "Ikke synkroniseret endnu",
       "saved": "Kalenderen er gemt og vises nedenfor.",
       "loadError": "Kalenderne kunne ikke indlæses.",
-      "fileName": "Fil"
+      "fileName": "Fil",
+      "apiUnavailable": "iCal-forbindelsen er ikke tilgængelig. Genstart eller geninstaller version 2.1.2."
     }
   },
   "messages": {

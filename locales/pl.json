@@ -84,7 +84,8 @@
       "never": "Jeszcze nie zsynchronizowano",
       "saved": "Kalendarz zapisano i wyświetlono poniżej.",
       "loadError": "Nie udało się wczytać kalendarzy.",
-      "fileName": "Plik"
+      "fileName": "Plik",
+      "apiUnavailable": "Połączenie iCal jest niedostępne. Uruchom ponownie lub przeinstaluj wersję 2.1.2."
     }
   },
   "messages": {

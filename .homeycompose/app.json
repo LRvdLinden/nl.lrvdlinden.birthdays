@@ -261,5 +261,19 @@
   },
   "homepage": "https://homey.app/nl-nl/apps/author/5d4da77a2c836a50f6936070/page/0/",
   "support": "https://community.homey.app/t/app-pro-birthdays-for-homey/93178",
-  "homeyCommunityTopicId": 93178
+  "homeyCommunityTopicId": 93178,
+  "api": {
+    "icalSync": {
+      "method": "POST",
+      "path": "/ical/sync"
+    },
+    "icalImport": {
+      "method": "POST",
+      "path": "/ical/import"
+    },
+    "icalStatus": {
+      "method": "GET",
+      "path": "/ical/status"
+    }
+  }
 }

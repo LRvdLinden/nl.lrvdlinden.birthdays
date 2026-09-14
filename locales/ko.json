@@ -87,7 +87,8 @@
       "never": "아직 동기화되지 않음",
       "saved": "캘린더가 저장되어 아래에 표시됩니다.",
       "loadError": "캘린더를 불러올 수 없습니다.",
-      "fileName": "파일"
+      "fileName": "파일",
+      "apiUnavailable": "iCal 연결을 사용할 수 없습니다. 버전 2.1.2를 다시 시작하거나 재설치하세요."
     }
   },
   "messages": {

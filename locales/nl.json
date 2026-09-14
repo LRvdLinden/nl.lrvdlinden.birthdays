@@ -87,7 +87,8 @@
       "never": "Nog niet gesynchroniseerd",
       "saved": "Agenda opgeslagen en hieronder weergegeven.",
       "loadError": "De agenda’s konden niet worden geladen.",
-      "fileName": "Bestand"
+      "fileName": "Bestand",
+      "apiUnavailable": "De iCal-verbinding is niet beschikbaar. Herstart of herinstalleer versie 2.1.2."
     }
   },
   "messages": {

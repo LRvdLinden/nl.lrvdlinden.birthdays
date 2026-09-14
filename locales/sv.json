@@ -84,7 +84,8 @@
       "never": "Inte synkroniserad ännu",
       "saved": "Kalendern sparades och visas nedan.",
       "loadError": "Kalendrarna kunde inte läsas in.",
-      "fileName": "Fil"
+      "fileName": "Fil",
+      "apiUnavailable": "iCal-anslutningen är inte tillgänglig. Starta om eller installera om version 2.1.2."
     }
   },
   "messages": {
