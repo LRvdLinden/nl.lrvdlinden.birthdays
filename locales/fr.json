@@ -75,7 +75,16 @@
       "synced": "__count__ anniversaires synchronisés.",
       "error": "Erreur iCal :",
       "chooseFile": "Choisissez un fichier .ics.",
-      "imported": "__count__ anniversaires importés."
+      "imported": "__count__ anniversaires importés.",
+      "addedCalendars": "Calendriers ajoutés",
+      "subscription": "Abonnement",
+      "uploadedFile": "Fichier importé",
+      "lastUpdated": "Dernière mise à jour",
+      "birthdayCount": "Anniversaires",
+      "never": "Pas encore synchronisé",
+      "saved": "Calendrier enregistré et affiché ci-dessous.",
+      "loadError": "Impossible de charger les calendriers.",
+      "fileName": "Fichier"
     }
   },
   "messages": {

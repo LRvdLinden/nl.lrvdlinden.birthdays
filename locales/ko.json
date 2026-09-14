@@ -78,7 +78,16 @@
       "synced": "생일 __count__개를 동기화했습니다.",
       "error": "iCal 오류:",
       "chooseFile": ".ics 파일을 선택하세요.",
-      "imported": "생일 __count__개를 가져왔습니다."
+      "imported": "생일 __count__개를 가져왔습니다.",
+      "addedCalendars": "추가된 캘린더",
+      "subscription": "구독",
+      "uploadedFile": "업로드된 파일",
+      "lastUpdated": "마지막 업데이트",
+      "birthdayCount": "생일",
+      "never": "아직 동기화되지 않음",
+      "saved": "캘린더가 저장되어 아래에 표시됩니다.",
+      "loadError": "캘린더를 불러올 수 없습니다.",
+      "fileName": "파일"
     }
   },
   "messages": {

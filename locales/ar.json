@@ -78,7 +78,16 @@
       "synced": "تمت مزامنة __count__ من أعياد الميلاد.",
       "error": "خطأ iCal:",
       "chooseFile": "اختر ملف .ics.",
-      "imported": "تم استيراد __count__ من أعياد الميلاد."
+      "imported": "تم استيراد __count__ من أعياد الميلاد.",
+      "addedCalendars": "التقاويم المضافة",
+      "subscription": "اشتراك",
+      "uploadedFile": "ملف مرفوع",
+      "lastUpdated": "آخر تحديث",
+      "birthdayCount": "أعياد الميلاد",
+      "never": "لم تتم المزامنة بعد",
+      "saved": "تم حفظ التقويم ويظهر أدناه.",
+      "loadError": "تعذر تحميل التقاويم.",
+      "fileName": "الملف"
     }
   },
   "messages": {

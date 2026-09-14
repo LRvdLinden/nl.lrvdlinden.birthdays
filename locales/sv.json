@@ -75,7 +75,16 @@
       "synced": "Synkroniserade __count__ födelsedagar.",
       "error": "iCal-fel:",
       "chooseFile": "Välj en .ics-fil.",
-      "imported": "Importerade __count__ födelsedagar."
+      "imported": "Importerade __count__ födelsedagar.",
+      "addedCalendars": "Tillagda kalendrar",
+      "subscription": "Prenumeration",
+      "uploadedFile": "Uppladdad fil",
+      "lastUpdated": "Senaste uppdatering",
+      "birthdayCount": "Födelsedagar",
+      "never": "Inte synkroniserad ännu",
+      "saved": "Kalendern sparades och visas nedan.",
+      "loadError": "Kalendrarna kunde inte läsas in.",
+      "fileName": "Fil"
     }
   },
   "messages": {

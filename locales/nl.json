@@ -78,7 +78,16 @@
       "synced": "__count__ verjaardagen gesynchroniseerd.",
       "error": "iCal-fout:",
       "chooseFile": "Kies een .ics-bestand.",
-      "imported": "__count__ verjaardagen geïmporteerd."
+      "imported": "__count__ verjaardagen geïmporteerd.",
+      "addedCalendars": "Toegevoegde agenda’s",
+      "subscription": "Abonnement",
+      "uploadedFile": "Geüpload bestand",
+      "lastUpdated": "Laatste update",
+      "birthdayCount": "Verjaardagen",
+      "never": "Nog niet gesynchroniseerd",
+      "saved": "Agenda opgeslagen en hieronder weergegeven.",
+      "loadError": "De agenda’s konden niet worden geladen.",
+      "fileName": "Bestand"
     }
   },
   "messages": {

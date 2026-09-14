@@ -75,7 +75,16 @@
       "synced": "Zsynchronizowano __count__ urodzin.",
       "error": "Błąd iCal:",
       "chooseFile": "Wybierz plik .ics.",
-      "imported": "Zaimportowano __count__ urodzin."
+      "imported": "Zaimportowano __count__ urodzin.",
+      "addedCalendars": "Dodane kalendarze",
+      "subscription": "Subskrypcja",
+      "uploadedFile": "Przesłany plik",
+      "lastUpdated": "Ostatnia aktualizacja",
+      "birthdayCount": "Urodziny",
+      "never": "Jeszcze nie zsynchronizowano",
+      "saved": "Kalendarz zapisano i wyświetlono poniżej.",
+      "loadError": "Nie udało się wczytać kalendarzy.",
+      "fileName": "Plik"
     }
   },
   "messages": {

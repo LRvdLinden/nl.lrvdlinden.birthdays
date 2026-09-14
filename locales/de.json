@@ -75,7 +75,16 @@
       "synced": "__count__ Geburtstage synchronisiert.",
       "error": "iCal-Fehler:",
       "chooseFile": "Wähle eine .ics-Datei.",
-      "imported": "__count__ Geburtstage importiert."
+      "imported": "__count__ Geburtstage importiert.",
+      "addedCalendars": "Hinzugefügte Kalender",
+      "subscription": "Abonnement",
+      "uploadedFile": "Hochgeladene Datei",
+      "lastUpdated": "Letzte Aktualisierung",
+      "birthdayCount": "Geburtstage",
+      "never": "Noch nicht synchronisiert",
+      "saved": "Kalender gespeichert und unten angezeigt.",
+      "loadError": "Die Kalender konnten nicht geladen werden.",
+      "fileName": "Datei"
     }
   },
   "messages": {
