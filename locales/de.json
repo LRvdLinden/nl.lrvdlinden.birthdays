@@ -85,7 +85,9 @@
       "saved": "Kalender gespeichert und unten angezeigt.",
       "loadError": "Die Kalender konnten nicht geladen werden.",
       "fileName": "Datei",
-      "apiUnavailable": "Die iCal-Verbindung ist nicht verfügbar. Starte Version 2.1.2 neu oder installiere sie erneut."
+      "apiUnavailable": "Die iCal-Verbindung ist nicht verfügbar. Starte Version 2.1.2 neu oder installiere sie erneut.",
+      "syncFailed": "Die Synchronisierung ist bei __count__ Kalender(n) fehlgeschlagen. Siehe Fehler unter dem Kalender.",
+      "noEvents": "Es wurden keine unterstützten Kalendereinträge gefunden."
     }
   },
   "messages": {

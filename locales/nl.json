@@ -88,7 +88,9 @@
       "saved": "Agenda opgeslagen en hieronder weergegeven.",
       "loadError": "De agenda’s konden niet worden geladen.",
       "fileName": "Bestand",
-      "apiUnavailable": "De iCal-verbinding is niet beschikbaar. Herstart of herinstalleer versie 2.1.2."
+      "apiUnavailable": "De iCal-verbinding is niet beschikbaar. Herstart of herinstalleer versie 2.1.2.",
+      "syncFailed": "Synchronisatie mislukt voor __count__ agenda(’s). Bekijk de fout onder de agenda.",
+      "noEvents": "Er zijn geen ondersteunde agenda-items gevonden."
     }
   },
   "messages": {

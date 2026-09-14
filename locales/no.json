@@ -85,7 +85,9 @@
       "saved": "Kalenderen er lagret og vises nedenfor.",
       "loadError": "Kalenderne kunne ikke lastes.",
       "fileName": "Fil",
-      "apiUnavailable": "iCal-tilkoblingen er ikke tilgjengelig. Start eller installer versjon 2.1.2 på nytt."
+      "apiUnavailable": "iCal-tilkoblingen er ikke tilgjengelig. Start eller installer versjon 2.1.2 på nytt.",
+      "syncFailed": "Synkronisering mislyktes for __count__ kalender(e). Se feilen under kalenderen.",
+      "noEvents": "Ingen støttede kalenderoppføringer ble funnet."
     }
   },
   "messages": {

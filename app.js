@@ -179,20 +179,44 @@ class Birthdays extends homey_1.default.App {
         });
     }
     async syncIcalSources(manual = false) {
-        const sources = (this.homey.settings.get('icalSources') || []).filter((source) => source && source.enabled !== false && source.url);
-        const status = { syncedAt: new Date().toISOString(), sources: {} };
-        if (!sources.length)
+        const configuredSources = this.homey.settings.get('icalSources') || [];
+        const sources = configuredSources.filter((source) => source && source.enabled !== false && source.url);
+        const syncedAt = new Date().toISOString();
+        const status = { syncedAt, sources: {} };
+        if (!sources.length) {
+            await this.homey.settings.set('icalSyncStatus', status);
             return status;
+        }
         let persons = this.homey.settings.get('persons') || [];
         for (const source of sources) {
             try {
-                const response = await axios.get(source.url, { responseType: 'text', timeout: 20000, maxContentLength: 5 * 1024 * 1024 });
-                const imported = parseIcal(response.data, source.id, source.name || 'iCal');
+                const requestUrl = String(source.url).replace(/^webcal:\/\//i, 'https://');
+                const response = await axios.get(requestUrl, {
+                    responseType: 'text',
+                    timeout: 30000,
+                    maxContentLength: 5 * 1024 * 1024,
+                    maxRedirects: 5,
+                    headers: {
+                        Accept: 'text/calendar,text/plain;q=0.9,*/*;q=0.5',
+                        'User-Agent': 'Birthdays-for-Homey/2.1.2',
+                    },
+                    transformResponse: [(data) => data],
+                });
+                const calendarText = typeof response.data === 'string' ? response.data : String(response.data || '');
+                if (!/BEGIN:(?:VCALENDAR|VEVENT)/i.test(calendarText)) {
+                    throw new Error('The URL did not return an iCal calendar');
+                }
+                const imported = parseIcal(calendarText, source.id, source.name || 'iCal');
                 persons = mergeSource(persons, imported, source.id);
-                status.sources[source.id] = { ok: true, count: imported.length };
+                status.sources[source.id] = { ok: true, count: imported.length, syncedAt };
             }
             catch (error) {
-                status.sources[source.id] = { ok: false, error: error && error.message ? error.message : String(error) };
+                status.sources[source.id] = {
+                    ok: false,
+                    count: 0,
+                    syncedAt,
+                    error: error && error.message ? error.message : String(error),
+                };
             }
         }
         await this.homey.settings.set('persons', persons);
@@ -206,6 +230,8 @@ class Birthdays extends homey_1.default.App {
         const content = String(body.content || '');
         if (!content || content.length > 5 * 1024 * 1024)
             throw new Error('Invalid or oversized iCal file');
+        if (!/BEGIN:(?:VCALENDAR|VEVENT)/i.test(content))
+            throw new Error('The file is not a valid iCal calendar');
         const sourceId = String(body.sourceId || `upload-${Date.now()}`);
         const sourceName = String(body.name || 'iCal upload');
         const imported = parseIcal(content, sourceId, sourceName);

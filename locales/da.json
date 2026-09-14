@@ -88,7 +88,9 @@
       "saved": "Kalenderen er gemt og vises nedenfor.",
       "loadError": "Kalenderne kunne ikke indlæses.",
       "fileName": "Fil",
-      "apiUnavailable": "iCal-forbindelsen er ikke tilgængelig. Genstart eller geninstaller version 2.1.2."
+      "apiUnavailable": "iCal-forbindelsen er ikke tilgængelig. Genstart eller geninstaller version 2.1.2.",
+      "syncFailed": "Synkronisering mislykkedes for __count__ kalender(e). Se fejlen under kalenderen.",
+      "noEvents": "Der blev ikke fundet understøttede kalenderposter."
     }
   },
   "messages": {

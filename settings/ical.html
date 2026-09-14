@@ -3,72 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="theme-color" content="#ffffff">
   <title>iCal - Birthdays for Homey</title>
-  <link rel="stylesheet" href="css/framework7-bundle.css">
-  <link rel="stylesheet" href="css/framework7-icons.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+  <link rel="stylesheet" href="css/framework7-icons.css">
+  <script src="/homey.js" data-origin="settings"></script>
   <style>
-    .ical-page { padding-bottom: 24px; }
-    .ical-field { display:block; width:100%; padding:12px; box-sizing:border-box; }
-    .ical-field .homey-form-label:not(:first-child) { margin-top:12px; }
-    .ical-back { display:inline-flex; align-items:center; margin:12px 0; color:inherit; text-decoration:none; }
-    html[dir="rtl"] .ical-back i { transform:rotate(180deg); }
-    .ical-overview-title { margin-top:28px; }
-    .ical-source { width:100%; padding:13px 12px; box-sizing:border-box; }
-    .ical-source-header { display:flex; align-items:flex-start; gap:10px; }
-    .ical-source-main { flex:1; min-width:0; }
-    .ical-source-name { display:block; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .ical-source-type { display:block; margin-top:3px; color:#8e8e93; font-size:13px; }
-    .ical-source-detail { margin-top:8px; overflow-wrap:anywhere; color:#6d6d72; font-size:12px; line-height:1.45; }
-    .ical-source-meta { margin-top:7px; color:#8e8e93; font-size:12px; }
-    .ical-empty { padding:14px 12px; color:#8e8e93; }
-    .ical-remove { flex:0 0 auto; }
+    :root { color-scheme: light dark; --bg:#fff; --card:#fff; --text:#17233d; --muted:#8b9098; --line:#e5e7eb; --field:#fff; --shadow:0 5px 18px rgba(17,24,39,.08); --blue:#168cf4; --danger:#e53935; }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:0 20px 32px; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    .banner { width:100%; max-width:620px; display:block; margin:0 auto 8px; }
+    .back { display:inline-flex; align-items:center; min-height:42px; color:var(--text); text-decoration:none; }
+    html[dir="rtl"] .back i { transform:rotate(180deg); }
+    h1 { margin:2px 0 22px; font-size:28px; line-height:1.2; }
+    .section-title { margin:28px 2px 10px; color:var(--muted); font-size:13px; font-weight:750; letter-spacing:.03em; text-transform:uppercase; }
+    .card { width:100%; margin-bottom:14px; padding:17px; border:1px solid var(--line); border-radius:18px; background:var(--card); box-shadow:var(--shadow); overflow:hidden; }
+    .field { width:100%; margin-bottom:15px; }
+    .field:last-child { margin-bottom:0; }
+    label { display:block; width:100%; margin:0 0 7px; color:var(--muted); font-size:14px; font-weight:600; }
+    input { display:block; width:100%; min-width:0; height:48px; padding:0 13px; border:1px solid var(--line); border-radius:12px; background:var(--field); color:var(--text); font:inherit; }
+    input[type="file"] { height:auto; min-height:48px; padding:11px; }
+    button { display:block; width:100%; min-height:48px; margin:0; padding:11px 14px; border:0; border-radius:13px; font:inherit; font-weight:700; cursor:pointer; }
+    button:disabled { opacity:.55; }
+    .primary { color:#fff; background:linear-gradient(135deg,#087ef0,#51adff); }
+    .secondary { color:var(--blue); background:color-mix(in srgb,var(--blue) 12%,var(--card)); }
+    .source-card { position:relative; }
+    .source-top { display:flex; align-items:flex-start; gap:10px; }
+    .source-copy { flex:1; min-width:0; }
+    .source-name { display:block; font-size:17px; font-weight:750; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .source-type,.source-meta { display:block; margin-top:4px; color:var(--muted); font-size:12px; line-height:1.4; }
+    .source-url { margin-top:10px; padding:10px; border-radius:10px; background:color-mix(in srgb,var(--muted) 9%,transparent); color:var(--muted); font-size:12px; line-height:1.45; overflow-wrap:anywhere; word-break:break-word; }
+    .source-error { margin-top:10px; padding:10px; border-radius:10px; background:color-mix(in srgb,var(--danger) 12%,transparent); color:var(--danger); font-size:12px; line-height:1.45; overflow-wrap:anywhere; }
+    .remove { width:auto; min-height:36px; padding:7px 10px; color:var(--danger); background:transparent; font-size:13px; }
+    .empty { color:var(--muted); text-align:center; box-shadow:none; }
+    #status { min-height:20px; margin:12px 2px; color:var(--muted); font-size:13px; line-height:1.45; overflow-wrap:anywhere; }
+    @media (prefers-color-scheme:dark) {
+      :root { --bg:#000; --card:#1c1c1e; --text:#fff; --muted:#a6a6ad; --line:#38383a; --field:#2c2c2e; --shadow:none; --blue:#4aa8ff; --danger:#ff6961; }
+      body { background:#000; }
+      input { outline:none; }
+      input:focus { border-color:var(--blue); }
+    }
   </style>
 </head>
 <body>
-  <div style="width:100%;text-align:center;">
-    <img src="https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/settings_banner.png" alt="" style="max-width:100%;">
+  <img class="banner" src="https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/settings_banner.png" alt="">
+  <a href="index.html" class="back" aria-label="Back"><i class="icon f7-icons">chevron_left</i></a>
+  <h1 data-i18n="settings.ical.title">iCal calendars</h1>
+
+  <div class="section-title" data-i18n="settings.ical.subscription">Subscription</div>
+  <div class="card">
+    <div class="field">
+      <label for="ical-name" data-i18n="settings.ical.name">Calendar name</label>
+      <input id="ical-name" type="text" data-i18n-placeholder="settings.ical.namePlaceholder">
+    </div>
+    <div class="field">
+      <label for="ical-url" data-i18n="settings.ical.url">iCal subscription URL</label>
+      <input id="ical-url" type="url" inputmode="url" autocapitalize="none" autocomplete="off" data-i18n-placeholder="settings.ical.urlPlaceholder">
+    </div>
+    <button id="ical-add" class="primary" data-i18n="settings.ical.add">Add subscription</button>
   </div>
 
-  <div class="page-content ical-page">
-    <a href="index.html" class="ical-back" aria-label="Back"><i class="icon f7-icons">chevron_left</i></a>
-    <h1 class="homey-title" data-i18n="settings.ical.title">iCal calendars</h1>
-
-    <div class="list settings-list list-outline list-dividers full-width">
-      <ul>
-        <li class="item-content">
-          <div class="item-inner ical-field">
-            <label class="homey-form-label" for="ical-name" data-i18n="settings.ical.name">Calendar name</label>
-            <input id="ical-name" class="homey-form-input" type="text" data-i18n-placeholder="settings.ical.namePlaceholder">
-            <label class="homey-form-label" for="ical-url" data-i18n="settings.ical.url">iCal subscription URL</label>
-            <input id="ical-url" class="homey-form-input" type="url" inputmode="url" autocapitalize="none" autocomplete="off" data-i18n-placeholder="settings.ical.urlPlaceholder">
-            <button id="ical-add" class="homey-button-primary-full" style="margin-top:12px" data-i18n="settings.ical.add">Add subscription</button>
-          </div>
-        </li>
-        <li class="item-content">
-          <div class="item-inner ical-field">
-            <label class="homey-form-label" for="ical-file" data-i18n="settings.ical.upload">Upload iCal file</label>
-            <input id="ical-file" class="homey-form-input" type="file" accept=".ics,text/calendar">
-            <button id="ical-import" class="homey-button-secondary-full" style="margin-top:12px" data-i18n="settings.ical.import">Import file</button>
-          </div>
-        </li>
-      </ul>
+  <div class="section-title" data-i18n="settings.ical.uploadedFile">Uploaded file</div>
+  <div class="card">
+    <div class="field">
+      <label for="ical-file" data-i18n="settings.ical.upload">Upload iCal file</label>
+      <input id="ical-file" type="file" accept=".ics,text/calendar">
     </div>
-
-    <div class="light-gray-title ical-overview-title" data-i18n="settings.ical.addedCalendars">Added calendars</div>
-    <div class="list settings-list list-outline list-dividers full-width">
-      <ul><li><div id="ical-sources"></div></li></ul>
-    </div>
-    <button id="ical-sync" class="homey-button-secondary-full" data-i18n="settings.ical.sync">Synchronize now</button>
-    <p id="ical-status" class="homey-subtitle" aria-live="polite"></p>
+    <button id="ical-import" class="secondary" data-i18n="settings.ical.import">Import file</button>
   </div>
 
-  <script src="js/framework7-bundle.js"></script>
+  <div class="section-title" data-i18n="settings.ical.addedCalendars">Added calendars</div>
+  <div id="ical-sources"></div>
+  <button id="ical-sync" class="secondary" data-i18n="settings.ical.sync">Synchronize now</button>
+  <div id="status" aria-live="polite"></div>
+
   <script>
     let myHomey;
     let currentSources = [];
@@ -76,40 +84,53 @@
 
     function getSetting(key) {
       return new Promise(function(resolve, reject) {
-        let completed = false;
-        function done(error, value) {
-          if (completed) return;
-          completed = true;
+        let done = false;
+        function finish(error, value) {
+          if (done) return;
+          done = true;
           if (error) reject(error); else resolve(value);
         }
         try {
-          const result = myHomey.get(key, done);
-          if (result && typeof result.then === 'function') result.then(function(value) { done(null, value); }).catch(done);
-        } catch (error) { done(error); }
+          const result = myHomey.get(key, finish);
+          if (result && typeof result.then === 'function') result.then(value => finish(null, value)).catch(finish);
+        } catch (error) { finish(error); }
       });
     }
 
     function setSetting(key, value) {
       return new Promise(function(resolve, reject) {
-        let completed = false;
-        function done(error) {
-          if (completed) return;
-          completed = true;
+        let done = false;
+        function finish(error) {
+          if (done) return;
+          done = true;
           if (error) reject(error); else resolve();
         }
         try {
-          const result = myHomey.set(key, value, done);
-          if (result && typeof result.then === 'function') result.then(function() { done(); }).catch(done);
-        } catch (error) { done(error); }
+          const result = myHomey.set(key, value, finish);
+          if (result && typeof result.then === 'function') result.then(() => finish()).catch(finish);
+        } catch (error) { finish(error); }
       });
     }
 
-    function readableError(error) {
+    function api(method, path, body) {
+      return new Promise(function(resolve, reject) {
+        let done = false;
+        function finish(error, result) {
+          if (done) return;
+          done = true;
+          if (error) reject(error); else resolve(result);
+        }
+        try {
+          const result = myHomey.api(method, path, body, finish);
+          if (result && typeof result.then === 'function') result.then(value => finish(null, value)).catch(finish);
+        } catch (error) { finish(error); }
+      });
+    }
+
+    function errorText(error) {
       const value = error && error.message ? error.message : String(error || '');
-      if (/<!doctype|<html|cannot\s+(post|get)/i.test(value)) {
-        return myHomey.__('settings.ical.apiUnavailable');
-      }
-      return value;
+      if (/<!doctype|<html|cannot\s+(post|get)/i.test(value)) return myHomey.__('settings.ical.apiUnavailable');
+      return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
     }
 
     function formatDate(value) {
@@ -118,90 +139,91 @@
       return Number.isNaN(date.getTime()) ? myHomey.__('settings.ical.never') : date.toLocaleString();
     }
 
-    function addText(parent, className, text) {
-      const element = document.createElement('span');
-      element.className = className;
-      element.textContent = text;
-      parent.appendChild(element);
-      return element;
+    function element(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
     }
 
-    function renderIcalSources() {
+    function renderSources() {
       const container = document.getElementById('ical-sources');
       container.innerHTML = '';
       if (!currentSources.length) {
-        const empty = document.createElement('div');
-        empty.className = 'ical-empty';
-        empty.textContent = myHomey.__('settings.ical.none');
-        container.appendChild(empty);
+        container.appendChild(element('div', 'card empty', myHomey.__('settings.ical.none')));
         return;
       }
 
       currentSources.forEach(function(source) {
-        const item = document.createElement('div');
-        item.className = 'ical-source';
-        const header = document.createElement('div');
-        header.className = 'ical-source-header';
-        const main = document.createElement('div');
-        main.className = 'ical-source-main';
-        addText(main, 'ical-source-name', source.name || source.fileName || source.url || 'iCal');
-        const isUpload = source.type === 'upload' || (!source.url && source.fileName);
-        addText(main, 'ical-source-type', myHomey.__(isUpload ? 'settings.ical.uploadedFile' : 'settings.ical.subscription'));
-
-        const detail = document.createElement('div');
-        detail.className = 'ical-source-detail';
-        detail.textContent = isUpload
-          ? myHomey.__('settings.ical.fileName') + ': ' + (source.fileName || source.name || 'iCal.ics')
-          : source.url;
-        main.appendChild(detail);
-
-        const sourceStatus = (currentSyncStatus.sources || {})[source.id] || {};
-        const count = source.count !== undefined ? source.count : sourceStatus.count;
-        const updatedAt = source.lastImportedAt || sourceStatus.syncedAt || currentSyncStatus.syncedAt;
-        const meta = document.createElement('div');
-        meta.className = 'ical-source-meta';
-        meta.textContent =
+        const status = (currentSyncStatus.sources || {})[source.id] || {};
+        const upload = source.type === 'upload' || (!source.url && source.fileName);
+        const card = element('div', 'card source-card');
+        const top = element('div', 'source-top');
+        const copy = element('div', 'source-copy');
+        copy.appendChild(element('span', 'source-name', source.name || source.fileName || source.url || 'iCal'));
+        copy.appendChild(element('span', 'source-type', myHomey.__(upload ? 'settings.ical.uploadedFile' : 'settings.ical.subscription')));
+        const count = source.count !== undefined ? source.count : status.count;
+        const updated = source.lastImportedAt || status.syncedAt || currentSyncStatus.syncedAt;
+        copy.appendChild(element('span', 'source-meta',
           myHomey.__('settings.ical.birthdayCount') + ': ' + (count !== undefined ? count : '—') +
-          ' · ' + myHomey.__('settings.ical.lastUpdated') + ': ' + formatDate(updatedAt);
-        main.appendChild(meta);
-
-        const remove = document.createElement('button');
-        remove.className = 'homey-button-secondary-shadow ical-remove';
+          ' · ' + myHomey.__('settings.ical.lastUpdated') + ': ' + formatDate(updated)));
+        top.appendChild(copy);
+        const remove = element('button', 'remove', myHomey.__('settings.ical.remove'));
         remove.type = 'button';
-        remove.textContent = myHomey.__('settings.ical.remove');
-        remove.addEventListener('click', function() { removeSource(source.id); });
-
-        header.appendChild(main);
-        header.appendChild(remove);
-        item.appendChild(header);
-        container.appendChild(item);
+        remove.addEventListener('click', () => removeSource(source.id));
+        top.appendChild(remove);
+        card.appendChild(top);
+        card.appendChild(element('div', 'source-url',
+          upload ? myHomey.__('settings.ical.fileName') + ': ' + (source.fileName || source.name || 'iCal.ics') : source.url));
+        if (status.ok === false) card.appendChild(element('div', 'source-error', errorText(status.error)));
+        container.appendChild(card);
       });
     }
 
-    async function refreshSources() {
+    async function refresh() {
+      const values = await Promise.all([getSetting('icalSources'), getSetting('icalSyncStatus')]);
+      currentSources = Array.isArray(values[0]) ? values[0] : [];
+      currentSyncStatus = values[1] && typeof values[1] === 'object' ? values[1] : {};
+      renderSources();
+    }
+
+    async function sync(showMessage) {
+      const result = await api('POST', '/ical/sync', {});
+      currentSyncStatus = result || {};
+      await refresh();
+      const entries = Object.values(result.sources || {});
+      const count = entries.reduce((total, item) => total + (item.count || 0), 0);
+      const failed = entries.filter(item => item.ok === false).length;
+      document.getElementById('status').textContent = failed
+        ? myHomey.__('settings.ical.syncFailed').replace('__count__', failed)
+        : myHomey.__('settings.ical.synced').replace('__count__', count);
+      if (showMessage && !failed && count === 0) {
+        document.getElementById('status').textContent += ' ' + myHomey.__('settings.ical.noEvents');
+      }
+      return result;
+    }
+
+    async function removeSource(id) {
       try {
-        const values = await Promise.all([getSetting('icalSources'), getSetting('icalSyncStatus')]);
-        currentSources = Array.isArray(values[0]) ? values[0] : [];
-        currentSyncStatus = values[1] && typeof values[1] === 'object' ? values[1] : {};
-        renderIcalSources();
+        currentSources = currentSources.filter(source => source.id !== id);
+        await setSetting('icalSources', currentSources);
+        const persons = await getSetting('persons');
+        if (Array.isArray(persons)) await setSetting('persons', persons.filter(person => person.icalSourceId !== id));
+        renderSources();
       } catch (error) {
-        document.getElementById('ical-status').textContent = myHomey.__('settings.ical.loadError') + ' ' + readableError(error);
+        myHomey.alert(myHomey.__('settings.ical.error') + ' ' + errorText(error));
+        await refresh();
       }
     }
 
-    async function removeSource(sourceId) {
-      try {
-        currentSources = currentSources.filter(function(source) { return source.id !== sourceId; });
-        await setSetting('icalSources', currentSources);
-        const persons = await getSetting('persons');
-        if (Array.isArray(persons)) {
-          await setSetting('persons', persons.filter(function(person) { return person.icalSourceId !== sourceId; }));
-        }
-        renderIcalSources();
-      } catch (error) {
-        myHomey.alert(myHomey.__('settings.ical.error') + ' ' + readableError(error));
-        await refreshSources();
-      }
+    function readFile(file) {
+      if (typeof file.text === 'function') return file.text();
+      return new Promise(function(resolve, reject) {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ''));
+        reader.onerror = () => reject(reader.error || new Error('File read failed'));
+        reader.readAsText(file);
+      });
     }
 
     function onHomeyReady(Homey) {
@@ -209,63 +231,43 @@
       const language = Homey.getLanguage ? Homey.getLanguage() : 'en';
       document.documentElement.lang = language;
       document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(function(element) {
-        element.placeholder = Homey.__(element.getAttribute('data-i18n-placeholder'));
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function(input) {
+        input.placeholder = Homey.__(input.getAttribute('data-i18n-placeholder'));
       });
 
       document.getElementById('ical-add').addEventListener('click', async function(event) {
-        event.preventDefault();
         const button = event.currentTarget;
-        const url = document.getElementById('ical-url').value.trim();
+        let url = document.getElementById('ical-url').value.trim();
         const name = document.getElementById('ical-name').value.trim() || 'iCal';
+        if (/^webcal:\/\//i.test(url)) url = url.replace(/^webcal:\/\//i, 'https://');
         if (!/^https?:\/\//i.test(url)) return myHomey.alert(myHomey.__('settings.ical.invalidUrl'));
         button.disabled = true;
         try {
           const stored = await getSetting('icalSources');
           const sources = Array.isArray(stored) ? stored.slice() : [];
-          const source = {
-            id: 'url-' + Date.now().toString(36),
-            type: 'subscription',
-            name: name,
-            url: url,
-            enabled: true,
-            createdAt: new Date().toISOString()
-          };
-          sources.push(source);
+          sources.push({ id:'url-' + Date.now().toString(36), type:'subscription', name, url, enabled:true, createdAt:new Date().toISOString() });
           await setSetting('icalSources', sources);
           currentSources = sources;
-          renderIcalSources();
+          renderSources();
           document.getElementById('ical-url').value = '';
           document.getElementById('ical-name').value = '';
-          document.getElementById('ical-status').textContent = myHomey.__('settings.ical.saved');
+          document.getElementById('status').textContent = myHomey.__('settings.ical.syncing');
+          await sync(true);
         } catch (error) {
-          myHomey.alert(myHomey.__('settings.ical.error') + ' ' + readableError(error));
-        } finally {
-          button.disabled = false;
-        }
+          document.getElementById('status').textContent = myHomey.__('settings.ical.error') + ' ' + errorText(error);
+        } finally { button.disabled = false; }
       });
 
       document.getElementById('ical-sync').addEventListener('click', async function(event) {
-        event.preventDefault();
         const button = event.currentTarget;
-        const status = document.getElementById('ical-status');
         button.disabled = true;
-        status.textContent = myHomey.__('settings.ical.syncing');
-        try {
-          const result = await myHomey.api('POST', '/ical/sync', {});
-          currentSyncStatus = result || {};
-          status.textContent = myHomey.__('settings.ical.synced').replace('__count__',
-            Object.values(result.sources || {}).reduce(function(total, source) { return total + (source.count || 0); }, 0));
-          await refreshSources();
-        } catch (error) {
-          status.textContent = myHomey.__('settings.ical.error') + ' ' + readableError(error);
-        } finally {
-          button.disabled = false;
-        }
+        document.getElementById('status').textContent = myHomey.__('settings.ical.syncing');
+        try { await sync(true); }
+        catch (error) { document.getElementById('status').textContent = myHomey.__('settings.ical.error') + ' ' + errorText(error); }
+        finally { button.disabled = false; }
       });
 
       document.getElementById('ical-import').addEventListener('click', async function(event) {
-        event.preventDefault();
         const button = event.currentTarget;
         const file = document.getElementById('ical-file').files[0];
         if (!file) return myHomey.alert(myHomey.__('settings.ical.chooseFile'));
@@ -273,37 +275,25 @@
         const sourceId = 'upload-' + Date.now().toString(36);
         const name = file.name.replace(/\.ics$/i, '') || 'iCal';
         try {
-          const content = await file.text();
-          const result = await myHomey.api('POST', '/ical/import', {
-            content: content,
-            name: name,
-            sourceId: sourceId
-          });
+          const result = await api('POST', '/ical/import', { content:await readFile(file), name, sourceId });
           const stored = await getSetting('icalSources');
-          const sources = (Array.isArray(stored) ? stored : []).filter(function(source) { return source.id !== sourceId; });
-          sources.push({
-            id: sourceId,
-            type: 'upload',
-            name: name,
-            fileName: file.name,
-            enabled: true,
-            count: result.count || 0,
-            lastImportedAt: new Date().toISOString()
-          });
+          const sources = Array.isArray(stored) ? stored.slice() : [];
+          sources.push({ id:sourceId, type:'upload', name, fileName:file.name, enabled:true, count:result.count || 0, lastImportedAt:new Date().toISOString() });
           await setSetting('icalSources', sources);
           currentSources = sources;
-          renderIcalSources();
+          renderSources();
           document.getElementById('ical-file').value = '';
-          document.getElementById('ical-status').textContent =
-            myHomey.__('settings.ical.imported').replace('__count__', result.count || 0);
+          document.getElementById('status').textContent =
+            myHomey.__('settings.ical.imported').replace('__count__', result.count || 0) +
+            ((result.count || 0) === 0 ? ' ' + myHomey.__('settings.ical.noEvents') : '');
         } catch (error) {
-          myHomey.alert(myHomey.__('settings.ical.error') + ' ' + readableError(error));
-        } finally {
-          button.disabled = false;
-        }
+          document.getElementById('status').textContent = myHomey.__('settings.ical.error') + ' ' + errorText(error);
+        } finally { button.disabled = false; }
       });
 
-      refreshSources().finally(function() { Homey.ready(); });
+      refresh()
+        .catch(error => { document.getElementById('status').textContent = myHomey.__('settings.ical.loadError') + ' ' + errorText(error); })
+        .finally(() => Homey.ready());
     }
   </script>
 </body>

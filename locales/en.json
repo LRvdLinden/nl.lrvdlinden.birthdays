@@ -85,7 +85,9 @@
       "saved": "Calendar saved and shown below.",
       "loadError": "Could not load the calendars.",
       "fileName": "File",
-      "apiUnavailable": "The iCal connection is not available. Restart or reinstall version 2.1.2."
+      "apiUnavailable": "The iCal connection is not available. Restart or reinstall version 2.1.2.",
+      "syncFailed": "Synchronization failed for __count__ calendar(s). See the error below the calendar.",
+      "noEvents": "No supported calendar items were found."
     }
   },
   "messages": {
