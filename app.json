@@ -1477,6 +1477,99 @@
             }
           }
         ]
+      },
+      {
+        "id": "sync-ical-calendars",
+        "advanced": true,
+        "title": {
+          "en": "Synchronize iCal calendars",
+          "nl": "Synchroniseer iCal-agenda’s",
+          "de": "iCal-Kalender synchronisieren",
+          "fr": "Synchroniser les calendriers iCal",
+          "it": "Sincronizza i calendari iCal",
+          "sv": "Synkronisera iCal-kalendrar",
+          "no": "Synkroniser iCal-kalendere",
+          "es": "Sincronizar calendarios iCal",
+          "da": "Synkroniser iCal-kalendere",
+          "ru": "Синхронизировать календари iCal",
+          "pl": "Synchronizuj kalendarze iCal",
+          "ko": "iCal 캘린더 동기화",
+          "ar": "مزامنة تقاويم iCal"
+        },
+        "titleFormatted": {
+          "en": "Synchronize iCal calendars",
+          "nl": "Synchroniseer iCal-agenda’s",
+          "de": "iCal-Kalender synchronisieren",
+          "fr": "Synchroniser les calendriers iCal",
+          "it": "Sincronizza i calendari iCal",
+          "sv": "Synkronisera iCal-kalendrar",
+          "no": "Synkroniser iCal-kalendere",
+          "es": "Sincronizar calendarios iCal",
+          "da": "Synkroniser iCal-kalendere",
+          "ru": "Синхронизировать календари iCal",
+          "pl": "Synchronizuj kalendarze iCal",
+          "ko": "iCal 캘린더 동기화",
+          "ar": "مزامنة تقاويم iCal"
+        },
+        "tokens": [
+          {
+            "name": "birthdays",
+            "type": "number",
+            "title": {
+              "en": "Imported birthdays",
+              "nl": "Geïmporteerde verjaardagen",
+              "de": "Importierte Geburtstage",
+              "fr": "Anniversaires importés",
+              "it": "Compleanni importati",
+              "sv": "Importerade födelsedagar",
+              "no": "Importerte fødselsdager",
+              "es": "Cumpleaños importados",
+              "da": "Importerede fødselsdage",
+              "ru": "Импортированные дни рождения",
+              "pl": "Zaimportowane urodziny",
+              "ko": "가져온 생일",
+              "ar": "أعياد الميلاد المستوردة"
+            }
+          },
+          {
+            "name": "successful_calendars",
+            "type": "number",
+            "title": {
+              "en": "Successful calendars",
+              "nl": "Geslaagde agenda’s",
+              "de": "Erfolgreiche Kalender",
+              "fr": "Calendriers réussis",
+              "it": "Calendari riusciti",
+              "sv": "Lyckade kalendrar",
+              "no": "Vellykkede kalendere",
+              "es": "Calendarios correctos",
+              "da": "Vellykkede kalendere",
+              "ru": "Успешные календари",
+              "pl": "Pomyślnie zsynchronizowane kalendarze",
+              "ko": "성공한 캘린더",
+              "ar": "التقاويم الناجحة"
+            }
+          },
+          {
+            "name": "failed_calendars",
+            "type": "number",
+            "title": {
+              "en": "Failed calendars",
+              "nl": "Mislukte agenda’s",
+              "de": "Fehlgeschlagene Kalender",
+              "fr": "Calendriers échoués",
+              "it": "Calendari non riusciti",
+              "sv": "Misslyckade kalendrar",
+              "no": "Mislykkede kalendere",
+              "es": "Calendarios fallidos",
+              "da": "Mislykkede kalendere",
+              "ru": "Календари с ошибками",
+              "pl": "Kalendarze z błędami",
+              "ko": "실패한 캘린더",
+              "ar": "التقاويم الفاشلة"
+            }
+          }
+        ]
       }
     ]
   },

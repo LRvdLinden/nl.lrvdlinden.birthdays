@@ -449,6 +449,15 @@ class Birthdays extends Homey.App {
     this.isSpecificBirthdayTodayConditionCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
 
     this.homey.flow.getActionCard("temporary-image").registerRunListener(this.temporaryImageRunListener.bind(this));
+    this.homey.flow.getActionCard("sync-ical-calendars").registerRunListener(async () => {
+      const result = await this.syncIcalSources(true);
+      const sources = Object.values(result.sources || {}) as Array<any>;
+      return {
+        birthdays: sources.reduce((total, source) => total + Number(source.count || 0), 0),
+        successful_calendars: sources.filter(source => source.ok === true).length,
+        failed_calendars: sources.filter(source => source.ok === false).length
+      };
+    });
   }
 
   private async temporaryImageRunListener(args: { imageUrl: string }) {

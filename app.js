@@ -378,6 +378,15 @@ class Birthdays extends homey_1.default.App {
         });
         this.isSpecificBirthdayTodayConditionCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
         this.homey.flow.getActionCard("temporary-image").registerRunListener(this.temporaryImageRunListener.bind(this));
+        this.homey.flow.getActionCard("sync-ical-calendars").registerRunListener(async () => {
+            const result = await this.syncIcalSources(true);
+            const sources = Object.values(result.sources || {});
+            return {
+                birthdays: sources.reduce((total, source) => total + Number(source.count || 0), 0),
+                successful_calendars: sources.filter(source => source.ok === true).length,
+                failed_calendars: sources.filter(source => source.ok === false).length
+            };
+        });
     }
     async temporaryImageRunListener(args) {
         const { imageUrl } = args;
