@@ -14,7 +14,14 @@
       "imageUrl": "Birthday card image URL",
       "add": "Añadir persona",
       "save": "Guardar",
-      "cancel": "Cancelar"
+      "cancel": "Cancelar",
+      "placeholders": {
+        "name": "p. ej. María Pérez",
+        "mobile": "p. ej. +34123456789",
+        "category": "Selecciona o introduce una categoría",
+        "message": "p. ej. Feliz cumpleaños María 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Personas",
@@ -24,11 +31,52 @@
       "message": "Mensaje",
       "actions": "Acciones",
       "edit": "Editar",
-      "delete": "Eliminar"
+      "delete": "Eliminar",
+      "searchPlaceholder": "Buscar por nombre, categoría o contacto",
+      "allCategories": "Todas las categorías",
+      "age": "Edad"
     },
     "import_btn": "Importar CSV",
     "export_btn": "Exportar CSV",
-    "clear_btn": "Vaciar lista"
+    "clear_btn": "Vaciar lista",
+    "main": {
+      "subtitle": "Gestiona cumpleaños, recordatorios y tu lista de cumpleaños.",
+      "general": "General",
+      "version": "Versión",
+      "changelog": "Registro de cambios",
+      "rate": "Valorar esta app",
+      "forum": "Foro",
+      "birthdaySettings": "Ajustes de cumpleaños",
+      "addBirthday": "Añadir cumpleaños",
+      "birthdayList": "Lista de cumpleaños",
+      "developers": "Desarrolladores",
+      "madeWith": "Hecho con cariño",
+      "in": "en",
+      "back": "Atrás",
+      "add": "Añadir",
+      "comingSoon": "Próximamente",
+      "loadError": "¡Error al guardar los datos!"
+    },
+    "ical": {
+      "title": "Calendarios iCal",
+      "name": "Nombre del calendario",
+      "namePlaceholder": "p. ej. Trabajo o asociación",
+      "url": "URL de suscripción iCal",
+      "urlPlaceholder": "https://calendario.example/calendario.ics",
+      "add": "Añadir suscripción",
+      "upload": "Subir archivo iCal",
+      "import": "Importar archivo",
+      "sync": "Sincronizar ahora",
+      "remove": "Eliminar",
+      "none": "No hay suscripciones iCal configuradas.",
+      "invalidUrl": "Introduce una URL http(s) válida.",
+      "added": "Suscripción añadida.",
+      "syncing": "Sincronizando…",
+      "synced": "Se sincronizaron __count__ cumpleaños.",
+      "error": "Error de iCal:",
+      "chooseFile": "Elige un archivo .ics.",
+      "imported": "Se importaron __count__ cumpleaños."
+    }
   },
   "messages": {
     "validation_error": "Por favor, verifique los datos ingresados",
@@ -44,5 +92,8 @@
     "no_export": "No hay cumpleaños para exportar.",
     "clear_confirm": "¿Estás seguro de que quieres eliminar todos los cumpleaños? Esto no se puede deshacer.",
     "clear_success": "Se han eliminado todos los cumpleaños."
+  },
+  "menu": {
+    "title": "Cumpleaños"
   }
 }

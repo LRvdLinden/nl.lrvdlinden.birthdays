@@ -221,107 +221,18 @@
 
 <body>
   <div class="card" id="card">
-    <div class="empty">Verjaardagen laden...</div>
+    <div class="empty">Loading birthdays...</div>
   </div>
-
   <script type="text/javascript">
     function onHomeyReady(Homey) {
-      Homey.ready();
-
-      const card = document.getElementById('card');
-
-      function escapeHtml(value) {
-        return String(value || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      function getStatusText(person) {
-        if (person.daysUntil === 0) return 'Vandaag jarig';
-        if (person.daysUntil > 0) return 'Over ' + person.daysUntil + ' dag(en)';
-        return 'Geweest';
-      }
-
-      function getAgeText(person) {
-        if (person.isBaby || person.age === null || person.age === undefined) {
-          return 'Baby';
-        }
-
-        return person.age + ' jaar';
-      }
-
-      function render(data) {
-        const birthdays = data && Array.isArray(data.birthdays) ? data.birthdays : [];
-        const month = data && data.month ? data.month : 'deze maand';
-        const shortMonth = String(month).slice(0, 3);
-
-        const header = `
-          <div class="header">
-            <div class="appIcon" aria-label="Birthdays"></div>
-            <div>
-              <div class="title">Verjaardagen deze maand</div>
-              <div class="subtitle">${escapeHtml(month)} · ${birthdays.length} verjaardag(en)</div>
-            </div>
-          </div>
-        `;
-
-        if (!birthdays.length) {
-          card.innerHTML = `
-            ${header}
-            <div class="empty">
-              <div class="emptyTitle">Geen verjaardagen deze maand</div>
-              <div class="emptyText">
-                Voeg verjaardagen toe in de app-instellingen om ze hier te tonen.
-              </div>
-            </div>
-          `;
-          return;
-        }
-
-        card.innerHTML = `
-          ${header}
-          <div class="list">
-            ${birthdays.map(function(person) {
-              const ageText = getAgeText(person);
-
-             const meta = getStatusText(person);
-
-              return `
-                <div class="person">
-                  <div class="dateBadge">
-                    <div class="day">${escapeHtml(person.day)}</div>
-                    <div class="dayLabel">${escapeHtml(shortMonth)}</div>
-                  </div>
-
-                  <div class="info">
-                    <div class="name">
-                      ${escapeHtml(person.name)}
-                      <span class="ageInline">${escapeHtml(ageText)}</span>
-                    </div>
-                    <div class="meta">${escapeHtml(meta || 'Gefeliciteerd 🎉')}</div>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        `;
-      }
-
-      function loadData() {
-        Homey.api('GET', '/', {})
-          .then(function(data) {
-            render(data || {});
-          })
-          .catch(function() {
-            card.innerHTML = '<div class="empty">Kon verjaardagen niet laden</div>';
-          });
-      }
-
-      loadData();
-      setInterval(loadData, 60000);
+      Homey.ready(); const card=document.getElementById('card');
+      const translations={"en":{"today":"Birthdays today","count":"birthday(s)","none":"No birthdays","empty":"No birthdays today","help":"Add birthdays in the app settings to show them here.","loading":"Loading birthdays...","loadError":"Could not load birthdays","baby":"Baby","years":"years","todayStatus":"Birthday today","congrats":"Congratulations 🎉","monthTitle":"Birthdays this month","thisMonth":"this month","emptyMonth":"No birthdays this month","inDays":"In {n} day(s)","past":"Passed"},"nl":{"today":"Vandaag jarig","count":"verjaardag(en)","none":"Geen verjaardagen","empty":"Vandaag is er niemand jarig","help":"Voeg verjaardagen toe in de app-instellingen om ze hier te tonen.","loading":"Verjaardagen laden...","loadError":"Kon verjaardagen niet laden","baby":"Baby","years":"jaar","todayStatus":"Vandaag jarig","congrats":"Gefeliciteerd 🎉","monthTitle":"Verjaardagen deze maand","thisMonth":"deze maand","emptyMonth":"Geen verjaardagen deze maand","inDays":"Over {n} dag(en)","past":"Geweest"},"de":{"today":"Heutige Geburtstage","count":"Geburtstag/Geburtstage","none":"Keine Geburtstage","empty":"Heute hat niemand Geburtstag","help":"Füge Geburtstage in den App-Einstellungen hinzu, um sie hier anzuzeigen.","loading":"Geburtstage werden geladen...","loadError":"Geburtstage konnten nicht geladen werden","baby":"Baby","years":"Jahre","todayStatus":"Hat heute Geburtstag","congrats":"Herzlichen Glückwunsch 🎉","monthTitle":"Geburtstage diesen Monat","thisMonth":"dieser Monat","emptyMonth":"Keine Geburtstage diesen Monat","inDays":"In {n} Tag(en)","past":"Vorbei"},"fr":{"today":"Anniversaires aujourd’hui","count":"anniversaire(s)","none":"Aucun anniversaire","empty":"Personne ne fête son anniversaire aujourd’hui","help":"Ajoutez des anniversaires dans les réglages de l’application pour les afficher ici.","loading":"Chargement des anniversaires...","loadError":"Impossible de charger les anniversaires","baby":"Bébé","years":"ans","todayStatus":"Anniversaire aujourd’hui","congrats":"Joyeux anniversaire 🎉","monthTitle":"Anniversaires ce mois-ci","thisMonth":"ce mois-ci","emptyMonth":"Aucun anniversaire ce mois-ci","inDays":"Dans {n} jour(s)","past":"Passé"},"it":{"today":"Compleanni di oggi","count":"compleanno/i","none":"Nessun compleanno","empty":"Oggi non compie gli anni nessuno","help":"Aggiungi i compleanni nelle impostazioni dell’app per visualizzarli qui.","loading":"Caricamento compleanni...","loadError":"Impossibile caricare i compleanni","baby":"Bebè","years":"anni","todayStatus":"Compleanno oggi","congrats":"Buon compleanno 🎉","monthTitle":"Compleanni di questo mese","thisMonth":"questo mese","emptyMonth":"Nessun compleanno questo mese","inDays":"Tra {n} giorno/i","past":"Passato"},"sv":{"today":"Födelsedagar idag","count":"födelsedag(ar)","none":"Inga födelsedagar","empty":"Ingen fyller år idag","help":"Lägg till födelsedagar i appinställningarna för att visa dem här.","loading":"Laddar födelsedagar...","loadError":"Kunde inte ladda födelsedagar","baby":"Baby","years":"år","todayStatus":"Fyller år idag","congrats":"Grattis 🎉","monthTitle":"Födelsedagar denna månad","thisMonth":"denna månad","emptyMonth":"Inga födelsedagar denna månad","inDays":"Om {n} dag(ar)","past":"Har varit"},"no":{"today":"Bursdager i dag","count":"bursdag(er)","none":"Ingen bursdager","empty":"Ingen har bursdag i dag","help":"Legg til bursdager i appinnstillingene for å vise dem her.","loading":"Laster bursdager...","loadError":"Kunne ikke laste bursdager","baby":"Baby","years":"år","todayStatus":"Har bursdag i dag","congrats":"Gratulerer 🎉","monthTitle":"Bursdager denne måneden","thisMonth":"denne måneden","emptyMonth":"Ingen bursdager denne måneden","inDays":"Om {n} dag(er)","past":"Har vært"},"es":{"today":"Cumpleaños de hoy","count":"cumpleaños","none":"No hay cumpleaños","empty":"Hoy no cumple años nadie","help":"Añade cumpleaños en los ajustes de la app para mostrarlos aquí.","loading":"Cargando cumpleaños...","loadError":"No se pudieron cargar los cumpleaños","baby":"Bebé","years":"años","todayStatus":"Cumple años hoy","congrats":"Felicidades 🎉","monthTitle":"Cumpleaños de este mes","thisMonth":"este mes","emptyMonth":"No hay cumpleaños este mes","inDays":"En {n} día(s)","past":"Pasado"},"da":{"today":"Fødselsdage i dag","count":"fødselsdag(e)","none":"Ingen fødselsdage","empty":"Ingen har fødselsdag i dag","help":"Tilføj fødselsdage i appindstillingerne for at vise dem her.","loading":"Indlæser fødselsdage...","loadError":"Kunne ikke indlæse fødselsdage","baby":"Baby","years":"år","todayStatus":"Har fødselsdag i dag","congrats":"Tillykke 🎉","monthTitle":"Fødselsdage denne måned","thisMonth":"denne måned","emptyMonth":"Ingen fødselsdage denne måned","inDays":"Om {n} dag(e)","past":"Har været"},"ru":{"today":"Дни рождения сегодня","count":"дн. рождения","none":"Нет дней рождения","empty":"Сегодня ни у кого нет дня рождения","help":"Добавьте дни рождения в настройках приложения, чтобы увидеть их здесь.","loading":"Загрузка дней рождения...","loadError":"Не удалось загрузить дни рождения","baby":"Малыш","years":"лет","todayStatus":"День рождения сегодня","congrats":"С днём рождения 🎉","monthTitle":"Дни рождения в этом месяце","thisMonth":"этот месяц","emptyMonth":"В этом месяце нет дней рождения","inDays":"Через {n} дн.","past":"Прошёл"},"pl":{"today":"Dzisiejsze urodziny","count":"urodziny","none":"Brak urodzin","empty":"Dzisiaj nikt nie ma urodzin","help":"Dodaj urodziny w ustawieniach aplikacji, aby je tutaj wyświetlić.","loading":"Ładowanie urodzin...","loadError":"Nie udało się wczytać urodzin","baby":"Niemowlę","years":"lat","todayStatus":"Urodziny dzisiaj","congrats":"Wszystkiego najlepszego 🎉","monthTitle":"Urodziny w tym miesiącu","thisMonth":"ten miesiąc","emptyMonth":"Brak urodzin w tym miesiącu","inDays":"Za {n} dni","past":"Minęły"},"ko":{"today":"오늘의 생일","count":"명","none":"생일 없음","empty":"오늘 생일인 사람이 없습니다","help":"여기에 표시하려면 앱 설정에서 생일을 추가하세요.","loading":"생일 불러오는 중...","loadError":"생일을 불러올 수 없습니다","baby":"아기","years":"세","todayStatus":"오늘 생일","congrats":"생일 축하합니다 🎉","monthTitle":"이번 달 생일","thisMonth":"이번 달","emptyMonth":"이번 달에는 생일이 없습니다","inDays":"{n}일 후","past":"지남"},"ar":{"today":"أعياد ميلاد اليوم","count":"عيد ميلاد","none":"لا توجد أعياد ميلاد","empty":"لا أحد يحتفل بعيد ميلاده اليوم","help":"أضف أعياد الميلاد في إعدادات التطبيق لعرضها هنا.","loading":"جارٍ تحميل أعياد الميلاد...","loadError":"تعذر تحميل أعياد الميلاد","baby":"رضيع","years":"سنة","todayStatus":"عيد ميلاده اليوم","congrats":"عيد ميلاد سعيد 🎉","monthTitle":"أعياد ميلاد هذا الشهر","thisMonth":"هذا الشهر","emptyMonth":"لا توجد أعياد ميلاد هذا الشهر","inDays":"بعد {n} يوم","past":"مضى"}};
+      function escapeHtml(value){return String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
+      function tr(data){const l=data&&translations[data.language]?data.language:'en';return translations[l]}
+      function ageText(p,t){return p.isBaby||p.age===null||p.age===undefined?t.baby:p.age+' '+t.years}
+      function render(data){const list=data&&Array.isArray(data.birthdays)?data.birthdays:[],t=tr(data);document.documentElement.lang=data.language||'en';document.documentElement.dir=(data.language==='ar'?'rtl':'ltr');
+        const month=data.month||t.thisMonth,shortMonth=String(month).slice(0,3);const header=`<div class="header"><div class="appIcon" aria-label="Birthdays"></div><div><div class="title">${escapeHtml(t.monthTitle)}</div><div class="subtitle">${escapeHtml(month)} · ${list.length} ${escapeHtml(t.count)}</div></div></div>`;if(!list.length){card.innerHTML=header+`<div class="empty"><div class="emptyTitle">${escapeHtml(t.emptyMonth)}</div><div class="emptyText">${escapeHtml(t.help)}</div></div>`;return}card.innerHTML=header+'<div class="list">'+list.map(p=>{const status=p.daysUntil===0?t.todayStatus:p.daysUntil>0?t.inDays.replace('{n}',p.daysUntil):t.past;return `<div class="person"><div class="dateBadge"><div class="day">${escapeHtml(p.day)}</div><div class="dayLabel">${escapeHtml(shortMonth)}</div></div><div class="info"><div class="name">${escapeHtml(p.name)} <span class="ageInline">${escapeHtml(ageText(p,t))}</span></div><div class="meta">${escapeHtml(status||t.congrats)}</div></div></div>`}).join('')+'</div>';}
+      function loadData(){Homey.api('GET','/',{}).then(d=>render(d||{})).catch(()=>{card.innerHTML='<div class="empty">Could not load birthdays</div>'})}loadData();setInterval(loadData,60000);
     }
   </script>
 </body>

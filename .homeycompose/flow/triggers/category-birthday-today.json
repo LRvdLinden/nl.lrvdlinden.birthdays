@@ -11,7 +11,9 @@
     "no": "Det er en persons bursdag i en kategori",
     "da": "Det er en persons fødselsdag i en kategori",
     "ru": "Это день рождения человека в категории",
-    "pl": "To są urodziny osoby w kategorii"
+    "pl": "To są urodziny osoby w kategorii",
+    "ko": "카테고리에 속한 사람의 생일입니다",
+    "ar": "إنه عيد ميلاد شخص ضمن فئة"
   },
   "titleFormatted": {
     "en": "Celebrate the birthday of a person in category [[category]] at [[run_at]] o'clock",
@@ -24,7 +26,9 @@
     "no": "Feir bursdagen til en person i kategorien [[category]] klokken [[run_at]]",
     "da": "Fejr fødselsdagen for en person i kategorien [[category]] kl. [[run_at]]",
     "ru": "Празднуйте день рождения человека в категории [[category]] в [[run_at]] часов",
-    "pl": "Świętuj urodziny osoby w kategorii [[category]] o [[run_at]]"
+    "pl": "Świętuj urodziny osoby w kategorii [[category]] o [[run_at]]",
+    "ko": "[[run_at]]에 [[category]] 카테고리 사람의 생일 축하",
+    "ar": "احتفل بعيد ميلاد شخص في فئة [[category]] الساعة [[run_at]]"
   },
   "args": [
     {
@@ -41,7 +45,9 @@
         "no": "Velg kategori",
         "da": "Vælg kategori",
         "ru": "Выберите категорию",
-        "pl": "Wybierz kategorię"
+        "pl": "Wybierz kategorię",
+        "ko": "카테고리 선택",
+        "ar": "اختر الفئة"
       },
       "placeholder": {
         "en": "Work",
@@ -54,7 +60,9 @@
         "no": "Arbeid",
         "da": "Arbejde",
         "ru": "Работа",
-        "pl": "Praca"
+        "pl": "Praca",
+        "ko": "직장",
+        "ar": "العمل"
       },
       "values": [
         {
@@ -70,7 +78,9 @@
             "no": "Arbeid",
             "da": "Arbejde",
             "ru": "Работа",
-            "pl": "Praca"
+            "pl": "Praca",
+            "ko": "직장",
+            "ar": "العمل"
           }
         },
         {
@@ -86,7 +96,9 @@
             "no": "Privat",
             "da": "Privat",
             "ru": "Частное",
-            "pl": "Prywatny"
+            "pl": "Prywatny",
+            "ko": "개인",
+            "ar": "خاص"
           }
         }
       ]
@@ -105,10 +117,24 @@
         "no": "Tid",
         "da": "Tid",
         "ru": "Время",
-        "pl": "Czas"
+        "pl": "Czas",
+        "ko": "시간",
+        "ar": "الوقت"
       },
       "placeholder": {
-        "en": "13:37"
+        "en": "13:37",
+        "nl": "13:37",
+        "de": "13:37",
+        "fr": "13:37",
+        "it": "13:37",
+        "sv": "13:37",
+        "no": "13:37",
+        "es": "13:37",
+        "da": "13:37",
+        "ru": "13:37",
+        "pl": "13:37",
+        "ko": "13:37",
+        "ar": "13:37"
       }
     }
   ],
@@ -127,7 +153,9 @@
         "no": "Bursdagsbarn",
         "da": "Fødselar",
         "ru": "Имя именинника",
-        "pl": "Osoba obchodząca urodziny"
+        "pl": "Osoba obchodząca urodziny",
+        "ko": "생일인 사람",
+        "ar": "صاحب عيد الميلاد"
       },
       "example": {
         "en": "Jon Doe",
@@ -140,24 +168,28 @@
         "no": "Per Olsen",
         "da": "Lise Nielsen",
         "ru": "Иван Иванов",
-        "pl": "Jan Kowalski"
+        "pl": "Jan Kowalski",
+        "ko": "홍길동",
+        "ar": "أحمد محمد"
       }
     },
     {
       "name": "category",
       "type": "string",
       "title": {
-          "en": "Category",
-          "nl": "Categorie",
-          "de": "Kategorie",
-          "fr": "Catégorie",
-          "it": "Categoria",
-          "es": "Categoría",
-          "sv": "Kategori",
-          "no": "Kategori",
-          "da": "Kategori",
-          "ru": "Категория",
-          "pl": "Kategoria"  
+        "en": "Category",
+        "nl": "Categorie",
+        "de": "Kategorie",
+        "fr": "Catégorie",
+        "it": "Categoria",
+        "es": "Categoría",
+        "sv": "Kategori",
+        "no": "Kategori",
+        "da": "Kategori",
+        "ru": "Категория",
+        "pl": "Kategoria",
+        "ko": "카테고리",
+        "ar": "الفئة"
       },
       "example": {
         "en": "Work",
@@ -170,7 +202,9 @@
         "no": "Arbeid",
         "da": "Arbejde",
         "ru": "Работа",
-        "pl": "Praca"
+        "pl": "Praca",
+        "ko": "직장",
+        "ar": "العمل"
       }
     },
     {
@@ -187,7 +221,9 @@
         "no": "Mobilnummer",
         "da": "Mobilnummer",
         "ru": "Мобильный номер",
-        "pl": "Numer telefonu komórkowego"
+        "pl": "Numer telefonu komórkowego",
+        "ko": "휴대폰 번호",
+        "ar": "رقم الهاتف المحمول"
       },
       "example": {
         "en": "+441234567890",
@@ -200,7 +236,9 @@
         "no": "+47123456789",
         "da": "+45123456789",
         "ru": "+79123456789",
-        "pl": "+48123456789"
+        "pl": "+48123456789",
+        "ko": "+441234567890",
+        "ar": "+441234567890"
       }
     },
     {
@@ -217,7 +255,9 @@
         "no": "Mobilnummer 2",
         "da": "Mobilnummer 2",
         "ru": "Мобильный номер 2",
-        "pl": "Numer telefonu komórkowego 2"
+        "pl": "Numer telefonu komórkowego 2",
+        "ko": "휴대폰 번호 2",
+        "ar": "رقم الهاتف المحمول 2"
       },
       "example": {
         "en": "+31612345678",
@@ -230,7 +270,9 @@
         "no": "+47123456789",
         "da": "+45123456789",
         "ru": "+79123456789",
-        "pl": "+48123456789"
+        "pl": "+48123456789",
+        "ko": "+31612345678",
+        "ar": "+31612345678"
       }
     },
     {
@@ -247,7 +289,9 @@
         "no": "Bursdagsmelding",
         "da": "Fødselsdagshilsen",
         "ru": "Поздравление с днем рождения",
-        "pl": "Wiadomość urodzinowa"
+        "pl": "Wiadomość urodzinowa",
+        "ko": "생일 메시지",
+        "ar": "رسالة عيد الميلاد"
       },
       "example": {
         "en": "Happy B-day!",
@@ -260,24 +304,28 @@
         "no": "Gratulerer med dagen!",
         "da": "Tillykke med fødselsdagen!",
         "ru": "С днем рождения!",
-        "pl": "Wszystkiego najlepszego!"
+        "pl": "Wszystkiego najlepszego!",
+        "ko": "생일 축하합니다!",
+        "ar": "عيد ميلاد سعيد!"
       }
     },
     {
       "name": "imageUrl",
       "type": "string",
       "title": {
-          "en": "URL Image",
-          "nl": "URL Afbeelding",
-          "de": "URL Bild",
-          "fr": "URL de l'image",
-          "it": "URL Immagine",
-          "es": "URL de la imagen",
-          "sv": "URL Bild",
-          "no": "URL Bilde",
-          "da": "URL Billede",
-          "ru": "URL изображения",
-          "pl": "URL Obrazu"
+        "en": "URL Image",
+        "nl": "URL Afbeelding",
+        "de": "URL Bild",
+        "fr": "URL de l'image",
+        "it": "URL Immagine",
+        "es": "URL de la imagen",
+        "sv": "URL Bild",
+        "no": "URL Bilde",
+        "da": "URL Billede",
+        "ru": "URL изображения",
+        "pl": "URL Obrazu",
+        "ko": "이미지 URL",
+        "ar": "رابط الصورة"
       },
       "example": {
         "en": "Https://",
@@ -290,7 +338,9 @@
         "no": "Https://",
         "da": "Https://",
         "ru": "Https://",
-        "pl": "Https://"
+        "pl": "Https://",
+        "ko": "Https://",
+        "ar": "Https://"
       }
     },
     {
@@ -307,7 +357,9 @@
         "no": "Alder",
         "da": "Alder",
         "ru": "Возраст",
-        "pl": "Wiek"
+        "pl": "Wiek",
+        "ko": "나이",
+        "ar": "العمر"
       },
       "example": {
         "en": "38",
@@ -320,7 +372,9 @@
         "no": "38",
         "da": "38",
         "ru": "38",
-        "pl": "38"
+        "pl": "38",
+        "ko": "38",
+        "ar": "38"
       }
     }
   ]

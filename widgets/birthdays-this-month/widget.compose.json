@@ -1,7 +1,18 @@
 {
   "name": {
     "en": "Birthdays This Month",
-    "nl": "Verjaardagen Deze Maand"
+    "nl": "Verjaardagen deze maand",
+    "de": "Geburtstage diesen Monat",
+    "fr": "Anniversaires ce mois-ci",
+    "it": "Compleanni di questo mese",
+    "sv": "Födelsedagar denna månad",
+    "no": "Bursdager denne måneden",
+    "es": "Cumpleaños de este mes",
+    "da": "Fødselsdage denne måned",
+    "ru": "Дни рождения в этом месяце",
+    "pl": "Urodziny w tym miesiącu",
+    "ko": "이번 달 생일",
+    "ar": "أعياد ميلاد هذا الشهر"
   },
   "height": 300,
   "api": {

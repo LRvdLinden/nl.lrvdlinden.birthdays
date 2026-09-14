@@ -14,7 +14,14 @@
       "imageUrl": "Birthday card image URL",
       "add": "Dodaj osobę",
       "save": "Zapisz",
-      "cancel": "Anuluj"
+      "cancel": "Anuluj",
+      "placeholders": {
+        "name": "np. Jan Kowalski",
+        "mobile": "np. +48123456789",
+        "category": "Wybierz lub wpisz kategorię",
+        "message": "np. Wszystkiego najlepszego Jan 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Osoby",
@@ -24,11 +31,52 @@
       "message": "Wiadomość",
       "actions": "Akcje",
       "edit": "Edytuj",
-      "delete": "Usuń"
+      "delete": "Usuń",
+      "searchPlaceholder": "Szukaj według nazwy, kategorii lub kontaktu",
+      "allCategories": "Wszystkie kategorie",
+      "age": "Wiek"
     },
     "import_btn": "Importuj CSV",
     "export_btn": "Eksportuj CSV",
-    "clear_btn": "Wyczyść listę"
+    "clear_btn": "Wyczyść listę",
+    "main": {
+      "subtitle": "Zarządzaj urodzinami, przypomnieniami i listą urodzin.",
+      "general": "Ogólne",
+      "version": "Wersja",
+      "changelog": "Dziennik zmian",
+      "rate": "Oceń aplikację",
+      "forum": "Forum",
+      "birthdaySettings": "Ustawienia urodzin",
+      "addBirthday": "Dodaj urodziny",
+      "birthdayList": "Lista urodzin",
+      "developers": "Programiści",
+      "madeWith": "Stworzone z miłością",
+      "in": "w",
+      "back": "Wstecz",
+      "add": "Dodaj",
+      "comingSoon": "Wkrótce",
+      "loadError": "Błąd zapisywania danych!"
+    },
+    "ical": {
+      "title": "Kalendarze iCal",
+      "name": "Nazwa kalendarza",
+      "namePlaceholder": "np. Praca lub stowarzyszenie",
+      "url": "Adres subskrypcji iCal",
+      "urlPlaceholder": "https://kalendarz.example/kalendarz.ics",
+      "add": "Dodaj subskrypcję",
+      "upload": "Prześlij plik iCal",
+      "import": "Importuj plik",
+      "sync": "Synchronizuj teraz",
+      "remove": "Usuń",
+      "none": "Brak skonfigurowanych subskrypcji iCal.",
+      "invalidUrl": "Wpisz prawidłowy adres http(s).",
+      "added": "Dodano subskrypcję.",
+      "syncing": "Synchronizowanie…",
+      "synced": "Zsynchronizowano __count__ urodzin.",
+      "error": "Błąd iCal:",
+      "chooseFile": "Wybierz plik .ics.",
+      "imported": "Zaimportowano __count__ urodzin."
+    }
   },
   "messages": {
     "validation_error": "Sprawdź wprowadzone dane",
@@ -44,5 +92,8 @@
     "no_export": "Brak urodzin do wyeksportowania.",
     "clear_confirm": "Czy na pewno chcesz usunąć wszystkie urodziny? Tej operacji nie można cofnąć.",
     "clear_success": "Wszystkie urodziny zostały usunięte."
+  },
+  "menu": {
+    "title": "Urodziny"
   }
 }

@@ -23,7 +23,7 @@
 </div>
 
 <!-- Page Content Block -->
-<p class="homey-subtitle" data-i18n="settings.subtitle">
+<p class="homey-subtitle" data-i18n="settings.main.subtitle">
     <!-- This field will also be translated -->
 </p>
 
@@ -47,7 +47,7 @@
 
 <!-- Information Block -->
 <div class="page-content">
-        <div class="light-gray-title">General</div>
+        <div class="light-gray-title" data-i18n="settings.main.general">General</div>
         <div class="list links-list colored-icons-list settings-list list-outline list-dividers full-width">
             <ul>
                 <li>
@@ -55,8 +55,8 @@
                       <div class="colored-icon gray">
                         <i class="fa-solid fa-gear"></i>
                     </div>
-                      Version
-                      <div class="item-after">v2.1.1</div>
+                      <span data-i18n="settings.main.version">Version</span>
+                      <div class="item-after">v2.1.2</div>
                     </a>
                   </li>
         <li>
@@ -64,7 +64,7 @@
                 <div class="colored-icon orange">
                     <i class="fa-solid fa-rotate"></i>
                 </div>
-                Changelog
+                <span data-i18n="settings.main.changelog">Changelog</span>
             </a>
         </li>
         <li>
@@ -72,7 +72,7 @@
                 <div class="colored-icon purple">
                     <i class="fa-solid fa-star"></i>
                 </div>
-                Rate This App
+                <span data-i18n="settings.main.rate">Rate This App</span>
             </a>
         </li>
         <li>
@@ -80,12 +80,12 @@
                 <div class="colored-icon green">
                     <i class="fa-solid fa-comments"></i>
                 </div>
-                Forum
+                <span data-i18n="settings.main.forum">Forum</span>
             </a>
         </li>
     </ul>
 </div>
-<div class="light-gray-title">Birthdays settings</div>
+<div class="light-gray-title" data-i18n="settings.main.birthdaySettings">Birthday settings</div>
 <div class="list links-list colored-icons-list settings-list list-outline list-dividers full-width">
     <ul>
       <li>
@@ -93,7 +93,7 @@
             <div class="colored-icon blue">
               <i class="fa-solid fa-plus"></i>
             </div>
-            Add birthday
+            <span data-i18n="settings.main.addBirthday">Add birthday</span>
         </a>
     </li>
       <li>
@@ -101,7 +101,7 @@
             <div class="colored-icon pink">
               <i class="fa-solid fa-list"></i>
             </div>
-            Birthday list
+            <span data-i18n="settings.main.birthdayList">Birthday list</span>
         </a>
     </li>
       <li>
@@ -132,8 +132,37 @@
 </ul>
 </div>
 
+<div class="light-gray-title" data-i18n="settings.ical.title">iCal calendars</div>
+<div class="list settings-list list-outline list-dividers full-width">
+  <ul>
+    <li class="item-content">
+      <div class="item-inner" style="display:block;width:100%;padding:12px;">
+        <label class="homey-form-label" data-i18n="settings.ical.name">Calendar name</label>
+        <input id="ical-name" class="homey-form-input" type="text" data-i18n-placeholder="settings.ical.namePlaceholder">
+        <label class="homey-form-label" style="margin-top:10px" data-i18n="settings.ical.url">iCal subscription URL</label>
+        <input id="ical-url" class="homey-form-input" type="url" data-i18n-placeholder="settings.ical.urlPlaceholder">
+        <button id="ical-add" class="homey-button-primary-full" style="margin-top:10px" data-i18n="settings.ical.add">Add subscription</button>
+      </div>
+    </li>
+    <li class="item-content">
+      <div class="item-inner" style="display:block;width:100%;padding:12px;">
+        <label class="homey-form-label" data-i18n="settings.ical.upload">Upload iCal file</label>
+        <input id="ical-file" class="homey-form-input" type="file" accept=".ics,text/calendar">
+        <button id="ical-import" class="homey-button-secondary-full" style="margin-top:10px" data-i18n="settings.ical.import">Import file</button>
+      </div>
+    </li>
+    <li class="item-content">
+      <div class="item-inner" style="display:block;width:100%;padding:12px;">
+        <div id="ical-sources"></div>
+        <button id="ical-sync" class="homey-button-secondary-full" data-i18n="settings.ical.sync">Synchronize now</button>
+        <p id="ical-status" class="homey-subtitle"></p>
+      </div>
+    </li>
+  </ul>
+</div>
+
 <!-- Developers Block -->
-<div class="light-gray-title">Developers</div>
+<div class="light-gray-title" data-i18n="settings.main.developers">Developers</div>
 <div class="list list-with-icons list-outline list-dividers full-width">
     <ul>
         <li>
@@ -173,17 +202,16 @@
 
 <!-- Footer Block -->
 <footer style="margin-top: 20px;">
-    <div class="light-gray-title">Made with
+    <div class="light-gray-title"><span data-i18n="settings.main.madeWith">Made with</span>
     <svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="height: 0.8rem;">
         <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#ef35aa"></path>
     </svg> 
-    in <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+    <span data-i18n="settings.main.in">in</span> <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
 </footer>
 </div>
 <!-- Document Footer Block -->
 <script src="js/framework7-bundle.js"></script>
 <script defer src="fontawesome/js/brands.js"></script>
-<script defer src="fontawesome/js/light.js"></script>
 <script defer src="fontawesome/js/regular.js"></script>
 <script defer src="fontawesome/js/solid.js"></script>
 <script defer src="fontawesome/js/fontawesome.js"></script>
@@ -199,6 +227,73 @@
 
     function onHomeyReady(Homey) {
         myHomey = Homey;
+        document.documentElement.lang = Homey.getLanguage ? Homey.getLanguage() : 'en';
+        document.documentElement.dir = document.documentElement.lang === 'ar' ? 'rtl' : 'ltr';
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function(element) {
+            element.placeholder = Homey.__(element.getAttribute('data-i18n-placeholder'));
+        });
+
+        function renderIcalSources() {
+            myHomey.get('icalSources', function(err, sources) {
+                sources = Array.isArray(sources) ? sources : [];
+                const container = document.getElementById('ical-sources');
+                container.innerHTML = sources.length ? sources.map(function(source) {
+                    return '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span style="flex:1;overflow:hidden;text-overflow:ellipsis">' +
+                      String(source.name || source.url).replace(/[&<>"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]}) +
+                      '</span><button class="homey-button-secondary-shadow ical-remove" data-id="' + source.id + '">' + myHomey.__('settings.ical.remove') + '</button></div>';
+                }).join('') : '<p>' + myHomey.__('settings.ical.none') + '</p>';
+                container.querySelectorAll('.ical-remove').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        const removedId = button.dataset.id;
+                        myHomey.set('icalSources', sources.filter(function(source){ return source.id !== removedId; }), function() {
+                            myHomey.get('persons', function(personError, persons) {
+                                if (!personError && Array.isArray(persons)) myHomey.set('persons', persons.filter(function(person){ return person.icalSourceId !== removedId; }));
+                                renderIcalSources();
+                            });
+                        });
+                    });
+                });
+            });
+        }
+
+        document.getElementById('ical-add').addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('ical-url').value.trim();
+            const name = document.getElementById('ical-name').value.trim() || 'iCal';
+            if (!/^https?:\/\//i.test(url)) return myHomey.alert(myHomey.__('settings.ical.invalidUrl'));
+            myHomey.get('icalSources', function(err, sources) {
+                sources = Array.isArray(sources) ? sources : [];
+                const id = 'url-' + Date.now().toString(36);
+                sources.push({ id:id, name:name, url:url, enabled:true });
+                myHomey.set('icalSources', sources, function(setErr) {
+                    if (setErr) return myHomey.alert(String(setErr));
+                    document.getElementById('ical-url').value = '';
+                    document.getElementById('ical-name').value = '';
+                    renderIcalSources();
+                    myHomey.alert(myHomey.__('settings.ical.added'));
+                });
+            });
+        });
+
+        document.getElementById('ical-sync').addEventListener('click', function(e) {
+            e.preventDefault(); const status = document.getElementById('ical-status'); status.textContent = myHomey.__('settings.ical.syncing');
+            myHomey.api('POST', '/ical/sync', {}).then(function(result) {
+                const count = Object.values(result.sources || {}).reduce(function(sum, source){return sum + (source.count || 0)}, 0);
+                status.textContent = myHomey.__('settings.ical.synced').replace('__count__', count);
+            }).catch(function(error){ status.textContent = myHomey.__('settings.ical.error') + ' ' + error.message; });
+        });
+
+        document.getElementById('ical-import').addEventListener('click', function(e) {
+            e.preventDefault(); const file = document.getElementById('ical-file').files[0];
+            if (!file) return myHomey.alert(myHomey.__('settings.ical.chooseFile'));
+            const reader = new FileReader(); reader.onload = function() {
+                myHomey.api('POST', '/ical/import', { content:String(reader.result), name:file.name.replace(/\.ics$/i,''), sourceId:'upload-'+file.name.toLowerCase().replace(/[^a-z0-9]+/g,'-') })
+                  .then(function(result){ myHomey.alert(myHomey.__('settings.ical.imported').replace('__count__', result.count)); })
+                  .catch(function(error){ myHomey.alert(myHomey.__('settings.ical.error') + ' ' + error.message); });
+            }; reader.readAsText(file);
+        });
+
+        renderIcalSources();
 
         document.getElementById('importeer-btn').addEventListener('click', function(e) {
             e.preventDefault();
@@ -383,9 +478,9 @@ function toggleDarkMode() {
   updateVerifiedBadgeClass();
   // Toggle ook de class voor het pictogram
   const checkmarkIcon = document.getElementById('checkmarkIcon');
-  if (body.classList.contains('dark')) {
+  if (checkmarkIcon && body.classList.contains('dark')) {
     checkmarkIcon.style.backgroundColor = '#00000000'; // Set background color to black in dark mode
-  } else {
+  } else if (checkmarkIcon) {
     checkmarkIcon.style.backgroundColor = '#00000000'; // Set background color to white when dark mode is off
   }
 }
@@ -395,7 +490,7 @@ if (isDarkMode) {
   body.classList.add('dark');
   // Voeg ook de dark class toe aan het pictogram als de dark mode standaard is ingeschakeld
   const checkmarkIcon = document.getElementById('checkmarkIcon');
-  checkmarkIcon.style.backgroundColor = '#00000000'; // Set initial background color to black in dark mode
+  if (checkmarkIcon) checkmarkIcon.style.backgroundColor = '#00000000'; // Set initial background color to black in dark mode
 }
 
 // Luister naar veranderingen in de donkere modus en werk de kleuren bij

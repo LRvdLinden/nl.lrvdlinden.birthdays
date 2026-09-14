@@ -1,64 +1,7 @@
 'use strict';
-
-function getTodayKey() {
-    const now = new Date();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-
-    return `${month}-${day}`;
-}
-
-function getBirthdayKey(dateOfBirth) {
-    if (!dateOfBirth || typeof dateOfBirth !== 'string') return null;
-
-    const parts = dateOfBirth.split('-');
-
-    if (parts.length !== 3) return null;
-
-    return `${parts[1]}-${parts[2]}`;
-}
-
-function getAge(person) {
-    if (person.isBaby) return null;
-    if (!person.dateOfBirth) return null;
-
-    const today = new Date();
-    const birthDate = new Date(person.dateOfBirth);
-
-    if (Number.isNaN(birthDate.getTime())) return null;
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-
-    const hasHadBirthday =
-        today.getMonth() > birthDate.getMonth() ||
-        (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
-
-    if (!hasHadBirthday) age--;
-
-    return age;
-}
-
-module.exports = {
-    async getBirthdaysToday({ homey }) {
-        const persons = homey.settings.get('persons') || [];
-        const todayKey = getTodayKey();
-
-        const birthdays = Array.isArray(persons)
-            ? persons
-                .filter((person) => getBirthdayKey(person.dateOfBirth) === todayKey)
-                .map((person) => ({
-                    name: person.name || '',
-                    category: person.category || '',
-                    message: person.message || '',
-                    imageUrl: person.imageUrl || 'https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/birthday_card.png',
-                    age: getAge(person),
-                    isBaby: !!person.isBaby,
-                }))
-            : [];
-
-        return {
-            date: todayKey,
-            birthdays,
-        };
-    },
-};
+const LOCALES={en:'en-GB',nl:'nl-NL',de:'de-DE',fr:'fr-FR',it:'it-IT',sv:'sv-SE',no:'nb-NO',es:'es-ES',da:'da-DK',ru:'ru-RU',pl:'pl-PL',ko:'ko-KR',ar:'ar-SA'};
+function context(homey){const l=homey.i18n.getLanguage();return{language:LOCALES[l]?l:'en',locale:LOCALES[l]||LOCALES.en,timeZone:homey.clock.getTimezone()||'UTC'}}
+function zonedParts(date,locale,timeZone){return Object.fromEntries(new Intl.DateTimeFormat(locale,{timeZone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]))}
+function birthdayParts(value){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(value||'');return m?{year:Number(m[1]),month:m[2],day:m[3]}:null}
+function age(person,now){if(person.isBaby)return null;const b=birthdayParts(person.dateOfBirth);return b?Number(now.year)-b.year-(`${now.month}-${now.day}`<`${b.month}-${b.day}`?1:0):null}
+module.exports={async getBirthdaysToday({homey}){const {language,locale,timeZone}=context(homey);const now=zonedParts(new Date(),locale,timeZone);const todayKey=`${now.month}-${now.day}`;const persons=homey.settings.get('persons')||[];const birthdays=Array.isArray(persons)?persons.filter(p=>{const b=birthdayParts(p.dateOfBirth);return b&&`${b.month}-${b.day}`===todayKey}).map(p=>({name:p.name||'',category:p.category||'',message:p.message||'',imageUrl:p.imageUrl||'https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/birthday_card.png',age:age(p,now),isBaby:!!p.isBaby})):[];return{date:todayKey,language,locale,timeZone,birthdays}}};

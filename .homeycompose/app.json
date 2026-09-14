@@ -1,6 +1,6 @@
 {
   "id": "nl.lrvdlinden.birthdays",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "compatibility": ">=12.1.0",
   "sdk": 3,
   "platforms": [
@@ -9,7 +9,18 @@
   "brandColor": "#ef35aa",
   "name": {
     "en": "Birthdays",
-    "nl": "Verjaardagen"
+    "nl": "Verjaardagen",
+    "de": "Geburtstage",
+    "fr": "Anniversaires",
+    "it": "Compleanni",
+    "sv": "Födelsedagar",
+    "no": "Bursdager",
+    "es": "Cumpleaños",
+    "da": "Fødselsdage",
+    "ru": "Дни рождения",
+    "pl": "Urodziny",
+    "ko": "생일",
+    "ar": "أعياد الميلاد"
   },
   "images": {
     "xlarge": "/assets/images/xlarge.jpg",
@@ -27,7 +38,9 @@
     "no": "Sett bursdagspåminnelser eller send bursdagshilsener",
     "da": "Indstil fødselsdagspåmindelser eller send fødselsdagshilsener",
     "ru": "Настройте напоминания о днях рождения или отправьте поздравления с днем рождения",
-    "pl": "Ustaw przypomnienia urodzinowe lub wysyłaj życzenia urodzinowe"
+    "pl": "Ustaw przypomnienia urodzinowe lub wysyłaj życzenia urodzinowe",
+    "ko": "생일 알림을 설정하거나 생일 축하 메시지를 보내세요",
+    "ar": "اضبط تذكيرات أعياد الميلاد أو أرسل تهاني عيد الميلاد"
   },
   "category": "tools",
   "class": "cloud",
@@ -176,6 +189,20 @@
       "impreza",
       "urodziny",
       "callmebot"
+    ],
+    "ko": [
+      "생일",
+      "알림",
+      "메시지",
+      "캘린더",
+      "파티"
+    ],
+    "ar": [
+      "عيد ميلاد",
+      "تذكير",
+      "رسالة",
+      "تقويم",
+      "حفلة"
     ]
   },
   "language": {
@@ -184,12 +211,14 @@
     "de": "de",
     "fr": "fr",
     "it": "it",
-    "es": "es",
     "sv": "sv",
     "no": "no",
+    "es": "es",
     "da": "da",
     "ru": "ru",
-    "pl": "pl"
+    "pl": "pl",
+    "ko": "ko",
+    "ar": "ar"
   },
   "permissions": [],
   "author": {
@@ -201,7 +230,7 @@
       {
         "name": "Lucas van der Have"
       },
-            {
+      {
         "name": "Techniman"
       }
     ],

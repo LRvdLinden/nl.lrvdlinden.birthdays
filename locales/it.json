@@ -14,7 +14,14 @@
       "imageUrl": "Birthday card image URL",
       "add": "Aggiungi persona",
       "save": "Salva",
-      "cancel": "Annulla"
+      "cancel": "Annulla",
+      "placeholders": {
+        "name": "es. Mario Rossi",
+        "mobile": "es. +391234567890",
+        "category": "Seleziona o inserisci una categoria",
+        "message": "es. Buon compleanno Mario 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Persone",
@@ -24,11 +31,52 @@
       "message": "Messaggio",
       "actions": "Azioni",
       "edit": "Modifica",
-      "delete": "Elimina"
+      "delete": "Elimina",
+      "searchPlaceholder": "Cerca nome, categoria o contatti",
+      "allCategories": "Tutte le categorie",
+      "age": "Età"
     },
     "import_btn": "Importa CSV",
     "export_btn": "Esporta CSV",
-    "clear_btn": "Svuota elenco"
+    "clear_btn": "Svuota elenco",
+    "main": {
+      "subtitle": "Gestisci compleanni, promemoria e il tuo elenco dei compleanni.",
+      "general": "Generale",
+      "version": "Versione",
+      "changelog": "Registro modifiche",
+      "rate": "Valuta questa app",
+      "forum": "Forum",
+      "birthdaySettings": "Impostazioni compleanni",
+      "addBirthday": "Aggiungi compleanno",
+      "birthdayList": "Elenco compleanni",
+      "developers": "Sviluppatori",
+      "madeWith": "Creato con amore",
+      "in": "a",
+      "back": "Indietro",
+      "add": "Aggiungi",
+      "comingSoon": "Prossimamente",
+      "loadError": "Errore durante il salvataggio dei dati!"
+    },
+    "ical": {
+      "title": "Calendari iCal",
+      "name": "Nome calendario",
+      "namePlaceholder": "es. Lavoro o associazione",
+      "url": "URL abbonamento iCal",
+      "urlPlaceholder": "https://calendario.example/calendario.ics",
+      "add": "Aggiungi abbonamento",
+      "upload": "Carica file iCal",
+      "import": "Importa file",
+      "sync": "Sincronizza ora",
+      "remove": "Rimuovi",
+      "none": "Nessun abbonamento iCal configurato.",
+      "invalidUrl": "Inserisci un URL http(s) valido.",
+      "added": "Abbonamento aggiunto.",
+      "syncing": "Sincronizzazione…",
+      "synced": "Sincronizzati __count__ compleanni.",
+      "error": "Errore iCal:",
+      "chooseFile": "Scegli un file .ics.",
+      "imported": "Importati __count__ compleanni."
+    }
   },
   "messages": {
     "validation_error": "Si prega di controllare i dati inseriti",
@@ -44,5 +92,8 @@
     "no_export": "Nessun compleanno da esportare.",
     "clear_confirm": "Sei sicuro di voler eliminare tutti i compleanni? Questa operazione non può essere annullata.",
     "clear_success": "Tutti i compleanni sono stati eliminati."
+  },
+  "menu": {
+    "title": "Compleanni"
   }
 }

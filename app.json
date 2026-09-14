@@ -1,8 +1,8 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.lrvdlinden.birthdays",
-  "version": "2.0.1",
-  "compatibility": ">=5.0.0",
+  "version": "2.1.2",
+  "compatibility": ">=12.1.0",
   "sdk": 3,
   "platforms": [
     "local"
@@ -10,7 +10,18 @@
   "brandColor": "#ef35aa",
   "name": {
     "en": "Birthdays",
-    "nl": "Verjaardagen"
+    "nl": "Verjaardagen",
+    "de": "Geburtstage",
+    "fr": "Anniversaires",
+    "it": "Compleanni",
+    "sv": "Födelsedagar",
+    "no": "Bursdager",
+    "es": "Cumpleaños",
+    "da": "Fødselsdage",
+    "ru": "Дни рождения",
+    "pl": "Urodziny",
+    "ko": "생일",
+    "ar": "أعياد الميلاد"
   },
   "images": {
     "xlarge": "/assets/images/xlarge.jpg",
@@ -28,7 +39,9 @@
     "no": "Sett bursdagspåminnelser eller send bursdagshilsener",
     "da": "Indstil fødselsdagspåmindelser eller send fødselsdagshilsener",
     "ru": "Настройте напоминания о днях рождения или отправьте поздравления с днем рождения",
-    "pl": "Ustaw przypomnienia urodzinowe lub wysyłaj życzenia urodzinowe"
+    "pl": "Ustaw przypomnienia urodzinowe lub wysyłaj życzenia urodzinowe",
+    "ko": "생일 알림을 설정하거나 생일 축하 메시지를 보내세요",
+    "ar": "اضبط تذكيرات أعياد الميلاد أو أرسل تهاني عيد الميلاد"
   },
   "category": "tools",
   "class": "cloud",
@@ -176,6 +189,20 @@
       "impreza",
       "urodziny",
       "callmebot"
+    ],
+    "ko": [
+      "생일",
+      "알림",
+      "메시지",
+      "캘린더",
+      "파티"
+    ],
+    "ar": [
+      "عيد ميلاد",
+      "تذكير",
+      "رسالة",
+      "تقويم",
+      "حفلة"
     ]
   },
   "language": {
@@ -184,12 +211,14 @@
     "de": "de",
     "fr": "fr",
     "it": "it",
-    "es": "es",
     "sv": "sv",
     "no": "no",
+    "es": "es",
     "da": "da",
     "ru": "ru",
-    "pl": "pl"
+    "pl": "pl",
+    "ko": "ko",
+    "ar": "ar"
   },
   "permissions": [],
   "author": {
@@ -200,6 +229,9 @@
     "developers": [
       {
         "name": "Lucas van der Have"
+      },
+      {
+        "name": "Techniman"
       }
     ],
     "translators": [
@@ -245,7 +277,9 @@
           "no": "Det er noen sin bursdag",
           "da": "Det er en persons fødselsdag",
           "ru": "У кого-то день рождения",
-          "pl": "Ktoś ma urodziny"
+          "pl": "Ktoś ma urodziny",
+          "ko": "누군가의 생일입니다",
+          "ar": "إنه عيد ميلاد شخص ما"
         },
         "titleFormatted": {
           "en": "Celebrate someone's birthday at [[run_at]] o'clock",
@@ -258,7 +292,9 @@
           "no": "Feire noens bursdag klokken [[run_at]]",
           "da": "Fejr en persons fødselsdag kl. [[run_at]]",
           "ru": "Празднуйте день рождения кого-то в [[run_at]] часов",
-          "pl": "Świętuj urodziny kogoś o [[run_at]]"
+          "pl": "Świętuj urodziny kogoś o [[run_at]]",
+          "ko": "[[run_at]]에 누군가의 생일 축하",
+          "ar": "احتفل بعيد ميلاد شخص ما الساعة [[run_at]]"
         },
         "args": [
           {
@@ -275,10 +311,24 @@
               "no": "Tid",
               "da": "Tid",
               "ru": "Время",
-              "pl": "Czas"
+              "pl": "Czas",
+              "ko": "시간",
+              "ar": "الوقت"
             },
             "placeholder": {
-              "en": "13:37"
+              "en": "13:37",
+              "nl": "13:37",
+              "de": "13:37",
+              "fr": "13:37",
+              "it": "13:37",
+              "sv": "13:37",
+              "no": "13:37",
+              "es": "13:37",
+              "da": "13:37",
+              "ru": "13:37",
+              "pl": "13:37",
+              "ko": "13:37",
+              "ar": "13:37"
             }
           }
         ],
@@ -297,7 +347,9 @@
               "no": "Bursdagsbarn",
               "da": "Fødselar",
               "ru": "Имя именинника",
-              "pl": "Osoba obchodząca urodziny"
+              "pl": "Osoba obchodząca urodziny",
+              "ko": "생일인 사람",
+              "ar": "صاحب عيد الميلاد"
             },
             "example": {
               "en": "Jon Doe",
@@ -310,7 +362,9 @@
               "no": "Per Olsen",
               "da": "Lise Nielsen",
               "ru": "Иван Иванов",
-              "pl": "Jan Kowalski"
+              "pl": "Jan Kowalski",
+              "ko": "홍길동",
+              "ar": "أحمد محمد"
             }
           },
           {
@@ -327,7 +381,9 @@
               "no": "Kategori",
               "da": "Kategori",
               "ru": "Категория",
-              "pl": "Kategoria"
+              "pl": "Kategoria",
+              "ko": "카테고리",
+              "ar": "الفئة"
             },
             "example": {
               "en": "Work",
@@ -340,7 +396,9 @@
               "no": "Arbeid",
               "da": "Arbejde",
               "ru": "Работа",
-              "pl": "Praca"
+              "pl": "Praca",
+              "ko": "직장",
+              "ar": "العمل"
             }
           },
           {
@@ -357,7 +415,9 @@
               "no": "Mobilnummer",
               "da": "Mobilnummer",
               "ru": "Мобильный номер",
-              "pl": "Numer telefonu komórkowego"
+              "pl": "Numer telefonu komórkowego",
+              "ko": "휴대폰 번호",
+              "ar": "رقم الهاتف المحمول"
             },
             "example": {
               "en": "+31612345678",
@@ -370,7 +430,9 @@
               "no": "+47123456789",
               "da": "+45123456789",
               "ru": "+79123456789",
-              "pl": "+48123456789"
+              "pl": "+48123456789",
+              "ko": "+31612345678",
+              "ar": "+31612345678"
             }
           },
           {
@@ -387,7 +449,9 @@
               "no": "Mobilnummer 2",
               "da": "Mobilnummer 2",
               "ru": "Мобильный номер 2",
-              "pl": "Numer telefonu komórkowego 2"
+              "pl": "Numer telefonu komórkowego 2",
+              "ko": "휴대폰 번호 2",
+              "ar": "رقم الهاتف المحمول 2"
             },
             "example": {
               "en": "+31612345678",
@@ -400,7 +464,9 @@
               "no": "+47123456789",
               "da": "+45123456789",
               "ru": "+79123456789",
-              "pl": "+48123456789"
+              "pl": "+48123456789",
+              "ko": "+31612345678",
+              "ar": "+31612345678"
             }
           },
           {
@@ -417,7 +483,9 @@
               "no": "Bursdagsmelding",
               "da": "Fødselsdagshilsen",
               "ru": "Поздравление с днем рождения",
-              "pl": "Wiadomość urodzinowa"
+              "pl": "Wiadomość urodzinowa",
+              "ko": "생일 메시지",
+              "ar": "رسالة عيد الميلاد"
             },
             "example": {
               "en": "Happy B-day!",
@@ -430,7 +498,9 @@
               "no": "Gratulerer med dagen!",
               "da": "Tillykke med fødselsdagen!",
               "ru": "С днем рождения!",
-              "pl": "Wszystkiego najlepszego!"
+              "pl": "Wszystkiego najlepszego!",
+              "ko": "생일 축하합니다!",
+              "ar": "عيد ميلاد سعيد!"
             }
           },
           {
@@ -447,7 +517,9 @@
               "no": "URL Bilde",
               "da": "URL Billede",
               "ru": "URL изображения",
-              "pl": "URL Obrazu"
+              "pl": "URL Obrazu",
+              "ko": "이미지 URL",
+              "ar": "رابط الصورة"
             },
             "example": {
               "en": "Https://",
@@ -460,7 +532,9 @@
               "no": "Https://",
               "da": "Https://",
               "ru": "Https://",
-              "pl": "Https://"
+              "pl": "Https://",
+              "ko": "Https://",
+              "ar": "Https://"
             }
           },
           {
@@ -477,7 +551,9 @@
               "no": "Alder",
               "da": "Alder",
               "ru": "Возраст",
-              "pl": "Wiek"
+              "pl": "Wiek",
+              "ko": "나이",
+              "ar": "العمر"
             },
             "example": {
               "en": "38",
@@ -490,7 +566,9 @@
               "no": "38",
               "da": "38",
               "ru": "38",
-              "pl": "38"
+              "pl": "38",
+              "ko": "38",
+              "ar": "38"
             }
           }
         ]
@@ -508,7 +586,9 @@
           "no": "Det er en persons bursdag i en kategori",
           "da": "Det er en persons fødselsdag i en kategori",
           "ru": "Это день рождения человека в категории",
-          "pl": "To są urodziny osoby w kategorii"
+          "pl": "To są urodziny osoby w kategorii",
+          "ko": "카테고리에 속한 사람의 생일입니다",
+          "ar": "إنه عيد ميلاد شخص ضمن فئة"
         },
         "titleFormatted": {
           "en": "Celebrate the birthday of a person in category [[category]] at [[run_at]] o'clock",
@@ -521,7 +601,9 @@
           "no": "Feir bursdagen til en person i kategorien [[category]] klokken [[run_at]]",
           "da": "Fejr fødselsdagen for en person i kategorien [[category]] kl. [[run_at]]",
           "ru": "Празднуйте день рождения человека в категории [[category]] в [[run_at]] часов",
-          "pl": "Świętuj urodziny osoby w kategorii [[category]] o [[run_at]]"
+          "pl": "Świętuj urodziny osoby w kategorii [[category]] o [[run_at]]",
+          "ko": "[[run_at]]에 [[category]] 카테고리 사람의 생일 축하",
+          "ar": "احتفل بعيد ميلاد شخص في فئة [[category]] الساعة [[run_at]]"
         },
         "args": [
           {
@@ -538,7 +620,9 @@
               "no": "Velg kategori",
               "da": "Vælg kategori",
               "ru": "Выберите категорию",
-              "pl": "Wybierz kategorię"
+              "pl": "Wybierz kategorię",
+              "ko": "카테고리 선택",
+              "ar": "اختر الفئة"
             },
             "placeholder": {
               "en": "Work",
@@ -551,7 +635,9 @@
               "no": "Arbeid",
               "da": "Arbejde",
               "ru": "Работа",
-              "pl": "Praca"
+              "pl": "Praca",
+              "ko": "직장",
+              "ar": "العمل"
             },
             "values": [
               {
@@ -567,7 +653,9 @@
                   "no": "Arbeid",
                   "da": "Arbejde",
                   "ru": "Работа",
-                  "pl": "Praca"
+                  "pl": "Praca",
+                  "ko": "직장",
+                  "ar": "العمل"
                 }
               },
               {
@@ -583,7 +671,9 @@
                   "no": "Privat",
                   "da": "Privat",
                   "ru": "Частное",
-                  "pl": "Prywatny"
+                  "pl": "Prywatny",
+                  "ko": "개인",
+                  "ar": "خاص"
                 }
               }
             ]
@@ -602,10 +692,24 @@
               "no": "Tid",
               "da": "Tid",
               "ru": "Время",
-              "pl": "Czas"
+              "pl": "Czas",
+              "ko": "시간",
+              "ar": "الوقت"
             },
             "placeholder": {
-              "en": "13:37"
+              "en": "13:37",
+              "nl": "13:37",
+              "de": "13:37",
+              "fr": "13:37",
+              "it": "13:37",
+              "sv": "13:37",
+              "no": "13:37",
+              "es": "13:37",
+              "da": "13:37",
+              "ru": "13:37",
+              "pl": "13:37",
+              "ko": "13:37",
+              "ar": "13:37"
             }
           }
         ],
@@ -624,7 +728,9 @@
               "no": "Bursdagsbarn",
               "da": "Fødselar",
               "ru": "Имя именинника",
-              "pl": "Osoba obchodząca urodziny"
+              "pl": "Osoba obchodząca urodziny",
+              "ko": "생일인 사람",
+              "ar": "صاحب عيد الميلاد"
             },
             "example": {
               "en": "Jon Doe",
@@ -637,7 +743,9 @@
               "no": "Per Olsen",
               "da": "Lise Nielsen",
               "ru": "Иван Иванов",
-              "pl": "Jan Kowalski"
+              "pl": "Jan Kowalski",
+              "ko": "홍길동",
+              "ar": "أحمد محمد"
             }
           },
           {
@@ -654,7 +762,9 @@
               "no": "Kategori",
               "da": "Kategori",
               "ru": "Категория",
-              "pl": "Kategoria"
+              "pl": "Kategoria",
+              "ko": "카테고리",
+              "ar": "الفئة"
             },
             "example": {
               "en": "Work",
@@ -667,7 +777,9 @@
               "no": "Arbeid",
               "da": "Arbejde",
               "ru": "Работа",
-              "pl": "Praca"
+              "pl": "Praca",
+              "ko": "직장",
+              "ar": "العمل"
             }
           },
           {
@@ -684,7 +796,9 @@
               "no": "Mobilnummer",
               "da": "Mobilnummer",
               "ru": "Мобильный номер",
-              "pl": "Numer telefonu komórkowego"
+              "pl": "Numer telefonu komórkowego",
+              "ko": "휴대폰 번호",
+              "ar": "رقم الهاتف المحمول"
             },
             "example": {
               "en": "+441234567890",
@@ -697,7 +811,9 @@
               "no": "+47123456789",
               "da": "+45123456789",
               "ru": "+79123456789",
-              "pl": "+48123456789"
+              "pl": "+48123456789",
+              "ko": "+441234567890",
+              "ar": "+441234567890"
             }
           },
           {
@@ -714,7 +830,9 @@
               "no": "Mobilnummer 2",
               "da": "Mobilnummer 2",
               "ru": "Мобильный номер 2",
-              "pl": "Numer telefonu komórkowego 2"
+              "pl": "Numer telefonu komórkowego 2",
+              "ko": "휴대폰 번호 2",
+              "ar": "رقم الهاتف المحمول 2"
             },
             "example": {
               "en": "+31612345678",
@@ -727,7 +845,9 @@
               "no": "+47123456789",
               "da": "+45123456789",
               "ru": "+79123456789",
-              "pl": "+48123456789"
+              "pl": "+48123456789",
+              "ko": "+31612345678",
+              "ar": "+31612345678"
             }
           },
           {
@@ -744,7 +864,9 @@
               "no": "Bursdagsmelding",
               "da": "Fødselsdagshilsen",
               "ru": "Поздравление с днем рождения",
-              "pl": "Wiadomość urodzinowa"
+              "pl": "Wiadomość urodzinowa",
+              "ko": "생일 메시지",
+              "ar": "رسالة عيد الميلاد"
             },
             "example": {
               "en": "Happy B-day!",
@@ -757,7 +879,9 @@
               "no": "Gratulerer med dagen!",
               "da": "Tillykke med fødselsdagen!",
               "ru": "С днем рождения!",
-              "pl": "Wszystkiego najlepszego!"
+              "pl": "Wszystkiego najlepszego!",
+              "ko": "생일 축하합니다!",
+              "ar": "عيد ميلاد سعيد!"
             }
           },
           {
@@ -774,7 +898,9 @@
               "no": "URL Bilde",
               "da": "URL Billede",
               "ru": "URL изображения",
-              "pl": "URL Obrazu"
+              "pl": "URL Obrazu",
+              "ko": "이미지 URL",
+              "ar": "رابط الصورة"
             },
             "example": {
               "en": "Https://",
@@ -787,7 +913,9 @@
               "no": "Https://",
               "da": "Https://",
               "ru": "Https://",
-              "pl": "Https://"
+              "pl": "Https://",
+              "ko": "Https://",
+              "ar": "Https://"
             }
           },
           {
@@ -804,7 +932,9 @@
               "no": "Alder",
               "da": "Alder",
               "ru": "Возраст",
-              "pl": "Wiek"
+              "pl": "Wiek",
+              "ko": "나이",
+              "ar": "العمر"
             },
             "example": {
               "en": "38",
@@ -817,7 +947,9 @@
               "no": "38",
               "da": "38",
               "ru": "38",
-              "pl": "38"
+              "pl": "38",
+              "ko": "38",
+              "ar": "38"
             }
           }
         ]
@@ -835,7 +967,9 @@
           "no": "Det er en spesifikk persons bursdag",
           "da": "Det er en bestemt persons fødselsdag",
           "ru": "Сегодня день рождения конкретного человека",
-          "pl": "To są urodziny konkretnej osoby"
+          "pl": "To są urodziny konkretnej osoby",
+          "ko": "특정인의 생일입니다",
+          "ar": "إنه عيد ميلاد شخص محدد"
         },
         "titleFormatted": {
           "en": "Celebrate [[person]]'s birthday at [[run_at]] o'clock",
@@ -848,7 +982,9 @@
           "no": "Feir [[person]]'s bursdag klokken [[run_at]]",
           "da": "Fejr [[person]]'s fødselsdag kl. [[run_at]]",
           "ru": "Празднуйте день рождения [[person]] в [[run_at]] часов",
-          "pl": "Świętuj urodziny [[person]] o [[run_at]]"
+          "pl": "Świętuj urodziny [[person]] o [[run_at]]",
+          "ko": "[[run_at]]에 [[person]]의 생일 축하",
+          "ar": "احتفل بعيد ميلاد [[person]] الساعة [[run_at]]"
         },
         "args": [
           {
@@ -865,10 +1001,24 @@
               "no": "Person",
               "da": "Person",
               "ru": "Человек",
-              "pl": "Osoba"
+              "pl": "Osoba",
+              "ko": "사람",
+              "ar": "الشخص"
             },
             "placeholder": {
-              "en": "John Doe"
+              "en": "John Doe",
+              "nl": "John Doe",
+              "de": "John Doe",
+              "fr": "John Doe",
+              "it": "John Doe",
+              "sv": "John Doe",
+              "no": "John Doe",
+              "es": "John Doe",
+              "da": "John Doe",
+              "ru": "John Doe",
+              "pl": "John Doe",
+              "ko": "홍길동",
+              "ar": "أحمد محمد"
             }
           },
           {
@@ -885,10 +1035,24 @@
               "no": "Tid",
               "da": "Tid",
               "ru": "Время",
-              "pl": "Czas"
+              "pl": "Czas",
+              "ko": "시간",
+              "ar": "الوقت"
             },
             "placeholder": {
-              "en": "13:37"
+              "en": "13:37",
+              "nl": "13:37",
+              "de": "13:37",
+              "fr": "13:37",
+              "it": "13:37",
+              "sv": "13:37",
+              "no": "13:37",
+              "es": "13:37",
+              "da": "13:37",
+              "ru": "13:37",
+              "pl": "13:37",
+              "ko": "13:37",
+              "ar": "13:37"
             }
           }
         ],
@@ -907,7 +1071,9 @@
               "no": "Bursdagsbarn",
               "da": "Fødselar",
               "ru": "Имя именинника",
-              "pl": "Osoba obchodząca urodziny"
+              "pl": "Osoba obchodząca urodziny",
+              "ko": "생일인 사람",
+              "ar": "صاحب عيد الميلاد"
             },
             "example": {
               "en": "Jon Doe",
@@ -920,7 +1086,9 @@
               "no": "Per Olsen",
               "da": "Lise Nielsen",
               "ru": "Иван Иванов",
-              "pl": "Jan Kowalski"
+              "pl": "Jan Kowalski",
+              "ko": "홍길동",
+              "ar": "أحمد محمد"
             }
           },
           {
@@ -937,7 +1105,9 @@
               "no": "Kategori",
               "da": "Kategori",
               "ru": "Категория",
-              "pl": "Kategoria"
+              "pl": "Kategoria",
+              "ko": "카테고리",
+              "ar": "الفئة"
             },
             "example": {
               "en": "Work",
@@ -950,7 +1120,9 @@
               "no": "Arbeid",
               "da": "Arbejde",
               "ru": "Работа",
-              "pl": "Praca"
+              "pl": "Praca",
+              "ko": "직장",
+              "ar": "العمل"
             }
           },
           {
@@ -967,7 +1139,9 @@
               "no": "Mobilnummer",
               "da": "Mobilnummer",
               "ru": "Мобильный номер",
-              "pl": "Numer telefonu komórkowego"
+              "pl": "Numer telefonu komórkowego",
+              "ko": "휴대폰 번호",
+              "ar": "رقم الهاتف المحمول"
             },
             "example": {
               "en": "+441234567890",
@@ -980,7 +1154,9 @@
               "no": "+47123456789",
               "da": "+45123456789",
               "ru": "+79123456789",
-              "pl": "+48123456789"
+              "pl": "+48123456789",
+              "ko": "+441234567890",
+              "ar": "+441234567890"
             }
           },
           {
@@ -997,7 +1173,9 @@
               "no": "Mobilnummer 2",
               "da": "Mobilnummer 2",
               "ru": "Мобильный номер 2",
-              "pl": "Numer telefonu komórkowego 2"
+              "pl": "Numer telefonu komórkowego 2",
+              "ko": "휴대폰 번호 2",
+              "ar": "رقم الهاتف المحمول 2"
             },
             "example": {
               "en": "+31612345678",
@@ -1010,7 +1188,9 @@
               "no": "+47123456789",
               "da": "+45123456789",
               "ru": "+79123456789",
-              "pl": "+48123456789"
+              "pl": "+48123456789",
+              "ko": "+31612345678",
+              "ar": "+31612345678"
             }
           },
           {
@@ -1027,7 +1207,9 @@
               "no": "Bursdagsmelding",
               "da": "Fødselsdagshilsen",
               "ru": "Поздравление с днем рождения",
-              "pl": "Wiadomość urodzinowa"
+              "pl": "Wiadomość urodzinowa",
+              "ko": "생일 메시지",
+              "ar": "رسالة عيد الميلاد"
             },
             "example": {
               "en": "Happy B-day!",
@@ -1040,7 +1222,9 @@
               "no": "Gratulerer med dagen!",
               "da": "Tillykke med fødselsdagen!",
               "ru": "С днем рождения!",
-              "pl": "Wszystkiego najlepszego!"
+              "pl": "Wszystkiego najlepszego!",
+              "ko": "생일 축하합니다!",
+              "ar": "عيد ميلاد سعيد!"
             }
           },
           {
@@ -1057,7 +1241,9 @@
               "no": "URL Bilde",
               "da": "URL Billede",
               "ru": "URL изображения",
-              "pl": "URL Obrazu"
+              "pl": "URL Obrazu",
+              "ko": "이미지 URL",
+              "ar": "رابط الصورة"
             },
             "example": {
               "en": "Https://",
@@ -1070,7 +1256,9 @@
               "no": "Https://",
               "da": "Https://",
               "ru": "Https://",
-              "pl": "Https://"
+              "pl": "Https://",
+              "ko": "Https://",
+              "ar": "Https://"
             }
           },
           {
@@ -1087,7 +1275,9 @@
               "no": "Alder",
               "da": "Alder",
               "ru": "Возраст",
-              "pl": "Wiek"
+              "pl": "Wiek",
+              "ko": "나이",
+              "ar": "العمر"
             },
             "example": {
               "en": "38",
@@ -1100,7 +1290,9 @@
               "no": "38",
               "da": "38",
               "ru": "38",
-              "pl": "38"
+              "pl": "38",
+              "ko": "38",
+              "ar": "38"
             }
           }
         ]
@@ -1120,7 +1312,9 @@
           "no": "Det er noen sin bursdag i dag",
           "da": "Det er nogens fødselsdag i dag",
           "ru": "Сегодня у кого-то день рождения",
-          "pl": "Dziś ktoś ma urodziny"
+          "pl": "Dziś ktoś ma urodziny",
+          "ko": "오늘 누군가의 생일입니다",
+          "ar": "اليوم عيد ميلاد شخص ما"
         },
         "titleFormatted": {
           "en": "Today !{{is|isn't}} someone's birthday",
@@ -1133,7 +1327,9 @@
           "no": "I dag !{{er|er ikke}} noen sin bursdag",
           "da": "I dag !{{er|er ikke}} nogens fødselsdag",
           "ru": "Сегодня !{{есть|нет}} у кого-то день рождения",
-          "pl": "Dziś !{{jest|nie ma}} urodzin kogoś"
+          "pl": "Dziś !{{jest|nie ma}} urodzin kogoś",
+          "ko": "오늘 !{{누군가의 생일입니다|누구의 생일도 아닙니다}}",
+          "ar": "اليوم !{{هو|ليس}} عيد ميلاد شخص ما"
         }
       },
       {
@@ -1149,7 +1345,9 @@
           "no": "Noen spesifikke har bursdag i dag",
           "da": "Nogen specifik har fødselsdag i dag",
           "ru": "Кто-то отмечает свой день рождения сегодня",
-          "pl": "Ktoś ma dzisiaj urodziny"
+          "pl": "Ktoś ma dzisiaj urodziny",
+          "ko": "오늘 특정인의 생일입니다",
+          "ar": "اليوم عيد ميلاد شخص محدد"
         },
         "titleFormatted": {
           "en": "Today !{{is|is not}} [[person]]'s birthday",
@@ -1162,7 +1360,9 @@
           "no": "I dag !{{er|er ikke}} det [[person]]s bursdag",
           "da": "I dag !{{er|er ikke}} det fødselsdag for [[person]]",
           "ru": "Сегодня !{{день рождения|не день рождения}} [[person]]",
-          "pl": "Dziś !{{są|nie są}} urodziny [[person]]"
+          "pl": "Dziś !{{są|nie są}} urodziny [[person]]",
+          "ko": "오늘은 [[person]]의 생일이 !{{맞습니다|아닙니다}}",
+          "ar": "اليوم !{{هو|ليس}} عيد ميلاد [[person]]"
         },
         "args": [
           {
@@ -1179,10 +1379,24 @@
               "no": "Person",
               "da": "Person",
               "ru": "Человек",
-              "pl": "Osoba"
+              "pl": "Osoba",
+              "ko": "사람",
+              "ar": "الشخص"
             },
             "placeholder": {
-              "en": "John Doe"
+              "en": "John Doe",
+              "nl": "John Doe",
+              "de": "John Doe",
+              "fr": "John Doe",
+              "it": "John Doe",
+              "sv": "John Doe",
+              "no": "John Doe",
+              "es": "John Doe",
+              "da": "John Doe",
+              "ru": "John Doe",
+              "pl": "John Doe",
+              "ko": "홍길동",
+              "ar": "أحمد محمد"
             }
           }
         ]
@@ -1202,7 +1416,9 @@
           "no": "Opprett bilde-token",
           "da": "Opret billede token",
           "ru": "Создать токен изображения",
-          "pl": "Utwórz token obrazu"
+          "pl": "Utwórz token obrazu",
+          "ko": "이미지 토큰 생성",
+          "ar": "إنشاء رمز صورة"
         },
         "titleFormatted": {
           "en": "Create image token [[imageUrl]]",
@@ -1215,7 +1431,9 @@
           "no": "Opprett bilde-token [[imageUrl]]",
           "da": "Opret billede token [[imageUrl]]",
           "ru": "Создать токен изображения [[imageUrl]]",
-          "pl": "Utwórz token obrazu [[imageUrl]]"
+          "pl": "Utwórz token obrazu [[imageUrl]]",
+          "ko": "이미지 토큰 생성 [[imageUrl]]",
+          "ar": "إنشاء رمز صورة [[imageUrl]]"
         },
         "args": [
           {
@@ -1232,7 +1450,9 @@
               "no": "https:// (Støtter bare .png, .jpg eller .jpeg)",
               "da": "https:// (Understøtter kun .png, .jpg eller .jpeg)",
               "ru": "https:// (Поддерживаются только .png, .jpg или .jpeg)",
-              "pl": "https:// (Obsługuje tylko .png, .jpg lub .jpeg)"
+              "pl": "https:// (Obsługuje tylko .png, .jpg lub .jpeg)",
+              "ko": "https:// (.png, .jpg 또는 .jpeg만 지원)",
+              "ar": "https:// (يدعم فقط .png أو .jpg أو .jpeg)"
             }
           }
         ],
@@ -1251,11 +1471,67 @@
               "no": "Bilde",
               "da": "Billede",
               "ru": "Изображение",
-              "pl": "Obraz"
+              "pl": "Obraz",
+              "ko": "이미지",
+              "ar": "صورة"
             }
           }
         ]
       }
     ]
+  },
+  "widgets": {
+    "birthdays-this-month": {
+      "name": {
+        "en": "Birthdays This Month",
+        "nl": "Verjaardagen deze maand",
+        "de": "Geburtstage diesen Monat",
+        "fr": "Anniversaires ce mois-ci",
+        "it": "Compleanni di questo mese",
+        "sv": "Födelsedagar denna månad",
+        "no": "Bursdager denne måneden",
+        "es": "Cumpleaños de este mes",
+        "da": "Fødselsdage denne måned",
+        "ru": "Дни рождения в этом месяце",
+        "pl": "Urodziny w tym miesiącu",
+        "ko": "이번 달 생일",
+        "ar": "أعياد ميلاد هذا الشهر"
+      },
+      "height": 300,
+      "api": {
+        "getBirthdaysThisMonth": {
+          "method": "GET",
+          "path": "/"
+        }
+      },
+      "id": "birthdays-this-month",
+      "settings": []
+    },
+    "birthdays-today": {
+      "name": {
+        "en": "Birthdays Today",
+        "nl": "Vandaag jarig",
+        "de": "Heutige Geburtstage",
+        "fr": "Anniversaires aujourd’hui",
+        "it": "Compleanni di oggi",
+        "sv": "Födelsedagar idag",
+        "no": "Bursdager i dag",
+        "es": "Cumpleaños de hoy",
+        "da": "Fødselsdage i dag",
+        "ru": "Дни рождения сегодня",
+        "pl": "Dzisiejsze urodziny",
+        "ko": "오늘의 생일",
+        "ar": "أعياد ميلاد اليوم"
+      },
+      "height": 200,
+      "api": {
+        "getBirthdaysToday": {
+          "method": "GET",
+          "path": "/"
+        }
+      },
+      "id": "birthdays-today",
+      "settings": []
+    }
   }
 }

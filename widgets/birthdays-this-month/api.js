@@ -1,78 +1,8 @@
 'use strict';
-
-function getAge(person) {
-    if (person.isBaby) return null;
-    if (!person.dateOfBirth) return null;
-
-    const today = new Date();
-    const birthDate = new Date(person.dateOfBirth);
-
-    if (Number.isNaN(birthDate.getTime())) return null;
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-
-    const hasHadBirthday =
-        today.getMonth() > birthDate.getMonth() ||
-        (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
-
-    if (!hasHadBirthday) age--;
-
-    return age;
-}
-
-function getDaysUntilThisYear(dateOfBirth) {
-    const today = new Date();
-    const birthDate = new Date(dateOfBirth);
-
-    const birthdayThisYear = new Date(
-        today.getFullYear(),
-        birthDate.getMonth(),
-        birthDate.getDate()
-    );
-
-    today.setHours(0, 0, 0, 0);
-    birthdayThisYear.setHours(0, 0, 0, 0);
-
-    return Math.round((birthdayThisYear - today) / (1000 * 60 * 60 * 24));
-}
-
-module.exports = {
-    async getBirthdaysThisMonth({ homey }) {
-        const persons = homey.settings.get('persons') || [];
-        const now = new Date();
-        const currentMonth = now.getMonth();
-
-        const birthdays = Array.isArray(persons)
-            ? persons
-                .filter((person) => {
-                    if (!person.dateOfBirth) return false;
-
-                    const date = new Date(person.dateOfBirth);
-                    if (Number.isNaN(date.getTime())) return false;
-
-                    return date.getMonth() === currentMonth;
-                })
-                .map((person) => {
-                    const date = new Date(person.dateOfBirth);
-
-                    return {
-                        name: person.name || '',
-                        category: person.category || '',
-                        message: person.message || '',
-                        imageUrl: person.imageUrl || 'https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/birthday_card.png',
-                        dateOfBirth: person.dateOfBirth,
-                        day: date.getDate(),
-                        age: getAge(person),
-                        isBaby: !!person.isBaby,
-                        daysUntil: getDaysUntilThisYear(person.dateOfBirth),
-                    };
-                })
-                .sort((a, b) => a.day - b.day)
-            : [];
-
-        return {
-            month: now.toLocaleString('nl-NL', { month: 'long' }),
-            birthdays,
-        };
-    },
-};
+const LOCALES={en:'en-GB',nl:'nl-NL',de:'de-DE',fr:'fr-FR',it:'it-IT',sv:'sv-SE',no:'nb-NO',es:'es-ES',da:'da-DK',ru:'ru-RU',pl:'pl-PL',ko:'ko-KR',ar:'ar-SA'};
+function context(homey){const l=homey.i18n.getLanguage();return{language:LOCALES[l]?l:'en',locale:LOCALES[l]||LOCALES.en,timeZone:homey.clock.getTimezone()||'UTC'}}
+function zonedParts(date,locale,timeZone){return Object.fromEntries(new Intl.DateTimeFormat(locale,{timeZone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]))}
+function birthdayParts(value){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(value||'');return m?{year:Number(m[1]),month:m[2],day:m[3]}:null}
+function age(person,now){if(person.isBaby)return null;const b=birthdayParts(person.dateOfBirth);return b?Number(now.year)-b.year-(`${now.month}-${now.day}`<`${b.month}-${b.day}`?1:0):null}
+function utcDay(y,m,d){return Date.UTC(Number(y),Number(m)-1,Number(d))/86400000}
+module.exports={async getBirthdaysThisMonth({homey}){const {language,locale,timeZone}=context(homey);const now=zonedParts(new Date(),locale,timeZone);const persons=homey.settings.get('persons')||[];const birthdays=Array.isArray(persons)?persons.filter(p=>{const b=birthdayParts(p.dateOfBirth);return b&&b.month===now.month}).map(p=>{const b=birthdayParts(p.dateOfBirth);return{name:p.name||'',category:p.category||'',message:p.message||'',imageUrl:p.imageUrl||'https://raw.githubusercontent.com/LRvdLinden/Homey_Brands/main/Birthdays/birthday_card.png',dateOfBirth:p.dateOfBirth,day:Number(b.day),age:age(p,now),isBaby:!!p.isBaby,daysUntil:utcDay(now.year,b.month,b.day)-utcDay(now.year,now.month,now.day)}}).sort((a,b)=>a.day-b.day):[];const month=new Intl.DateTimeFormat(locale,{timeZone,month:'long'}).format(new Date());return{month,language,locale,timeZone,birthdays}}};

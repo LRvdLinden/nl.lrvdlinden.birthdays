@@ -17,7 +17,14 @@
       "imageUrl": "Birthday card image URL",
       "add": "Tilføj person",
       "save": "Gem",
-      "cancel": "Annuller"
+      "cancel": "Annuller",
+      "placeholders": {
+        "name": "f.eks. Lise Nielsen",
+        "mobile": "f.eks. +45123456789",
+        "category": "Vælg eller indtast en kategori",
+        "message": "f.eks. Tillykke med fødselsdagen Lise 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Personer",
@@ -27,11 +34,52 @@
       "message": "Besked",
       "actions": "Handlinger",
       "edit": "Rediger",
-      "delete": "Slet"
+      "delete": "Slet",
+      "searchPlaceholder": "Søg efter navn, kategori eller kontaktoplysninger",
+      "allCategories": "Alle kategorier",
+      "age": "Alder"
     },
     "import_btn": "Importer CSV",
     "export_btn": "Eksporter CSV",
-    "clear_btn": "Ryd liste"
+    "clear_btn": "Ryd liste",
+    "main": {
+      "subtitle": "Administrer fødselsdage, påmindelser og din fødselsdagsliste.",
+      "general": "Generelt",
+      "version": "Version",
+      "changelog": "Ændringslog",
+      "rate": "Bedøm appen",
+      "forum": "Forum",
+      "birthdaySettings": "Fødselsdagsindstillinger",
+      "addBirthday": "Tilføj fødselsdag",
+      "birthdayList": "Fødselsdagsliste",
+      "developers": "Udviklere",
+      "madeWith": "Lavet med kærlighed",
+      "in": "i",
+      "back": "Tilbage",
+      "add": "Tilføj",
+      "comingSoon": "Kommer snart",
+      "loadError": "Fejl ved lagring af data!"
+    },
+    "ical": {
+      "title": "iCal-kalendere",
+      "name": "Kalendernavn",
+      "namePlaceholder": "f.eks. Arbejde eller forening",
+      "url": "URL til iCal-abonnement",
+      "urlPlaceholder": "https://kalender.example/kalender.ics",
+      "add": "Tilføj abonnement",
+      "upload": "Upload iCal-fil",
+      "import": "Importér fil",
+      "sync": "Synkroniser nu",
+      "remove": "Fjern",
+      "none": "Ingen iCal-abonnementer er konfigureret.",
+      "invalidUrl": "Indtast en gyldig http(s)-URL.",
+      "added": "Abonnement tilføjet.",
+      "syncing": "Synkroniserer…",
+      "synced": "Synkroniserede __count__ fødselsdage.",
+      "error": "iCal-fejl:",
+      "chooseFile": "Vælg en .ics-fil.",
+      "imported": "Importerede __count__ fødselsdage."
+    }
   },
   "messages": {
     "validation_error": "Tjek venligst de indtastede data",

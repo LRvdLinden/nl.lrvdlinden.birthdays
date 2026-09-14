@@ -1,0 +1,99 @@
+{
+  "menu": {
+    "title": "생일"
+  },
+  "settings": {
+    "main": {
+      "subtitle": "생일, 알림 및 생일 목록을 관리하세요.",
+      "general": "일반",
+      "version": "버전",
+      "changelog": "변경 사항",
+      "rate": "앱 평가",
+      "forum": "포럼",
+      "birthdaySettings": "생일 설정",
+      "addBirthday": "생일 추가",
+      "birthdayList": "생일 목록",
+      "developers": "개발자",
+      "madeWith": "정성을 담아 제작",
+      "in": "제작지",
+      "back": "뒤로",
+      "add": "추가",
+      "comingSoon": "출시 예정",
+      "loadError": "데이터 저장 오류!"
+    },
+    "person": {
+      "placeholders": {
+        "name": "예: 홍길동",
+        "mobile": "예: +821012345678",
+        "category": "카테고리 선택 또는 입력",
+        "message": "예: 생일 축하해요 🎉🍻",
+        "imageUrl": "https://"
+      },
+      "title": "사람",
+      "name": "이름",
+      "mobile": "휴대폰 번호",
+      "mobile2": "두 번째 휴대폰 번호",
+      "message": "생일 메시지",
+      "dateOfBirth": "생년월일",
+      "babyCheckbox": "출생 연도 무시",
+      "imageUrl": "생일 카드 이미지 URL",
+      "category": "카테고리",
+      "add": "사람 추가",
+      "save": "저장",
+      "cancel": "취소"
+    },
+    "title": "생일 설정",
+    "description": "받고 싶은 생일 알림을 여기에서 설정하세요.",
+    "import_btn": "CSV 가져오기",
+    "export_btn": "CSV 내보내기",
+    "clear_btn": "목록 비우기",
+    "personList": {
+      "title": "사람",
+      "name": "이름",
+      "dateOfBirth": "생일",
+      "age": "나이",
+      "category": "카테고리",
+      "message": "메시지",
+      "actions": "작업",
+      "edit": "수정",
+      "delete": "삭제",
+      "searchPlaceholder": "이름, 카테고리 또는 연락처 검색",
+      "allCategories": "모든 카테고리"
+    },
+    "ical": {
+      "title": "iCal 캘린더",
+      "name": "캘린더 이름",
+      "namePlaceholder": "예: 직장 또는 협회",
+      "url": "iCal 구독 URL",
+      "urlPlaceholder": "https://calendar.example/calendar.ics",
+      "add": "구독 추가",
+      "upload": "iCal 파일 업로드",
+      "import": "파일 가져오기",
+      "sync": "지금 동기화",
+      "remove": "삭제",
+      "none": "설정된 iCal 구독이 없습니다.",
+      "invalidUrl": "올바른 http(s) URL을 입력하세요.",
+      "added": "구독이 추가되었습니다.",
+      "syncing": "동기화 중…",
+      "synced": "생일 __count__개를 동기화했습니다.",
+      "error": "iCal 오류:",
+      "chooseFile": ".ics 파일을 선택하세요.",
+      "imported": "생일 __count__개를 가져왔습니다."
+    }
+  },
+  "messages": {
+    "validation_error": "입력 내용을 확인하세요.",
+    "person_added": "__name__님의 생일이 추가되었습니다.",
+    "birthday_notification": "오늘은 __name__님의 생일입니다 🎉. __age__세가 되었습니다.",
+    "export_error": "내보내기 오류: ",
+    "export_success": "내보내기가 완료되어 다운로드를 시작했습니다.",
+    "export_fallback": "내보내기가 완료되었습니다. 다운로드가 시작되지 않으면 클립보드의 데이터를 .csv 파일로 저장하세요.",
+    "import_invalid": "잘못된 CSV 형식입니다.",
+    "import_missing_fields": "CSV에 필수 필드(name, dateOfBirth)가 없습니다.",
+    "import_error": "생일 불러오기/저장 오류: ",
+    "import_success": "생일 __count__개를 가져왔습니다!",
+    "no_export": "내보낼 생일이 없습니다.",
+    "clear_confirm": "모든 생일을 삭제하시겠습니까? 되돌릴 수 없습니다.",
+    "clear_success": "모든 생일이 삭제되었습니다."
+  }
+}

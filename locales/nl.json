@@ -1,7 +1,7 @@
 {
   "menu": {
     "title": "Verjaardagen"
-    },
+  },
   "settings": {
     "title": "Instellingen voor Verjaardagen",
     "description": "Stel hier de verjaardagsmeldingen in die je wilt ontvangen.",
@@ -20,7 +20,14 @@
       "imageUrl": "Verjaardagskaart image URL",
       "add": "Persoon toevoegen",
       "save": "Opslaan",
-      "cancel": "Annuleren"
+      "cancel": "Annuleren",
+      "placeholders": {
+        "name": "bijv. Jan Jansen",
+        "mobile": "bijv. +31601020304",
+        "category": "Selecteer of voer een categorie in",
+        "message": "bijv. Gefeliciteerd Jan 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Personen",
@@ -31,7 +38,47 @@
       "message": "Bericht",
       "actions": "Acties",
       "edit": "Wijzigen",
-      "delete": "Verwijderen"
+      "delete": "Verwijderen",
+      "searchPlaceholder": "Zoek op naam, categorie of contactgegevens",
+      "allCategories": "Alle categorieën"
+    },
+    "main": {
+      "subtitle": "Beheer verjaardagen, herinneringen en je verjaardagslijst.",
+      "general": "Algemeen",
+      "version": "Versie",
+      "changelog": "Wijzigingslog",
+      "rate": "Beoordeel deze app",
+      "forum": "Forum",
+      "birthdaySettings": "Verjaardagsinstellingen",
+      "addBirthday": "Verjaardag toevoegen",
+      "birthdayList": "Verjaardagslijst",
+      "developers": "Ontwikkelaars",
+      "madeWith": "Gemaakt met",
+      "in": "in",
+      "back": "Terug",
+      "add": "Toevoegen",
+      "comingSoon": "Binnenkort",
+      "loadError": "Fout bij opslaan van gegevens!"
+    },
+    "ical": {
+      "title": "iCal-agenda’s",
+      "name": "Agendanaam",
+      "namePlaceholder": "bijv. Werk of vereniging",
+      "url": "iCal-abonnements-URL",
+      "urlPlaceholder": "https://agenda.example/kalender.ics",
+      "add": "Abonnement toevoegen",
+      "upload": "iCal-bestand uploaden",
+      "import": "Bestand importeren",
+      "sync": "Nu synchroniseren",
+      "remove": "Verwijderen",
+      "none": "Geen iCal-abonnementen ingesteld.",
+      "invalidUrl": "Voer een geldige http(s)-URL in.",
+      "added": "Abonnement toegevoegd.",
+      "syncing": "Synchroniseren…",
+      "synced": "__count__ verjaardagen gesynchroniseerd.",
+      "error": "iCal-fout:",
+      "chooseFile": "Kies een .ics-bestand.",
+      "imported": "__count__ verjaardagen geïmporteerd."
     }
   },
   "messages": {

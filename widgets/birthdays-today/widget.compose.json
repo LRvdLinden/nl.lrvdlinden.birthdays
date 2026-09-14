@@ -1,7 +1,18 @@
 {
   "name": {
     "en": "Birthdays Today",
-    "nl": "Jarig Vandaag"
+    "nl": "Vandaag jarig",
+    "de": "Heutige Geburtstage",
+    "fr": "Anniversaires aujourd’hui",
+    "it": "Compleanni di oggi",
+    "sv": "Födelsedagar idag",
+    "no": "Bursdager i dag",
+    "es": "Cumpleaños de hoy",
+    "da": "Fødselsdage i dag",
+    "ru": "Дни рождения сегодня",
+    "pl": "Dzisiejsze urodziny",
+    "ko": "오늘의 생일",
+    "ar": "أعياد ميلاد اليوم"
   },
   "height": 200,
   "api": {

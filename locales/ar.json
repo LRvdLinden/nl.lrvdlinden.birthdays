@@ -1,0 +1,99 @@
+{
+  "menu": {
+    "title": "أعياد الميلاد"
+  },
+  "settings": {
+    "main": {
+      "subtitle": "إدارة أعياد الميلاد والتذكيرات وقائمة أعياد الميلاد.",
+      "general": "عام",
+      "version": "الإصدار",
+      "changelog": "سجل التغييرات",
+      "rate": "قيّم التطبيق",
+      "forum": "المنتدى",
+      "birthdaySettings": "إعدادات أعياد الميلاد",
+      "addBirthday": "إضافة عيد ميلاد",
+      "birthdayList": "قائمة أعياد الميلاد",
+      "developers": "المطورون",
+      "madeWith": "صُنع بمحبة",
+      "in": "في",
+      "back": "رجوع",
+      "add": "إضافة",
+      "comingSoon": "قريبًا",
+      "loadError": "خطأ في حفظ البيانات!"
+    },
+    "person": {
+      "placeholders": {
+        "name": "مثال: أحمد محمد",
+        "mobile": "مثال: +31601020304",
+        "category": "اختر فئة أو أدخلها",
+        "message": "مثال: عيد ميلاد سعيد 🎉🍻",
+        "imageUrl": "https://"
+      },
+      "title": "الشخص",
+      "name": "الاسم",
+      "mobile": "رقم الهاتف المحمول",
+      "mobile2": "رقم الهاتف المحمول الثاني",
+      "message": "رسالة عيد الميلاد",
+      "dateOfBirth": "تاريخ الميلاد",
+      "babyCheckbox": "تجاهل سنة الميلاد",
+      "imageUrl": "رابط صورة بطاقة عيد الميلاد",
+      "category": "الفئة",
+      "add": "إضافة شخص",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    },
+    "title": "إعدادات أعياد الميلاد",
+    "description": "اضبط هنا إشعارات أعياد الميلاد التي تريد تلقيها.",
+    "import_btn": "استيراد CSV",
+    "export_btn": "تصدير CSV",
+    "clear_btn": "مسح القائمة",
+    "personList": {
+      "title": "الأشخاص",
+      "name": "الاسم",
+      "dateOfBirth": "عيد الميلاد",
+      "age": "العمر",
+      "category": "الفئة",
+      "message": "الرسالة",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "searchPlaceholder": "البحث بالاسم أو الفئة أو بيانات الاتصال",
+      "allCategories": "كل الفئات"
+    },
+    "ical": {
+      "title": "تقويمات iCal",
+      "name": "اسم التقويم",
+      "namePlaceholder": "مثال: العمل أو الجمعية",
+      "url": "رابط اشتراك iCal",
+      "urlPlaceholder": "https://calendar.example/calendar.ics",
+      "add": "إضافة اشتراك",
+      "upload": "رفع ملف iCal",
+      "import": "استيراد الملف",
+      "sync": "مزامنة الآن",
+      "remove": "إزالة",
+      "none": "لم يتم إعداد اشتراكات iCal.",
+      "invalidUrl": "أدخل رابط http(s) صالحًا.",
+      "added": "تمت إضافة الاشتراك.",
+      "syncing": "جارٍ المزامنة…",
+      "synced": "تمت مزامنة __count__ من أعياد الميلاد.",
+      "error": "خطأ iCal:",
+      "chooseFile": "اختر ملف .ics.",
+      "imported": "تم استيراد __count__ من أعياد الميلاد."
+    }
+  },
+  "messages": {
+    "validation_error": "يرجى التحقق من البيانات المدخلة.",
+    "person_added": "تمت إضافة عيد ميلاد __name__.",
+    "birthday_notification": "اليوم عيد ميلاد __name__ 🎉. العمر __age__ سنة.",
+    "export_error": "خطأ في التصدير: ",
+    "export_success": "تم التصدير وبدأ التنزيل.",
+    "export_fallback": "تم التصدير. إذا لم يبدأ التنزيل، فاحفظ البيانات المنسوخة كملف .csv.",
+    "import_invalid": "تنسيق CSV غير صالح.",
+    "import_missing_fields": "لا يحتوي CSV على الحقول المطلوبة (name, dateOfBirth).",
+    "import_error": "خطأ في جلب/حفظ أعياد الميلاد: ",
+    "import_success": "تم استيراد __count__ من أعياد الميلاد!",
+    "no_export": "لا توجد أعياد ميلاد للتصدير.",
+    "clear_confirm": "هل تريد حذف جميع أعياد الميلاد؟ لا يمكن التراجع عن ذلك.",
+    "clear_success": "تم حذف جميع أعياد الميلاد."
+  }
+}

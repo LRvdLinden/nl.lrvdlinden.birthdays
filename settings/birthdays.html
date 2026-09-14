@@ -22,7 +22,7 @@
             <div class="icon-container-birthdays">
           <img src="svg/birthdays.svg" alt="Birthdays" />
         </div>
-          <span style="margin-left: 10px; font-size: 16px;">Birthdays</span>
+          <span style="margin-left: 10px; font-size: 16px;" data-i18n="menu.title">Birthdays</span>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 24 24" style="fill:#c8c8cf;">
           <g fill="#c8c8cf">
@@ -37,7 +37,7 @@
           <div class="icon-container-soon">
         <img src="svg/plus-item.svg" alt="soon" />
         </div>
-        <span style="margin-left: 10px; font-size: 16px;">COMING SOON</span>
+        <span style="margin-left: 10px; font-size: 16px;" data-i18n="settings.main.comingSoon">Coming soon</span>
       </div>
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 24 24" style="fill:#c8c8cf;">
       <g fill="#c8c8cf">
@@ -63,7 +63,7 @@
       <!-- Knoppen: Terug en Toevoegen -->
       <button id="back-to-menu" class="back-button" onclick="window.location.href = 'index.html';">
         <img src="svg/arrow-prev.svg" alt="Back" class="back-button-icon"/>
-        <span class="back-button-text">Back</span>
+        <span class="back-button-text" data-i18n="settings.main.back">Back</span>
       </button>
       <button id="add-person-button" class="circle-button">
         <img src="svg/plus-small.svg" alt="Add" class="add-person-button-icon"/>
@@ -87,6 +87,14 @@
       <div id="person-list">
         <!-- Lijst met personen -->
         <h2 class="homey-title" data-i18n="settings.personList.title"></h2>
+        <div class="flex-2" style="margin-bottom:12px">
+          <div class="field-2 homey-form-group">
+            <input id="person-search" class="homey-form-input" type="search" data-i18n-placeholder="settings.personList.searchPlaceholder">
+          </div>
+          <div class="field-2 homey-form-group">
+            <select id="person-category-filter" class="homey-form-select"><option value="" data-i18n="settings.personList.allCategories">All categories</option></select>
+          </div>
+        </div>
         <table class="homey-table" id="person-table">
           <thead>
             <tr>
@@ -94,6 +102,7 @@
               <th data-i18n="settings.personList.name"> <div class="light-gray-title">Name</div></th>
               <th data-i18n="settings.personList.dateOfBirth"><div class="light-gray-title">Date of birth</div></th>
               <th data-i18n="settings.personList.age"><div class="light-gray-title">Age</div></th>
+              <th data-i18n="settings.personList.category"><div class="light-gray-title">Category</div></th>
               <th data-i18n="settings.personList.message"><div class="light-gray-title">Message</div></th>
             </tr>
           </thead>
@@ -126,7 +135,7 @@
                   <div class="flex-2">
                     <div class="field-2 homey-form-group">
                       <label class="homey-form-label" for="name" data-i18n="settings.person.name"></label>
-                      <input class="homey-form-input" id="name" type="text" placeholder="e.g. Jon Doe" />
+                      <input class="homey-form-input" id="name" type="text" data-i18n-placeholder="settings.person.placeholders.name" />
                   </div>
       
                   <div class="field-2 homey-form-group">
@@ -144,18 +153,18 @@
                   <div class="flex-2">
                     <div class="field-2 homey-form-group">
                       <label class="homey-form-label" for="mobile" data-i18n="settings.person.mobile"></label>
-                      <input class="homey-form-input" id="mobile" type="text" placeholder="e.g. +31601020304"/>
+                      <input class="homey-form-input" id="mobile" type="text" data-i18n-placeholder="settings.person.placeholders.mobile"/>
                   </div>
       
                   <div class="field-2 homey-form-group">
                     <label class="homey-form-label" for="mobile2" data-i18n="settings.person.mobile2"></label>
-                    <input class="homey-form-input" id="mobile2" type="text" placeholder="e.g. +31601020304" />
+                    <input class="homey-form-input" id="mobile2" type="text" data-i18n-placeholder="settings.person.placeholders.mobile" />
                 </div>
                 </div>
                 
                 <div class="homey-form-group">
                   <label for="category" class="homey-form-label" data-i18n="settings.person.category"></label>
-                  <input id="category" name="category" class="homey-form-input" placeholder="Select or enter a category">
+                  <input id="category" name="category" class="homey-form-input" data-i18n-placeholder="settings.person.placeholders.category">
                   <div id="categoryDropdown" class="category-dropdown">
                     <!-- Categorie-opties en verwijderknoppen worden hier ingeladen -->
                   </div>
@@ -163,12 +172,12 @@
       
                 <div class="homey-form-group">
                       <label class="homey-form-label" for="message" data-i18n="settings.person.message"></label>
-                      <textarea class="homey-form-textarea" id="message" rows="3" placeholder="e.g. Happy birthday Jon 🎉🍻"></textarea>
+                      <textarea class="homey-form-textarea" id="message" rows="3" data-i18n-placeholder="settings.person.placeholders.message"></textarea>
                   </div>
       
                   <div class="homey-form-group">
                     <label class="homey-form-label" for="imageUrl" data-i18n="settings.person.imageUrl"></label>
-                    <input class="homey-form-input" id="imageUrl" type="text" placeholder="Https://"/>
+                    <input class="homey-form-input" id="imageUrl" type="text" data-i18n-placeholder="settings.person.placeholders.imageUrl"/>
                 </div>
       
                 <div class="flex" style="margin-bottom: 20px;">
@@ -225,6 +234,11 @@ function scrollToTop() {
 
   function onHomeyReady (Homey) {
     myHomey = Homey;
+    document.documentElement.lang = Homey.getLanguage ? Homey.getLanguage() : 'en';
+    document.documentElement.dir = document.documentElement.lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(element) {
+      element.placeholder = Homey.__(element.getAttribute('data-i18n-placeholder'));
+    });
     myHomey.ready();
 
     loadPersons();
@@ -284,11 +298,15 @@ function getDayOfYear(date) {
   const addPersonButtonElement = document.querySelector("#add-person-button");
   const saveButtonElement = document.querySelector("#save-button");
   const cancelButtonElement = document.querySelector("#cancel-button");
+  const personSearchElement = document.querySelector("#person-search");
+  const personCategoryFilterElement = document.querySelector("#person-category-filter");
 
 
   addPersonButtonElement.addEventListener("click", showCreateOrEdit);
   saveButtonElement.addEventListener("click", addOrUpdateBirthday);
   cancelButtonElement.addEventListener("click", cancelCreateOrEdit);
+  personSearchElement.addEventListener("input", renderPersons);
+  personCategoryFilterElement.addEventListener("change", renderPersons);
 
   function renderPersonRow (person, tableBody) {
     console.log("creating row");
@@ -309,6 +327,10 @@ function getDayOfYear(date) {
     ageCell.textContent = (age === 'N/A') ? age : age + 1; 
     row.appendChild(ageCell);
 
+    const categoryCell = document.createElement("td");
+    categoryCell.textContent = person.category || "";
+    row.appendChild(categoryCell);
+
     const messageCell = document.createElement("td");
     messageCell.textContent = person.message;
     row.appendChild(messageCell);
@@ -319,7 +341,7 @@ function getDayOfYear(date) {
 
     const actionsCell = document.createElement("td");
 
-    actionsCell.colSpan = 4;
+    actionsCell.colSpan = 5;
     actionsCell.style.textAlign = "center";
     actionsCell.style.borderBottom = "solid 1px #eee";
 
@@ -370,7 +392,26 @@ function getDayOfYear(date) {
     console.log(tableBodyElement);
     tableBodyElement.innerHTML = "";
     console.log(tableBodyElement);
-    persons.forEach(person => {
+    const selectedCategory = personCategoryFilterElement.value;
+    const categories = Array.from(new Set(persons.map(person => String(person.category || '').trim()).filter(Boolean))).sort((a,b) => a.localeCompare(b));
+    personCategoryFilterElement.innerHTML = '';
+    const allCategoriesOption = document.createElement('option');
+    allCategoriesOption.value = '';
+    allCategoriesOption.textContent = myHomey.__("settings.personList.allCategories");
+    personCategoryFilterElement.appendChild(allCategoriesOption);
+    categories.forEach(category => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      personCategoryFilterElement.appendChild(option);
+    });
+    personCategoryFilterElement.value = categories.includes(selectedCategory) ? selectedCategory : '';
+    const query = personSearchElement.value.trim().toLocaleLowerCase();
+    persons.filter(person => {
+      const categoryMatches = !personCategoryFilterElement.value || person.category === personCategoryFilterElement.value;
+      const haystack = [person.name, person.category, person.message, person.mobile, person.mobile2].join(' ').toLocaleLowerCase();
+      return categoryMatches && (!query || haystack.includes(query));
+    }).forEach(person => {
       console.log(person);
       renderPersonRow(person, tableBodyElement);
     });
@@ -441,7 +482,8 @@ function getDayOfYear(date) {
     event?.preventDefault();
 
     const person = {
-  id: guid(),
+      ...(editingPerson || {}),
+      id: editingPerson?.id || guid(),
       name: document.getElementById("name").value,
       dateOfBirth: document.getElementById("dateOfBirth").value,
       mobile: document.getElementById("mobile").value ?? "",
@@ -460,6 +502,7 @@ function getDayOfYear(date) {
       } else {
         persons[editingIndex] = person;
         editingIndex = -1;
+        editingPerson = null;
       }
 
       save();
@@ -491,6 +534,7 @@ function getDayOfYear(date) {
     fillCreateOrEditForm({});
 
     editingIndex = -1;
+    editingPerson = null;
   }
 
   function guid () {
@@ -506,7 +550,7 @@ function getDayOfYear(date) {
     myHomey.set("persons", persons, function(error) {
       if (error) {
         console.error(error);
-        myHomey.alert("Error saving data!");
+        myHomey.alert(myHomey.__("settings.main.loadError"));
         return;
       }
       clearFields();

@@ -13,7 +13,15 @@
       "imageUrl": "Birthday card image URL",
       "add": "Person hinzufügen",
       "save": "Speichern",
-      "cancel": "Abbrechen"
+      "cancel": "Abbrechen",
+      "placeholders": {
+        "name": "z. B. Max Mustermann",
+        "mobile": "z. B. +4916012345678",
+        "category": "Kategorie auswählen oder eingeben",
+        "message": "z. B. Alles Gute zum Geburtstag Max 🎉🍻",
+        "imageUrl": "https://"
+      },
+      "mobile2": "Zweite Handynummer"
     },
     "personList": {
       "title": "Personen",
@@ -23,11 +31,52 @@
       "message": "Nachricht",
       "actions": "Aktionen",
       "edit": "Bearbeiten",
-      "delete": "Löschen"
+      "delete": "Löschen",
+      "searchPlaceholder": "Nach Name, Kategorie oder Kontaktdaten suchen",
+      "allCategories": "Alle Kategorien",
+      "age": "Alter"
     },
     "import_btn": "CSV importieren",
     "export_btn": "CSV exportieren",
-    "clear_btn": "Liste leeren"
+    "clear_btn": "Liste leeren",
+    "main": {
+      "subtitle": "Verwalte Geburtstage, Erinnerungen und deine Geburtstagsliste.",
+      "general": "Allgemein",
+      "version": "Version",
+      "changelog": "Änderungsprotokoll",
+      "rate": "App bewerten",
+      "forum": "Forum",
+      "birthdaySettings": "Geburtstagseinstellungen",
+      "addBirthday": "Geburtstag hinzufügen",
+      "birthdayList": "Geburtstagsliste",
+      "developers": "Entwickler",
+      "madeWith": "Mit Liebe erstellt",
+      "in": "in",
+      "back": "Zurück",
+      "add": "Hinzufügen",
+      "comingSoon": "Demnächst",
+      "loadError": "Fehler beim Speichern der Daten!"
+    },
+    "ical": {
+      "title": "iCal-Kalender",
+      "name": "Kalendername",
+      "namePlaceholder": "z. B. Arbeit oder Verein",
+      "url": "iCal-Abonnement-URL",
+      "urlPlaceholder": "https://kalender.example/kalender.ics",
+      "add": "Abonnement hinzufügen",
+      "upload": "iCal-Datei hochladen",
+      "import": "Datei importieren",
+      "sync": "Jetzt synchronisieren",
+      "remove": "Entfernen",
+      "none": "Keine iCal-Abonnements eingerichtet.",
+      "invalidUrl": "Gib eine gültige http(s)-URL ein.",
+      "added": "Abonnement hinzugefügt.",
+      "syncing": "Synchronisierung…",
+      "synced": "__count__ Geburtstage synchronisiert.",
+      "error": "iCal-Fehler:",
+      "chooseFile": "Wähle eine .ics-Datei.",
+      "imported": "__count__ Geburtstage importiert."
+    }
   },
   "messages": {
     "validation_error": "Bitte überprüfen Sie die eingegebenen Daten",
@@ -43,5 +92,8 @@
     "no_export": "Keine Geburtstage zum Exportieren.",
     "clear_confirm": "Sind Sie sicher, dass Sie alle Geburtstage löschen möchten? Dies kann nicht rückgängig gemacht werden.",
     "clear_success": "Alle Geburtstage wurden gelöscht."
+  },
+  "menu": {
+    "title": "Geburtstage"
   }
 }

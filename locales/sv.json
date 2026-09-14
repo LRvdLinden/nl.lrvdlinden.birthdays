@@ -14,7 +14,14 @@
       "imageUrl": "URL Image",
       "add": "Lägg till person",
       "save": "Spara",
-      "cancel": "Avbryt"
+      "cancel": "Avbryt",
+      "placeholders": {
+        "name": "t.ex. Anna Andersson",
+        "mobile": "t.ex. +46123456789",
+        "category": "Välj eller ange en kategori",
+        "message": "t.ex. Grattis på födelsedagen Anna 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Personer",
@@ -24,11 +31,52 @@
       "message": "Meddelande",
       "actions": "Åtgärder",
       "edit": "Redigera",
-      "delete": "Radera"
+      "delete": "Radera",
+      "searchPlaceholder": "Sök namn, kategori eller kontaktuppgifter",
+      "allCategories": "Alla kategorier",
+      "age": "Ålder"
     },
     "import_btn": "Importera CSV",
     "export_btn": "Exportera CSV",
-    "clear_btn": "Rensa listan"
+    "clear_btn": "Rensa listan",
+    "main": {
+      "subtitle": "Hantera födelsedagar, påminnelser och din födelsedagslista.",
+      "general": "Allmänt",
+      "version": "Version",
+      "changelog": "Ändringslogg",
+      "rate": "Betygsätt appen",
+      "forum": "Forum",
+      "birthdaySettings": "Födelsedagsinställningar",
+      "addBirthday": "Lägg till födelsedag",
+      "birthdayList": "Födelsedagslista",
+      "developers": "Utvecklare",
+      "madeWith": "Skapad med kärlek",
+      "in": "i",
+      "back": "Tillbaka",
+      "add": "Lägg till",
+      "comingSoon": "Kommer snart",
+      "loadError": "Fel när data sparades!"
+    },
+    "ical": {
+      "title": "iCal-kalendrar",
+      "name": "Kalendernamn",
+      "namePlaceholder": "t.ex. Arbete eller förening",
+      "url": "Webbadress för iCal-prenumeration",
+      "urlPlaceholder": "https://kalender.example/kalender.ics",
+      "add": "Lägg till prenumeration",
+      "upload": "Ladda upp iCal-fil",
+      "import": "Importera fil",
+      "sync": "Synkronisera nu",
+      "remove": "Ta bort",
+      "none": "Inga iCal-prenumerationer har konfigurerats.",
+      "invalidUrl": "Ange en giltig http(s)-adress.",
+      "added": "Prenumerationen har lagts till.",
+      "syncing": "Synkroniserar…",
+      "synced": "Synkroniserade __count__ födelsedagar.",
+      "error": "iCal-fel:",
+      "chooseFile": "Välj en .ics-fil.",
+      "imported": "Importerade __count__ födelsedagar."
+    }
   },
   "messages": {
     "validation_error": "Kontrollera de inmatade uppgifterna",
@@ -44,5 +92,8 @@
     "no_export": "Inga födelsedagar att exportera.",
     "clear_confirm": "Är du säker på att du vill ta bort alla födelsedagar? Detta kan inte ångras.",
     "clear_success": "Alla födelsedagar har tagits bort."
+  },
+  "menu": {
+    "title": "Födelsedagar"
   }
 }

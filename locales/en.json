@@ -17,7 +17,14 @@
       "category": "Category",
       "add": "Add Person",
       "save": "Save",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "placeholders": {
+        "name": "e.g. John Doe",
+        "mobile": "e.g. +31601020304",
+        "category": "Select or enter a category",
+        "message": "e.g. Happy birthday John 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Persons",
@@ -28,7 +35,47 @@
       "message": "Message",
       "actions": "Actions",
       "edit": "Edit",
-      "delete": "Delete"
+      "delete": "Delete",
+      "searchPlaceholder": "Search name, category or contact details",
+      "allCategories": "All categories"
+    },
+    "main": {
+      "subtitle": "Manage birthdays, reminders and your birthday list.",
+      "general": "General",
+      "version": "Version",
+      "changelog": "Changelog",
+      "rate": "Rate this app",
+      "forum": "Forum",
+      "birthdaySettings": "Birthday settings",
+      "addBirthday": "Add birthday",
+      "birthdayList": "Birthday list",
+      "developers": "Developers",
+      "madeWith": "Made with",
+      "in": "in",
+      "back": "Back",
+      "add": "Add",
+      "comingSoon": "Coming soon",
+      "loadError": "Error saving data!"
+    },
+    "ical": {
+      "title": "iCal calendars",
+      "name": "Calendar name",
+      "namePlaceholder": "e.g. Work or association",
+      "url": "iCal subscription URL",
+      "urlPlaceholder": "https://calendar.example/calendar.ics",
+      "add": "Add subscription",
+      "upload": "Upload iCal file",
+      "import": "Import file",
+      "sync": "Synchronize now",
+      "remove": "Remove",
+      "none": "No iCal subscriptions configured.",
+      "invalidUrl": "Enter a valid http(s) URL.",
+      "added": "Subscription added.",
+      "syncing": "Synchronizing…",
+      "synced": "Synchronized __count__ birthdays.",
+      "error": "iCal error:",
+      "chooseFile": "Choose an .ics file.",
+      "imported": "Imported __count__ birthdays."
     }
   },
   "messages": {
@@ -45,5 +92,8 @@
     "no_export": "No birthdays to export.",
     "clear_confirm": "Are you sure you want to delete all birthdays? This cannot be undone.",
     "clear_success": "All birthdays have been deleted."
+  },
+  "menu": {
+    "title": "Birthdays"
   }
 }

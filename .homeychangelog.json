@@ -33,5 +33,20 @@
   },
   "2.0.1": {
     "en": "App improvement"
+  },
+  "2.1.2": {
+    "en": "Added iCal URL subscriptions and .ics imports, category search/filtering, stable person IDs and reliable birthday Flow triggers.",
+    "nl": "iCal-URL-abonnementen en .ics-import toegevoegd, zoeken/filteren op categorie, stabiele persoons-ID’s en betrouwbare verjaardags-Flow-triggers.",
+    "de": "iCal-URL-Abonnements und .ics-Import, Kategoriesuche/-filter, stabile Personen-IDs und zuverlässige Geburtstags-Flow-Trigger hinzugefügt.",
+    "fr": "Ajout des abonnements iCal par URL, de l’import .ics, de la recherche par catégorie, d’identifiants stables et de déclencheurs Flow fiables.",
+    "it": "Aggiunti abbonamenti iCal tramite URL, importazione .ics, ricerca per categoria, ID persona stabili e trigger Flow affidabili.",
+    "sv": "Lade till iCal-prenumerationer, .ics-import, kategorisökning, stabila person-ID:n och tillförlitliga Flow-utlösare.",
+    "no": "La til iCal-abonnementer, .ics-import, kategorisøk, stabile person-ID-er og pålitelige Flow-utløsere.",
+    "es": "Se añadieron suscripciones iCal, importación .ics, búsqueda por categoría, ID estables y activadores Flow fiables.",
+    "da": "Tilføjede iCal-abonnementer, .ics-import, kategorisøgning, stabile person-ID’er og pålidelige Flow-udløsere.",
+    "ru": "Добавлены подписки iCal, импорт .ics, поиск по категориям, стабильные ID и надёжные триггеры Flow.",
+    "pl": "Dodano subskrypcje iCal, import .ics, wyszukiwanie kategorii, stabilne ID osób i niezawodne wyzwalacze Flow.",
+    "ko": "iCal 구독, .ics 가져오기, 카테고리 검색, 안정적인 사람 ID 및 신뢰할 수 있는 Flow 트리거를 추가했습니다.",
+    "ar": "تمت إضافة اشتراكات iCal واستيراد .ics والبحث حسب الفئة ومعرّفات ثابتة ومشغلات Flow موثوقة."
   }
 }

@@ -11,7 +11,9 @@
     "no": "Opprett bilde-token",
     "da": "Opret billede token",
     "ru": "Создать токен изображения",
-    "pl": "Utwórz token obrazu"
+    "pl": "Utwórz token obrazu",
+    "ko": "이미지 토큰 생성",
+    "ar": "إنشاء رمز صورة"
   },
   "titleFormatted": {
     "en": "Create image token [[imageUrl]]",
@@ -24,7 +26,9 @@
     "no": "Opprett bilde-token [[imageUrl]]",
     "da": "Opret billede token [[imageUrl]]",
     "ru": "Создать токен изображения [[imageUrl]]",
-    "pl": "Utwórz token obrazu [[imageUrl]]"
+    "pl": "Utwórz token obrazu [[imageUrl]]",
+    "ko": "이미지 토큰 생성 [[imageUrl]]",
+    "ar": "إنشاء رمز صورة [[imageUrl]]"
   },
   "args": [
     {
@@ -41,7 +45,9 @@
         "no": "https:// (Støtter bare .png, .jpg eller .jpeg)",
         "da": "https:// (Understøtter kun .png, .jpg eller .jpeg)",
         "ru": "https:// (Поддерживаются только .png, .jpg или .jpeg)",
-        "pl": "https:// (Obsługuje tylko .png, .jpg lub .jpeg)"
+        "pl": "https:// (Obsługuje tylko .png, .jpg lub .jpeg)",
+        "ko": "https:// (.png, .jpg 또는 .jpeg만 지원)",
+        "ar": "https:// (يدعم فقط .png أو .jpg أو .jpeg)"
       }
     }
   ],
@@ -60,7 +66,9 @@
         "no": "Bilde",
         "da": "Billede",
         "ru": "Изображение",
-        "pl": "Obraz"
+        "pl": "Obraz",
+        "ko": "이미지",
+        "ar": "صورة"
       }
     }
   ]

@@ -14,7 +14,14 @@
       "imageUrl": "Birthday card image URL",
       "add": "Ajouter une personne",
       "save": "Enregistrer",
-      "cancel": "Annuler"
+      "cancel": "Annuler",
+      "placeholders": {
+        "name": "p. ex. Jean Dupont",
+        "mobile": "p. ex. +33123456789",
+        "category": "Sélectionnez ou saisissez une catégorie",
+        "message": "p. ex. Joyeux anniversaire Jean 🎉🍻",
+        "imageUrl": "https://"
+      }
     },
     "personList": {
       "title": "Personnes",
@@ -24,11 +31,52 @@
       "message": "Message",
       "actions": "Actions",
       "edit": "Modifier",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "searchPlaceholder": "Rechercher par nom, catégorie ou coordonnées",
+      "allCategories": "Toutes les catégories",
+      "age": "Âge"
     },
     "import_btn": "Importer CSV",
     "export_btn": "Exporter CSV",
-    "clear_btn": "Vider la liste"
+    "clear_btn": "Vider la liste",
+    "main": {
+      "subtitle": "Gérez les anniversaires, les rappels et votre liste d’anniversaires.",
+      "general": "Général",
+      "version": "Version",
+      "changelog": "Journal des modifications",
+      "rate": "Évaluer l’application",
+      "forum": "Forum",
+      "birthdaySettings": "Réglages des anniversaires",
+      "addBirthday": "Ajouter un anniversaire",
+      "birthdayList": "Liste d’anniversaires",
+      "developers": "Développeurs",
+      "madeWith": "Créé avec amour",
+      "in": "à",
+      "back": "Retour",
+      "add": "Ajouter",
+      "comingSoon": "Bientôt disponible",
+      "loadError": "Erreur lors de l’enregistrement des données !"
+    },
+    "ical": {
+      "title": "Calendriers iCal",
+      "name": "Nom du calendrier",
+      "namePlaceholder": "p. ex. Travail ou association",
+      "url": "URL d’abonnement iCal",
+      "urlPlaceholder": "https://calendrier.example/calendrier.ics",
+      "add": "Ajouter l’abonnement",
+      "upload": "Téléverser un fichier iCal",
+      "import": "Importer le fichier",
+      "sync": "Synchroniser maintenant",
+      "remove": "Supprimer",
+      "none": "Aucun abonnement iCal configuré.",
+      "invalidUrl": "Saisissez une URL http(s) valide.",
+      "added": "Abonnement ajouté.",
+      "syncing": "Synchronisation…",
+      "synced": "__count__ anniversaires synchronisés.",
+      "error": "Erreur iCal :",
+      "chooseFile": "Choisissez un fichier .ics.",
+      "imported": "__count__ anniversaires importés."
+    }
   },
   "messages": {
     "validation_error": "Veuillez vérifier les données saisies",
@@ -44,5 +92,8 @@
     "no_export": "Aucun anniversaire à exporter.",
     "clear_confirm": "Êtes-vous sûr de vouloir supprimer tous les anniversaires? Cette action est irréversible.",
     "clear_success": "Tous les anniversaires ont été supprimés."
+  },
+  "menu": {
+    "title": "Anniversaires"
   }
 }

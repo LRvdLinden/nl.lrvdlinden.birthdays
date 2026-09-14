@@ -11,7 +11,9 @@
     "no": "Noen spesifikke har bursdag i dag",
     "da": "Nogen specifik har fødselsdag i dag",
     "ru": "Кто-то отмечает свой день рождения сегодня",
-    "pl": "Ktoś ma dzisiaj urodziny"
+    "pl": "Ktoś ma dzisiaj urodziny",
+    "ko": "오늘 특정인의 생일입니다",
+    "ar": "اليوم عيد ميلاد شخص محدد"
   },
   "titleFormatted": {
     "en": "Today !{{is|is not}} [[person]]'s birthday",
@@ -24,7 +26,9 @@
     "no": "I dag !{{er|er ikke}} det [[person]]s bursdag",
     "da": "I dag !{{er|er ikke}} det fødselsdag for [[person]]",
     "ru": "Сегодня !{{день рождения|не день рождения}} [[person]]",
-    "pl": "Dziś !{{są|nie są}} urodziny [[person]]"
+    "pl": "Dziś !{{są|nie są}} urodziny [[person]]",
+    "ko": "오늘은 [[person]]의 생일이 !{{맞습니다|아닙니다}}",
+    "ar": "اليوم !{{هو|ليس}} عيد ميلاد [[person]]"
   },
   "args": [
     {
@@ -41,10 +45,24 @@
         "no": "Person",
         "da": "Person",
         "ru": "Человек",
-        "pl": "Osoba"
+        "pl": "Osoba",
+        "ko": "사람",
+        "ar": "الشخص"
       },
       "placeholder": {
-        "en": "John Doe"
+        "en": "John Doe",
+        "nl": "John Doe",
+        "de": "John Doe",
+        "fr": "John Doe",
+        "it": "John Doe",
+        "sv": "John Doe",
+        "no": "John Doe",
+        "es": "John Doe",
+        "da": "John Doe",
+        "ru": "John Doe",
+        "pl": "John Doe",
+        "ko": "홍길동",
+        "ar": "أحمد محمد"
       }
     }
   ]

@@ -11,7 +11,9 @@
     "no": "Det er noen sin bursdag i dag",
     "da": "Det er nogens fødselsdag i dag",
     "ru": "Сегодня у кого-то день рождения",
-    "pl": "Dziś ktoś ma urodziny"
+    "pl": "Dziś ktoś ma urodziny",
+    "ko": "오늘 누군가의 생일입니다",
+    "ar": "اليوم عيد ميلاد شخص ما"
   },
   "titleFormatted": {
     "en": "Today !{{is|isn't}} someone's birthday",
@@ -24,6 +26,8 @@
     "no": "I dag !{{er|er ikke}} noen sin bursdag",
     "da": "I dag !{{er|er ikke}} nogens fødselsdag",
     "ru": "Сегодня !{{есть|нет}} у кого-то день рождения",
-    "pl": "Dziś !{{jest|nie ma}} urodzin kogoś"
-    }
+    "pl": "Dziś !{{jest|nie ma}} urodzin kogoś",
+    "ko": "오늘 !{{누군가의 생일입니다|누구의 생일도 아닙니다}}",
+    "ar": "اليوم !{{هو|ليس}} عيد ميلاد شخص ما"
+  }
 }
