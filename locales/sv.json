@@ -85,7 +85,7 @@
       "saved": "Kalendern sparades och visas nedan.",
       "loadError": "Kalendrarna kunde inte läsas in.",
       "fileName": "Fil",
-      "apiUnavailable": "iCal-anslutningen är inte tillgänglig. Starta om eller installera om version 2.1.2.",
+      "apiUnavailable": "iCal-anslutningen är inte tillgänglig. Starta om eller installera om appen.",
       "syncFailed": "Synkroniseringen misslyckades för __count__ kalender/kalendrar. Se felet under kalendern.",
       "noEvents": "Inga kalenderposter som stöds hittades."
     }

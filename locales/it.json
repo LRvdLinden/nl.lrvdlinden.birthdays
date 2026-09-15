@@ -85,7 +85,7 @@
       "saved": "Calendario salvato e mostrato qui sotto.",
       "loadError": "Impossibile caricare i calendari.",
       "fileName": "File",
-      "apiUnavailable": "La connessione iCal non è disponibile. Riavvia o reinstalla la versione 2.1.2.",
+      "apiUnavailable": "La connessione iCal non è disponibile. Riavvia o reinstalla l’app.",
       "syncFailed": "Sincronizzazione non riuscita per __count__ calendario/i. Vedi l’errore sotto il calendario.",
       "noEvents": "Non sono stati trovati eventi di calendario supportati."
     }

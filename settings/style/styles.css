@@ -1,7 +1,47 @@
 
+/* Shared Homey settings theme. Keep every settings view readable when the
+   operating-system theme changes while the view is open. */
+:root {
+  color-scheme: light;
+  --settings-bg: #ffffff;
+  --settings-surface: #ffffff;
+  --settings-text: #17233d;
+  --settings-muted: #7b8492;
+  --settings-border: #d8dce2;
+  --settings-hover: #f2f4f7;
+  --settings-field: #ffffff;
+  --settings-table-stripe: #f7f8fa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --settings-bg: #000000;
+    --settings-surface: #1c1c1e;
+    --settings-text: #f5f7fa;
+    --settings-muted: #a6abb4;
+    --settings-border: #3a3a3c;
+    --settings-hover: #242426;
+    --settings-field: #2c2c2e;
+    --settings-table-stripe: #151517;
+  }
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--settings-bg);
+  color: var(--settings-text);
+}
+
+body.dark {
+  color-scheme: dark;
+}
+
 /* Achtergrondkleur voor de gehele menu-pagina */
 #menu {
-  background-color: #ffffff;
+  background-color: var(--settings-bg);
+  color: var(--settings-text);
 }
 .hidden {
   display: none;
@@ -12,7 +52,7 @@
   align-items: center;
   justify-content: start;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--settings-border);
   /*border-radius: 8px; */
   margin-bottom: 1px;
 }
@@ -41,7 +81,7 @@
 
 
 #menu li:hover {
-  background-color: #e9e9ef; /* Lichtere kleur voor hover-effect */
+  background-color: var(--settings-hover);
 }
 
 .flex-container {
@@ -90,7 +130,7 @@
   gap: 10px;
   position: sticky;
   top: 0; /* Geen ruimte aan de bovenkant */
-  background-color: white; /* Of een andere passende achtergrondkleur */
+  background-color: var(--settings-bg);
   z-index: 10;
   margin-bottom: 15px; /* Ondermarge, pas aan indien nodig */
 }
@@ -126,7 +166,7 @@
 
 #add-person-button {
   margin-left: auto; /* Zet de Add knop aan de rechterkant */
-  width: 70x; /* Zorgt voor een cirkelvorm */
+  width: 70px; /* Zorgt voor een cirkelvorm */
   height: 70px; /* Zorgt voor een cirkelvorm */
   border-radius: 50%; /* Maakt de knop rond */
   background-color: #2c78fa;
@@ -257,6 +297,81 @@
 .flex-2 {
   display: flex;
   gap: 10px; /* Voeg hier de gewenste tussenruimte in pixels toe */
+}
+
+/* Homey form and list colour corrections shared by birthdays and iCal. */
+.homey-title,
+.homey-form-label,
+.homey-form-legend,
+.back-button-text,
+.homey-table,
+.homey-form-checkbox-text,
+footer {
+  color: var(--settings-text);
+}
+
+.light-gray-title,
+.homey-subtitle {
+  color: var(--settings-muted) !important;
+}
+
+.homey-form-input,
+.homey-form-select,
+.homey-form-textarea,
+.homey-form-input[type="date"] {
+  background-color: var(--settings-field) !important;
+  border-color: var(--settings-border) !important;
+  color: var(--settings-text) !important;
+  -webkit-text-fill-color: var(--settings-text);
+}
+
+.homey-form-input::placeholder,
+.homey-form-textarea::placeholder {
+  color: var(--settings-muted) !important;
+  -webkit-text-fill-color: var(--settings-muted);
+  opacity: 1;
+}
+
+.homey-form-input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: .75;
+}
+
+.homey-table th,
+.homey-table td {
+  border-color: var(--settings-border) !important;
+  color: var(--settings-text);
+}
+
+.homey-table tbody tr:nth-child(even) {
+  background: var(--settings-table-stripe);
+}
+
+.category-dropdown {
+  background: var(--settings-surface) !important;
+  border-color: var(--settings-border) !important;
+  color: var(--settings-text) !important;
+}
+
+.category-dropdown > div:hover {
+  background: var(--settings-hover) !important;
+}
+
+a.custom-link-reverse {
+  color: #168cf4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hint {
+    color: #b9dcff;
+    background-color: #102d47;
+    border-color: #245477;
+  }
+
+  .help {
+    color: #d8dbe0;
+    background-color: #202023;
+    border-color: #3a3a3c;
+  }
 }
 
 /* Beide velden in de rij nemen de helft van de beschikbare ruimte in */
@@ -891,4 +1006,61 @@ html[dir="rtl"] .rating-block-total-text {
 html[dir="rtl"] .panel-links a i {
   margin-left: 15px;
   margin-right: 0;
+}
+
+/* Final theme layer: kept last so legacy component rules cannot reintroduce
+   light colours in dark mode. */
+body,
+#menu,
+.buttons-container {
+  background-color: var(--settings-bg) !important;
+  color: var(--settings-text) !important;
+}
+
+.homey-title,
+.homey-form-label,
+.homey-form-legend,
+.homey-form-checkbox-text,
+.back-button-text,
+.homey-table,
+.homey-table th,
+.homey-table td,
+footer {
+  color: var(--settings-text) !important;
+}
+
+.homey-form-input,
+.homey-form-select,
+.homey-form-textarea,
+.homey-form-input[type="date"] {
+  background-color: var(--settings-field) !important;
+  border-color: var(--settings-border) !important;
+  color: var(--settings-text) !important;
+  -webkit-text-fill-color: var(--settings-text) !important;
+}
+
+.category-dropdown {
+  background-color: var(--settings-surface) !important;
+  border-color: var(--settings-border) !important;
+  color: var(--settings-text) !important;
+}
+
+.category-dropdown div:hover {
+  background-color: var(--settings-hover) !important;
+}
+
+.category-delete-btn {
+  background-color: var(--settings-surface);
+  box-shadow: none;
+}
+
+#person-list {
+  overflow-x: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .back-button-icon,
+  .back-to-top-icon {
+    filter: invert(1);
+  }
 }

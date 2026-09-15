@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#ffffff">
-    <title>Birthdays - Homey App</title>
+    <title data-i18n="settings.title">Birthday Settings</title>
     <link rel="stylesheet" href="css/framework7-bundle.css">
     <link rel="stylesheet" href="css/framework7-icons.css">
     <link rel="stylesheet" href="css/style.css">
@@ -56,7 +56,7 @@
                         <i class="fa-solid fa-gear"></i>
                     </div>
                       <span data-i18n="settings.main.version">Version</span>
-                      <div class="item-after">v2.1.2</div>
+                      <div class="item-after">v2.1.3</div>
                     </a>
                   </li>
         <li>
@@ -186,6 +186,7 @@
         <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#ef35aa"></path>
     </svg> 
     <span data-i18n="settings.main.in">in</span> <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+    </div>
 </footer>
 </div>
 <!-- Document Footer Block -->
@@ -382,54 +383,14 @@
     }
 </script>
 <script>
-// Controleer of de dark mode is ingeschakeld
 const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-let isDarkMode = darkModeMediaQuery.matches;
-
-// Selecteer het body-element
-const body = document.body;
-
-// Functie om dark mode aan of uit te schakelen
-function toggleDarkMode() {
-  body.classList.toggle('dark');
-  updateVerifiedBadgeClass();
-  // Toggle ook de class voor het pictogram
-  const checkmarkIcon = document.getElementById('checkmarkIcon');
-  if (checkmarkIcon && body.classList.contains('dark')) {
-    checkmarkIcon.style.backgroundColor = '#00000000'; // Set background color to black in dark mode
-  } else if (checkmarkIcon) {
-    checkmarkIcon.style.backgroundColor = '#00000000'; // Set background color to white when dark mode is off
-  }
+function applyDarkMode(event) {
+  document.body.classList.toggle('dark', event.matches);
 }
 
-// Update de achtergrondkleur voor dark mode
-if (isDarkMode) {
-  body.classList.add('dark');
-  // Voeg ook de dark class toe aan het pictogram als de dark mode standaard is ingeschakeld
-  const checkmarkIcon = document.getElementById('checkmarkIcon');
-  if (checkmarkIcon) checkmarkIcon.style.backgroundColor = '#00000000'; // Set initial background color to black in dark mode
-}
-
-// Luister naar veranderingen in de donkere modus en werk de kleuren bij
-darkModeMediaQuery.addEventListener('change', event => {
-  isDarkMode = event.matches;
-  updateVerifiedBadgeClass();
-});
-
-// Functie om de verified badge klasse te veranderen op basis van de donkere modus
-function updateVerifiedBadgeClass() {
-  const verifiedBadges = document.querySelectorAll('.verified-badge');
-  verifiedBadges.forEach(badge => {
-    if (isDarkMode) {
-      badge.classList.remove('verified-badge');
-      badge.classList.add('verified-badge-dark');
-    } else {
-      badge.classList.remove('verified-badge-dark');
-      badge.classList.add('verified-badge');
-    }
-  });
-}
-
+applyDarkMode(darkModeMediaQuery);
+if (darkModeMediaQuery.addEventListener) darkModeMediaQuery.addEventListener('change', applyDarkMode);
+else darkModeMediaQuery.addListener(applyDarkMode);
 </script>
 
 

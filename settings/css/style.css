@@ -120,11 +120,23 @@ Author:	Xioyuna
   --background-color: #001119;
   --light-gray: #0e232d;
 }
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --title-color: #fff;
+    --text-color: #9aa9b2;
+    --background-color: #001119;
+    --light-gray: #0e232d;
+  }
+}
 
 /* 3. General */
 
 body {
   font-family: "Rubik", -apple-system, SF Pro Text, SF UI Text, system-ui, Helvetica Neue, Helvetica, Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--title-color);
+  transition: background-color 0.4s, color 0.4s;
 }
 .page {
   background-color: var(--background-color);

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <title>Birthdays today</title>
 
   <style>
     :root {
@@ -220,7 +221,7 @@
 
 <body>
   <div class="card" id="card">
-    <div class="empty">Loading birthdays...</div>
+    <div class="empty" aria-live="polite"></div>
   </div>
   <script type="text/javascript">
     function onHomeyReady(Homey) {
@@ -229,9 +230,10 @@
       function escapeHtml(value){return String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
       function tr(data){const l=data&&translations[data.language]?data.language:'en';return translations[l]}
       function ageText(p,t){return p.isBaby||p.age===null||p.age===undefined?t.baby:p.age+' '+t.years}
-      function render(data){const list=data&&Array.isArray(data.birthdays)?data.birthdays:[],t=tr(data);document.documentElement.lang=data.language||'en';document.documentElement.dir=(data.language==='ar'?'rtl':'ltr');
+      function render(data){const list=data&&Array.isArray(data.birthdays)?data.birthdays:[],t=tr(data);document.documentElement.lang=data.language||'en';document.documentElement.dir=(data.language==='ar'?'rtl':'ltr');document.title=t.today;
         const header=`<div class="header"><div class="appIcon" aria-label="Birthdays"></div><div><div class="title">${escapeHtml(t.today)}</div><div class="subtitle">${escapeHtml(list.length?list.length+' '+t.count:t.none)}</div></div></div>`;if(!list.length){card.innerHTML=header+`<div class="empty"><div class="emptyTitle">${escapeHtml(t.empty)}</div><div class="emptyText">${escapeHtml(t.help)}</div></div>`;return}card.innerHTML=header+'<div class="list">'+list.map(p=>`<div class="person"><div class="dateBadge"><div class="day">${escapeHtml(t.todayStatus)}</div></div><div class="info"><div class="name">${escapeHtml(p.name)} <span class="ageInline">${escapeHtml(ageText(p,t))}</span></div><div class="meta">${escapeHtml(t.todayStatus||t.congrats)}</div></div></div>`).join('')+'</div>';}
-      function loadData(){Homey.api('GET','/',{}).then(d=>render(d||{})).catch(()=>{card.innerHTML='<div class="empty">Could not load birthdays</div>'})}loadData();setInterval(loadData,60000);
+      function preferred(){const language=(Homey.getLanguage&&Homey.getLanguage())||document.documentElement.lang||navigator.language.slice(0,2);return translations[language]||translations.en}card.textContent=preferred().loading;
+      function loadData(){Homey.api('GET','/',{}).then(d=>render(d||{})).catch(()=>{card.innerHTML='<div class="empty">'+escapeHtml(preferred().loadError)+'</div>'})}loadData();setInterval(loadData,60000);
     }
   </script>
 </body>

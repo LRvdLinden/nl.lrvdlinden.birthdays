@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
   <link rel="stylesheet" type="text/css" href="style/styles.css">
+  <title data-i18n="settings.title">Birthday Settings</title>
 </head>
 <body>
 
@@ -48,24 +49,24 @@
 </ul><br><br><br><br><br><br><br><br><br><br><br>
 <!-- Footer Block -->
 <footer style="margin-top: 20px;">
-  <div class="light-gray-title">Made with
+  <div class="light-gray-title"><span data-i18n="settings.main.madeWith">Made with</span>
   <svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="height: 0.8rem;">
       <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#ef35aa"></path>
   </svg> 
-  in <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+  <span data-i18n="settings.main.in">in</span> <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+  </div>
 </footer>
 </div>
-  </div>
   
   <div id="content-area">
     <!-- Blijft altijd zichtbaar en statisch bovenaan -->
     <div class="buttons-container">
       <!-- Knoppen: Terug en Toevoegen -->
-      <button id="back-to-menu" class="back-button" onclick="window.location.href = 'index.html';">
+      <button id="back-to-menu" class="back-button" type="button" onclick="window.location.href = 'index.html';">
         <img src="svg/arrow-prev.svg" alt="Back" class="back-button-icon"/>
         <span class="back-button-text" data-i18n="settings.main.back">Back</span>
       </button>
-      <button id="add-person-button" class="circle-button">
+      <button id="add-person-button" class="circle-button" type="button">
         <img src="svg/plus-small.svg" alt="Add" class="add-person-button-icon"/>
       </button>
     </div>
@@ -111,18 +112,19 @@
         
         <!-- Container voor de Back to Top knop -->
         <div class="back-to-top-container">
-          <button id="back-to-top" class="circle-button-top" onclick="scrollToTop()">
+          <button id="back-to-top" class="circle-button-top" type="button" onclick="scrollToTop()">
             <img src="svg/arrow-up.svg" alt="Back to Top" class="back-to-top-icon"/>
           </button>
         </div>
       
 <!-- Footer Block -->
 <footer style="margin-top: 20px;">
-  <div class="light-gray-title">Made with
+  <div class="light-gray-title"><span data-i18n="settings.main.madeWith">Made with</span>
   <svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="height: 0.8rem;">
       <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#ef35aa"></path>
   </svg> 
-  in <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+  <span data-i18n="settings.main.in">in</span> <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+  </div>
 </footer>
         </div>
   
@@ -164,7 +166,7 @@
                 
                 <div class="homey-form-group">
                   <label for="category" class="homey-form-label" data-i18n="settings.person.category"></label>
-                  <input id="category" name="category" class="homey-form-input" data-i18n-placeholder="settings.person.placeholders.category">
+                  <input id="category" name="category" class="homey-form-input" type="text" data-i18n-placeholder="settings.person.placeholders.category">
                   <div id="categoryDropdown" class="category-dropdown">
                     <!-- Categorie-opties en verwijderknoppen worden hier ingeladen -->
                   </div>
@@ -181,24 +183,27 @@
                 </div>
       
                 <div class="flex" style="margin-bottom: 20px;">
-                  <button id="save-button" class="homey-button-primary-full"
+                  <button id="save-button" class="homey-button-primary-full" type="submit"
                           data-i18n="settings.person.save"></button>
-                  <button id="cancel-button" class="homey-button-secondary-full-shadow"
+                  <button id="cancel-button" class="homey-button-secondary-full-shadow" type="button"
                           data-i18n="settings.person.cancel"></button>
               </div>
               
 <!-- Footer Block -->
 <footer style="margin-top: 20px;">
-  <div class="light-gray-title">Made with
+  <div class="light-gray-title"><span data-i18n="settings.main.madeWith">Made with</span>
   <svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="height: 0.8rem;">
       <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#ef35aa"></path>
   </svg> 
-  in <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+  <span data-i18n="settings.main.in">in</span> <a href="https://www.google.com/maps/dir/Apeldoorn" target="_blank" class="custom-link-reverse">Apeldoorn</a>
+  </div>
 </footer>
-</div>
             </fieldset>
           </form>
       </div>
+
+    </div>
+  </div>
 
       <script type="text/javascript">
 document.getElementById('menu-birthdays').addEventListener('click', function() {
@@ -673,43 +678,15 @@ loadCategories();
 
 
 <script>
-  // Functie om de achtergrondkleur en tekstkleur in te stellen op basis van de donkere modus
-  function setBodyBackgroundColor() {
-    // Controleer of de donkere modus is ingeschakeld
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const isDarkMode = darkModeMediaQuery.matches;
+  const settingsTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Selecteer het body-element, de buttons-container en de footer
-    const body = document.body;
-    const buttonsContainer = document.querySelector('.buttons-container');
-    const footer = document.querySelector('footer');
-    const allTextElements = document.querySelectorAll('body *:not(form):not(footer):not(.light-gray-title):not(.custom-link-reverse)');
-    const formTextElements = document.querySelectorAll('form *:not(.buttons-container):not(footer):not(.light-gray-title):not(.custom-link-reverse)');
-
-    // Functie om de achtergrondkleur en tekstkleur in te stellen
-    if (isDarkMode) {
-      body.style.backgroundColor = '#000000'; // Zwart
-      buttonsContainer.style.backgroundColor = '#000000'; // Zwart
-      allTextElements.forEach(element => {
-        element.style.color = '#FFFFFF'; // Wit
-      });
-      formTextElements.forEach(element => {
-        element.style.color = ''; // Terug naar standaardkleur (meestal zwart)
-      });
-    } else {
-      body.style.backgroundColor = '#FFFFFF'; // Wit
-      buttonsContainer.style.backgroundColor = '#FFFFFF'; // Wit
-      allTextElements.forEach(element => {
-        element.style.color = '#000000'; // Zwart
-      });
-      formTextElements.forEach(element => {
-        element.style.color = ''; // Terug naar standaardkleur (meestal zwart)
-      });
-    }
+  function applySettingsTheme(event) {
+    document.body.classList.toggle('dark', event.matches);
   }
 
-  // Roep de functie aan om de achtergrondkleur in te stellen wanneer de pagina wordt geladen
-  setBodyBackgroundColor();
+  applySettingsTheme(settingsTheme);
+  if (settingsTheme.addEventListener) settingsTheme.addEventListener('change', applySettingsTheme);
+  else settingsTheme.addListener(applySettingsTheme);
 </script>
 
 
