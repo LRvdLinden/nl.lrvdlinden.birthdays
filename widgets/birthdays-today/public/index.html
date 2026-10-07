@@ -26,30 +26,28 @@
       color: #111827;
     }
 
-    body {
-      padding: 2px;
+    .card {
+      position: relative;
+      height: 100%;
+      padding: 15px 16px;
       box-sizing: border-box;
+      overflow: hidden;
+      background: #ffffff;
     }
 
-    .card {
-      height: calc(100% - 4px);
-      padding: 16px;
-      box-sizing: border-box;
-      border-radius: 22px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow:
-        0 10px 28px rgba(0, 0, 0, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.05);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, #ef35aa, #9b36f2);
     }
 
     .header {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
     }
 
     .appIcon {
@@ -57,7 +55,7 @@
       height: 44px;
       border-radius: 14px;
       background: #ef35aa;
-      box-shadow: 0 8px 20px rgba(239, 53, 170, 0.28);
+      box-shadow: 0 6px 16px rgba(239, 53, 170, 0.24);
       position: relative;
       flex: 0 0 auto;
     }
@@ -89,7 +87,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      max-height: 118px;
+      max-height: 119px;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -98,17 +96,17 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 10px;
-      border-radius: 16px;
-      background: rgba(239, 53, 170, 0.10);
-      box-shadow: inset 0 0 0 1px rgba(239, 53, 170, 0.10);
+      padding: 9px 10px;
+      border-radius: 14px;
+      background: #f8f3f7;
+      box-shadow: inset 0 0 0 1px rgba(239, 53, 170, 0.08);
     }
 
     .dateBadge {
-      min-width: 46px;
+      min-width: 42px;
       height: 42px;
-      border-radius: 15px;
-      background: rgba(239, 53, 170, 0.16);
+      border-radius: 13px;
+      background: linear-gradient(145deg, rgba(239, 53, 170, 0.18), rgba(155, 54, 242, 0.13));
       color: #ef35aa;
       display: flex;
       flex-direction: column;
@@ -118,7 +116,7 @@
     }
 
     .day {
-      font-size: 13px;
+      font-size: 21px;
       line-height: 1;
       font-weight: 950;
       text-transform: lowercase;
@@ -151,6 +149,23 @@
       font-size: 12px;
       font-weight: 800;
       color: #ef35aa;
+      white-space: nowrap;
+    }
+
+    .category {
+      display: inline-block;
+      max-width: 110px;
+      margin-left: 5px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(239, 53, 170, 0.10);
+      color: #c6248c;
+      font-size: 10px;
+      line-height: 1.2;
+      font-weight: 800;
+      vertical-align: 1px;
+      overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
@@ -195,10 +210,7 @@
       }
 
       .card {
-        background: rgba(15, 23, 42, 0.94);
-        box-shadow:
-          0 12px 32px rgba(0, 0, 0, 0.35),
-          0 2px 10px rgba(0, 0, 0, 0.18);
+        background: #17171a;
       }
 
       .subtitle,
@@ -208,12 +220,17 @@
       }
 
       .person {
-        background: rgba(239, 53, 170, 0.14);
+        background: #242126;
         box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
       }
 
       .dateBadge {
         background: rgba(239, 53, 170, 0.20);
+      }
+
+      .category {
+        background: rgba(239, 53, 170, 0.18);
+        color: #ff7dcb;
       }
     }
   </style>
@@ -231,7 +248,7 @@
       function tr(data){const l=data&&translations[data.language]?data.language:'en';return translations[l]}
       function ageText(p,t){return p.isBaby||p.age===null||p.age===undefined?t.baby:p.age+' '+t.years}
       function render(data){const list=data&&Array.isArray(data.birthdays)?data.birthdays:[],t=tr(data);document.documentElement.lang=data.language||'en';document.documentElement.dir=(data.language==='ar'?'rtl':'ltr');document.title=t.today;
-        const header=`<div class="header"><div class="appIcon" aria-label="Birthdays"></div><div><div class="title">${escapeHtml(t.today)}</div><div class="subtitle">${escapeHtml(list.length?list.length+' '+t.count:t.none)}</div></div></div>`;if(!list.length){card.innerHTML=header+`<div class="empty"><div class="emptyTitle">${escapeHtml(t.empty)}</div><div class="emptyText">${escapeHtml(t.help)}</div></div>`;return}card.innerHTML=header+'<div class="list">'+list.map(p=>`<div class="person"><div class="dateBadge"><div class="day">${escapeHtml(t.todayStatus)}</div></div><div class="info"><div class="name">${escapeHtml(p.name)} <span class="ageInline">${escapeHtml(ageText(p,t))}</span></div><div class="meta">${escapeHtml(t.todayStatus||t.congrats)}</div></div></div>`).join('')+'</div>';}
+        const header=`<div class="header"><div class="appIcon" aria-hidden="true"></div><div><div class="title">${escapeHtml(t.today)}</div><div class="subtitle">${escapeHtml(list.length?list.length+' '+t.count:t.none)}</div></div></div>`;if(!list.length){card.innerHTML=header+`<div class="empty"><div class="emptyTitle">${escapeHtml(t.empty)}</div><div class="emptyText">${escapeHtml(t.help)}</div></div>`;return}card.innerHTML=header+'<div class="list">'+list.map(p=>`<div class="person"><div class="dateBadge" aria-hidden="true"><div class="day">🎂</div></div><div class="info"><div class="name">${escapeHtml(p.name)} <span class="ageInline">${escapeHtml(ageText(p,t))}</span>${p.category?` <span class="category">${escapeHtml(p.category)}</span>`:''}</div><div class="meta">${escapeHtml(p.message||t.congrats)}</div></div></div>`).join('')+'</div>';}
       function preferred(){const language=(Homey.getLanguage&&Homey.getLanguage())||document.documentElement.lang||navigator.language.slice(0,2);return translations[language]||translations.en}card.textContent=preferred().loading;
       function loadData(){Homey.api('GET','/',{}).then(d=>render(d||{})).catch(()=>{card.innerHTML='<div class="empty">'+escapeHtml(preferred().loadError)+'</div>'})}loadData();setInterval(loadData,60000);
     }
