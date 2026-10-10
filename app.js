@@ -44,6 +44,11 @@ class Birthdays extends homey_1.default.App {
     constructor() {
         super(...arguments);
         this.debug = false;
+        this.birthdaySchedulerStarted = false;
+        this.birthdaySlotQueue = [];
+        this.birthdaySlotsQueued = new Set();
+        this.birthdayQueueRunning = false;
+        this.lastBirthdayLogDate = undefined;
     }
     get image() {
         return this._image;
@@ -75,8 +80,8 @@ class Birthdays extends homey_1.default.App {
         this.registerTriggerCard();
         // Check birthdays upon initialization
         await this.checkBirthdayTriggers();
-        // Checks triggers every minute
-        this.homey.setInterval(this.checkBirthdayTriggers.bind(this), 60 * 1000);
+        // Checks triggers every minute, aligned to the start of each minute
+        this.startBirthdayScheduler();
         // Maak globale tokens aan
         const tokenTitles = {
             name: { en: 'Name', nl: 'Naam', de: 'Name', fr: 'Nom', it: 'Nome', sv: 'Namn', no: 'Navn', es: 'Nombre', da: 'Navn', ru: 'Имя', pl: 'Imię', ko: '이름', ar: 'الاسم' },
@@ -198,7 +203,7 @@ class Birthdays extends homey_1.default.App {
                     maxRedirects: 5,
                     headers: {
                         Accept: 'text/calendar,text/plain;q=0.9,*/*;q=0.5',
-                        'User-Agent': 'Birthdays-for-Homey/2.1.2',
+                        'User-Agent': 'Birthdays-for-Homey/2.1.5',
                     },
                     transformResponse: [(data) => data],
                 });
@@ -257,12 +262,14 @@ class Birthdays extends homey_1.default.App {
     }
     getPersonsWithBirthdaysToday() {
         const today = this.getHomeyDateParts();
-        const formattedToday = `${today.month}-${today.day}`;
-        return this.persons?.filter((person) => {
-            return typeof person.dateOfBirth === 'string' && person.dateOfBirth.substring(5) === formattedToday;
-        }) ?? [];
+        return this.getPersonsWithBirthdayOn(`${today.month}-${today.day}`);
     }
     ;
+    getPersonsWithBirthdayOn(monthDay) {
+        return (this.persons ?? []).filter((person) => {
+            return !!person && typeof person.dateOfBirth === 'string' && person.dateOfBirth.substring(5) === monthDay;
+        });
+    }
     getAvailableCategories() {
         const categories = new Set();
         this.persons?.forEach((person) => {
@@ -273,46 +280,113 @@ class Birthdays extends homey_1.default.App {
         return Array.from(categories);
     }
     ;
+    /**
+     * Starts a scheduler that fires exactly once per minute, one second after the minute boundary.
+     * Replaces the old drifting 60s interval, which could skip a minute entirely.
+     */
+    startBirthdayScheduler() {
+        if (this.birthdaySchedulerStarted) return;
+        this.birthdaySchedulerStarted = true;
+        this.scheduleNextBirthdayCheck();
+    }
+
+    scheduleNextBirthdayCheck() {
+        const delay = 60 * 1000 - (Date.now() % (60 * 1000)) + 1000;
+        this.homey.setTimeout(() => {
+            this.scheduleNextBirthdayCheck();
+            this.checkBirthdayTriggers().catch((error) => this.error('Birthday check failed', error));
+        }, delay);
+    }
+
+    /**
+     * Captures the current Homey minute ("slot") and queues it. Slots are processed one after another,
+     * so a slow run (many birthdays, slow flows) never causes a minute or a person to be skipped.
+     */
     async checkBirthdayTriggers() {
-        this.log("Checking birthdays");
-        if (this.debug) {
-            this.log("Persons with birthdays today", this.getPersonsWithBirthdaysToday());
+        const slot = this.getHomeySlot();
+        if (this.birthdaySlotsQueued.has(slot.key)) return;
+        for (const key of Array.from(this.birthdaySlotsQueued)) {
+            if (!key.startsWith(slot.date)) this.birthdaySlotsQueued.delete(key);
         }
-        const birthdaysToday = this.getPersonsWithBirthdaysToday();
+        this.birthdaySlotsQueued.add(slot.key);
+        this.birthdaySlotQueue.push(slot);
+
+        if (this.birthdayQueueRunning) return;
+        this.birthdayQueueRunning = true;
+        try {
+            while (this.birthdaySlotQueue.length > 0) {
+                const nextSlot = this.birthdaySlotQueue.shift();
+                try {
+                    await this.processBirthdaySlot(nextSlot);
+                } catch (error) {
+                    this.error(`Birthday check for ${nextSlot.key} failed`, error);
+                }
+            }
+        } finally {
+            this.birthdayQueueRunning = false;
+        }
+    }
+
+    async processBirthdaySlot(slot) {
+        this.log("Checking birthdays");
+        const birthdaysToday = this.getPersonsWithBirthdayOn(slot.monthDay);
+
+        if (birthdaysToday.length > 0 && this.lastBirthdayLogDate !== slot.date) {
+            this.lastBirthdayLogDate = slot.date;
+            this.log(`Birthdays today (${slot.date}): ${birthdaysToday.length} - ${birthdaysToday.map(person => person.name).join(', ')}`);
+        }
+        if (this.debug) {
+            this.log("Persons with birthdays today", birthdaysToday);
+        }
+
         for (let i = 0; i < birthdaysToday.length; i++) {
             const birthdayPerson = birthdaysToday[i];
+            const age = Number(this.getPersonAge(birthdayPerson, slot) || 0);
             const tokens = {
                 name: String(birthdayPerson.name || ''),
-                age: Number(this.getPersonAge(birthdayPerson) || 0),
+                age,
                 mobile: String(birthdayPerson.mobile || ''),
                 mobile2: String(birthdayPerson.mobile2 || ''),
                 message: String(birthdayPerson.message || ''),
                 imageUrl: String(birthdayPerson.imageUrl || ''),
                 category: String(birthdayPerson.category || '')
             };
+            // The slot time travels with the trigger, so the "run at" check no longer depends on
+            // the wall clock at the moment Homey evaluates the card. Every birthday person of this
+            // minute is matched against the same time, however long the previous person took.
             const state = {
-                person: birthdayPerson
+                person: birthdayPerson,
+                runAt: slot.time,
+                date: slot.date
             };
+
             if (this.debug) {
                 this.log("trigger birthday triggers with", { tokens, state });
             }
-            const triggerResults = await Promise.allSettled([
-                this.birthdayTriggerCard?.trigger(tokens, state),
-                this.specificBirthdayTriggerCard?.trigger(tokens, state),
-                this.categoryBirthdayTriggerCard?.trigger(tokens, state)
-            ]);
-            triggerResults.forEach((result, index) => {
-                if (result.status === 'rejected')
-                    this.error(`Birthday trigger ${index + 1} failed`, result.reason);
-            });
-            // Update globale tokens
-            this.updateGlobalTokens(birthdayPerson);
-            // Wacht voor een specifieke tijd voordat je doorgaat naar de volgende jarige persoon
-            await new Promise(resolve => setTimeout(resolve, 5000)); // 5 seconden wachten
+
+            // Update global tokens before triggering, so flows that use them get this person's data
+            await this.updateGlobalTokens(birthdayPerson, age);
+
+            const cards = [this.birthdayTriggerCard, this.specificBirthdayTriggerCard, this.categoryBirthdayTriggerCard];
+            const triggers = Promise.allSettled(cards.map(card => card ? Promise.resolve().then(() => card.trigger(tokens, state)) : Promise.resolve()))
+                .then(results => results.forEach((result, index) => {
+                    if (result.status === 'rejected') this.error(`Birthday trigger ${index + 1} failed for ${tokens.name}`, result.reason);
+                }));
+            // Never let one slow flow block the next birthday person: wait at most 10 seconds
+            await Promise.race([triggers, this.sleep(10 * 1000)]);
+
+            // Keep a short pause between birthday persons (as before) so flows using global tokens can finish
+            if (i < birthdaysToday.length - 1) {
+                await this.sleep(5 * 1000);
+            }
         }
     }
+
+    sleep(ms) {
+        return new Promise(resolve => this.homey.setTimeout(resolve, ms));
+    }
     // Methode om globale tokens bij te werken
-    async updateGlobalTokens(birthdayPerson) {
+    async updateGlobalTokens(birthdayPerson, age) {
         try {
             if (this.tokens && this.tokens.name) {
                 await this.tokens.name.setValue(birthdayPerson.name);
@@ -333,8 +407,8 @@ class Birthdays extends homey_1.default.App {
                 await this.tokens.category.setValue(birthdayPerson.category || "Work");
             }
             if (this.tokens && this.tokens.age) {
-                const age = this.getPersonAge(birthdayPerson);
-                await this.tokens.age.setValue(Number(age));
+                const personAge = typeof age === 'number' ? age : this.getPersonAge(birthdayPerson);
+                await this.tokens.age.setValue(Number(personAge));
             }
         }
         catch (error) {
@@ -346,13 +420,13 @@ class Birthdays extends homey_1.default.App {
         this.birthdayTriggerCard = this.homey.flow.getTriggerCard("birthday-today");
         this.birthdayTriggerCard.registerRunListener(async (args, state) => {
             // Validate that the current time matches the args.run_at time which has the format "HH:mm"
-            return !!args && typeof args.run_at === 'string' && this.verifyRunAtByArgs(args);
+            return !!args && typeof args.run_at === 'string' && this.verifyRunAtByArgs(args, state);
         });
         // Specific person birthday trigger card
         this.specificBirthdayTriggerCard = this.homey.flow.getTriggerCard("specific-birthday-today");
         this.specificBirthdayTriggerCard.registerRunListener(async (args, state) => {
             // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person is the same
-            return !!args && !!state && this.isSamePerson(args.person, state.person) && typeof args.run_at === 'string' && this.verifyRunAtByArgs(args);
+            return !!args && !!state && this.isSamePerson(args.person, state.person) && typeof args.run_at === 'string' && this.verifyRunAtByArgs(args, state);
         });
         this.specificBirthdayTriggerCard.registerArgumentAutocompleteListener("person", this.autocompletePersons.bind(this));
         // Category birthday trigger card
@@ -360,7 +434,7 @@ class Birthdays extends homey_1.default.App {
         this.categoryBirthdayTriggerCard.registerRunListener(async (args, state) => {
             // Validate that the current time matches the args.run_at time which has the format "HH:mm" and verify that the person belongs to the provided category
             return !!args?.category && !!state?.person && String(args.category.id).toLowerCase() === String(state.person.category || '').toLowerCase()
-                && this.verifyRunAtByArgs(args);
+                && this.verifyRunAtByArgs(args, state);
         });
         this.categoryBirthdayTriggerCard.registerArgumentAutocompleteListener("category", this.autocompleteCategories.bind(this));
         // Is birthday condition card
@@ -436,12 +510,13 @@ class Birthdays extends homey_1.default.App {
             return result.name.toLowerCase().includes(query.toLowerCase());
         });
     }
-    verifyRunAtByArgs(args) {
-        const now = new Date();
-        const targetTimezone = this.homey.clock.getTimezone();
-        const nowString = now.toLocaleTimeString(this.getLocale(), { timeZone: targetTimezone, hour12: false });
-        const [nowHours, nowMinutes] = nowString.split(":").map(Number);
+    verifyRunAtByArgs(args, state) {
+        if (!args || typeof args.run_at !== 'string') return false;
         const [runAtHours, runAtMinutes] = args.run_at.split(":").map(Number);
+        // Prefer the minute captured when the birthday check started; fall back to the current Homey time
+        const reference = state && typeof state.runAt === 'string' ? state.runAt : this.getHomeySlot().time;
+        const [nowHours, nowMinutes] = reference.split(":").map(Number);
+
         if (this.debug) {
             this.log("verify run at", {
                 nowHours,
@@ -450,6 +525,7 @@ class Birthdays extends homey_1.default.App {
                 runAtMinutes
             });
         }
+
         return nowHours === runAtHours &&
             nowMinutes === runAtMinutes;
     }
@@ -511,8 +587,8 @@ class Birthdays extends homey_1.default.App {
         hash.update(JSON.stringify(object));
         return hash.digest("hex");
     }
-    getPersonAge(person) {
-        const today = this.getHomeyDateParts();
+    getPersonAge(person, reference) {
+        const today = reference || this.getHomeyDateParts();
         const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(person.dateOfBirth || '');
         if (!match)
             return 0;
@@ -527,6 +603,28 @@ class Birthdays extends homey_1.default.App {
         const parts = Object.fromEntries(formatter.formatToParts(new Date()).filter(part => part.type !== 'literal').map(part => [part.type, part.value]));
         return { year: parts.year, month: parts.month, day: parts.day };
     }
+    getHomeySlot() {
+        const formatter = new Intl.DateTimeFormat('en-CA', {
+            timeZone: this.homey.clock.getTimezone() || 'UTC',
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+        });
+        const parts = Object.fromEntries(formatter.formatToParts(new Date()).filter(part => part.type !== 'literal').map(part => [part.type, part.value]));
+        const hour = String(Number(parts.hour) % 24).padStart(2, '0');
+        const minute = String(Number(parts.minute)).padStart(2, '0');
+        const date = `${parts.year}-${parts.month}-${parts.day}`;
+        const time = `${hour}:${minute}`;
+        return {
+            year: parts.year,
+            month: parts.month,
+            day: parts.day,
+            date,
+            monthDay: `${parts.month}-${parts.day}`,
+            time,
+            key: `${date} ${time}`
+        };
+    }
+
     getLocale() {
         const localeMappings = {
             en: "en-GB", // English (United Kingdom)
