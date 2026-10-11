@@ -6,6 +6,8 @@
   <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
   <link rel="stylesheet" type="text/css" href="style/styles.css">
   <title data-i18n="settings.title">Birthday Settings</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
 </head>
 <body>
 
@@ -677,17 +679,6 @@ loadCategories();
 </script>
 
 
-<script>
-  const settingsTheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-  function applySettingsTheme(event) {
-    document.body.classList.toggle('dark', event.matches);
-  }
-
-  applySettingsTheme(settingsTheme);
-  if (settingsTheme.addEventListener) settingsTheme.addEventListener('change', applySettingsTheme);
-  else settingsTheme.addListener(applySettingsTheme);
-</script>
 
 
 

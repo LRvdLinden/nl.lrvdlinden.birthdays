@@ -1,0 +1,350 @@
+/*
+ * Birthdays settings theme (v2.1.5)
+ *
+ * Loaded last on every settings page. js/theme.js puts `bd-light` or `bd-dark`
+ * on <html>; every rule below sets text AND background from the same palette,
+ * so Homey's injected styles and the phone theme can no longer be mixed.
+ */
+
+/* ---------- Palette ---------- */
+html.bd-light {
+  color-scheme: light;
+  --bd-bg: #ffffff;
+  --bd-surface: #ffffff;
+  --bd-field: #ffffff;
+  --bd-text: #17233d;
+  --bd-muted: #5f6b7a;
+  --bd-border: #d8dce2;
+  --bd-hover: #f2f4f7;
+  --bd-stripe: #f7f8fa;
+  --bd-accent: #0b72d0;
+  --bd-accent-text: #ffffff;
+  --bd-secondary-bg: #eef3fa;
+  --bd-danger: #c62828;
+  --bd-danger-bg: #fdecec;
+  --bd-shadow: 0 5px 18px rgba(17, 24, 39, .08);
+}
+
+html.bd-dark {
+  color-scheme: dark;
+  --bd-bg: #000000;
+  --bd-surface: #1c1c1e;
+  --bd-field: #2c2c2e;
+  --bd-text: #f5f7fa;
+  --bd-muted: #a6abb4;
+  --bd-border: #3a3a3c;
+  --bd-hover: #242426;
+  --bd-stripe: #121214;
+  --bd-accent: #4aa8ff;
+  --bd-accent-text: #04121f;
+  --bd-secondary-bg: #2c2c2e;
+  --bd-danger: #ff6961;
+  --bd-danger-bg: #3a1716;
+  --bd-shadow: none;
+}
+
+/* Map the palette onto the variables the older stylesheets use, so their
+   own prefers-color-scheme rules can never disagree with the chosen theme. */
+html.bd-light,
+html.bd-dark {
+  /* css/style.css + Framework7 (main menu) */
+  --title-color: var(--bd-text);
+  --text-color: var(--bd-muted);
+  --background-color: var(--bd-bg);
+  --light-gray: var(--bd-hover);
+  --f7-text-color: var(--bd-text);
+  --f7-page-bg-color: var(--bd-bg);
+  --f7-list-bg-color: var(--bd-bg);
+  --f7-list-outline-bg-color: var(--bd-bg);
+  --f7-list-item-title-text-color: var(--bd-text);
+  --f7-list-item-after-text-color: var(--bd-muted);
+  --f7-list-item-border-color: var(--bd-border);
+  --f7-list-outline-border-color: var(--bd-border);
+  --f7-list-chevron-icon-color: var(--bd-muted);
+  --f7-list-link-pressed-bg-color: var(--bd-hover);
+  /* style/styles.css (birthday list) */
+  --settings-bg: var(--bd-bg);
+  --settings-surface: var(--bd-surface);
+  --settings-text: var(--bd-text);
+  --settings-muted: var(--bd-muted);
+  --settings-border: var(--bd-border);
+  --settings-hover: var(--bd-hover);
+  --settings-field: var(--bd-field);
+  --settings-table-stripe: var(--bd-stripe);
+  /* ical.html */
+  --bg: var(--bd-bg);
+  --card: var(--bd-surface);
+  --text: var(--bd-text);
+  --muted: var(--bd-muted);
+  --line: var(--bd-border);
+  --field: var(--bd-field);
+  --blue: var(--bd-accent);
+  --danger: var(--bd-danger);
+  --shadow: var(--bd-shadow);
+}
+
+/* ---------- Page ---------- */
+html.bd-theme,
+html.bd-theme body {
+  background-color: var(--bd-bg) !important;
+  color: var(--bd-text) !important;
+}
+
+html.bd-theme #menu,
+html.bd-theme #content-area,
+html.bd-theme .buttons-container,
+html.bd-theme .scrollable-content,
+html.bd-theme .form-wrapper,
+html.bd-theme .page,
+html.bd-theme .page-content {
+  background-color: var(--bd-bg) !important;
+  color: var(--bd-text) !important;
+}
+
+/* ---------- Text ---------- */
+html.bd-theme h1,
+html.bd-theme h2,
+html.bd-theme h3,
+html.bd-theme .homey-title,
+html.bd-theme .homey-form-label,
+html.bd-theme .homey-form-legend,
+html.bd-theme .homey-form-checkbox-text,
+html.bd-theme .homey-form-radio-text,
+html.bd-theme legend,
+html.bd-theme label,
+html.bd-theme .homey-table,
+html.bd-theme .homey-table td,
+html.bd-theme .back-button-text,
+html.bd-theme .source-name,
+html.bd-theme #menu li span,
+html.bd-theme .list .item-title,
+html.bd-theme .list a,
+html.bd-theme .list span {
+  color: var(--bd-text) !important;
+}
+
+html.bd-theme p,
+html.bd-theme .homey-subtitle,
+html.bd-theme .light-gray-title,
+html.bd-theme .light-gray-title span,
+html.bd-theme .homey-table th,
+html.bd-theme .homey-table th div,
+html.bd-theme .section-title,
+html.bd-theme .source-type,
+html.bd-theme .source-meta,
+html.bd-theme .source-url,
+html.bd-theme #status,
+html.bd-theme .empty,
+html.bd-theme .list .item-after,
+html.bd-theme footer,
+html.bd-theme #back-to-menu,
+html.bd-theme #back-to-menu .back-button-text {
+  color: var(--bd-muted) !important;
+}
+
+html.bd-theme .ical-content label,
+html.bd-theme .card label {
+  color: var(--bd-muted) !important;
+}
+
+html.bd-theme a.custom-link-reverse,
+html.bd-theme footer a {
+  color: var(--bd-accent) !important;
+}
+
+/* Arrow icons are dark SVG files; lighten them in dark mode */
+html.bd-dark .back-button-icon {
+  filter: invert(72%) sepia(6%) saturate(300%) hue-rotate(180deg) brightness(95%);
+}
+
+/* ---------- Form fields ---------- */
+html.bd-theme .homey-form-input,
+html.bd-theme .homey-form-select,
+html.bd-theme .homey-form-textarea,
+html.bd-theme input[type="text"],
+html.bd-theme input[type="url"],
+html.bd-theme input[type="search"],
+html.bd-theme input[type="date"],
+html.bd-theme input[type="number"],
+html.bd-theme input[type="tel"],
+html.bd-theme input[type="email"],
+html.bd-theme input[type="file"],
+html.bd-theme select,
+html.bd-theme textarea {
+  background-color: var(--bd-field) !important;
+  border: 1px solid var(--bd-border) !important;
+  color: var(--bd-text) !important;
+  -webkit-text-fill-color: var(--bd-text) !important;
+  caret-color: var(--bd-text);
+  opacity: 1;
+}
+
+html.bd-theme input::placeholder,
+html.bd-theme textarea::placeholder {
+  color: var(--bd-muted) !important;
+  -webkit-text-fill-color: var(--bd-muted) !important;
+  opacity: 1;
+}
+
+html.bd-theme input:focus,
+html.bd-theme select:focus,
+html.bd-theme textarea:focus {
+  border-color: var(--bd-accent) !important;
+  outline: none;
+}
+
+html.bd-theme select option {
+  background-color: var(--bd-surface);
+  color: var(--bd-text);
+}
+
+html.bd-theme input:-webkit-autofill,
+html.bd-theme input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--bd-field) inset !important;
+  -webkit-text-fill-color: var(--bd-text) !important;
+}
+
+html.bd-theme input[type="file"]::file-selector-button {
+  background-color: var(--bd-secondary-bg);
+  color: var(--bd-text);
+  border: 1px solid var(--bd-border);
+  border-radius: 8px;
+  padding: 7px 9px;
+  margin-right: 10px;
+}
+
+html.bd-dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: .75;
+}
+
+html.bd-theme .homey-form-checkbox-checkmark {
+  border-color: var(--bd-muted) !important;
+  background-color: var(--bd-field);
+}
+
+html.bd-theme .homey-form-fieldset,
+html.bd-theme fieldset {
+  border-color: var(--bd-border) !important;
+  background-color: transparent;
+}
+
+/* ---------- Buttons ---------- */
+html.bd-theme .homey-button-primary,
+html.bd-theme .homey-button-primary-full,
+html.bd-theme .homey-button-primary-shadow,
+html.bd-theme .homey-button-primary-full-shadow {
+  background-color: var(--bd-accent) !important;
+  color: var(--bd-accent-text) !important;
+  border: 0 !important;
+}
+
+html.bd-theme .homey-button-secondary,
+html.bd-theme .homey-button-secondary-full,
+html.bd-theme .homey-button-secondary-shadow,
+html.bd-theme .homey-button-secondary-full-shadow {
+  background-color: var(--bd-secondary-bg) !important;
+  color: var(--bd-accent) !important;
+  border: 1px solid var(--bd-border) !important;
+}
+
+html.bd-theme .homey-button-danger,
+html.bd-theme .homey-button-danger-full,
+html.bd-theme .homey-button-danger-shadow,
+html.bd-theme .homey-button-danger-full-shadow {
+  background-color: var(--bd-danger-bg) !important;
+  color: var(--bd-danger) !important;
+  border: 1px solid var(--bd-border) !important;
+}
+
+html.bd-theme button:disabled {
+  opacity: .55;
+}
+
+/* ---------- Birthday list table ---------- */
+html.bd-theme .homey-table,
+html.bd-theme .homey-table thead,
+html.bd-theme .homey-table tbody,
+html.bd-theme .homey-table tr {
+  background-color: transparent !important;
+}
+
+html.bd-theme .homey-table th,
+html.bd-theme .homey-table td {
+  border-color: var(--bd-border) !important;
+}
+
+html.bd-theme .homey-table tbody tr:nth-child(even) {
+  background-color: var(--bd-stripe) !important;
+}
+
+/* ---------- Category dropdown ---------- */
+html.bd-theme .category-dropdown {
+  background-color: var(--bd-surface) !important;
+  border-color: var(--bd-border) !important;
+  color: var(--bd-text) !important;
+}
+
+html.bd-theme .category-dropdown > div,
+html.bd-theme .category-item,
+html.bd-theme .category-text {
+  color: var(--bd-text) !important;
+}
+
+html.bd-theme .category-dropdown > div:hover,
+html.bd-theme .category-item:hover {
+  background-color: var(--bd-hover) !important;
+}
+
+/* ---------- Menu, lists and cards ---------- */
+html.bd-theme #menu li {
+  border-color: var(--bd-border) !important;
+}
+
+html.bd-theme #menu li:hover {
+  background-color: var(--bd-hover) !important;
+}
+
+html.bd-theme .list ul,
+html.bd-theme .list li,
+html.bd-theme .list .item-content,
+html.bd-theme .list .item-link,
+html.bd-theme .list .item-inner {
+  background-color: var(--bd-bg) !important;
+}
+
+html.bd-theme .card {
+  background-color: var(--bd-surface) !important;
+  border-color: var(--bd-border) !important;
+  color: var(--bd-text) !important;
+}
+
+/* ---------- Info boxes ---------- */
+html.bd-light .hint {
+  color: #004085 !important;
+  background-color: #cce5ff !important;
+  border-color: #b8daff !important;
+}
+
+html.bd-dark .hint {
+  color: #b9dcff !important;
+  background-color: #102d47 !important;
+  border-color: #245477 !important;
+}
+
+html.bd-light .help {
+  color: #383d41 !important;
+  background-color: #f4f5f5 !important;
+  border-color: #e4e5e7 !important;
+}
+
+html.bd-dark .help {
+  color: #d8dbe0 !important;
+  background-color: #202023 !important;
+  border-color: #3a3a3c !important;
+}
+
+html.bd-theme .source-error {
+  color: var(--bd-danger) !important;
+  background-color: var(--bd-danger-bg) !important;
+}

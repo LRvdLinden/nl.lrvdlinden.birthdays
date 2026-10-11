@@ -274,7 +274,7 @@ class Birthdays extends Homey.App {
           maxRedirects: 5,
           headers: {
             Accept: 'text/calendar,text/plain;q=0.9,*/*;q=0.5',
-            'User-Agent': 'Birthdays-for-Homey/2.1.5',
+            'User-Agent': 'Birthdays-for-Homey/2.1.6',
           },
           transformResponse: [(data: any) => data],
         });

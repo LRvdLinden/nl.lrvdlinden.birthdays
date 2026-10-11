@@ -93,5 +93,20 @@
     "pl": "Naprawiono wysyłanie życzeń tylko do pierwszej osoby, gdy kilka osób ma urodziny tego samego dnia. Każdy solenizant uruchamia teraz Flow o ustawionej godzinie, nawet gdy Flow trwa dłużej. Sprawdzanie co minutę nie przesuwa się już i nie pomija żadnej minuty.",
     "ko": "같은 날 생일인 사람이 여러 명일 때 첫 번째 사람에게만 생일 메시지가 전송되던 문제를 수정했습니다. 이제 Flow가 오래 걸리더라도 모든 생일자가 설정된 시간에 Flow를 실행합니다. 분 단위 확인이 더 이상 밀리거나 건너뛰지 않습니다.",
     "ar": "تم إصلاح مشكلة إرسال رسائل عيد الميلاد إلى الشخص الأول فقط عندما يصادف عيد ميلاد عدة أشخاص في اليوم نفسه. أصبح كل شخص يحتفل بعيد ميلاده يشغّل الـ Flow في الوقت المحدد، حتى إذا استغرق الـ Flow وقتًا أطول. لم يعد الفحص الدقيق كل دقيقة ينزاح أو يتخطى أي دقيقة."
+  },
+  "2.1.6": {
+    "en": "Fixed unreadable settings pages in dark mode. The settings now follow the theme of the Homey app, and every page (menu, birthday list, birthday form and iCal) uses one consistent light and dark colour scheme with readable text, fields and buttons.",
+    "nl": "Onleesbare instellingenpagina's in donkere modus opgelost. De instellingen volgen nu het thema van de Homey-app en elke pagina (menu, verjaardagslijst, verjaardagsformulier en iCal) gebruikt één consistent licht en donker kleurenschema met leesbare tekst, velden en knoppen.",
+    "de": "Unlesbare Einstellungsseiten im Dunkelmodus behoben. Die Einstellungen folgen jetzt dem Design der Homey-App, und jede Seite (Menü, Geburtstagsliste, Geburtstagsformular und iCal) nutzt ein einheitliches helles und dunkles Farbschema mit lesbarem Text, Feldern und Schaltflächen.",
+    "fr": "Correction des pages de réglages illisibles en mode sombre. Les réglages suivent désormais le thème de l’app Homey, et chaque page (menu, liste d’anniversaires, formulaire et iCal) utilise un même jeu de couleurs clair et sombre avec des textes, champs et boutons lisibles.",
+    "it": "Risolte le pagine delle impostazioni illeggibili in modalità scura. Le impostazioni ora seguono il tema dell’app Homey e ogni pagina (menu, elenco compleanni, modulo e iCal) usa un unico schema di colori chiaro e scuro con testi, campi e pulsanti leggibili.",
+    "sv": "Åtgärdat oläsliga inställningssidor i mörkt läge. Inställningarna följer nu Homey-appens tema och varje sida (meny, födelsedagslista, formulär och iCal) använder ett enhetligt ljust och mörkt färgschema med läsbar text, fält och knappar.",
+    "no": "Rettet uleselige innstillingssider i mørk modus. Innstillingene følger nå temaet i Homey-appen, og hver side (meny, bursdagsliste, skjema og iCal) bruker ett felles lyst og mørkt fargeskjema med lesbar tekst, felt og knapper.",
+    "es": "Se corrigieron las páginas de ajustes ilegibles en modo oscuro. Los ajustes ahora siguen el tema de la app Homey y cada página (menú, lista de cumpleaños, formulario e iCal) usa un único esquema de colores claro y oscuro con textos, campos y botones legibles.",
+    "da": "Rettet ulæselige indstillingssider i mørk tilstand. Indstillingerne følger nu Homey-appens tema, og hver side (menu, fødselsdagsliste, formular og iCal) bruger ét ensartet lyst og mørkt farveskema med læselig tekst, felter og knapper.",
+    "ru": "Исправлены нечитаемые страницы настроек в тёмной теме. Настройки теперь следуют теме приложения Homey, а каждая страница (меню, список, форма и iCal) использует единую светлую и тёмную цветовую схему с читаемым текстом, полями и кнопками.",
+    "pl": "Naprawiono nieczytelne strony ustawień w trybie ciemnym. Ustawienia działają teraz zgodnie z motywem aplikacji Homey, a każda strona (menu, lista urodzin, formularz i iCal) korzysta z jednego jasnego i ciemnego schematu kolorów z czytelnym tekstem, polami i przyciskami.",
+    "ko": "다크 모드에서 설정 페이지를 읽기 어려웠던 문제를 수정했습니다. 이제 설정이 Homey 앱의 테마를 따르며, 모든 페이지(메뉴, 생일 목록, 생일 양식, iCal)가 읽기 쉬운 텍스트, 입력란, 버튼을 갖춘 일관된 라이트/다크 색상 구성을 사용합니다.",
+    "ar": "تم إصلاح صفحات الإعدادات غير المقروءة في الوضع الداكن. أصبحت الإعدادات تتبع سمة تطبيق Homey، وتستخدم كل صفحة (القائمة وقائمة أعياد الميلاد والنموذج وiCal) نظام ألوان فاتحًا وداكنًا موحدًا بنصوص وحقول وأزرار مقروءة."
   }
 }
